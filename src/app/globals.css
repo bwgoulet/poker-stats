@@ -1,0 +1,2 @@
+@import "tailwindcss";
+:root{--accent:#dc2626} body{background:#f6f7f9;color:#111827} a,button,select,input{outline-color:var(--accent)} .card{background:white;border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 1px 2px rgb(0 0 0/.04)}
