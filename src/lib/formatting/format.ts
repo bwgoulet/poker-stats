@@ -1,0 +1,1 @@
+export const dollars=(n:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n); export const pct=(n:number)=>Number.isFinite(n)?`${(n*100).toFixed(1)}%`:'—'; export const dateFmt=(s:string)=>new Date(`${s}T00:00:00Z`).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
