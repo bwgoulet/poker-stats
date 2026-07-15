@@ -13,6 +13,7 @@ import {
   playerStats,
   recentForm,
 } from '@/lib/stats/statistics';
+import { ProfitDistribution } from '@/components/charts/ProfitDistribution';
 import { dateFmt, dollars, pct } from '@/lib/formatting/format';
 
 export default async function Dashboard({
@@ -32,10 +33,6 @@ export default async function Dashboard({
   const hot = recentForm(data.players, nights, results, 10).slice(0, 5);
   const playerBalance = playerStats(data.players, nights, results).filter(
     (stat) => stat.nightsPlayed > 0,
-  );
-  const maxAbsProfit = Math.max(
-    1,
-    ...playerBalance.map((stat) => Math.abs(stat.totalProfit)),
   );
   const params = new URLSearchParams(sp as Record<string, string>);
 
@@ -113,43 +110,14 @@ export default async function Dashboard({
               <p className="text-sm text-gray-700 mb-4">
                 Profit distribution ({scopeLabel(filters).toLowerCase()})
               </p>
-              <div className="space-y-2">
-                {playerBalance.map((stat) => {
-                  const width = `${(Math.abs(stat.totalProfit) / maxAbsProfit) * 50}%`;
-                  const isProfit = stat.totalProfit >= 0;
-
-                  return (
-                    <div
-                      className="grid grid-cols-[6rem_1fr_4.5rem] items-center gap-3 text-sm"
-                      key={stat.player.id}
-                    >
-                      <Link
-                        className="text-red-600 font-medium truncate"
-                        href={`/players/${stat.player.id}?${params}`}
-                      >
-                        {stat.player.displayName}
-                      </Link>
-                      <div className="relative h-6 overflow-hidden rounded bg-gray-100">
-                        <div className="absolute left-1/2 top-0 h-full w-px bg-white" />
-                        <div
-                          className={`absolute top-0 h-full rounded ${
-                            isProfit ? 'left-1/2 bg-green-600' : 'right-1/2 bg-red-600'
-                          }`}
-                          style={{ width }}
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <span
-                        className={`text-right font-medium ${
-                          isProfit ? 'text-black' : 'text-red-600'
-                        }`}
-                      >
-                        {dollars(stat.totalProfit)}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+              <ProfitDistribution
+                rows={playerBalance.map((stat) => ({
+                  id: stat.player.id,
+                  label: stat.player.displayName,
+                  profit: stat.totalProfit,
+                  href: `/players/${stat.player.id}?${params}`,
+                }))}
+              />
             </div>
           </section>
         </>
