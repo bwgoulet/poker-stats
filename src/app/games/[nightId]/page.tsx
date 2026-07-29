@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { ProfitDistribution } from '@/components/charts/ProfitDistribution';
 import { getPokerData } from '@/lib/data/poker-repository';
-import { dollars, dateFmt } from '@/lib/formatting/format';
+import { dollars, longDateFmt } from '@/lib/formatting/format';
 
 export default async function Game({
   params,
@@ -30,9 +30,9 @@ export default async function Game({
     <>
       <header>
         <p className="text-red-600 font-semibold">
-          {dateFmt(night.date)} · {night.seasonId} · {night.nightType}
+          {night.seasonId} · {night.nightType}
         </p>
-        <h1 className="text-4xl font-black">{night.title}</h1>
+        <h1 className="text-4xl font-black">{longDateFmt(night.date)}</h1>
       </header>
       <section className="grid md:grid-cols-3 gap-4">
         <div className="card p-5">
