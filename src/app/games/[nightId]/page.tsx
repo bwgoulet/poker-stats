@@ -51,7 +51,7 @@ export default async function Game({
       <section>
         <h2 className="text-xl font-black mb-4">Game balance</h2>
         <div className="card p-6 md:p-8">
-          <p className="text-sm text-gray-700 mb-4">Profit distribution ({night.title})</p>
+          <p className="text-sm text-gray-700 mb-4">Profit distribution</p>
           <ProfitDistribution
             rows={results.map((result) => ({
               id: result.playerId,
