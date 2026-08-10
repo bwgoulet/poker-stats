@@ -1,13 +1,30 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as XLSX from 'xlsx';
-
-export const WORKBOOKS = [
-  { seasonId: 'fall-2025' as const, file: 'fall-2025.xlsx' },
-  { seasonId: 'spring-2026' as const, file: 'spring-2026.xlsx' },
-];
+import { SeasonId } from '@/types/poker';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
+const SEASON_WORKBOOK = /^([a-z][a-z0-9-]*-\d{4})\.xlsx$/i;
+
+export interface WorkbookSource {
+  seasonId: SeasonId;
+  file: string;
+}
+
+/** Discover season workbooks so adding an xlsx file never requires a code change. */
+export function discoverWorkbooks(dataDir = DATA_DIR): WorkbookSource[] {
+  return fs.readdirSync(dataDir, { withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .flatMap((entry) => {
+      const match = entry.name.match(SEASON_WORKBOOK);
+      return match ? [{ seasonId: match[1].toLowerCase(), file: entry.name }] : [];
+    })
+    .sort((a, b) => a.seasonId.localeCompare(b.seasonId));
+}
+
+export function getSeasonIds(): SeasonId[] {
+  return discoverWorkbooks().map(({ seasonId }) => seasonId);
+}
 
 function workbookPath(file: string) {
   return path.join(DATA_DIR, file);
@@ -32,7 +49,7 @@ function readWorkbook(file: string) {
 }
 
 export function loadWorkbooks() {
-  return WORKBOOKS.map((workbook) => ({
+  return discoverWorkbooks().map((workbook) => ({
     ...workbook,
     path: workbookPath(workbook.file),
     workbook: readWorkbook(workbook.file),
