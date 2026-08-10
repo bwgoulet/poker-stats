@@ -43,10 +43,10 @@ function dateFrom(v: unknown, season: string): string | null {
   if (v instanceof Date && !Number.isNaN(+v)) return v.toISOString().slice(0, 10);
   const s = text(v).replace(/(\d)(st|nd|rd|th)/gi, '$1').trim();
   if (!/\d/.test(s)) return null;
-  const d = new Date(s);
+  const seasonYear = season.match(/(\d{4})$/)?.[1];
+  const d = new Date(/\b\d{4}\b/.test(s) ? s : `${s} ${seasonYear ?? ''}`);
   if (!Number.isNaN(+d)) return d.toISOString().slice(0, 10);
-  const y = season === 'fall-2025' ? 2025 : 2026;
-  const d2 = new Date(`${s} ${y}`);
+  const d2 = new Date(s);
   return Number.isNaN(+d2) ? null : d2.toISOString().slice(0, 10);
 }
 

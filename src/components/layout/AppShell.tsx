@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { GlobalFilterBar } from '@/components/filters/GlobalFilterBar';
 import { NavigationLinks } from '@/components/layout/NavigationLinks';
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({ children, seasonIds }: { children: React.ReactNode; seasonIds: string[] }) {
   return (
     <div className="min-h-screen md:flex">
       <aside className="md:fixed md:h-screen md:w-64 bg-white border-r p-5">
@@ -17,7 +17,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <main className="md:ml-64 flex-1">
         <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
           <Suspense fallback={null}>
-            <GlobalFilterBar />
+            <GlobalFilterBar seasonIds={seasonIds} />
           </Suspense>
           {children}
         </div>
