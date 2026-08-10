@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { BarChart3, CircleDollarSign, Gamepad2, Users } from 'lucide-react';
+import { BarChart3, CircleDollarSign, Gamepad2, ShieldCheck, Users } from 'lucide-react';
 
 const nav = [
   ['/dashboard', 'Dashboard', BarChart3],
   ['/games', 'Games', Gamepad2],
   ['/players', 'Players', Users],
   ['/stats', 'Stats', CircleDollarSign],
+  ['/admin/tournaments', 'Admin portal', ShieldCheck],
 ] as const;
 
 export function NavigationLinks() {
