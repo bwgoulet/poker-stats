@@ -1,10 +1,14 @@
 import { Suspense } from 'react';
 import { GlobalFilterBar } from '@/components/filters/GlobalFilterBar';
 import { NavigationLinks } from '@/components/layout/NavigationLinks';
+import { NavigationLoader } from '@/components/layout/NavigationLoader';
 
 export function AppShell({ children, seasonIds }: { children: React.ReactNode; seasonIds: string[] }) {
   return (
     <div className="min-h-screen md:flex">
+      <Suspense fallback={null}>
+        <NavigationLoader />
+      </Suspense>
       <aside className="md:fixed md:h-screen md:w-64 bg-white border-r p-5">
         <div className="flex items-center gap-3 font-black text-xl">
           <div className="h-10 w-10 rounded-xl bg-red-600 text-white grid place-items-center">♠</div>
