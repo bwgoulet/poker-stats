@@ -1,2 +1,53 @@
 @import "tailwindcss";
 :root{--accent:#dc2626} body{background:#f6f7f9;color:#111827} a,button,select,input{outline-color:var(--accent)} .card{background:white;border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 1px 2px rgb(0 0 0/.04)}
+
+.route-loader {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(246 247 249 / 88%);
+  backdrop-filter: blur(3px);
+}
+
+.route-loader__content {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  color: #4b5563;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.route-loader__spade {
+  width: 4rem;
+  height: 4.5rem;
+  filter: drop-shadow(0 6px 8px rgb(220 38 38 / 18%));
+}
+
+.route-loader__spade-base {
+  fill: #e5e7eb;
+  stroke: #dc2626;
+  stroke-width: 1.5;
+}
+
+.route-loader__spade-progress {
+  fill: #dc2626;
+}
+
+.route-loader__fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: fill-spade 1.15s ease-in-out infinite;
+}
+
+@keyframes fill-spade {
+  0% { transform: scaleY(0); }
+  80%, 100% { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-loader__fill { animation: none; }
+}
