@@ -65,7 +65,9 @@ export default async function Dashboard({
 
           <section className="grid lg:grid-cols-2 gap-5">
             <div className="card p-5">
-              <h2 className="font-bold text-xl mb-3">Who’s hot</h2>
+              <h2 className="font-bold text-xl mb-3">
+                Who’s hot <span className="font-normal">(Last 10 Games)</span>
+              </h2>
               {hot.map((stat) => (
                 <Link
                   href={`/players/${stat.player.id}?${params}`}
@@ -75,7 +77,8 @@ export default async function Dashboard({
                   <span>
                     #{stat.rank} {stat.player.displayName}
                     <small className="block text-gray-500">
-                      {stat.wins}-{stat.losses} · ROI {pct(stat.roi)}
+                      {stat.wins}-{stat.losses} · ROI {pct(stat.roi)} · Volatility{' '}
+                      {pct(stat.volatility)} · {stat.nightsPlayed} games
                     </small>
                   </span>
                   <b className={stat.totalProfit >= 0 ? 'text-green-700' : 'text-red-700'}>
