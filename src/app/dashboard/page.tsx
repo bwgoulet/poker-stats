@@ -4,6 +4,7 @@ import { getPokerData } from '@/lib/data/poker-repository';
 import {
   filterNights,
   filterResults,
+  type GlobalFilters,
   parseFilters,
   scopeLabel,
 } from '@/lib/filters/filter-data';
@@ -35,6 +36,21 @@ export default async function Dashboard({
     (stat) => stat.nightsPlayed > 0,
   );
   const params = new URLSearchParams(sp as Record<string, string>);
+  const snapshotFilters: GlobalFilters = {
+    season: ['fall-2026'],
+    nightType: ['20', '10'],
+  };
+  const snapshotNights = filterNights(data.nights, snapshotFilters);
+  const snapshotResults = filterResults(data.results, data.nights, snapshotFilters);
+  const snapshotBalance = playerStats(
+    data.players,
+    snapshotNights,
+    snapshotResults,
+  ).filter((stat) => stat.nightsPlayed > 0);
+  const snapshotParams = new URLSearchParams({
+    season: snapshotFilters.season.join(','),
+    nightType: snapshotFilters.nightType.join(','),
+  });
 
   return (
     <>
@@ -119,6 +135,23 @@ export default async function Dashboard({
                   label: stat.player.displayName,
                   profit: stat.totalProfit,
                   href: `/players/${stat.player.id}?${params}`,
+                }))}
+              />
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-black mb-4">Season snapshot</h2>
+            <div className="card p-6 md:p-8">
+              <p className="text-sm text-gray-700 mb-4">
+                Profit distribution (Fall ’26 · $20 nights + $10 nights)
+              </p>
+              <ProfitDistribution
+                rows={snapshotBalance.map((stat) => ({
+                  id: stat.player.id,
+                  label: stat.player.displayName,
+                  profit: stat.totalProfit,
+                  href: `/players/${stat.player.id}?${snapshotParams}`,
                 }))}
               />
             </div>
