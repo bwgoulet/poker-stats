@@ -1,2 +1,15 @@
-import Link from 'next/link'; import { getPokerData } from '@/lib/data/poker-repository'; import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data'; import { playerStats } from '@/lib/stats/statistics'; import { dollars, pct } from '@/lib/formatting/format';
-export default async function Players({searchParams}:{searchParams:Promise<Record<string,string|undefined>>}){const sp=await searchParams, f=parseFilters(sp), d=getPokerData(); const rows=playerStats(d.players,filterNights(d.nights,f),filterResults(d.results,d.nights,f)).filter(r=>r.nightsPlayed>0); return <><header><p className="text-red-600 font-semibold">{scopeLabel(f)}</p><h1 className="text-4xl font-black">Players</h1></header><div className="card overflow-x-auto"><table className="w-full min-w-[760px] text-sm"><thead><tr className="bg-gray-50"><th>Rank</th><th className="text-left p-3">Player</th><th>Profit</th><th>ROI</th><th title="Standard deviation of the player's return on buy-in from night to night">Volatility</th><th>Nights</th><th>Wins</th><th>Win rate</th></tr></thead><tbody>{rows.map(r=><tr className="border-t" key={r.player.id}><td className="text-center">#{r.rank}</td><td className="p-3"><Link className="font-semibold text-red-700" href={`/players/${r.player.id}?${new URLSearchParams(sp as any)}`}>{r.player.displayName}</Link></td><td className="text-center">{dollars(r.totalProfit)}</td><td className="text-center">{pct(r.roi)}</td><td className="text-center">{pct(r.volatility)}</td><td className="text-center">{r.nightsPlayed}</td><td className="text-center">{r.wins}</td><td className="text-center">{pct(r.winRate)}</td></tr>)}</tbody></table></div></>}
+import { PlayersTable } from '@/components/players/PlayersTable';
+import { getPokerData } from '@/lib/data/poker-repository';
+import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
+import { playerStats } from '@/lib/stats/statistics';
+
+export default async function Players({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
+  const params = await searchParams;
+  const filters = parseFilters(params);
+  const data = getPokerData();
+  const rows = playerStats(data.players, filterNights(data.nights, filters), filterResults(data.results, data.nights, filters)).filter(
+    (row) => row.nightsPlayed > 0,
+  );
+
+  return <><header><p className="text-red-600 font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Players</h1></header><PlayersTable rows={rows} query={new URLSearchParams(params as Record<string, string>).toString()} /></>;
+}
