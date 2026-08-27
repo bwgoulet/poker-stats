@@ -1,7 +1,114 @@
-'use client'; import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+'use client';
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { navigationStartEvent } from '@/components/layout/NavigationLoader';
 
-const nightTypes=[['10','$10 nights'],['20','$20 nights'],['50','$50 nights'],['one-off','One-offs']] as const;
-function seasonLabel(season:string){const [name,...rest]=season.split('-'); const year=rest.at(-1); return `${name.charAt(0).toUpperCase()}${name.slice(1)}${year ? ` ’${year.slice(-2)}` : ''}`;}
+const nightTypes = [
+  ['10', '$10 nights'],
+  ['20', '$20 nights'],
+  ['50', '$50 nights'],
+  ['one-off', 'One-offs'],
+] as const;
+const currentSeason = 'fall-2026';
+const currentSeasonNightTypes = ['10', '20'];
 
-export function GlobalFilterBar({seasonIds}:{seasonIds:string[]}){const seasons=seasonIds.map(value=>[value,seasonLabel(value)] as const); const sp=useSearchParams(), router=useRouter(), path=usePathname(); function selected(k:string,all:readonly (readonly [string,string])[]){const values=sp.getAll(k); return values.length?values:all.map(([value])=>value)} function toggle(k:string,v:string,all:readonly (readonly [string,string])[]){const p=new URLSearchParams(sp), values=new Set(selected(k,all)); values.has(v)?values.delete(v):values.add(v); p.delete(k); if(values.size&&values.size<all.length) Array.from(values).forEach(value=>p.append(k,value)); const q=p.toString(); window.dispatchEvent(new Event(navigationStartEvent)); router.push(q?`${path}?${q}`:path)} return <div className="card p-3 flex flex-wrap gap-4 items-start"><span className="text-sm font-semibold pt-1">Scope</span><fieldset className="flex flex-wrap gap-2"><legend className="sr-only">Season</legend>{seasons.map(([value,label])=><label className="flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm" key={value}><input type="checkbox" checked={selected('season',seasons).includes(value)} onChange={()=>toggle('season',value,seasons)}/>{label}</label>)}</fieldset><fieldset className="flex flex-wrap gap-2"><legend className="sr-only">Night type</legend>{nightTypes.map(([value,label])=><label className="flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm" key={value}><input type="checkbox" checked={selected('nightType',nightTypes).includes(value)} onChange={()=>toggle('nightType',value,nightTypes)}/>{label}</label>)}</fieldset></div>}
+function seasonLabel(season: string) {
+  const [name, ...rest] = season.split('-');
+  const year = rest.at(-1);
+  return `${name.charAt(0).toUpperCase()}${name.slice(1)}${year ? ` ’${year.slice(-2)}` : ''}`;
+}
+
+export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
+  const seasons = seasonIds.map((value) => [value, seasonLabel(value)] as const);
+  const sp = useSearchParams();
+  const router = useRouter();
+  const path = usePathname();
+
+  function selected(key: string, all: readonly (readonly [string, string])[]) {
+    const values = sp.getAll(key);
+    return values.length ? values : all.map(([value]) => value);
+  }
+
+  function navigate(params: URLSearchParams) {
+    const query = params.toString();
+    window.dispatchEvent(new Event(navigationStartEvent));
+    router.push(query ? `${path}?${query}` : path);
+  }
+
+  function toggle(key: string, value: string, all: readonly (readonly [string, string])[]) {
+    const params = new URLSearchParams(sp);
+    const values = new Set(selected(key, all));
+    values.has(value) ? values.delete(value) : values.add(value);
+    params.delete(key);
+    if (values.size && values.size < all.length) {
+      Array.from(values).forEach((selectedValue) => params.append(key, selectedValue));
+    }
+    navigate(params);
+  }
+
+  const currentSeasonSelected =
+    selected('season', seasons).length === 1 &&
+    selected('season', seasons)[0] === currentSeason &&
+    selected('nightType', nightTypes).length === currentSeasonNightTypes.length &&
+    currentSeasonNightTypes.every((type) => selected('nightType', nightTypes).includes(type));
+
+  function toggleCurrentSeason() {
+    const params = new URLSearchParams(sp);
+    params.delete('season');
+    params.delete('nightType');
+    if (!currentSeasonSelected) {
+      params.set('season', currentSeason);
+      currentSeasonNightTypes.forEach((type) => params.append('nightType', type));
+    }
+    navigate(params);
+  }
+
+  return (
+    <div className="card p-3 flex flex-wrap gap-4 items-start">
+      <span className="text-sm font-semibold pt-1">Scope</span>
+      <fieldset className="flex flex-wrap gap-2">
+        <legend className="sr-only">Season</legend>
+        {seasons.map(([value, label]) => (
+          <label className="flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm" key={value}>
+            <input
+              type="checkbox"
+              checked={selected('season', seasons).includes(value)}
+              onChange={() => toggle('season', value, seasons)}
+            />
+            {label}
+          </label>
+        ))}
+      </fieldset>
+      <fieldset className="flex flex-wrap gap-2">
+        <legend className="sr-only">Night type</legend>
+        {nightTypes.map(([value, label]) => (
+          <label className="flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm" key={value}>
+            <input
+              type="checkbox"
+              checked={selected('nightType', nightTypes).includes(value)}
+              onChange={() => toggle('nightType', value, nightTypes)}
+            />
+            {label}
+          </label>
+        ))}
+      </fieldset>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={currentSeasonSelected}
+        onClick={toggleCurrentSeason}
+        className="ml-auto flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
+      >
+        Current Season
+        <span
+          aria-hidden="true"
+          className={`relative h-6 w-11 rounded-full transition-colors ${currentSeasonSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+        >
+          <span
+            className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${currentSeasonSelected ? 'translate-x-6' : 'translate-x-1'}`}
+          />
+        </span>
+      </button>
+    </div>
+  );
+}
