@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { classifyPlayers } from '@/lib/stats/player-classification';
+import { classifyPlayers, PLAYER_TYPE_DESCRIPTIONS } from '@/lib/stats/player-classification';
 import { PlayerResult, PokerNight } from '@/types/poker';
 
 const nights: PokerNight[] = Array.from({ length: 16 }, (_, index) => ({
@@ -24,6 +24,13 @@ function row(id: string, buyIns: number[], profits: number[]) {
 }
 
 describe('player classification', () => {
+  it('provides an explanation for every displayed player type', () => {
+    expect(Object.keys(PLAYER_TYPE_DESCRIPTIONS)).toEqual(expect.arrayContaining([
+      'NIT', 'Steady', 'Neutral', 'Gambler', 'Action Player', 'Maniac', 'Insufficient history',
+    ]));
+    expect(Object.values(PLAYER_TYPE_DESCRIPTIONS).every((description) => description.length > 20)).toBe(true);
+  });
+
   it('requires eight comparable nights', () => {
     const classifications = classifyPlayers([row('new', [1, 1, 1], [-1, 0, 1])], nights);
     expect(classifications.get('new')).toMatchObject({

@@ -5,9 +5,20 @@ export const ESTABLISHED_CLASSIFICATION_NIGHTS = 15;
 
 export type PlayerType = 'NIT' | 'Steady' | 'Neutral' | 'Gambler' | 'Action Player' | 'Maniac';
 export type ClassificationConfidence = 'insufficient' | 'provisional' | 'established';
+export type PlayerClassificationLabel = PlayerType | 'Insufficient history';
+
+export const PLAYER_TYPE_DESCRIPTIONS: Record<PlayerClassificationLabel, string> = {
+  Maniac: 'High buy-in intensity and high outcome swings: both rank in the top quarter of the eligible field and pass the practical minimums.',
+  'Action Player': 'High buy-in intensity, but not high outcome swings. This player frequently puts multiple buy-ins into play without the field’s most extreme results.',
+  Gambler: 'High outcome swings, but not high buy-in intensity. This player has unusually large results without consistently putting the most buy-ins into play.',
+  Neutral: 'Neither buy-in intensity nor outcome swings are unusually high or low relative to the eligible field.',
+  Steady: 'Low outcome swings without the low buy-in intensity required for a NIT. This player’s results are unusually consistent.',
+  NIT: 'Low buy-in intensity and low outcome swings: both rank in the bottom quarter of the eligible field and the player typically stays near one buy-in.',
+  'Insufficient history': `Fewer than ${MIN_CLASSIFICATION_NIGHTS} comparable nights are available, so no player type is assigned yet.`,
+};
 
 export interface PlayerClassification {
-  type: PlayerType | 'Insufficient history';
+  type: PlayerClassificationLabel;
   confidence: ClassificationConfidence;
   qualifyingNights: number;
   exposurePercentile: number | null;
