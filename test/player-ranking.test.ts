@@ -23,4 +23,17 @@ describe('player rankings', () => {
   it('ranks players by median profit', () => {
     expect(rankPlayers(rows, 'medianProfit').map((row) => row.player.displayName)).toEqual(['Zoe', 'Alice']);
   });
+
+  it('ranks player types from Maniac to NIT', () => {
+    const typedRows = ['NIT', 'Neutral', 'Gambler', 'Steady', 'Maniac', 'Action Player']
+      .map((type, index) => ({
+        ...rows[0],
+        player: { displayName: `Player ${index}` },
+        classification: { type },
+      }));
+
+    expect(rankPlayers(typedRows, 'type').map((row) => row.classification.type)).toEqual([
+      'Maniac', 'Action Player', 'Gambler', 'Neutral', 'Steady', 'NIT',
+    ]);
+  });
 });
