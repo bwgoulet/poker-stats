@@ -36,4 +36,15 @@ describe('player rankings', () => {
       'Maniac', 'Action Player', 'Whale', 'Chemical X', 'Gambler', 'Neutral', 'Steady', 'One-Bullet', 'NIT', 'Insufficient history',
     ]);
   });
+
+  it('ranks classification percentiles with insufficient history last', () => {
+    const classifiedRows = [
+      { ...rows[0], player: { displayName: 'Middle' }, classification: { type: 'Neutral', exposurePercentile: 50, swingPercentile: 75 } },
+      { ...rows[0], player: { displayName: 'Insufficient' }, classification: { type: 'Insufficient history', exposurePercentile: null, swingPercentile: null } },
+      { ...rows[0], player: { displayName: 'High' }, classification: { type: 'Maniac', exposurePercentile: 100, swingPercentile: 100 } },
+    ];
+
+    expect(rankPlayers(classifiedRows, 'buyInIntensity').map((row) => row.player.displayName)).toEqual(['High', 'Middle', 'Insufficient']);
+    expect(rankPlayers(classifiedRows, 'outcomeSwing').map((row) => row.player.displayName)).toEqual(['High', 'Middle', 'Insufficient']);
+  });
 });

@@ -1,9 +1,9 @@
-export const playerSortKeys = ['player', 'type', 'totalProfit', 'avgProfit', 'medianProfit', 'roi', 'volatility', 'nightsPlayed', 'wins', 'winRate'] as const;
+export const playerSortKeys = ['player', 'type', 'buyInIntensity', 'outcomeSwing', 'totalProfit', 'avgProfit', 'medianProfit', 'roi', 'volatility', 'nightsPlayed', 'wins', 'winRate'] as const;
 export type PlayerSortKey = (typeof playerSortKeys)[number];
 
 export interface RankablePlayer {
   player: { displayName: string };
-  classification?: { type: string };
+  classification?: { type: string; exposurePercentile?: number | null; swingPercentile?: number | null };
   totalProfit: number;
   avgProfit: number;
   medianProfit: number;
@@ -33,6 +33,15 @@ export function rankPlayers<T extends RankablePlayer>(rows: T[], sortKey: Player
       };
       return (typeOrder[b.classification?.type ?? ''] ?? -1) - (typeOrder[a.classification?.type ?? ''] ?? -1)
         || a.player.displayName.localeCompare(b.player.displayName);
+    }
+    if (sortKey === 'buyInIntensity' || sortKey === 'outcomeSwing') {
+      const classificationKey = sortKey === 'buyInIntensity' ? 'exposurePercentile' : 'swingPercentile';
+      const aValue = a.classification?.[classificationKey];
+      const bValue = b.classification?.[classificationKey];
+      if (aValue == null && bValue == null) return a.player.displayName.localeCompare(b.player.displayName);
+      if (aValue == null) return 1;
+      if (bValue == null) return -1;
+      return bValue - aValue || a.player.displayName.localeCompare(b.player.displayName);
     }
     return b[sortKey] - a[sortKey] || a.player.displayName.localeCompare(b.player.displayName);
   });

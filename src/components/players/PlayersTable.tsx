@@ -24,12 +24,20 @@ const columns: PlayerColumn[] = [
 ];
 
 const typeColumn: PlayerColumn = { key: 'type', label: 'Type', description: 'Player archetype based on relative buy-in intensity and outcome swings.' };
-const tooltipColumns = new Set<PlayerSortKey>(['type', 'roi', 'volatility']);
+const classificationColumns: PlayerColumn[] = [
+  { key: 'buyInIntensity', label: 'Buy-in Intensity', description: 'Percentile rank combining typical buy-in size, larger buy-ins, and the frequency of multiple buy-ins.' },
+  { key: 'outcomeSwing', label: 'Outcome Swing', description: 'Percentile rank of the variation in normalized nightly outcomes; higher values indicate larger swings.' },
+];
+const tooltipColumns = new Set<PlayerSortKey>(['type', 'buyInIntensity', 'outcomeSwing', 'roi', 'volatility']);
 
 export function PlayersTable({ rows, query }: { rows: PlayerStat[]; query: string }) {
   const [sortKey, setSortKey] = useState<PlayerSortKey>('totalProfit');
   const rankedRows = useMemo(() => rankPlayers(rows, sortKey), [rows, sortKey]);
-  return <div className="card overflow-x-auto"><table className="w-full min-w-[1100px] text-sm"><thead><tr className="bg-gray-50"><th className="p-3 text-center">Rank</th>{columns.slice(0, 1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}<SortableHeader column={typeColumn} sortKey={sortKey} setSortKey={setSortKey} />{columns.slice(1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}</tr></thead><tbody>{rankedRows.map((row, index) => <tr className="border-t" key={row.player.id}><td className="text-center">#{index + 1}</td><td className="p-3"><Link className="font-semibold text-red-700" href={`/players/${row.player.id}${query ? `?${query}` : ''}`}>{row.player.displayName}</Link></td><td className="px-3 py-2 text-center"><TypeTooltip classification={row.classification} playerName={row.player.displayName} /></td><td className="text-center">{dollars(row.totalProfit)}</td><td className="text-center">{dollars(row.avgProfit)}</td><td className="text-center">{dollars(row.medianProfit)}</td><td className="text-center">{pct(row.roi)}</td><td className="text-center">{pct(row.volatility)}</td><td className="text-center">{row.nightsPlayed}</td><td className="text-center">{row.wins}</td><td className="text-center">{pct(row.winRate)}</td></tr>)}</tbody></table></div>;
+  return <div className="card overflow-x-auto"><table className="w-full min-w-[1350px] text-sm"><thead><tr className="bg-gray-50"><th className="p-3 text-center">Rank</th>{columns.slice(0, 1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}<SortableHeader column={typeColumn} sortKey={sortKey} setSortKey={setSortKey} />{classificationColumns.map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}{columns.slice(1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}</tr></thead><tbody>{rankedRows.map((row, index) => <tr className="border-t" key={row.player.id}><td className="text-center">#{index + 1}</td><td className="p-3"><Link className="font-semibold text-red-700" href={`/players/${row.player.id}${query ? `?${query}` : ''}`}>{row.player.displayName}</Link></td><td className="px-3 py-2 text-center"><TypeTooltip classification={row.classification} playerName={row.player.displayName} /></td><td className="text-center">{classificationPercentile(row.classification.exposurePercentile)}</td><td className="text-center">{classificationPercentile(row.classification.swingPercentile)}</td><td className="text-center">{dollars(row.totalProfit)}</td><td className="text-center">{dollars(row.avgProfit)}</td><td className="text-center">{dollars(row.medianProfit)}</td><td className="text-center">{pct(row.roi)}</td><td className="text-center">{pct(row.volatility)}</td><td className="text-center">{row.nightsPlayed}</td><td className="text-center">{row.wins}</td><td className="text-center">{pct(row.winRate)}</td></tr>)}</tbody></table></div>;
+}
+
+function classificationPercentile(value: number | null) {
+  return value == null ? '—' : `${ordinal(value)} percentile`;
 }
 
 function TypeTooltip({ classification, playerName }: { classification: PlayerClassification; playerName: string }) {
