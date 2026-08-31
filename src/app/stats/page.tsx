@@ -19,7 +19,7 @@ export default async function Stats({ searchParams }: { searchParams: Promise<Re
   const query = new URLSearchParams(sp as Record<string, string>).toString();
   const playerRow = (stat: typeof stats[number]): BoardRow => ({ id: stat.player.id, label: stat.player.displayName, value: dollars(stat.totalProfit), href: `/players/${stat.player.id}?${query}` });
 
-  return <><header><p className="text-red-600 font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Stats</h1></header><section className="grid lg:grid-cols-3 gap-5">
+  return <><header><p className="text-carolina-dark font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Stats</h1></header><section className="grid lg:grid-cols-3 gap-5">
     <Board title="Most profitable" rows={stats.slice(0, 10).map(playerRow)} />
     <Board title={`Highest ROI (${MIN_SAMPLE_SIZE}+ nights)`} rows={roi.map(stat => ({ ...playerRow(stat), value: pct(stat.roi) }))} />
     <Board title="Largest single-night wins" rows={single.map(result => ({ id: result.nightId, label: players.get(result.playerId) ?? result.sourceName, value: dollars(result.profit), href: `/games/${result.nightId}?${query}` }))} />
@@ -27,5 +27,5 @@ export default async function Stats({ searchParams }: { searchParams: Promise<Re
 }
 
 function Board({ title, rows }: { title: string; rows: BoardRow[] }) {
-  return <div className="card p-5"><h2 className="font-bold text-xl mb-3">{title}</h2>{rows.map((row, index) => <div className="flex justify-between border-t py-2" key={`${row.id}-${index}`}><span>#{index + 1} <Link className="font-semibold text-red-700 hover:underline" href={row.href}>{row.label}</Link></span><b>{row.value}</b></div>)}</div>;
+  return <div className="card p-5"><h2 className="font-bold text-xl mb-3">{title}</h2>{rows.map((row, index) => <div className="flex justify-between border-t py-2" key={`${row.id}-${index}`}><span>#{index + 1} <Link className="font-semibold text-navy hover:underline" href={row.href}>{row.label}</Link></span><b>{row.value}</b></div>)}</div>;
 }

@@ -29,7 +29,7 @@ export default async function Game({
   return (
     <>
       <header>
-        <p className="text-red-600 font-semibold">
+        <p className="text-carolina-dark font-semibold">
           {night.seasonId} · {night.nightType}
         </p>
         <h1 className="text-4xl font-black">{longDateFmt(night.date)}</h1>
@@ -106,7 +106,7 @@ export default async function Game({
                   <td className="p-3 text-right tabular-nums">{dollars(result.cashOut)}</td>
                   <td
                     className={`p-3 text-right tabular-nums ${
-                      result.profit >= 0 ? 'text-green-700' : 'text-red-700'
+                      result.profit >= 0 ? 'text-green-700' : 'text-rose-700'
                     }`}
                   >
                     {dollars(result.profit)}

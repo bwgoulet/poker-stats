@@ -42,7 +42,7 @@ export function ProfitTimeline({ data }: { data: TimelinePoint[] }) {
             <Line
               dataKey="profit"
               name="Cumulative profit"
-              stroke="#dc2626"
+              stroke="#4b8fbd"
               strokeWidth={2}
               dot={data.length < 20}
             />
