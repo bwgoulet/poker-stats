@@ -11,6 +11,7 @@ const nightTypes = [
 ] as const;
 const currentSeason = 'fall-2026';
 const currentSeasonNightTypes = ['10', '20'];
+const defaultNightTypes = ['10', '20'];
 
 function seasonLabel(season: string) {
   const [name, ...rest] = season.split('-');
@@ -24,9 +25,13 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
   const router = useRouter();
   const path = usePathname();
 
-  function selected(key: string, all: readonly (readonly [string, string])[]) {
+  function selected(
+    key: string,
+    all: readonly (readonly [string, string])[],
+    defaults = all.map(([value]) => value),
+  ) {
     const values = sp.getAll(key);
-    return values.length ? values : all.map(([value]) => value);
+    return values.length ? values : defaults;
   }
 
   function navigate(params: URLSearchParams) {
@@ -35,12 +40,19 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
     router.push(query ? `${path}?${query}` : path);
   }
 
-  function toggle(key: string, value: string, all: readonly (readonly [string, string])[]) {
+  function toggle(
+    key: string,
+    value: string,
+    all: readonly (readonly [string, string])[],
+    defaults = all.map(([option]) => option),
+  ) {
     const params = new URLSearchParams(sp);
-    const values = new Set(selected(key, all));
+    const values = new Set(selected(key, all, defaults));
     values.has(value) ? values.delete(value) : values.add(value);
     params.delete(key);
-    if (values.size && values.size < all.length) {
+    const isDefault =
+      values.size === defaults.length && defaults.every((option) => values.has(option));
+    if (!isDefault) {
       Array.from(values).forEach((selectedValue) => params.append(key, selectedValue));
     }
     navigate(params);
@@ -49,8 +61,27 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
   const currentSeasonSelected =
     selected('season', seasons).length === 1 &&
     selected('season', seasons)[0] === currentSeason &&
-    selected('nightType', nightTypes).length === currentSeasonNightTypes.length &&
-    currentSeasonNightTypes.every((type) => selected('nightType', nightTypes).includes(type));
+    selected('nightType', nightTypes, defaultNightTypes).length === currentSeasonNightTypes.length &&
+    currentSeasonNightTypes.every((type) =>
+      selected('nightType', nightTypes, defaultNightTypes).includes(type),
+    );
+  const allSelected =
+    selected('season', seasons).length === seasons.length &&
+    seasons.every(([value]) => selected('season', seasons).includes(value)) &&
+    selected('nightType', nightTypes, defaultNightTypes).length === nightTypes.length &&
+    nightTypes.every(([value]) =>
+      selected('nightType', nightTypes, defaultNightTypes).includes(value),
+    );
+
+  function toggleAll() {
+    const params = new URLSearchParams(sp);
+    params.delete('season');
+    params.delete('nightType');
+    if (!allSelected) {
+      nightTypes.forEach(([value]) => params.append('nightType', value));
+    }
+    navigate(params);
+  }
 
   function toggleCurrentSeason() {
     const params = new URLSearchParams(sp);
@@ -85,30 +116,49 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
           <label className="flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm" key={value}>
             <input
               type="checkbox"
-              checked={selected('nightType', nightTypes).includes(value)}
-              onChange={() => toggle('nightType', value, nightTypes)}
+              checked={selected('nightType', nightTypes, defaultNightTypes).includes(value)}
+              onChange={() => toggle('nightType', value, nightTypes, defaultNightTypes)}
             />
             {label}
           </label>
         ))}
       </fieldset>
-      <button
-        type="button"
-        role="switch"
-        aria-checked={currentSeasonSelected}
-        onClick={toggleCurrentSeason}
-        className="ml-auto flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
-      >
-        Current Season
-        <span
-          aria-hidden="true"
-          className={`relative h-6 w-11 rounded-full transition-colors ${currentSeasonSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+      <div className="ml-auto flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          role="switch"
+          aria-checked={allSelected}
+          onClick={toggleAll}
+          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
         >
+          All
           <span
-            className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${currentSeasonSelected ? 'translate-x-6' : 'translate-x-1'}`}
-          />
-        </span>
-      </button>
+            aria-hidden="true"
+            className={`relative h-6 w-11 rounded-full transition-colors ${allSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+          >
+            <span
+              className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${allSelected ? 'translate-x-6' : 'translate-x-1'}`}
+            />
+          </span>
+        </button>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={currentSeasonSelected}
+          onClick={toggleCurrentSeason}
+          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
+        >
+          Current Season
+          <span
+            aria-hidden="true"
+            className={`relative h-6 w-11 rounded-full transition-colors ${currentSeasonSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+          >
+            <span
+              className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${currentSeasonSelected ? 'translate-x-6' : 'translate-x-1'}`}
+            />
+          </span>
+        </button>
+      </div>
     </div>
   );
 }
