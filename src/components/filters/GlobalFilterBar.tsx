@@ -11,6 +11,7 @@ const nightTypes = [
 ] as const;
 const currentSeason = 'fall-2026';
 const currentSeasonNightTypes = ['10', '20'];
+const defaultNightTypes = ['10', '20'];
 
 function seasonLabel(season: string) {
   const [name, ...rest] = season.split('-');
@@ -24,9 +25,13 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
   const router = useRouter();
   const path = usePathname();
 
-  function selected(key: string, all: readonly (readonly [string, string])[]) {
+  function selected(
+    key: string,
+    all: readonly (readonly [string, string])[],
+    defaults = all.map(([value]) => value),
+  ) {
     const values = sp.getAll(key);
-    return values.length ? values : all.map(([value]) => value);
+    return values.length ? values : defaults;
   }
 
   function navigate(params: URLSearchParams) {
@@ -35,12 +40,19 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
     router.push(query ? `${path}?${query}` : path);
   }
 
-  function toggle(key: string, value: string, all: readonly (readonly [string, string])[]) {
+  function toggle(
+    key: string,
+    value: string,
+    all: readonly (readonly [string, string])[],
+    defaults = all.map(([option]) => option),
+  ) {
     const params = new URLSearchParams(sp);
-    const values = new Set(selected(key, all));
+    const values = new Set(selected(key, all, defaults));
     values.has(value) ? values.delete(value) : values.add(value);
     params.delete(key);
-    if (values.size && values.size < all.length) {
+    const isDefault =
+      values.size === defaults.length && defaults.every((option) => values.has(option));
+    if (!isDefault) {
       Array.from(values).forEach((selectedValue) => params.append(key, selectedValue));
     }
     navigate(params);
@@ -49,8 +61,10 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
   const currentSeasonSelected =
     selected('season', seasons).length === 1 &&
     selected('season', seasons)[0] === currentSeason &&
-    selected('nightType', nightTypes).length === currentSeasonNightTypes.length &&
-    currentSeasonNightTypes.every((type) => selected('nightType', nightTypes).includes(type));
+    selected('nightType', nightTypes, defaultNightTypes).length === currentSeasonNightTypes.length &&
+    currentSeasonNightTypes.every((type) =>
+      selected('nightType', nightTypes, defaultNightTypes).includes(type),
+    );
 
   function toggleCurrentSeason() {
     const params = new URLSearchParams(sp);
@@ -85,8 +99,8 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
           <label className="flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm" key={value}>
             <input
               type="checkbox"
-              checked={selected('nightType', nightTypes).includes(value)}
-              onChange={() => toggle('nightType', value, nightTypes)}
+              checked={selected('nightType', nightTypes, defaultNightTypes).includes(value)}
+              onChange={() => toggle('nightType', value, nightTypes, defaultNightTypes)}
             />
             {label}
           </label>
