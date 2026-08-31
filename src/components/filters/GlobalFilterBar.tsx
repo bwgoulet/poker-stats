@@ -65,6 +65,23 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
     currentSeasonNightTypes.every((type) =>
       selected('nightType', nightTypes, defaultNightTypes).includes(type),
     );
+  const allSelected =
+    selected('season', seasons).length === seasons.length &&
+    seasons.every(([value]) => selected('season', seasons).includes(value)) &&
+    selected('nightType', nightTypes, defaultNightTypes).length === nightTypes.length &&
+    nightTypes.every(([value]) =>
+      selected('nightType', nightTypes, defaultNightTypes).includes(value),
+    );
+
+  function toggleAll() {
+    const params = new URLSearchParams(sp);
+    params.delete('season');
+    params.delete('nightType');
+    if (!allSelected) {
+      nightTypes.forEach(([value]) => params.append('nightType', value));
+    }
+    navigate(params);
+  }
 
   function toggleCurrentSeason() {
     const params = new URLSearchParams(sp);
@@ -106,23 +123,42 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
           </label>
         ))}
       </fieldset>
-      <button
-        type="button"
-        role="switch"
-        aria-checked={currentSeasonSelected}
-        onClick={toggleCurrentSeason}
-        className="ml-auto flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
-      >
-        Current Season
-        <span
-          aria-hidden="true"
-          className={`relative h-6 w-11 rounded-full transition-colors ${currentSeasonSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+      <div className="ml-auto flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          role="switch"
+          aria-checked={allSelected}
+          onClick={toggleAll}
+          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
         >
+          All
           <span
-            className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${currentSeasonSelected ? 'translate-x-6' : 'translate-x-1'}`}
-          />
-        </span>
-      </button>
+            aria-hidden="true"
+            className={`relative h-6 w-11 rounded-full transition-colors ${allSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+          >
+            <span
+              className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${allSelected ? 'translate-x-6' : 'translate-x-1'}`}
+            />
+          </span>
+        </button>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={currentSeasonSelected}
+          onClick={toggleCurrentSeason}
+          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
+        >
+          Current Season
+          <span
+            aria-hidden="true"
+            className={`relative h-6 w-11 rounded-full transition-colors ${currentSeasonSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+          >
+            <span
+              className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${currentSeasonSelected ? 'translate-x-6' : 'translate-x-1'}`}
+            />
+          </span>
+        </button>
+      </div>
     </div>
   );
 }
