@@ -25,8 +25,8 @@ const columns: PlayerColumn[] = [
 
 const typeColumn: PlayerColumn = { key: 'type', label: 'Type', description: 'Player archetype based on relative buy-in intensity and outcome swings.' };
 const classificationColumns: PlayerColumn[] = [
-  { key: 'buyInIntensity', label: 'Buy-in Intensity', description: 'Average amount bought in per qualifying night, expressed in multiples of that night’s nominal buy-in.' },
-  { key: 'outcomeSwing', label: 'Outcome Swing', description: 'Typical variation in normalized nightly profit, expressed in nominal buy-ins using a robust standard deviation estimate.' },
+  { key: 'buyInIntensity', label: 'AVG Buy-in', description: 'Average amount bought in per qualifying night, expressed in multiples of that night’s nominal buy-in.' },
+  { key: 'outcomeSwing', label: 'Swing', description: 'Typical variation in normalized nightly profit, expressed in nominal buy-ins using a robust standard deviation estimate.' },
 ];
 const tooltipColumns = new Set<PlayerSortKey>(['type', 'buyInIntensity', 'outcomeSwing', 'roi', 'volatility']);
 
