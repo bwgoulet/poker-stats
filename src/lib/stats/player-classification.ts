@@ -5,14 +5,16 @@ export const ESTABLISHED_CLASSIFICATION_NIGHTS = 15;
 export const LOW_TYPE_PERCENTILE = 25;
 export const HIGH_TYPE_PERCENTILE = 75;
 
-export type PlayerType = 'NIT' | 'One-Bullet' | 'Steady' | 'Neutral' | 'Gambler' | 'Action Player' | 'Maniac';
+export type PlayerType = 'NIT' | 'One-Bullet' | 'Steady' | 'Neutral' | 'Gambler' | 'Chemical X' | 'Whale' | 'Action Player' | 'Maniac';
 export type ClassificationConfidence = 'insufficient' | 'provisional' | 'established';
 export type PlayerClassificationLabel = PlayerType | 'Insufficient history';
 
 export const PLAYER_TYPE_DESCRIPTIONS: Record<PlayerClassificationLabel, string> = {
   Maniac: 'High buy-in intensity and high outcome swings: both rank in the top quarter of the eligible field.',
-  'Action Player': 'High buy-in intensity, but not high outcome swings. This player frequently puts multiple buy-ins into play without the field’s most extreme results.',
-  Gambler: 'High outcome swings, but not high buy-in intensity. This player has unusually large results without consistently putting the most buy-ins into play.',
+  'Action Player': 'High buy-in intensity with typical outcome swings. This player frequently puts multiple buy-ins into play without unusually steady or extreme results.',
+  Whale: 'High buy-in intensity but low outcome swings. This player frequently puts multiple buy-ins into play while producing unusually consistent results.',
+  'Chemical X': 'Typical buy-in intensity but high outcome swings. This player has unusually large results without unusually low or high buy-in intensity.',
+  Gambler: 'Low buy-in intensity but high outcome swings. This player has unusually large results despite putting fewer buy-ins into play than most of the field.',
   Neutral: 'Neither buy-in intensity nor outcome swings are unusually high or low relative to the eligible field.',
   'One-Bullet': 'Low buy-in intensity with typical outcome swings. This player commits less money than most of the field without producing unusually steady results.',
   Steady: 'Low outcome swings without the low buy-in intensity required for a NIT. This player’s results are unusually consistent.',
@@ -105,7 +107,9 @@ function measurePlayer(player: ClassifiablePlayer, nights: Map<string, PokerNigh
 
 function classify(exposure: 'low' | 'middle' | 'high', swing: 'low' | 'middle' | 'high'): PlayerType {
   if (exposure === 'high' && swing === 'high') return 'Maniac';
-  if (exposure === 'high') return 'Action Player';
+  if (exposure === 'high' && swing === 'middle') return 'Action Player';
+  if (exposure === 'high') return 'Whale';
+  if (exposure === 'middle' && swing === 'high') return 'Chemical X';
   if (swing === 'high') return 'Gambler';
   if (exposure === 'low' && swing === 'low') return 'NIT';
   if (exposure === 'low') return 'One-Bullet';

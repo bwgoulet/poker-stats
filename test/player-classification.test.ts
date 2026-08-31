@@ -26,7 +26,7 @@ function row(id: string, buyIns: number[], profits: number[]) {
 describe('player classification', () => {
   it('provides an explanation for every displayed player type', () => {
     expect(Object.keys(PLAYER_TYPE_DESCRIPTIONS)).toEqual(expect.arrayContaining([
-      'NIT', 'One-Bullet', 'Steady', 'Neutral', 'Gambler', 'Action Player', 'Maniac', 'Insufficient history',
+      'NIT', 'One-Bullet', 'Steady', 'Neutral', 'Gambler', 'Chemical X', 'Whale', 'Action Player', 'Maniac', 'Insufficient history',
     ]));
     expect(Object.values(PLAYER_TYPE_DESCRIPTIONS).every((description) => description.length > 20)).toBe(true);
   });
@@ -100,6 +100,36 @@ describe('player classification', () => {
     });
     expect(classifications.get('one-bullet')?.swingPercentile).toBeGreaterThan(25);
     expect(classifications.get('one-bullet')?.swingPercentile).toBeLessThan(75);
+  });
+
+  it('classifies middle exposure with high outcome swings as Chemical X', () => {
+    const classifications = classifyPlayers([
+      row('low', Array(8).fill(1), [-1, 1, -1, 1, -1, 1, -1, 1]),
+      row('chemical-x', Array(8).fill(2), [-4, 4, -4, 4, -4, 4, -4, 4]),
+      row('middle', Array(8).fill(3), [-2, 2, -2, 2, -2, 2, -2, 2]),
+      row('high', Array(8).fill(4), [-3, 3, -3, 3, -3, 3, -3, 3]),
+    ], nights);
+
+    expect(classifications.get('chemical-x')).toMatchObject({
+      type: 'Chemical X',
+      exposurePercentile: expect.any(Number),
+      swingPercentile: 100,
+    });
+  });
+
+  it('classifies high exposure with low outcome swings as Whale', () => {
+    const classifications = classifyPlayers([
+      row('low', Array(8).fill(1), [-2, 2, -2, 2, -2, 2, -2, 2]),
+      row('middle', Array(8).fill(2), [-3, 3, -3, 3, -3, 3, -3, 3]),
+      row('higher', Array(8).fill(3), [-4, 4, -4, 4, -4, 4, -4, 4]),
+      row('whale', Array(8).fill(4), [-1, 1, -1, 1, -1, 1, -1, 1]),
+    ], nights);
+
+    expect(classifications.get('whale')).toMatchObject({
+      type: 'Whale',
+      exposurePercentile: 100,
+      swingPercentile: 0,
+    });
   });
 
   it('excludes one-off nights without a nominal buy-in', () => {
