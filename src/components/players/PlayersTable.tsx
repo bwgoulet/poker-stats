@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { CircleHelp } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { navigationStartEvent } from '@/components/layout/NavigationLoader';
 import { dollars, ordinal, pct } from '@/lib/formatting/format';
 import { PlayerSortKey, rankPlayers } from '@/lib/stats/player-ranking';
 import { playerStats } from '@/lib/stats/statistics';
@@ -38,6 +39,7 @@ export function PlayersTable({ rows, query }: { rows: PlayerStat[]; query: strin
     const params = new URLSearchParams(query);
     params.delete('player');
     selected.forEach((id) => params.append('player', id));
+    window.dispatchEvent(new Event(navigationStartEvent));
     router.push(`/compare?${params.toString()}`);
   }
   return <div className="space-y-3"><div className="flex flex-wrap items-center justify-between gap-3"><p className="text-sm text-gray-600">Select two or more players to compare.</p><button type="button" disabled={selected.length < 2} onClick={compare} className="rounded-lg bg-red-600 px-4 py-2 font-semibold text-white disabled:cursor-not-allowed disabled:bg-gray-300">Compare selected ({selected.length})</button></div><div className="card overflow-x-auto"><table className="w-full min-w-[1160px] text-sm"><thead><tr className="bg-gray-50"><th className="p-3 text-center">Compare</th><th className="p-3 text-center">Rank</th>{columns.slice(0, 1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}<SortableHeader column={typeColumn} sortKey={sortKey} setSortKey={setSortKey} />{classificationColumns.map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}{columns.slice(1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}</tr></thead><tbody>{rankedRows.map((row, index) => <tr className="border-t" key={row.player.id}><td className="text-center"><input type="checkbox" aria-label={`Compare ${row.player.displayName}`} checked={selected.includes(row.player.id)} onChange={() => setSelected((current) => current.includes(row.player.id) ? current.filter((id) => id !== row.player.id) : [...current, row.player.id])} /></td><td className="text-center">#{index + 1}</td><td className="p-3"><Link className="font-semibold text-red-700" href={`/players/${row.player.id}${query ? `?${query}` : ''}`}>{row.player.displayName}</Link></td><td className="px-3 py-2 text-center"><TypeTooltip classification={row.classification} playerName={row.player.displayName} /></td><td className="text-center">{buyInUnits(row.classification.averageBuyInUnits)}</td><td className="text-center">{buyInUnits(row.classification.outcomeSwing)}</td><td className="text-center">{dollars(row.totalProfit)}</td><td className="text-center">{dollars(row.avgProfit)}</td><td className="text-center">{pct(row.roi)}</td><td className="text-center">{row.nightsPlayed}</td><td className="text-center">{row.wins}</td><td className="text-center">{pct(row.winRate)}</td></tr>)}</tbody></table></div></div>;
