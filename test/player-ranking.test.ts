@@ -24,8 +24,8 @@ describe('player rankings', () => {
     expect(rankPlayers(rows, 'medianProfit').map((row) => row.player.displayName)).toEqual(['Zoe', 'Alice']);
   });
 
-  it('ranks player types from Maniac to NIT', () => {
-    const typedRows = ['NIT', 'Neutral', 'Gambler', 'Steady', 'Maniac', 'Action Player']
+  it('ranks player types from Maniac to insufficient history', () => {
+    const typedRows = ['NIT', 'Neutral', 'Insufficient history', 'Gambler', 'Steady', 'Maniac', 'Action Player']
       .map((type, index) => ({
         ...rows[0],
         player: { displayName: `Player ${index}` },
@@ -33,7 +33,7 @@ describe('player rankings', () => {
       }));
 
     expect(rankPlayers(typedRows, 'type').map((row) => row.classification.type)).toEqual([
-      'Maniac', 'Action Player', 'Gambler', 'Neutral', 'Steady', 'NIT',
+      'Maniac', 'Action Player', 'Gambler', 'Neutral', 'Steady', 'NIT', 'Insufficient history',
     ]);
   });
 });
