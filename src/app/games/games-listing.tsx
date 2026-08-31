@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
+import { navigationStartEvent } from '@/components/layout/NavigationLoader';
 import { dollars, dateFmt } from '@/lib/formatting/format';
 
 type SortKey = 'date' | 'players' | 'pot' | 'winner';
@@ -41,6 +42,10 @@ export default function GamesListing({ rows }: { rows: Row[] }) {
   function changeSort(nextSort: SortKey) {
     update({ sort: nextSort, dir: sort === nextSort && direction === 'desc' ? 'asc' : 'desc' });
   }
+  function changePage(nextPage: number) {
+    window.dispatchEvent(new Event(navigationStartEvent));
+    update({ page: String(nextPage) });
+  }
   function ariaSort(key: SortKey): 'ascending' | 'descending' | 'none' {
     return sort === key ? (direction === 'asc' ? 'ascending' : 'descending') : 'none';
   }
@@ -60,7 +65,7 @@ export default function GamesListing({ rows }: { rows: Row[] }) {
     </tr></thead><tbody>{visible.map(row => <tr className="border-t" key={row.id}><td className="p-3 whitespace-nowrap">{dateFmt(row.date)}</td><td className="p-3"><Link className="font-semibold text-navy" href={`/games/${row.id}?${searchParams.toString()}`}>{row.title}</Link><small className="block text-gray-500">{row.seasonId} · {row.nightType}</small></td><td className="text-center">{row.players}</td><td className="text-center">{dollars(row.totalPot)}</td><td className="text-center">{row.winner}</td></tr>)}</tbody></table>
       {!visible.length && <p className="p-6 text-center text-gray-500">No games match these filters.</p>}
     </div>
-    {pages > 1 && <nav className="flex items-center justify-between" aria-label="Games pagination"><button className="rounded border px-3 py-2 disabled:opacity-50" disabled={page === 1} onClick={() => update({ page: String(page - 1) })}>Previous</button><span>Page {page} of {pages} · {filtered.length} games</span><button className="rounded border px-3 py-2 disabled:opacity-50" disabled={page === pages} onClick={() => update({ page: String(page + 1) })}>Next</button></nav>}
+    {pages > 1 && <nav className="flex items-center justify-between" aria-label="Games pagination"><button className="rounded border px-3 py-2 disabled:opacity-50" disabled={page === 1} onClick={() => changePage(page - 1)}>Previous</button><span>Page {page} of {pages} · {filtered.length} games</span><button className="rounded border px-3 py-2 disabled:opacity-50" disabled={page === pages} onClick={() => changePage(page + 1)}>Next</button></nav>}
   </div>;
 }
 
