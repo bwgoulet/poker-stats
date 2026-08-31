@@ -1,2 +1,97 @@
-import { notFound } from 'next/navigation'; import Link from 'next/link'; import { getPokerData } from '@/lib/data/poker-repository'; import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data'; import { playerStats, sortResultsByDate } from '@/lib/stats/statistics'; import { dollars, pct, dateFmt } from '@/lib/formatting/format'; import { ProfitTimeline } from '@/components/charts/ProfitTimeline';
-export default async function Player({params,searchParams}:{params:Promise<{playerId:string}>,searchParams:Promise<Record<string,string|undefined>>}){const {playerId}=await params, sp=await searchParams, f=parseFilters(sp), d=getPokerData(), p=d.players.find(x=>x.id===playerId); if(!p)notFound(); const nights=filterNights(d.nights,f), results=filterResults(d.results,d.nights,f); const s=playerStats(d.players,nights,results).find(stat=>stat.player.id===p.id)!; let cum=0; const timeline=sortResultsByDate(s.results,d.nights).map(r=>{cum+=r.profit; return {date:d.nights.find(n=>n.id===r.nightId)!.date,profit:cum}}); const gameHistory=sortResultsByDate(s.results,d.nights,'desc'); return <><header><p className="text-red-600 font-semibold">{scopeLabel(f)}</p><h1 className="text-4xl font-black">{p.displayName}</h1><p className="text-gray-500">Rank #{s.rank}</p></header><section className="grid md:grid-cols-4 gap-4">{[['Profit',dollars(s.totalProfit)],['ROI',pct(s.roi)],['Nights',s.nightsPlayed],['Win rate',pct(s.winRate)]].map(([k,v])=><div className="card p-5" key={k}><p className="text-gray-500">{k}</p><b className="text-2xl">{v}</b></div>)}</section><div className="card p-5"><h2 className="font-bold text-xl">Cumulative profit</h2><ProfitTimeline data={timeline}/></div><div className="card p-5"><h2 className="font-bold text-xl mb-3">Game history</h2>{gameHistory.map(r=>{const n=d.nights.find(x=>x.id===r.nightId)!;return <Link className="flex justify-between border-t py-3" href={`/games/${n.id}?${new URLSearchParams(sp as any)}`} key={n.id}><span>{dateFmt(n.date)} · {n.title}</span><b className={r.profit>=0?'text-green-700':'text-red-700'}>{dollars(r.profit)}</b></Link>})}</div></>}
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { getPokerData } from '@/lib/data/poker-repository';
+import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
+import { playerStats, sortResultsByDate } from '@/lib/stats/statistics';
+import { dollars, pct, dateFmt } from '@/lib/formatting/format';
+import { ProfitTimeline } from '@/components/charts/ProfitTimeline';
+
+const streakLabel = (streak: number) => {
+  if (streak === 0) return '—';
+  return `${Math.abs(streak)} ${streak > 0 ? 'win' : 'loss'}${Math.abs(streak) === 1 ? '' : 'es'}`;
+};
+
+export default async function Player({ params, searchParams }: {
+  params: Promise<{ playerId: string }>;
+  searchParams: Promise<Record<string, string | undefined>>;
+}) {
+  const { playerId } = await params;
+  const sp = await searchParams;
+  const filters = parseFilters(sp);
+  const data = getPokerData();
+  const player = data.players.find((candidate) => candidate.id === playerId);
+  if (!player) notFound();
+
+  const nights = filterNights(data.nights, filters);
+  const results = filterResults(data.results, data.nights, filters);
+  const stats = playerStats(data.players, nights, results).find((stat) => stat.player.id === player.id)!;
+  let cumulativeProfit = 0;
+  const timeline = sortResultsByDate(stats.results, data.nights).map((result) => {
+    cumulativeProfit += result.profit;
+    return { date: data.nights.find((night) => night.id === result.nightId)!.date, profit: cumulativeProfit };
+  });
+  const gameHistory = sortResultsByDate(stats.results, data.nights, 'desc');
+  const meanProfit = stats.avgProfit;
+  const dollarVolatility = stats.results.length
+    ? Math.sqrt(stats.results.reduce((sum, result) => sum + (result.profit - meanProfit) ** 2, 0) / stats.results.length)
+    : 0;
+
+  const headlineStats = [
+    { label: 'Profit', value: dollars(stats.totalProfit) },
+    { label: 'ROI', value: pct(stats.roi), help: 'Return on investment: total profit divided by total buy-in.' },
+    { label: 'Nights', value: String(stats.nightsPlayed) },
+    { label: 'Win rate', value: pct(stats.winRate) },
+  ];
+  const detailStats = [
+    { label: 'Total buy-in', value: dollars(stats.totalBuyIn) },
+    { label: 'Average profit', value: dollars(stats.avgProfit) },
+    { label: 'Median profit', value: dollars(stats.medianProfit) },
+    { label: 'Average buy-in', value: dollars(stats.avgBuyIn) },
+    { label: 'Profit volatility (dollars)', value: dollars(dollarVolatility), help: 'Typical variation in profit from one night to another, measured in dollars.' },
+    { label: 'Return volatility (normalized)', value: pct(stats.volatility), help: 'Typical variation in nightly return relative to that night’s buy-in, making differently sized games comparable.' },
+    { label: 'Biggest win', value: dollars(stats.biggestWin) },
+    { label: 'Biggest loss', value: dollars(stats.biggestLoss) },
+    { label: 'Current streak', value: streakLabel(stats.currentStreak) },
+    { label: 'Best streak', value: streakLabel(stats.bestStreak) },
+    { label: 'First appearance', value: stats.firstAppearance ? dateFmt(stats.firstAppearance) : '—' },
+    { label: 'Last appearance', value: stats.lastAppearance ? dateFmt(stats.lastAppearance) : '—' },
+  ];
+
+  return <>
+    <header>
+      <p className="text-red-600 font-semibold">{scopeLabel(filters)}</p>
+      <h1 className="text-4xl font-black">{player.displayName}</h1>
+      <p className="text-gray-500">Rank #{stats.rank}</p>
+    </header>
+    <section className="grid md:grid-cols-4 gap-4" aria-label="Player highlights">
+      {headlineStats.map(({ label, value, help }) => <div className="card p-5" key={label}>
+        <p className="text-gray-500" title={help}>{label}{help && <span aria-label={help}> ⓘ</span>}</p>
+        <b className="text-2xl">{value}</b>
+      </div>)}
+    </section>
+    <section className="card p-5" aria-labelledby="performance-details">
+      <h2 className="font-bold text-xl mb-3" id="performance-details">Performance details</h2>
+      <dl className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+        {detailStats.map(({ label, value, help }) => <div className="flex justify-between gap-4 border-t py-3" key={label}>
+          <dt className="text-gray-500" title={help}>{label}{help && <span aria-label={help}> ⓘ</span>}</dt>
+          <dd className="font-semibold text-right">{value}</dd>
+        </div>)}
+      </dl>
+    </section>
+    <div className="card p-5">
+      <h2 className="font-bold text-xl">Cumulative profit</h2>
+      <ProfitTimeline data={timeline} />
+    </div>
+    <div className="card p-5">
+      <h2 className="font-bold text-xl mb-3">Game history</h2>
+      {gameHistory.length === 0 && <p className="text-gray-500">No games match the selected filters.</p>}
+      {gameHistory.map((result) => {
+        const night = data.nights.find((candidate) => candidate.id === result.nightId)!;
+        return <Link className="flex justify-between border-t py-3" href={`/games/${night.id}?${new URLSearchParams(sp as Record<string, string>)}`} key={night.id}>
+          <span>{dateFmt(night.date)} · {night.title}</span>
+          <b className={result.profit >= 0 ? 'text-green-700' : 'text-red-700'}>{dollars(result.profit)}</b>
+        </Link>;
+      })}
+    </div>
+  </>;
+}
