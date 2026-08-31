@@ -29,8 +29,6 @@ export interface PlayerClassification {
   exposurePercentile: number | null;
   swingPercentile: number | null;
   averageBuyInUnits: number | null;
-  medianBuyInUnits: number | null;
-  multiBuyInRate: number | null;
   outcomeSwing: number | null;
 }
 
@@ -43,9 +41,6 @@ interface Measurements {
   id: string;
   qualifyingNights: number;
   averageBuyInUnits: number;
-  medianBuyInUnits: number;
-  upperBuyInUnits: number;
-  multiBuyInRate: number;
   outcomeSwing: number;
 }
 
@@ -90,7 +85,7 @@ function measurePlayer(player: ClassifiablePlayer, nights: Map<string, PokerNigh
     const buyIn = night && nominalBuyIn(night);
     return buyIn ? [{ buyInUnits: result.buyIn / buyIn, profitUnits: result.profit / buyIn }] : [];
   });
-  const buyIns = normalized.map((result) => result.buyInUnits).sort((a, b) => a - b);
+  const buyIns = normalized.map((result) => result.buyInUnits);
   const profits = normalized.map((result) => result.profitUnits);
   const medianProfit = median(profits);
   const mad = median(profits.map((profit) => Math.abs(profit - medianProfit)));
@@ -100,11 +95,6 @@ function measurePlayer(player: ClassifiablePlayer, nights: Map<string, PokerNigh
     qualifyingNights: normalized.length,
     averageBuyInUnits: buyIns.length
       ? buyIns.reduce((total, buyIn) => total + buyIn, 0) / buyIns.length
-      : 0,
-    medianBuyInUnits: median(buyIns),
-    upperBuyInUnits: percentile(buyIns, 0.75),
-    multiBuyInRate: normalized.length
-      ? normalized.filter((result) => result.buyInUnits > 1.05).length / normalized.length
       : 0,
     outcomeSwing: 1.4826 * mad,
   };
@@ -128,14 +118,8 @@ export function classifyPlayers(players: ClassifiablePlayer[], nights: PokerNigh
   const measurements = players.map((player) => measurePlayer(player, nightMap));
   const eligible = measurements.filter((player) => player.qualifyingNights >= MIN_CLASSIFICATION_NIGHTS);
 
-  const medianRanks = percentileRanks(new Map(eligible.map((player) => [player.id, player.medianBuyInUnits])));
-  const multiRanks = percentileRanks(new Map(eligible.map((player) => [player.id, player.multiBuyInRate])));
-  const upperRanks = percentileRanks(new Map(eligible.map((player) => [player.id, player.upperBuyInUnits])));
+  const exposureRanks = percentileRanks(new Map(eligible.map((player) => [player.id, player.averageBuyInUnits])));
   const swingRanks = percentileRanks(new Map(eligible.map((player) => [player.id, player.outcomeSwing])));
-  const exposureScores = new Map(eligible.map((player) => [player.id,
-    (medianRanks.get(player.id)! * 0.5) + (multiRanks.get(player.id)! * 0.3) + (upperRanks.get(player.id)! * 0.2),
-  ]));
-  const exposureRanks = percentileRanks(exposureScores);
 
   return new Map(measurements.map((player): [string, PlayerClassification] => {
     if (player.qualifyingNights < MIN_CLASSIFICATION_NIGHTS) {
@@ -143,8 +127,6 @@ export function classifyPlayers(players: ClassifiablePlayer[], nights: PokerNigh
         type: 'Insufficient history', confidence: 'insufficient',
         qualifyingNights: player.qualifyingNights, exposurePercentile: null, swingPercentile: null,
         averageBuyInUnits: player.qualifyingNights ? player.averageBuyInUnits : null,
-        medianBuyInUnits: player.qualifyingNights ? player.medianBuyInUnits : null,
-        multiBuyInRate: player.qualifyingNights ? player.multiBuyInRate : null,
         outcomeSwing: player.qualifyingNights ? player.outcomeSwing : null,
       }];
     }
@@ -165,8 +147,6 @@ export function classifyPlayers(players: ClassifiablePlayer[], nights: PokerNigh
       exposurePercentile,
       swingPercentile,
       averageBuyInUnits: player.averageBuyInUnits,
-      medianBuyInUnits: player.medianBuyInUnits,
-      multiBuyInRate: player.multiBuyInRate,
       outcomeSwing: player.outcomeSwing,
     }];
   }));
