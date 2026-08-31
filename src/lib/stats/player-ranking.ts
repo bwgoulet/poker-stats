@@ -20,10 +20,11 @@ export function rankPlayers<T extends RankablePlayer>(rows: T[], sortKey: Player
     if (sortKey === 'player') return b.player.displayName.localeCompare(a.player.displayName);
     if (sortKey === 'type') {
       const typeOrder: Record<string, number> = {
-        Maniac: 6,
-        'Action Player': 5,
-        Gambler: 4,
-        Neutral: 3,
+        Maniac: 7,
+        'Action Player': 6,
+        Gambler: 5,
+        Neutral: 4,
+        'One-Bullet': 3,
         Steady: 2,
         NIT: 1,
         'Insufficient history': 0,

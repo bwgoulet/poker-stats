@@ -26,7 +26,7 @@ function row(id: string, buyIns: number[], profits: number[]) {
 describe('player classification', () => {
   it('provides an explanation for every displayed player type', () => {
     expect(Object.keys(PLAYER_TYPE_DESCRIPTIONS)).toEqual(expect.arrayContaining([
-      'NIT', 'Steady', 'Neutral', 'Gambler', 'Action Player', 'Maniac', 'Insufficient history',
+      'NIT', 'One-Bullet', 'Steady', 'Neutral', 'Gambler', 'Action Player', 'Maniac', 'Insufficient history',
     ]));
     expect(Object.values(PLAYER_TYPE_DESCRIPTIONS).every((description) => description.length > 20)).toBe(true);
   });
@@ -84,6 +84,22 @@ describe('player classification', () => {
       swingPercentile: 0,
     });
     expect(classifications.get('cam')?.outcomeSwing).toBeGreaterThan(0.75);
+  });
+
+  it('classifies low exposure with middle outcome swings as One-Bullet', () => {
+    const classifications = classifyPlayers([
+      row('one-bullet', Array(8).fill(1), [-2, 2, -2, 2, -2, 2, -2, 2]),
+      row('steady', Array(8).fill(2), [-1, 1, -1, 1, -1, 1, -1, 1]),
+      row('middle', Array(8).fill(3), [-3, 3, -3, 3, -3, 3, -3, 3]),
+      row('high', Array(8).fill(4), [-4, 4, -4, 4, -4, 4, -4, 4]),
+    ], nights);
+
+    expect(classifications.get('one-bullet')).toMatchObject({
+      type: 'One-Bullet',
+      exposurePercentile: 0,
+    });
+    expect(classifications.get('one-bullet')?.swingPercentile).toBeGreaterThan(25);
+    expect(classifications.get('one-bullet')?.swingPercentile).toBeLessThan(75);
   });
 
   it('excludes one-off nights without a nominal buy-in', () => {

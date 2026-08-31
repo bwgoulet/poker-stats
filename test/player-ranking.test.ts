@@ -25,7 +25,7 @@ describe('player rankings', () => {
   });
 
   it('ranks player types from Maniac to insufficient history', () => {
-    const typedRows = ['NIT', 'Neutral', 'Insufficient history', 'Gambler', 'Steady', 'Maniac', 'Action Player']
+    const typedRows = ['NIT', 'Neutral', 'One-Bullet', 'Insufficient history', 'Gambler', 'Steady', 'Maniac', 'Action Player']
       .map((type, index) => ({
         ...rows[0],
         player: { displayName: `Player ${index}` },
@@ -33,7 +33,7 @@ describe('player rankings', () => {
       }));
 
     expect(rankPlayers(typedRows, 'type').map((row) => row.classification.type)).toEqual([
-      'Maniac', 'Action Player', 'Gambler', 'Neutral', 'Steady', 'NIT', 'Insufficient history',
+      'Maniac', 'Action Player', 'Gambler', 'Neutral', 'One-Bullet', 'Steady', 'NIT', 'Insufficient history',
     ]);
   });
 });

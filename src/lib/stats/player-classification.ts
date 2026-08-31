@@ -5,7 +5,7 @@ export const ESTABLISHED_CLASSIFICATION_NIGHTS = 15;
 export const LOW_TYPE_PERCENTILE = 25;
 export const HIGH_TYPE_PERCENTILE = 75;
 
-export type PlayerType = 'NIT' | 'Steady' | 'Neutral' | 'Gambler' | 'Action Player' | 'Maniac';
+export type PlayerType = 'NIT' | 'One-Bullet' | 'Steady' | 'Neutral' | 'Gambler' | 'Action Player' | 'Maniac';
 export type ClassificationConfidence = 'insufficient' | 'provisional' | 'established';
 export type PlayerClassificationLabel = PlayerType | 'Insufficient history';
 
@@ -14,6 +14,7 @@ export const PLAYER_TYPE_DESCRIPTIONS: Record<PlayerClassificationLabel, string>
   'Action Player': 'High buy-in intensity, but not high outcome swings. This player frequently puts multiple buy-ins into play without the field’s most extreme results.',
   Gambler: 'High outcome swings, but not high buy-in intensity. This player has unusually large results without consistently putting the most buy-ins into play.',
   Neutral: 'Neither buy-in intensity nor outcome swings are unusually high or low relative to the eligible field.',
+  'One-Bullet': 'Low buy-in intensity with typical outcome swings. This player commits less money than most of the field without producing unusually steady results.',
   Steady: 'Low outcome swings without the low buy-in intensity required for a NIT. This player’s results are unusually consistent.',
   NIT: 'Low buy-in intensity and low outcome swings: both rank in the bottom quarter of the eligible field.',
   'Insufficient history': `Fewer than ${MIN_CLASSIFICATION_NIGHTS} comparable nights are available, so no player type is assigned yet.`,
@@ -107,6 +108,7 @@ function classify(exposure: 'low' | 'middle' | 'high', swing: 'low' | 'middle' |
   if (exposure === 'high') return 'Action Player';
   if (swing === 'high') return 'Gambler';
   if (exposure === 'low' && swing === 'low') return 'NIT';
+  if (exposure === 'low') return 'One-Bullet';
   if (swing === 'low') return 'Steady';
   return 'Neutral';
 }
