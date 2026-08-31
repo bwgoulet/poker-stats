@@ -47,6 +47,29 @@ describe('player classification', () => {
     });
   });
 
+  it('reports buy-in intensity as the average buy-ins per qualifying night', () => {
+    const classifications = classifyPlayers([
+      row('reloads', [1, 1, 1, 2, 3], [0, 0, 0, 0, 0]),
+    ], nights);
+
+    expect(classifications.get('reloads')?.averageBuyInUnits).toBe(1.6);
+  });
+
+  it('uses average buy-in intensity to calculate the exposure percentile', () => {
+    const classifications = classifyPlayers([
+      row('one', [1, 1, 1, 1, 1], [0, 0, 0, 0, 0]),
+      row('reloads', [1, 1, 1, 2, 3], [0, 0, 0, 0, 0]),
+      row('two', [2, 2, 2, 2, 2], [0, 0, 0, 0, 0]),
+      row('three', [3, 3, 3, 3, 3], [0, 0, 0, 0, 0]),
+    ], nights);
+
+    expect(classifications.get('reloads')).toMatchObject({
+      averageBuyInUnits: 1.6,
+      type: 'Neutral',
+    });
+    expect(classifications.get('reloads')?.exposurePercentile).toBeCloseTo(100 / 3);
+  });
+
   it('does not force extreme labels in a homogeneous field', () => {
     const flat = Array(8).fill(1);
     const profits = [-0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5];
