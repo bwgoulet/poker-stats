@@ -2,6 +2,16 @@ import { PlayerResult, PokerNight } from '@/types/poker';
 
 export const MIN_CLASSIFICATION_NIGHTS = 5;
 export const ESTABLISHED_CLASSIFICATION_NIGHTS = 15;
+export const HIGH_EXPOSURE_PERCENTILE_MIN = 75;
+export const HIGH_MEDIAN_BUY_IN_UNITS_MIN = 1.5;
+export const HIGH_MULTI_BUY_IN_RATE_MIN = 0.4;
+export const LOW_EXPOSURE_PERCENTILE_MAX = 33;
+export const LOW_MEDIAN_BUY_IN_UNITS_MAX = 1.5;
+export const LOW_MULTI_BUY_IN_RATE_MAX = 0.25;
+export const HIGH_SWING_PERCENTILE_MIN = 75;
+export const HIGH_OUTCOME_SWING_MIN = 1;
+export const LOW_SWING_PERCENTILE_MAX = 33;
+export const LOW_OUTCOME_SWING_MAX = 1;
 
 export type PlayerType = 'NIT' | 'Steady' | 'Neutral' | 'Gambler' | 'Action Player' | 'Maniac';
 export type ClassificationConfidence = 'insufficient' | 'provisional' | 'established';
@@ -13,7 +23,7 @@ export const PLAYER_TYPE_DESCRIPTIONS: Record<PlayerClassificationLabel, string>
   Gambler: 'High outcome swings, but not high buy-in intensity. This player has unusually large results without consistently putting the most buy-ins into play.',
   Neutral: 'Neither buy-in intensity nor outcome swings are unusually high or low relative to the eligible field.',
   Steady: 'Low outcome swings without the low buy-in intensity required for a NIT. This player’s results are unusually consistent.',
-  NIT: 'Low buy-in intensity and low outcome swings: both rank in the bottom quarter of the eligible field and the player typically stays near one buy-in.',
+  NIT: 'Buy-in intensity and outcome swings both rank in the bottom third of the eligible field. NITs normally remain near one buy-in and exceed one buy-in in no more than one quarter of their games.',
   'Insufficient history': `Fewer than ${MIN_CLASSIFICATION_NIGHTS} comparable nights are available, so no player type is assigned yet.`,
 };
 
@@ -137,12 +147,17 @@ export function classifyPlayers(players: ClassifiablePlayer[], nights: PokerNigh
 
     const exposurePercentile = exposureRanks.get(player.id)!;
     const swingPercentile = swingRanks.get(player.id)!;
-    const exposure = exposurePercentile >= 75 && (player.medianBuyInUnits >= 1.5 || player.multiBuyInRate >= 0.4)
+    const exposure = exposurePercentile >= HIGH_EXPOSURE_PERCENTILE_MIN
+      && (player.medianBuyInUnits >= HIGH_MEDIAN_BUY_IN_UNITS_MIN
+        || player.multiBuyInRate >= HIGH_MULTI_BUY_IN_RATE_MIN)
       ? 'high'
-      : exposurePercentile <= 25 && player.medianBuyInUnits <= 1.1 ? 'low' : 'middle';
-    const swing = swingPercentile >= 75 && player.outcomeSwing >= 1
+      : exposurePercentile <= LOW_EXPOSURE_PERCENTILE_MAX
+        && player.medianBuyInUnits <= LOW_MEDIAN_BUY_IN_UNITS_MAX
+        && player.multiBuyInRate <= LOW_MULTI_BUY_IN_RATE_MAX ? 'low' : 'middle';
+    const swing = swingPercentile >= HIGH_SWING_PERCENTILE_MIN && player.outcomeSwing >= HIGH_OUTCOME_SWING_MIN
       ? 'high'
-      : swingPercentile <= 25 && player.outcomeSwing <= 0.75 ? 'low' : 'middle';
+      : swingPercentile <= LOW_SWING_PERCENTILE_MAX && player.outcomeSwing <= LOW_OUTCOME_SWING_MAX
+        ? 'low' : 'middle';
 
     return [player.id, {
       type: classify(exposure, swing),
