@@ -28,6 +28,7 @@ export interface PlayerClassification {
   qualifyingNights: number;
   exposurePercentile: number | null;
   swingPercentile: number | null;
+  averageBuyInUnits: number | null;
   medianBuyInUnits: number | null;
   multiBuyInRate: number | null;
   outcomeSwing: number | null;
@@ -41,6 +42,7 @@ interface ClassifiablePlayer {
 interface Measurements {
   id: string;
   qualifyingNights: number;
+  averageBuyInUnits: number;
   medianBuyInUnits: number;
   upperBuyInUnits: number;
   multiBuyInRate: number;
@@ -96,6 +98,9 @@ function measurePlayer(player: ClassifiablePlayer, nights: Map<string, PokerNigh
   return {
     id: player.player.id,
     qualifyingNights: normalized.length,
+    averageBuyInUnits: buyIns.length
+      ? buyIns.reduce((total, buyIn) => total + buyIn, 0) / buyIns.length
+      : 0,
     medianBuyInUnits: median(buyIns),
     upperBuyInUnits: percentile(buyIns, 0.75),
     multiBuyInRate: normalized.length
@@ -137,6 +142,7 @@ export function classifyPlayers(players: ClassifiablePlayer[], nights: PokerNigh
       return [player.id, {
         type: 'Insufficient history', confidence: 'insufficient',
         qualifyingNights: player.qualifyingNights, exposurePercentile: null, swingPercentile: null,
+        averageBuyInUnits: player.qualifyingNights ? player.averageBuyInUnits : null,
         medianBuyInUnits: player.qualifyingNights ? player.medianBuyInUnits : null,
         multiBuyInRate: player.qualifyingNights ? player.multiBuyInRate : null,
         outcomeSwing: player.qualifyingNights ? player.outcomeSwing : null,
@@ -158,6 +164,7 @@ export function classifyPlayers(players: ClassifiablePlayer[], nights: PokerNigh
       qualifyingNights: player.qualifyingNights,
       exposurePercentile,
       swingPercentile,
+      averageBuyInUnits: player.averageBuyInUnits,
       medianBuyInUnits: player.medianBuyInUnits,
       multiBuyInRate: player.multiBuyInRate,
       outcomeSwing: player.outcomeSwing,
