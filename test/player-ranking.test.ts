@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { rankPlayers } from '@/lib/stats/player-ranking';
 
 const rows = [
-  { player: { displayName: 'Alice' }, totalProfit: 100, avgProfit: 50, roi: 0.5, nightsPlayed: 2, wins: 1, winRate: 0.5 },
-  { player: { displayName: 'Zoe' }, totalProfit: 50, avgProfit: 12.5, roi: 1, nightsPlayed: 4, wins: 3, winRate: 0.75 },
+  { player: { displayName: 'Alice' }, totalProfit: 100, avgProfit: 50, roi: 0.5, nightsPlayed: 2, wins: 1, champions: 2, winRate: 0.5 },
+  { player: { displayName: 'Zoe' }, totalProfit: 50, avgProfit: 12.5, roi: 1, nightsPlayed: 4, wins: 3, champions: 1, winRate: 0.75 },
 ];
 
 describe('player rankings', () => {
@@ -14,6 +14,10 @@ describe('player rankings', () => {
 
   it('ranks player names in descending alphabetical order', () => {
     expect(rankPlayers(rows, 'player').map((row) => row.player.displayName)).toEqual(['Zoe', 'Alice']);
+  });
+
+  it('ranks players by championship count', () => {
+    expect(rankPlayers(rows, 'champions').map((row) => row.player.displayName)).toEqual(['Alice', 'Zoe']);
   });
 
   it('ranks players by average profit', () => {

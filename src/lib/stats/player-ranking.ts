@@ -1,4 +1,4 @@
-export const playerSortKeys = ['player', 'type', 'buyInIntensity', 'outcomeSwing', 'totalProfit', 'avgProfit', 'roi', 'nightsPlayed', 'wins', 'winRate'] as const;
+export const playerSortKeys = ['player', 'type', 'buyInIntensity', 'outcomeSwing', 'totalProfit', 'avgProfit', 'roi', 'nightsPlayed', 'wins', 'champions', 'winRate'] as const;
 export type PlayerSortKey = (typeof playerSortKeys)[number];
 
 export interface RankablePlayer {
@@ -9,6 +9,7 @@ export interface RankablePlayer {
   roi: number;
   nightsPlayed: number;
   wins: number;
+  champions: number;
   winRate: number;
 }
 
