@@ -3,7 +3,7 @@ export type PlayerSortKey = (typeof playerSortKeys)[number];
 
 export interface RankablePlayer {
   player: { displayName: string };
-  classification?: { type: string; medianBuyInUnits?: number | null; outcomeSwing?: number | null };
+  classification?: { type: string; averageBuyInUnits?: number | null; outcomeSwing?: number | null };
   totalProfit: number;
   avgProfit: number;
   medianProfit: number;
@@ -35,7 +35,7 @@ export function rankPlayers<T extends RankablePlayer>(rows: T[], sortKey: Player
         || a.player.displayName.localeCompare(b.player.displayName);
     }
     if (sortKey === 'buyInIntensity' || sortKey === 'outcomeSwing') {
-      const classificationKey = sortKey === 'buyInIntensity' ? 'medianBuyInUnits' : 'outcomeSwing';
+      const classificationKey = sortKey === 'buyInIntensity' ? 'averageBuyInUnits' : 'outcomeSwing';
       const aValue = a.classification?.[classificationKey];
       const bValue = b.classification?.[classificationKey];
       if (aValue == null && bValue == null) return a.player.displayName.localeCompare(b.player.displayName);

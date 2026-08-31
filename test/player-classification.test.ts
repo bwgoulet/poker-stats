@@ -47,6 +47,15 @@ describe('player classification', () => {
     });
   });
 
+  it('reports buy-in intensity as the average buy-ins per qualifying night', () => {
+    const classifications = classifyPlayers([
+      row('reloads', [1, 1, 1, 2, 3], [0, 0, 0, 0, 0]),
+    ], nights);
+
+    expect(classifications.get('reloads')?.averageBuyInUnits).toBe(1.6);
+    expect(classifications.get('reloads')?.medianBuyInUnits).toBe(1);
+  });
+
   it('does not force extreme labels in a homogeneous field', () => {
     const flat = Array(8).fill(1);
     const profits = [-0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5];
