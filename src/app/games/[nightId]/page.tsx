@@ -63,28 +63,59 @@ export default async function Game({
         </div>
       </section>
       <div className="card overflow-hidden">
-        <table className="w-full">
-          <tbody>
-            {results.map((result) => (
-              <tr className="border-t" key={result.playerId}>
-                <td className="p-3">#{result.placement}</td>
-                <td>
-                  <Link
-                    className="font-semibold"
-                    href={`/players/${result.playerId}?${paramsString}`}
-                  >
-                    {playerById.get(result.playerId)?.displayName}
-                  </Link>
-                </td>
-                <td>{dollars(result.buyIn)}</td>
-                <td>{dollars(result.cashOut)}</td>
-                <td className={result.profit >= 0 ? 'text-green-700' : 'text-red-700'}>
-                  {dollars(result.profit)}
-                </td>
+        <div
+          aria-label="Game results table, horizontally scrollable"
+          className="overflow-x-auto"
+          role="region"
+          tabIndex={0}
+        >
+          <table className="w-full min-w-[36rem]">
+            <caption className="sr-only">Player results for {longDateFmt(night.date)}</caption>
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="p-3 text-left" scope="col">
+                  Place
+                </th>
+                <th className="p-3 text-left" scope="col">
+                  Player
+                </th>
+                <th className="p-3 text-right" scope="col">
+                  Buy-in
+                </th>
+                <th className="p-3 text-right" scope="col">
+                  Cash-out
+                </th>
+                <th className="p-3 text-right" scope="col">
+                  Profit
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {results.map((result) => (
+                <tr className="border-t" key={result.playerId}>
+                  <td className="p-3">#{result.placement}</td>
+                  <td className="p-3">
+                    <Link
+                      className="font-semibold"
+                      href={`/players/${result.playerId}?${paramsString}`}
+                    >
+                      {playerById.get(result.playerId)?.displayName}
+                    </Link>
+                  </td>
+                  <td className="p-3 text-right tabular-nums">{dollars(result.buyIn)}</td>
+                  <td className="p-3 text-right tabular-nums">{dollars(result.cashOut)}</td>
+                  <td
+                    className={`p-3 text-right tabular-nums ${
+                      result.profit >= 0 ? 'text-green-700' : 'text-red-700'
+                    }`}
+                  >
+                    {dollars(result.profit)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );
