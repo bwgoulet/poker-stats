@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 import { dollars, dateFmt } from '@/lib/formatting/format';
 
@@ -12,7 +12,6 @@ const PAGE_SIZE = 25;
 export default function GamesListing({ rows }: { rows: Row[] }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const router = useRouter();
   const query = searchParams.get('q') ?? '';
   const from = searchParams.get('from') ?? '';
   const to = searchParams.get('to') ?? '';
@@ -33,7 +32,11 @@ export default function GamesListing({ rows }: { rows: Row[] }) {
     const next = new URLSearchParams(searchParams.toString());
     for (const [key, value] of Object.entries(changes)) value ? next.set(key, value) : next.delete(key);
     if (!('page' in changes)) next.delete('page');
-    router.replace(`${pathname}?${next.toString()}`, { scroll: false });
+    const queryString = next.toString();
+
+    // These filters only affect the rows already loaded by this client component.
+    // A router navigation would needlessly rerun the server page on every keystroke.
+    window.history.replaceState(null, '', `${pathname}${queryString ? `?${queryString}` : ''}`);
   }
   function changeSort(nextSort: SortKey) {
     update({ sort: nextSort, dir: sort === nextSort && direction === 'desc' ? 'asc' : 'desc' });
