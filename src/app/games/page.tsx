@@ -20,7 +20,7 @@ export default async function Games({ searchParams }: { searchParams: Promise<Re
   }));
 
   return <>
-    <header><p className="text-red-600 font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Games</h1></header>
+    <header><p className="text-carolina-dark font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Games</h1></header>
     <GamesListing rows={rows} />
   </>;
 }

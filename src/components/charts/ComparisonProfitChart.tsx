@@ -2,7 +2,7 @@
 
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-const colors = ['#dc2626', '#2563eb', '#16a34a', '#9333ea', '#ea580c', '#0891b2', '#4f46e5', '#be123c'];
+const colors = ['#4b8fbd', '#13294b', '#16a34a', '#9333ea', '#ea580c', '#0891b2', '#7bafd4', '#be123c'];
 
 export function ComparisonProfitChart({ data, players }: { data: Record<string, string | number>[]; players: { id: string; name: string }[] }) {
   if (!data.length) return <p className="py-12 text-center text-gray-500">No results in this scope.</p>;

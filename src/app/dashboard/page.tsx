@@ -55,7 +55,7 @@ export default async function Dashboard({
   return (
     <>
       <header>
-        <p className="text-red-600 font-semibold">{scopeLabel(filters)}</p>
+        <p className="text-carolina-dark font-semibold">{scopeLabel(filters)}</p>
         <h1 className="text-4xl font-black">UNC Poker</h1>
         <p className="text-gray-600">
           A live read-only dashboard built from the league workbooks.
@@ -97,7 +97,7 @@ export default async function Dashboard({
                       {pct(stat.volatility)} · {stat.nightsPlayed} games
                     </small>
                   </span>
-                  <b className={stat.totalProfit >= 0 ? 'text-green-700' : 'text-red-700'}>
+                  <b className={stat.totalProfit >= 0 ? 'text-green-700' : 'text-rose-700'}>
                     {dollars(stat.totalProfit)}
                   </b>
                 </Link>

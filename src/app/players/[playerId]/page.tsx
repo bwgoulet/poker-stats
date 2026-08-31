@@ -59,7 +59,7 @@ export default async function Player({ params, searchParams }: {
 
   return <>
     <header>
-      <p className="text-red-600 font-semibold">{scopeLabel(filters)}</p>
+      <p className="text-carolina-dark font-semibold">{scopeLabel(filters)}</p>
       <h1 className="text-4xl font-black">{player.displayName}</h1>
       <p className="text-gray-500">Rank #{stats.rank}</p>
     </header>
@@ -89,7 +89,7 @@ export default async function Player({ params, searchParams }: {
         const night = data.nights.find((candidate) => candidate.id === result.nightId)!;
         return <Link className="flex justify-between border-t py-3" href={`/games/${night.id}?${new URLSearchParams(sp as Record<string, string>)}`} key={night.id}>
           <span>{dateFmt(night.date)} · {night.title}</span>
-          <b className={result.profit >= 0 ? 'text-green-700' : 'text-red-700'}>{dollars(result.profit)}</b>
+          <b className={result.profit >= 0 ? 'text-green-700' : 'text-rose-700'}>{dollars(result.profit)}</b>
         </Link>;
       })}
     </div>

@@ -22,7 +22,7 @@ export function ProfitDistribution({
         const width = `${(Math.abs(row.profit) / maxAbsProfit) * 50}%`;
         const isProfit = row.profit >= 0;
         const labelClassName = row.href
-          ? 'text-red-600 font-medium truncate'
+          ? 'text-carolina-dark font-medium truncate'
           : 'font-medium truncate';
 
         return (
@@ -41,14 +41,14 @@ export function ProfitDistribution({
               <div className="absolute left-1/2 top-0 h-full w-px bg-white" />
               <div
                 className={`absolute top-0 h-full rounded ${
-                  isProfit ? 'left-1/2 bg-green-600' : 'right-1/2 bg-red-600'
+                  isProfit ? 'left-1/2 bg-green-600' : 'right-1/2 bg-rose-600'
                 }`}
                 style={{ width }}
                 aria-hidden="true"
               />
             </div>
             <span
-              className={`text-right font-medium ${isProfit ? 'text-black' : 'text-red-600'}`}
+              className={`text-right font-medium ${isProfit ? 'text-black' : 'text-rose-700'}`}
             >
               {dollars(row.profit)}
             </span>

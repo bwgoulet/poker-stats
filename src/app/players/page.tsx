@@ -15,5 +15,5 @@ export default async function Players({ searchParams }: { searchParams: Promise<
     (row) => row.nightsPlayed > 0,
   ).map((row) => ({ ...row, classification: classifications.get(row.player.id)! }));
 
-  return <><header><p className="text-red-600 font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Players</h1></header><PlayersTable rows={rows} query={new URLSearchParams(params as Record<string, string>).toString()} /></>;
+  return <><header><p className="text-carolina-dark font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Players</h1></header><PlayersTable rows={rows} query={new URLSearchParams(params as Record<string, string>).toString()} /></>;
 }

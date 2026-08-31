@@ -95,12 +95,12 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
   }
 
   return (
-    <div className="card p-3 flex flex-wrap gap-4 items-start">
-      <span className="text-sm font-semibold pt-1">Scope</span>
+    <div className="card flex flex-wrap items-center gap-3 p-3.5">
+      <span className="rounded-lg bg-navy px-2.5 py-2 text-xs font-bold uppercase tracking-wider text-white">Scope</span>
       <fieldset className="flex flex-wrap gap-2">
         <legend className="sr-only">Season</legend>
         {seasons.map(([value, label]) => (
-          <label className="flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm" key={value}>
+          <label className="flex items-center gap-2 rounded-xl border bg-white px-3 py-2 text-sm font-medium shadow-sm hover:border-carolina" key={value}>
             <input
               type="checkbox"
               checked={selected('season', seasons).includes(value)}
@@ -113,7 +113,7 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
       <fieldset className="flex flex-wrap gap-2">
         <legend className="sr-only">Night type</legend>
         {nightTypes.map(([value, label]) => (
-          <label className="flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm" key={value}>
+          <label className="flex items-center gap-2 rounded-xl border bg-white px-3 py-2 text-sm font-medium shadow-sm hover:border-carolina" key={value}>
             <input
               type="checkbox"
               checked={selected('nightType', nightTypes, defaultNightTypes).includes(value)}
@@ -134,7 +134,7 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
           All
           <span
             aria-hidden="true"
-            className={`relative h-6 w-11 rounded-full transition-colors ${allSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+            className={`relative h-6 w-11 rounded-full transition-colors ${allSelected ? 'bg-carolina-dark' : 'bg-gray-300'}`}
           >
             <span
               className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${allSelected ? 'translate-x-6' : 'translate-x-1'}`}
@@ -151,7 +151,7 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
           Current Season
           <span
             aria-hidden="true"
-            className={`relative h-6 w-11 rounded-full transition-colors ${currentSeasonSelected ? 'bg-red-600' : 'bg-gray-300'}`}
+            className={`relative h-6 w-11 rounded-full transition-colors ${currentSeasonSelected ? 'bg-carolina-dark' : 'bg-gray-300'}`}
           >
             <span
               className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${currentSeasonSelected ? 'translate-x-6' : 'translate-x-1'}`}
