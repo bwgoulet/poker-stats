@@ -1,14 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  classifyPlayers,
-  LOW_EXPOSURE_PERCENTILE_MAX,
-  LOW_MEDIAN_BUY_IN_UNITS_MAX,
-  LOW_MULTI_BUY_IN_RATE_MAX,
-  LOW_OUTCOME_SWING_MAX,
-  LOW_SWING_PERCENTILE_MAX,
-  PLAYER_TYPE_DESCRIPTIONS,
-} from '@/lib/stats/player-classification';
+import { classifyPlayers, PLAYER_TYPE_DESCRIPTIONS } from '@/lib/stats/player-classification';
 import { PlayerResult, PokerNight } from '@/types/poker';
 
 const nights: PokerNight[] = Array.from({ length: 16 }, (_, index) => ({
@@ -78,6 +70,22 @@ describe('player classification', () => {
     expect(classifications.get('maniac')?.swingPercentile).toBe(100);
   });
 
+  it('classifies the field-relative low-exposure, low-swing player as a NIT', () => {
+    const classifications = classifyPlayers([
+      row('cam', Array(8).fill(1.2), [-1, 1, -1, 1, -1, 1, -1, 1]),
+      row('two', Array(8).fill(2), [-2, 2, -2, 2, -2, 2, -2, 2]),
+      row('three', Array(8).fill(3), [-3, 3, -3, 3, -3, 3, -3, 3]),
+      row('four', Array(8).fill(4), [-4, 4, -4, 4, -4, 4, -4, 4]),
+    ], nights);
+
+    expect(classifications.get('cam')).toMatchObject({
+      type: 'NIT',
+      exposurePercentile: 0,
+      swingPercentile: 0,
+    });
+    expect(classifications.get('cam')?.outcomeSwing).toBeGreaterThan(0.75);
+  });
+
   it('excludes one-off nights without a nominal buy-in', () => {
     const oneOffs = nights.slice(0, 8).map((night) => ({ ...night, nightType: 'one-off' as const }));
     const classifications = classifyPlayers([row('guest', Array(8).fill(3), Array(8).fill(2))], oneOffs);
@@ -92,83 +100,5 @@ describe('player classification', () => {
       row('regular', Array(15).fill(1), Array.from({ length: 15 }, (_, index) => index % 2 ? 0.5 : -0.5)),
     ], nights);
     expect(classifications.get('regular')?.confidence).toBe('established');
-  });
-
-  it('exports the inclusive low classification boundaries', () => {
-    expect({
-      exposurePercentile: LOW_EXPOSURE_PERCENTILE_MAX,
-      medianBuyInUnits: LOW_MEDIAN_BUY_IN_UNITS_MAX,
-      multiBuyInRate: LOW_MULTI_BUY_IN_RATE_MAX,
-      swingPercentile: LOW_SWING_PERCENTILE_MAX,
-      outcomeSwing: LOW_OUTCOME_SWING_MAX,
-    }).toEqual({
-      exposurePercentile: 33,
-      medianBuyInUnits: 1.5,
-      multiBuyInRate: 0.25,
-      swingPercentile: 33,
-      outcomeSwing: 1,
-    });
-  });
-
-  it('accepts a 25% multi-buy-in rate and a one-buy-in outcome swing', () => {
-    const unitMad = 1 / 1.4826;
-    const classifications = classifyPlayers([
-      row('boundary', [1, 1, 1, 1, 1, 1, 2, 2], Array.from({ length: 8 }, (_, i) => i % 2 ? unitMad : -unitMad)),
-      row('middle', Array(8).fill(2), Array.from({ length: 8 }, (_, i) => i % 2 ? 2 : -2)),
-      row('high', Array(8).fill(3), Array.from({ length: 8 }, (_, i) => i % 2 ? 3 : -3)),
-    ], nights);
-
-    expect(classifications.get('boundary')).toMatchObject({
-      type: 'NIT',
-      medianBuyInUnits: 1,
-      multiBuyInRate: 0.25,
-      outcomeSwing: 1,
-    });
-  });
-
-  it('keeps a low-swing player with greater than 25% multi-buy-ins Steady', () => {
-    const classifications = classifyPlayers([
-      row('frequent-rebuys', [1, 1, 1, 1, 1, 2, 2, 2], Array.from({ length: 8 }, (_, i) => i % 2 ? 0.1 : -0.1)),
-      row('middle', Array(8).fill(2), Array.from({ length: 8 }, (_, i) => i % 2 ? 1 : -1)),
-      row('high', Array(8).fill(3), Array.from({ length: 8 }, (_, i) => i % 2 ? 2 : -2)),
-    ], nights);
-
-    expect(classifications.get('frequent-rebuys')).toMatchObject({
-      type: 'Steady',
-      multiBuyInRate: 0.375,
-    });
-  });
-
-  it('measures the inclusive 1.5 median boundary independently of the rebuy gate', () => {
-    const classifications = classifyPlayers([
-      row('median-boundary', [1, 1, 1, 1, 2, 2, 2, 2], Array.from({ length: 8 }, (_, i) => i % 2 ? 0.1 : -0.1)),
-      row('middle', Array(8).fill(2.5), Array.from({ length: 8 }, (_, i) => i % 2 ? 1 : -1)),
-      row('high', Array(8).fill(3), Array.from({ length: 8 }, (_, i) => i % 2 ? 2 : -2)),
-    ], nights);
-
-    expect(classifications.get('median-boundary')).toMatchObject({
-      type: 'Steady',
-      medianBuyInUnits: 1.5,
-      multiBuyInRate: 0.5,
-    });
-  });
-
-  it('includes players exactly at the 33rd-percentile boundaries', () => {
-    const field = Array.from({ length: 101 }, (_, index) => {
-      const swing = (index + 1) / 50;
-      const deviation = swing / 1.4826;
-      return row(
-        `player-${index}`,
-        Array(8).fill(0.7 + (index * 0.01)),
-        Array.from({ length: 8 }, (_, resultIndex) => resultIndex % 2 ? deviation : -deviation),
-      );
-    });
-    const boundary = classifyPlayers(field, nights).get('player-33');
-
-    expect(boundary).toMatchObject({
-      type: 'NIT',
-      exposurePercentile: 33,
-      swingPercentile: 33,
-    });
   });
 });

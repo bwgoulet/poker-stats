@@ -2,28 +2,20 @@ import { PlayerResult, PokerNight } from '@/types/poker';
 
 export const MIN_CLASSIFICATION_NIGHTS = 5;
 export const ESTABLISHED_CLASSIFICATION_NIGHTS = 15;
-export const HIGH_EXPOSURE_PERCENTILE_MIN = 75;
-export const HIGH_MEDIAN_BUY_IN_UNITS_MIN = 1.5;
-export const HIGH_MULTI_BUY_IN_RATE_MIN = 0.4;
-export const LOW_EXPOSURE_PERCENTILE_MAX = 33;
-export const LOW_MEDIAN_BUY_IN_UNITS_MAX = 1.5;
-export const LOW_MULTI_BUY_IN_RATE_MAX = 0.25;
-export const HIGH_SWING_PERCENTILE_MIN = 75;
-export const HIGH_OUTCOME_SWING_MIN = 1;
-export const LOW_SWING_PERCENTILE_MAX = 33;
-export const LOW_OUTCOME_SWING_MAX = 1;
+export const LOW_TYPE_PERCENTILE = 25;
+export const HIGH_TYPE_PERCENTILE = 75;
 
 export type PlayerType = 'NIT' | 'Steady' | 'Neutral' | 'Gambler' | 'Action Player' | 'Maniac';
 export type ClassificationConfidence = 'insufficient' | 'provisional' | 'established';
 export type PlayerClassificationLabel = PlayerType | 'Insufficient history';
 
 export const PLAYER_TYPE_DESCRIPTIONS: Record<PlayerClassificationLabel, string> = {
-  Maniac: 'High buy-in intensity and high outcome swings: both rank in the top quarter of the eligible field and pass the practical minimums.',
+  Maniac: 'High buy-in intensity and high outcome swings: both rank in the top quarter of the eligible field.',
   'Action Player': 'High buy-in intensity, but not high outcome swings. This player frequently puts multiple buy-ins into play without the field’s most extreme results.',
   Gambler: 'High outcome swings, but not high buy-in intensity. This player has unusually large results without consistently putting the most buy-ins into play.',
   Neutral: 'Neither buy-in intensity nor outcome swings are unusually high or low relative to the eligible field.',
   Steady: 'Low outcome swings without the low buy-in intensity required for a NIT. This player’s results are unusually consistent.',
-  NIT: 'Buy-in intensity and outcome swings both rank in the bottom third of the eligible field. NITs normally remain near one buy-in and exceed one buy-in in no more than one quarter of their games.',
+  NIT: 'Low buy-in intensity and low outcome swings: both rank in the bottom quarter of the eligible field.',
   'Insufficient history': `Fewer than ${MIN_CLASSIFICATION_NIGHTS} comparable nights are available, so no player type is assigned yet.`,
 };
 
@@ -119,7 +111,7 @@ function classify(exposure: 'low' | 'middle' | 'high', swing: 'low' | 'middle' |
   return 'Neutral';
 }
 
-/** Classifies players relative to the eligible field, with practical gates for extreme labels. */
+/** Classifies players by their exposure and swing percentiles within the eligible field. */
 export function classifyPlayers(players: ClassifiablePlayer[], nights: PokerNight[]) {
   const nightMap = new Map(nights.map((night) => [night.id, night]));
   const measurements = players.map((player) => measurePlayer(player, nightMap));
@@ -147,17 +139,12 @@ export function classifyPlayers(players: ClassifiablePlayer[], nights: PokerNigh
 
     const exposurePercentile = exposureRanks.get(player.id)!;
     const swingPercentile = swingRanks.get(player.id)!;
-    const exposure = exposurePercentile >= HIGH_EXPOSURE_PERCENTILE_MIN
-      && (player.medianBuyInUnits >= HIGH_MEDIAN_BUY_IN_UNITS_MIN
-        || player.multiBuyInRate >= HIGH_MULTI_BUY_IN_RATE_MIN)
+    const exposure = exposurePercentile >= HIGH_TYPE_PERCENTILE
       ? 'high'
-      : exposurePercentile <= LOW_EXPOSURE_PERCENTILE_MAX
-        && player.medianBuyInUnits <= LOW_MEDIAN_BUY_IN_UNITS_MAX
-        && player.multiBuyInRate <= LOW_MULTI_BUY_IN_RATE_MAX ? 'low' : 'middle';
-    const swing = swingPercentile >= HIGH_SWING_PERCENTILE_MIN && player.outcomeSwing >= HIGH_OUTCOME_SWING_MIN
+      : exposurePercentile <= LOW_TYPE_PERCENTILE ? 'low' : 'middle';
+    const swing = swingPercentile >= HIGH_TYPE_PERCENTILE
       ? 'high'
-      : swingPercentile <= LOW_SWING_PERCENTILE_MAX && player.outcomeSwing <= LOW_OUTCOME_SWING_MAX
-        ? 'low' : 'middle';
+      : swingPercentile <= LOW_TYPE_PERCENTILE ? 'low' : 'middle';
 
     return [player.id, {
       type: classify(exposure, swing),
