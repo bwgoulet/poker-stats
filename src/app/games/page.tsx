@@ -1,2 +1,26 @@
-import Link from 'next/link'; import { getPokerData } from '@/lib/data/poker-repository'; import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data'; import { nightStats } from '@/lib/stats/statistics'; import { dollars, dateFmt } from '@/lib/formatting/format';
-export default async function Games({searchParams}:{searchParams:Promise<Record<string,string|undefined>>}){const sp=await searchParams, f=parseFilters(sp), d=getPokerData(); const rows=nightStats(filterNights(d.nights,f),filterResults(d.results,d.nights,f)).sort((a,b)=>b.night.date.localeCompare(a.night.date)); return <><header><p className="text-red-600 font-semibold">{scopeLabel(f)}</p><h1 className="text-4xl font-black">Games</h1></header><div className="card overflow-hidden"><table className="w-full text-sm"><thead className="bg-gray-50"><tr><th className="p-3 text-left">Date</th><th className="p-3 text-left">Game</th><th>Players</th><th>Pot</th><th>Winner</th></tr></thead><tbody>{rows.map(r=><tr className="border-t" key={r.night.id}><td className="p-3">{dateFmt(r.night.date)}</td><td className="p-3"><Link className="font-semibold text-red-700" href={`/games/${r.night.id}?${new URLSearchParams(sp as any)}`}>{r.night.title}</Link><small className="block text-gray-500">{r.night.seasonId} · {r.night.nightType}</small></td><td className="text-center">{r.players}</td><td className="text-center">{dollars(r.totalPot)}</td><td className="text-center">{d.players.find(p=>p.id===r.winner?.playerId)?.displayName??'—'}</td></tr>)}</tbody></table></div></>}
+import { getPokerData } from '@/lib/data/poker-repository';
+import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
+import { nightStats } from '@/lib/stats/statistics';
+import GamesListing from './games-listing';
+
+export default async function Games({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
+  const sp = await searchParams;
+  const filters = parseFilters(sp);
+  const data = getPokerData();
+  const players = new Map(data.players.map(player => [player.id, player.displayName]));
+  const rows = nightStats(filterNights(data.nights, filters), filterResults(data.results, data.nights, filters)).map(row => ({
+    id: row.night.id,
+    date: row.night.date,
+    title: row.night.title,
+    seasonId: row.night.seasonId,
+    nightType: row.night.nightType,
+    players: row.players,
+    totalPot: row.totalPot,
+    winner: players.get(row.winner?.playerId ?? '') ?? '—',
+  }));
+
+  return <>
+    <header><p className="text-red-600 font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Games</h1></header>
+    <GamesListing rows={rows} />
+  </>;
+}
