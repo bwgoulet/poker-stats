@@ -24,9 +24,9 @@ export function rankPlayers<T extends RankablePlayer>(rows: T[], sortKey: Player
         'Action Player': 5,
         Gambler: 4,
         Neutral: 3,
-        'Insufficient history': 2,
-        Steady: 1,
-        NIT: 0,
+        Steady: 2,
+        NIT: 1,
+        'Insufficient history': 0,
       };
       return (typeOrder[b.classification?.type ?? ''] ?? -1) - (typeOrder[a.classification?.type ?? ''] ?? -1)
         || a.player.displayName.localeCompare(b.player.displayName);
