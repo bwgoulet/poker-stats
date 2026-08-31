@@ -36,4 +36,15 @@ describe('player rankings', () => {
       'Maniac', 'Action Player', 'Whale', 'Chemical X', 'Gambler', 'Neutral', 'Steady', 'One-Bullet', 'NIT', 'Insufficient history',
     ]);
   });
+
+  it('ranks raw classification measurements with unavailable values last', () => {
+    const classifiedRows = [
+      { ...rows[0], player: { displayName: 'Middle' }, classification: { type: 'Neutral', medianBuyInUnits: 1.5, outcomeSwing: 1.25 } },
+      { ...rows[0], player: { displayName: 'Unavailable' }, classification: { type: 'Insufficient history', medianBuyInUnits: null, outcomeSwing: null } },
+      { ...rows[0], player: { displayName: 'High' }, classification: { type: 'Maniac', medianBuyInUnits: 2.5, outcomeSwing: 3.25 } },
+    ];
+
+    expect(rankPlayers(classifiedRows, 'buyInIntensity').map((row) => row.player.displayName)).toEqual(['High', 'Middle', 'Unavailable']);
+    expect(rankPlayers(classifiedRows, 'outcomeSwing').map((row) => row.player.displayName)).toEqual(['High', 'Middle', 'Unavailable']);
+  });
 });
