@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import { dollars, pct } from '@/lib/formatting/format';
 import { PlayerSortKey, rankPlayers } from '@/lib/stats/player-ranking';
 import { playerStats } from '@/lib/stats/statistics';
-import { PLAYER_TYPE_DESCRIPTIONS, PlayerClassification } from '@/lib/stats/player-classification';
+import { MIN_CLASSIFICATION_NIGHTS, PLAYER_TYPE_DESCRIPTIONS, PlayerClassification } from '@/lib/stats/player-classification';
 
 type PlayerStat = ReturnType<typeof playerStats>[number] & { classification: PlayerClassification };
 const columns: { key: PlayerSortKey; label: string; title?: string }[] = [
@@ -33,4 +33,4 @@ function classificationTitle(classification: PlayerClassification) {
   return `Buy-in intensity: ${classification.exposurePercentile?.toFixed(0)}th percentile · Outcome swing: ${classification.swingPercentile?.toFixed(0)}th percentile · ${classification.qualifyingNights} qualifying nights · ${classification.confidence}`;
 }
 
-const MINIMUM_NIGHTS_TEXT = '8 required for a player type';
+const MINIMUM_NIGHTS_TEXT = `${MIN_CLASSIFICATION_NIGHTS} required for a player type`;

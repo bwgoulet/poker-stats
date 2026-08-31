@@ -31,12 +31,19 @@ describe('player classification', () => {
     expect(Object.values(PLAYER_TYPE_DESCRIPTIONS).every((description) => description.length > 20)).toBe(true);
   });
 
-  it('requires eight comparable nights', () => {
-    const classifications = classifyPlayers([row('new', [1, 1, 1], [-1, 0, 1])], nights);
+  it('requires five comparable nights', () => {
+    const classifications = classifyPlayers([row('new', [1, 1, 1, 1], [-1, 0, 1, 0])], nights);
     expect(classifications.get('new')).toMatchObject({
       type: 'Insufficient history',
       confidence: 'insufficient',
-      qualifyingNights: 3,
+      qualifyingNights: 4,
+    });
+
+    const eligible = classifyPlayers([row('eligible', [1, 1, 1, 1, 1], [-1, 0, 1, 0, 0])], nights);
+    expect(eligible.get('eligible')).toMatchObject({
+      type: 'Neutral',
+      confidence: 'provisional',
+      qualifyingNights: 5,
     });
   });
 

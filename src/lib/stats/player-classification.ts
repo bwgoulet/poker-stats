@@ -1,6 +1,6 @@
 import { PlayerResult, PokerNight } from '@/types/poker';
 
-export const MIN_CLASSIFICATION_NIGHTS = 8;
+export const MIN_CLASSIFICATION_NIGHTS = 5;
 export const ESTABLISHED_CLASSIFICATION_NIGHTS = 15;
 
 export type PlayerType = 'NIT' | 'Steady' | 'Neutral' | 'Gambler' | 'Action Player' | 'Maniac';
