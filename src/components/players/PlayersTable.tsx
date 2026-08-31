@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import { dollars, pct } from '@/lib/formatting/format';
+import { dollars, ordinal, pct } from '@/lib/formatting/format';
 import { PlayerSortKey, rankPlayers } from '@/lib/stats/player-ranking';
 import { playerStats } from '@/lib/stats/statistics';
 import { MIN_CLASSIFICATION_NIGHTS, PLAYER_TYPE_DESCRIPTIONS, PlayerClassification } from '@/lib/stats/player-classification';
@@ -30,7 +30,7 @@ function SortableHeader({ column, sortKey, setSortKey }: { column: typeof column
 
 function classificationTitle(classification: PlayerClassification) {
   if (classification.confidence === 'insufficient') return `${classification.qualifyingNights} qualifying nights; ${MINIMUM_NIGHTS_TEXT}`;
-  return `Buy-in intensity: ${classification.exposurePercentile?.toFixed(0)}th percentile · Outcome swing: ${classification.swingPercentile?.toFixed(0)}th percentile · ${classification.qualifyingNights} qualifying nights · ${classification.confidence}`;
+  return `Buy-in intensity: ${ordinal(classification.exposurePercentile!)} percentile · Outcome swing: ${ordinal(classification.swingPercentile!)} percentile · ${classification.qualifyingNights} qualifying nights · ${classification.confidence}`;
 }
 
 const MINIMUM_NIGHTS_TEXT = `${MIN_CLASSIFICATION_NIGHTS} required for a player type`;
