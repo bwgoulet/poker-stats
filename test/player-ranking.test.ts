@@ -37,14 +37,14 @@ describe('player rankings', () => {
     ]);
   });
 
-  it('ranks classification percentiles with insufficient history last', () => {
+  it('ranks raw classification measurements with unavailable values last', () => {
     const classifiedRows = [
-      { ...rows[0], player: { displayName: 'Middle' }, classification: { type: 'Neutral', exposurePercentile: 50, swingPercentile: 75 } },
-      { ...rows[0], player: { displayName: 'Insufficient' }, classification: { type: 'Insufficient history', exposurePercentile: null, swingPercentile: null } },
-      { ...rows[0], player: { displayName: 'High' }, classification: { type: 'Maniac', exposurePercentile: 100, swingPercentile: 100 } },
+      { ...rows[0], player: { displayName: 'Middle' }, classification: { type: 'Neutral', medianBuyInUnits: 1.5, outcomeSwing: 1.25 } },
+      { ...rows[0], player: { displayName: 'Unavailable' }, classification: { type: 'Insufficient history', medianBuyInUnits: null, outcomeSwing: null } },
+      { ...rows[0], player: { displayName: 'High' }, classification: { type: 'Maniac', medianBuyInUnits: 2.5, outcomeSwing: 3.25 } },
     ];
 
-    expect(rankPlayers(classifiedRows, 'buyInIntensity').map((row) => row.player.displayName)).toEqual(['High', 'Middle', 'Insufficient']);
-    expect(rankPlayers(classifiedRows, 'outcomeSwing').map((row) => row.player.displayName)).toEqual(['High', 'Middle', 'Insufficient']);
+    expect(rankPlayers(classifiedRows, 'buyInIntensity').map((row) => row.player.displayName)).toEqual(['High', 'Middle', 'Unavailable']);
+    expect(rankPlayers(classifiedRows, 'outcomeSwing').map((row) => row.player.displayName)).toEqual(['High', 'Middle', 'Unavailable']);
   });
 });
