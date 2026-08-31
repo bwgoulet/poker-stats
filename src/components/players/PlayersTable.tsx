@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { CircleHelp } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { dollars, ordinal, pct } from '@/lib/formatting/format';
 import { PlayerSortKey, rankPlayers } from '@/lib/stats/player-ranking';
@@ -8,24 +9,39 @@ import { playerStats } from '@/lib/stats/statistics';
 import { MIN_CLASSIFICATION_NIGHTS, PLAYER_TYPE_DESCRIPTIONS, PlayerClassification } from '@/lib/stats/player-classification';
 
 type PlayerStat = ReturnType<typeof playerStats>[number] & { classification: PlayerClassification };
-const columns: { key: PlayerSortKey; label: string; title?: string }[] = [
-  { key: 'player', label: 'Player' }, { key: 'totalProfit', label: 'Profit' }, { key: 'avgProfit', label: 'AVG Profit', title: "Average profit per game played" }, { key: 'medianProfit', label: 'Median Profit', title: "Median profit per game played" }, { key: 'roi', label: 'ROI' },
-  { key: 'volatility', label: 'Volatility', title: "Standard deviation of the player's return on buy-in from night to night" },
-  { key: 'nightsPlayed', label: 'Nights' }, { key: 'wins', label: 'Wins' }, { key: 'winRate', label: 'Win rate' },
+type PlayerColumn = { key: PlayerSortKey; label: string; description: string };
+
+const columns: PlayerColumn[] = [
+  { key: 'player', label: 'Player', description: 'The player whose results are summarized in this row.' },
+  { key: 'totalProfit', label: 'Profit', description: 'Total cash-out minus total buy-in across all nights played.' },
+  { key: 'avgProfit', label: 'AVG Profit', description: 'Average profit per night played.' },
+  { key: 'medianProfit', label: 'Median Profit', description: 'The middle nightly profit when all of the player’s results are ordered.' },
+  { key: 'roi', label: 'ROI', description: 'Total profit divided by total buy-in, shown as a percentage.' },
+  { key: 'volatility', label: 'Volatility', description: 'Standard deviation of the player’s nightly return on buy-in; higher values mean less consistent results.' },
+  { key: 'nightsPlayed', label: 'Nights', description: 'Number of game nights in which the player recorded a result.' },
+  { key: 'wins', label: 'Wins', description: 'Number of nights the player finished with a profit greater than zero.' },
+  { key: 'winRate', label: 'Win rate', description: 'Winning nights divided by total nights played, shown as a percentage.' },
 ];
+
+const typeColumn: PlayerColumn = { key: 'type', label: 'Type', description: 'Player archetype based on relative buy-in intensity and outcome swings.' };
 
 export function PlayersTable({ rows, query }: { rows: PlayerStat[]; query: string }) {
   const [sortKey, setSortKey] = useState<PlayerSortKey>('totalProfit');
   const rankedRows = useMemo(() => rankPlayers(rows, sortKey), [rows, sortKey]);
-  return <div className="card overflow-x-auto"><table className="w-full min-w-[1100px] text-sm"><thead><tr className="bg-gray-50"><th className="p-3 text-center">Rank</th>{columns.slice(0, 1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}<SortableHeader column={{ key: 'type', label: 'Type', title: 'Relative player archetype based on buy-in intensity and outcome swings' }} sortKey={sortKey} setSortKey={setSortKey} />{columns.slice(1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}</tr></thead><tbody>{rankedRows.map((row, index) => <tr className="border-t" key={row.player.id}><td className="text-center">#{index + 1}</td><td className="p-3"><Link className="font-semibold text-red-700" href={`/players/${row.player.id}${query ? `?${query}` : ''}`}>{row.player.displayName}</Link></td><td className="px-3 py-2 text-center"><TypeTooltip classification={row.classification} playerName={row.player.displayName} /></td><td className="text-center">{dollars(row.totalProfit)}</td><td className="text-center">{dollars(row.avgProfit)}</td><td className="text-center">{dollars(row.medianProfit)}</td><td className="text-center">{pct(row.roi)}</td><td className="text-center">{pct(row.volatility)}</td><td className="text-center">{row.nightsPlayed}</td><td className="text-center">{row.wins}</td><td className="text-center">{pct(row.winRate)}</td></tr>)}</tbody></table></div>;
+  return <div className="card overflow-x-auto"><table className="w-full min-w-[1100px] text-sm"><thead><tr className="bg-gray-50"><th className="p-3 text-center"><span className="inline-flex items-center gap-1">Rank<StatTooltip id="rank" label="Rank" description="Position in the table after sorting by the selected column." /></span></th>{columns.slice(0, 1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}<SortableHeader column={typeColumn} sortKey={sortKey} setSortKey={setSortKey} />{columns.slice(1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}</tr></thead><tbody>{rankedRows.map((row, index) => <tr className="border-t" key={row.player.id}><td className="text-center">#{index + 1}</td><td className="p-3"><Link className="font-semibold text-red-700" href={`/players/${row.player.id}${query ? `?${query}` : ''}`}>{row.player.displayName}</Link></td><td className="px-3 py-2 text-center"><TypeTooltip classification={row.classification} playerName={row.player.displayName} /></td><td className="text-center">{dollars(row.totalProfit)}</td><td className="text-center">{dollars(row.avgProfit)}</td><td className="text-center">{dollars(row.medianProfit)}</td><td className="text-center">{pct(row.roi)}</td><td className="text-center">{pct(row.volatility)}</td><td className="text-center">{row.nightsPlayed}</td><td className="text-center">{row.wins}</td><td className="text-center">{pct(row.winRate)}</td></tr>)}</tbody></table></div>;
 }
 
 function TypeTooltip({ classification, playerName }: { classification: PlayerClassification; playerName: string }) {
   return <details className="group"><summary className="inline-block cursor-pointer list-none rounded-full bg-gray-100 px-2.5 py-1 font-semibold hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-red-700" aria-label={`Explain ${playerName}'s ${classification.type} player type`}>{classification.type}</summary><div className="mx-auto mt-2 w-72 rounded-lg border border-gray-200 bg-white p-3 text-left font-normal shadow-lg" role="tooltip"><strong className="block mb-1">What qualifies as {classification.type}?</strong><p className="text-gray-700">{PLAYER_TYPE_DESCRIPTIONS[classification.type]}</p><p className="mt-2 border-t pt-2 text-xs text-gray-500">{classificationTitle(classification)}</p></div></details>;
 }
 
-function SortableHeader({ column, sortKey, setSortKey }: { column: typeof columns[number]; sortKey: PlayerSortKey; setSortKey: (key: PlayerSortKey) => void }) {
-  return <th className={column.key === 'player' ? 'p-0 text-left' : 'p-0 text-center'} title={column.title} aria-sort={sortKey === column.key ? 'descending' : 'none'}><button className={`w-full p-3 font-semibold hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-red-700 ${column.key === 'player' ? 'text-left' : 'text-center'}`} type="button" onClick={() => setSortKey(column.key)}>{column.label}<span className={sortKey === column.key ? 'ml-1' : 'ml-1 invisible'} aria-hidden="true">↓</span></button></th>;
+function SortableHeader({ column, sortKey, setSortKey }: { column: PlayerColumn; sortKey: PlayerSortKey; setSortKey: (key: PlayerSortKey) => void }) {
+  return <th className={column.key === 'player' ? 'p-0 text-left' : 'p-0 text-center'} aria-sort={sortKey === column.key ? 'descending' : 'none'}><span className={`inline-flex items-center gap-1 p-3 ${column.key === 'player' ? 'justify-start' : 'justify-center'}`}><button className="font-semibold hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700" type="button" onClick={() => setSortKey(column.key)}>{column.label}<span className={sortKey === column.key ? 'ml-1' : 'ml-1 invisible'} aria-hidden="true">↓</span></button><StatTooltip id={column.key} label={column.label} description={column.description} /></span></th>;
+}
+
+function StatTooltip({ id, label, description }: { id: string; label: string; description: string }) {
+  const tooltipId = `column-${id}-description`;
+  return <span className="group relative inline-flex"><button type="button" className="rounded-full text-gray-400 hover:text-red-700 focus-visible:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700" aria-label={`Explain ${label}`} aria-describedby={tooltipId}><CircleHelp aria-hidden="true" size={15} strokeWidth={2.25} /></button><span id={tooltipId} role="tooltip" className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 hidden w-56 -translate-x-1/2 rounded-lg bg-gray-900 p-2.5 text-left text-xs font-normal leading-relaxed text-white shadow-lg group-hover:block group-focus-within:block">{description}</span></span>;
 }
 
 function classificationTitle(classification: PlayerClassification) {
