@@ -31,14 +31,20 @@ export default async function Dashboard({
   const recentNights = nightStats(nights, results)
     .sort((a, b) => b.night.date.localeCompare(a.night.date))
     .slice(0, 6);
-  const hot = recentForm(data.players, nights, results, 10).slice(0, 5);
+  const eligiblePlayerIds = new Set(playerStats(data.players, nights, results)
+    .filter((stat) => stat.nightsPlayed >= filters.minNights)
+    .map((stat) => stat.player.id));
+  const hot = recentForm(data.players, nights, results, 10)
+    .filter((stat) => eligiblePlayerIds.has(stat.player.id))
+    .slice(0, 5);
   const playerBalance = playerStats(data.players, nights, results).filter(
-    (stat) => stat.nightsPlayed > 0,
+    (stat) => stat.nightsPlayed >= filters.minNights,
   );
   const params = new URLSearchParams(sp as Record<string, string>);
   const snapshotFilters: GlobalFilters = {
     season: ['fall-2026'],
     nightType: ['20', '10'],
+    minNights: 3,
   };
   const snapshotNights = filterNights(data.nights, snapshotFilters);
   const snapshotResults = filterResults(data.results, data.nights, snapshotFilters);
@@ -46,10 +52,11 @@ export default async function Dashboard({
     data.players,
     snapshotNights,
     snapshotResults,
-  ).filter((stat) => stat.nightsPlayed > 0);
+  ).filter((stat) => stat.nightsPlayed >= snapshotFilters.minNights);
   const snapshotParams = new URLSearchParams({
     season: snapshotFilters.season.join(','),
     nightType: snapshotFilters.nightType.join(','),
+    minNights: String(snapshotFilters.minNights),
   });
 
   return (
@@ -70,7 +77,7 @@ export default async function Dashboard({
               ['Nights', league.totalNights],
               ['Total buy-ins', dollars(league.totalMoney)],
               ['Avg pot', dollars(league.averagePot)],
-              ['Active players', league.activePlayers],
+              [`Players (${filters.minNights}+ nights)`, playerBalance.length],
             ].map(([key, value]) => (
               <div className="card p-5" key={key}>
                 <p className="text-sm text-gray-500">{key}</p>
