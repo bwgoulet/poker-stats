@@ -3,6 +3,9 @@ export const dollars = (n: number) =>
 
 export const pct = (n: number) => (Number.isFinite(n) ? `${(n * 100).toFixed(1)}%` : '—');
 
+export const buyInUnits = (value: number | null) =>
+  value == null ? '—' : `${value.toFixed(2)}×`;
+
 export const streakLabel = (streak: number) => {
   if (streak === 0) return '—';
   const count = Math.abs(streak);

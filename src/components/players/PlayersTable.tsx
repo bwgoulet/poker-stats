@@ -5,7 +5,7 @@ import { CircleHelp } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { navigationStartEvent } from '@/components/layout/NavigationLoader';
-import { dollars, ordinal, pct } from '@/lib/formatting/format';
+import { buyInUnits, dollars, ordinal, pct } from '@/lib/formatting/format';
 import { PlayerSortKey, rankPlayers } from '@/lib/stats/player-ranking';
 import { playerStats } from '@/lib/stats/statistics';
 import { MIN_CLASSIFICATION_NIGHTS, PLAYER_TYPE_DESCRIPTIONS, PlayerClassification } from '@/lib/stats/player-classification';
@@ -44,10 +44,6 @@ export function PlayersTable({ rows, query }: { rows: PlayerStat[]; query: strin
     router.push(`/compare?${params.toString()}`);
   }
   return <div className="space-y-3"><div className="flex flex-wrap items-center justify-between gap-3"><p className="text-sm text-gray-600">Select two or more players to compare.</p><button type="button" disabled={selected.length < 2} onClick={compare} className="rounded-lg bg-carolina-dark px-4 py-2 font-semibold text-white disabled:cursor-not-allowed disabled:bg-gray-300">Compare selected ({selected.length})</button></div><div className="card overflow-x-auto"><table className="w-full min-w-[1050px] text-sm"><thead><tr className="bg-gray-50"><th className="px-2 py-3 text-center">Compare</th><th className="px-2 py-3 text-center">Rank</th>{columns.slice(0, 1).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}<SortableHeader column={typeColumn} sortKey={sortKey} setSortKey={setSortKey} />{columns.slice(1, 3).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}{classificationColumns.map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}{columns.slice(3).map((column) => <SortableHeader column={column} sortKey={sortKey} setSortKey={setSortKey} key={column.key} />)}</tr></thead><tbody>{rankedRows.map((row, index) => <tr className="border-t" key={row.player.id}><td className="text-center"><input type="checkbox" aria-label={`Compare ${row.player.displayName}`} checked={selected.includes(row.player.id)} onChange={() => setSelected((current) => current.includes(row.player.id) ? current.filter((id) => id !== row.player.id) : [...current, row.player.id])} /></td><td className="text-center">#{index + 1}</td><td className="p-3"><Link className="font-semibold text-navy" href={`/players/${row.player.id}${query ? `?${query}` : ''}`}>{row.player.displayName}</Link></td><td className="px-2 py-2 text-center"><TypeTooltip classification={row.classification} playerName={row.player.displayName} /></td><td className="px-2 text-center tabular-nums">{dollars(row.totalProfit)}</td><td className="px-2 text-center tabular-nums">{dollars(row.avgProfit)}</td><td className="px-2 text-center tabular-nums">{buyInUnits(row.classification.averageBuyInUnits)}</td><td className="px-2 text-center tabular-nums">{buyInUnits(row.classification.outcomeSwing)}</td><td className="px-2 text-center tabular-nums">{pct(row.roi)}</td><td className="px-2 text-center tabular-nums">{row.nightsPlayed}</td><td className="px-2 text-center tabular-nums">{row.wins}</td><td className="px-2 text-center tabular-nums">{row.champions}</td><td className="px-2 text-center tabular-nums">{pct(row.winRate)}</td></tr>)}</tbody></table></div></div>;
-}
-
-function buyInUnits(value: number | null) {
-  return value == null ? '—' : `${value.toFixed(2)}×`;
 }
 
 function TypeTooltip({ classification, playerName }: { classification: PlayerClassification; playerName: string }) {
