@@ -122,18 +122,6 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
     router.push(query ? `${path}?${query}` : path);
   }
 
-  const requestedMinNights = Number(sp.get('minNights'));
-  const minNights = (minNightsOptions as readonly number[]).includes(requestedMinNights)
-    ? requestedMinNights
-    : defaultMinNights;
-
-  function selectMinNights(value: number) {
-    const params = new URLSearchParams(sp);
-    if (value === defaultMinNights) params.delete('minNights');
-    else params.set('minNights', String(value));
-    navigate(params);
-  }
-
   return (
     <section className="card overflow-hidden" aria-labelledby="scope-heading">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b bg-carolina-light/50 px-4 py-3">
