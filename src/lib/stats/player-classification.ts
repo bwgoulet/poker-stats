@@ -5,8 +5,6 @@ export const ESTABLISHED_CLASSIFICATION_NIGHTS = 15;
 export const LOW_TYPE_PERCENTILE = 25;
 export const HIGH_TYPE_PERCENTILE = 75;
 
-export const OUTCOME_SWING_DESCRIPTION = 'Typical variation in normalized nightly profit, expressed in nominal buy-ins using a robust standard deviation estimate. Example: for normalized profits of −1×, 0×, and +2×, the median is 0× and the median absolute deviation is 1×, so outcome swing = 1.4826 × 1× = 1.48×.';
-
 export type PlayerType = 'NIT' | 'One-Bullet' | 'Steady' | 'Neutral' | 'Gambler' | 'Chemical X' | 'Whale' | 'Action Player' | 'Maniac';
 export type ClassificationConfidence = 'insufficient' | 'provisional' | 'established';
 export type PlayerClassificationLabel = PlayerType | 'Insufficient history';
