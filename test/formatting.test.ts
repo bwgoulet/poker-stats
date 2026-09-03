@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import { ordinal, streakLabel } from '@/lib/formatting/format';
+import { buyInUnits, ordinal, streakLabel } from '@/lib/formatting/format';
+
+describe('buy-in unit formatting', () => {
+  it('matches the values displayed in the players table', () => {
+    expect(buyInUnits(1.234)).toBe('1.23×');
+    expect(buyInUnits(0)).toBe('0.00×');
+    expect(buyInUnits(null)).toBe('—');
+  });
+});
 
 describe('ordinal formatting', () => {
   it('uses the correct English suffix for percentiles', () => {
