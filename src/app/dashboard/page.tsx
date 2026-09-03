@@ -44,7 +44,7 @@ export default async function Dashboard({
   const snapshotFilters: GlobalFilters = {
     season: ['fall-2026'],
     nightType: ['20', '10'],
-    minNights: 3,
+    minNights: 1,
   };
   const snapshotNights = filterNights(data.nights, snapshotFilters);
   const snapshotResults = filterResults(data.results, data.nights, snapshotFilters);
