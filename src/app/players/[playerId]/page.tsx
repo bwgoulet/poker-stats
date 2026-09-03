@@ -6,6 +6,7 @@ import { playerStats, sortResultsByDate } from '@/lib/stats/statistics';
 import { classifyPlayers } from '@/lib/stats/player-classification';
 import { buyInUnits, dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
 import { ProfitTimeline } from '@/components/charts/ProfitTimeline';
+import { StatTooltip } from '@/components/ui/StatTooltip';
 
 export default async function Player({ params, searchParams }: {
   params: Promise<{ playerId: string }>;
@@ -58,7 +59,7 @@ export default async function Player({ params, searchParams }: {
     </header>
     <section className="grid md:grid-cols-4 gap-4" aria-label="Player highlights">
       {headlineStats.map(({ label, value, help }) => <div className="card p-5" key={label}>
-        <p className="text-gray-500" title={help}>{label}{help && <span aria-label={help}> ⓘ</span>}</p>
+        <p className="flex items-center gap-1 text-gray-500">{label}{help && <StatTooltip label={label} description={help} />}</p>
         <b className="text-2xl">{value}</b>
       </div>)}
     </section>
@@ -66,7 +67,7 @@ export default async function Player({ params, searchParams }: {
       <h2 className="font-bold text-xl mb-3" id="performance-details">Performance details</h2>
       <dl className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
         {detailStats.map(({ label, value, help }) => <div className="flex justify-between gap-4 border-t py-3" key={label}>
-          <dt className="text-gray-500" title={help}>{label}{help && <span aria-label={help}> ⓘ</span>}</dt>
+          <dt className="flex items-center gap-1 text-gray-500">{label}{help && <StatTooltip label={label} description={help} />}</dt>
           <dd className="font-semibold text-right">{value}</dd>
         </div>)}
       </dl>
