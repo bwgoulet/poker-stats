@@ -3,13 +3,8 @@ import Link from 'next/link';
 import { getPokerData } from '@/lib/data/poker-repository';
 import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
 import { playerStats, sortResultsByDate } from '@/lib/stats/statistics';
-import { dollars, pct, dateFmt } from '@/lib/formatting/format';
+import { dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
 import { ProfitTimeline } from '@/components/charts/ProfitTimeline';
-
-const streakLabel = (streak: number) => {
-  if (streak === 0) return '—';
-  return `${Math.abs(streak)} ${streak > 0 ? 'win' : 'loss'}${Math.abs(streak) === 1 ? '' : 'es'}`;
-};
 
 export default async function Player({ params, searchParams }: {
   params: Promise<{ playerId: string }>;
@@ -47,8 +42,8 @@ export default async function Player({ params, searchParams }: {
     { label: 'Average profit', value: dollars(stats.avgProfit) },
     { label: 'Median profit', value: dollars(stats.medianProfit) },
     { label: 'Average buy-in', value: dollars(stats.avgBuyIn) },
-    { label: 'Profit volatility (dollars)', value: dollars(dollarVolatility), help: 'Typical variation in profit from one night to another, measured in dollars.' },
-    { label: 'Return volatility (normalized)', value: pct(stats.volatility), help: 'Typical variation in nightly return relative to that night’s buy-in, making differently sized games comparable.' },
+    { label: 'Buy-in exposure', value: dollars(dollarVolatility), help: 'Typical variation in profit from one night to another, measured in dollars.' },
+    { label: 'Outcome swing', value: pct(stats.volatility), help: 'Typical variation in nightly return relative to that night’s buy-in, making differently sized games comparable.' },
     { label: 'Biggest win', value: dollars(stats.biggestWin) },
     { label: 'Biggest loss', value: dollars(stats.biggestLoss) },
     { label: 'Current streak', value: streakLabel(stats.currentStreak) },

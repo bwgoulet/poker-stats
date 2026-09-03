@@ -3,6 +3,13 @@ export const dollars = (n: number) =>
 
 export const pct = (n: number) => (Number.isFinite(n) ? `${(n * 100).toFixed(1)}%` : '—');
 
+export const streakLabel = (streak: number) => {
+  if (streak === 0) return '—';
+  const count = Math.abs(streak);
+  const outcome = streak > 0 ? 'win' : 'loss';
+  return `${count} ${outcome}${count === 1 ? '' : outcome === 'win' ? 's' : 'es'}`;
+};
+
 export const ordinal = (n: number) => {
   if (!Number.isFinite(n)) return '—';
   const value = Math.round(n);
