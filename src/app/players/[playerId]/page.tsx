@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getPokerData } from '@/lib/data/poker-repository';
 import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
 import { playerStats, sortResultsByDate } from '@/lib/stats/statistics';
-import { classifyPlayers, OUTCOME_SWING_DESCRIPTION } from '@/lib/stats/player-classification';
+import { classifyPlayers } from '@/lib/stats/player-classification';
 import { buyInUnits, dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
 import { ProfitTimeline } from '@/components/charts/ProfitTimeline';
 
@@ -41,7 +41,7 @@ export default async function Player({ params, searchParams }: {
     { label: 'Median profit', value: dollars(stats.medianProfit) },
     { label: 'Average buy-in', value: dollars(stats.avgBuyIn) },
     { label: 'Buy-in intensity', value: buyInUnits(classification.averageBuyInUnits), help: 'Average amount bought in per qualifying night, expressed in multiples of that night’s nominal buy-in.' },
-    { label: 'Outcome swing', value: buyInUnits(classification.outcomeSwing), help: OUTCOME_SWING_DESCRIPTION },
+    { label: 'Outcome swing', value: buyInUnits(classification.outcomeSwing), help: 'Typical variation in normalized nightly profit, expressed in nominal buy-ins using a robust standard deviation estimate.' },
     { label: 'Biggest win', value: dollars(stats.biggestWin) },
     { label: 'Biggest loss', value: dollars(stats.biggestLoss) },
     { label: 'Current streak', value: streakLabel(stats.currentStreak) },
