@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ordinal } from '@/lib/formatting/format';
+import { ordinal, streakLabel } from '@/lib/formatting/format';
 
 describe('ordinal formatting', () => {
   it('uses the correct English suffix for percentiles', () => {
@@ -12,5 +12,17 @@ describe('ordinal formatting', () => {
   it('rounds decimal percentile ranks before choosing a suffix', () => {
     expect(ordinal(91.4)).toBe('91st');
     expect(ordinal(91.5)).toBe('92nd');
+  });
+});
+
+describe('streak formatting', () => {
+  it('pluralizes winning and losing streaks', () => {
+    expect([streakLabel(1), streakLabel(5), streakLabel(-1), streakLabel(-3)]).toEqual([
+      '1 win', '5 wins', '1 loss', '3 losses',
+    ]);
+  });
+
+  it('uses a dash when there is no streak', () => {
+    expect(streakLabel(0)).toBe('—');
   });
 });
