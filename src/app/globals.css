@@ -59,7 +59,7 @@ table thead { background: #edf6fc; color: var(--navy); }
 table tbody tr { transition: background-color 150ms ease; }
 table tbody tr:hover { background: rgb(234 244 251 / 65%); }
 
-input[type="checkbox"] { accent-color: #4b8fbd; }
+input[type="checkbox"], input[type="radio"] { accent-color: #4b8fbd; }
 
 .route-loader {
   position: fixed; z-index: 50; inset: 0; display: grid; place-items: center;
