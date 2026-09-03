@@ -8,7 +8,7 @@ export interface GlobalFilters{season:MultiFilterValue<SeasonId>; nightType:Mult
 const NIGHT_TYPES:NightType[]=['10','20','50','one-off'];
 const DEFAULT_NIGHT_TYPES:NightType[]=['10','20'];
 export const MIN_NIGHTS_OPTIONS=[1,3,5,10] as const;
-export const DEFAULT_MIN_NIGHTS=3;
+export const DEFAULT_MIN_NIGHTS=1;
 
 function parseMulti<T extends string>(value:FilterParam, allowed:readonly T[], defaults:readonly T[]=allowed):T[]{
   if(value===undefined)return Array.from(defaults);

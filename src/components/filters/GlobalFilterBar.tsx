@@ -14,7 +14,7 @@ const currentSeason = 'fall-2026';
 const currentSeasonNightTypes = ['10', '20'];
 const defaultNightTypes = ['10', '20'];
 const minNightsOptions = [1, 3, 5, 10] as const;
-const defaultMinNights = 3;
+const defaultMinNights = 1;
 
 function seasonLabel(season: string) {
   const [name, ...rest] = season.split('-');
