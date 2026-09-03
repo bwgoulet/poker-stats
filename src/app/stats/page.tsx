@@ -12,9 +12,10 @@ export default async function Stats({ searchParams }: { searchParams: Promise<Re
   const data = getPokerData();
   const nights = filterNights(data.nights, filters);
   const results = filterResults(data.results, data.nights, filters);
-  const stats = playerStats(data.players, nights, results).filter(stat => stat.nightsPlayed > 0);
+  const stats = playerStats(data.players, nights, results).filter(stat => stat.nightsPlayed >= filters.minNights);
   const roi = stats.filter(stat => stat.nightsPlayed >= MIN_SAMPLE_SIZE).sort((a, b) => b.roi - a.roi).slice(0, 10);
-  const single = results.slice().sort((a, b) => b.profit - a.profit).slice(0, 10);
+  const eligiblePlayers = new Set(stats.map(stat => stat.player.id));
+  const single = results.filter(result => eligiblePlayers.has(result.playerId)).sort((a, b) => b.profit - a.profit).slice(0, 10);
   const players = new Map(data.players.map(player => [player.id, player.displayName]));
   const query = new URLSearchParams(sp as Record<string, string>).toString();
   const playerRow = (stat: typeof stats[number]): BoardRow => ({ id: stat.player.id, label: stat.player.displayName, value: dollars(stat.totalProfit), href: `/players/${stat.player.id}?${query}` });

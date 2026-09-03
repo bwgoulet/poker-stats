@@ -12,7 +12,7 @@ export default async function Players({ searchParams }: { searchParams: Promise<
   const stats = playerStats(data.players, nights, filterResults(data.results, data.nights, filters));
   const classifications = classifyPlayers(stats, nights);
   const rows = stats.filter(
-    (row) => row.nightsPlayed > 0,
+    (row) => row.nightsPlayed >= filters.minNights,
   ).map((row) => ({ ...row, classification: classifications.get(row.player.id)! }));
 
   return <><header><p className="text-carolina-dark font-semibold">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Players</h1></header><PlayersTable rows={rows} query={new URLSearchParams(params as Record<string, string>).toString()} /></>;

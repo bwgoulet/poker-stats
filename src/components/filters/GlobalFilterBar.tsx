@@ -12,6 +12,8 @@ const nightTypes = [
 const currentSeason = 'fall-2026';
 const currentSeasonNightTypes = ['10', '20'];
 const defaultNightTypes = ['10', '20'];
+const minNightsOptions = [1, 3, 5, 10] as const;
+const defaultMinNights = 3;
 
 function seasonLabel(season: string) {
   const [name, ...rest] = season.split('-');
@@ -94,11 +96,50 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
     navigate(params);
   }
 
+  const requestedMinNights = Number(sp.get('minNights'));
+  const minNights = (minNightsOptions as readonly number[]).includes(requestedMinNights)
+    ? requestedMinNights
+    : defaultMinNights;
+
+  function selectMinNights(value: number) {
+    const params = new URLSearchParams(sp);
+    if (value === defaultMinNights) params.delete('minNights');
+    else params.set('minNights', String(value));
+    navigate(params);
+  }
+
   return (
-    <div className="card flex flex-wrap items-center gap-3 p-3.5">
-      <span className="rounded-lg bg-navy px-2.5 py-2 text-xs font-bold uppercase tracking-wider text-white">Scope</span>
-      <fieldset className="flex flex-wrap gap-2">
-        <legend className="sr-only">Season</legend>
+    <section className="card overflow-hidden" aria-labelledby="scope-heading">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b bg-carolina-light/50 px-4 py-3">
+        <h2 className="text-xs font-black uppercase tracking-[.16em] text-navy" id="scope-heading">Scope</h2>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            role="switch"
+            aria-checked={allSelected}
+            onClick={toggleAll}
+            className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
+          >
+            All
+            <Toggle checked={allSelected} />
+          </button>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={currentSeasonSelected}
+            onClick={toggleCurrentSeason}
+            className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
+          >
+            Current Season
+            <Toggle checked={currentSeasonSelected} />
+          </button>
+        </div>
+      </div>
+      <div className="grid divide-y md:grid-cols-[9rem_1fr] md:divide-y-0">
+        <div className="contents">
+          <div className="bg-gray-50 px-4 py-3 text-sm font-bold text-navy md:border-b md:border-r">Season</div>
+          <fieldset className="flex flex-wrap gap-2 px-4 py-3 md:border-b">
+            <legend className="sr-only">Season</legend>
         {seasons.map(([value, label]) => (
           <label className="flex items-center gap-2 rounded-xl border bg-white px-3 py-2 text-sm font-medium shadow-sm hover:border-carolina" key={value}>
             <input
@@ -109,9 +150,12 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
             {label}
           </label>
         ))}
-      </fieldset>
-      <fieldset className="flex flex-wrap gap-2">
-        <legend className="sr-only">Night type</legend>
+          </fieldset>
+        </div>
+        <div className="contents">
+          <div className="bg-gray-50 px-4 py-3 text-sm font-bold text-navy md:border-b md:border-r">Night Type</div>
+          <fieldset className="flex flex-wrap gap-2 px-4 py-3 md:border-b">
+            <legend className="sr-only">Night type</legend>
         {nightTypes.map(([value, label]) => (
           <label className="flex items-center gap-2 rounded-xl border bg-white px-3 py-2 text-sm font-medium shadow-sm hover:border-carolina" key={value}>
             <input
@@ -122,43 +166,25 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
             {label}
           </label>
         ))}
-      </fieldset>
-      <div className="ml-auto flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          role="switch"
-          aria-checked={allSelected}
-          onClick={toggleAll}
-          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
-        >
-          All
-          <span
-            aria-hidden="true"
-            className={`relative h-6 w-11 rounded-full transition-colors ${allSelected ? 'bg-carolina-dark' : 'bg-gray-300'}`}
-          >
-            <span
-              className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${allSelected ? 'translate-x-6' : 'translate-x-1'}`}
-            />
-          </span>
-        </button>
-        <button
-          type="button"
-          role="switch"
-          aria-checked={currentSeasonSelected}
-          onClick={toggleCurrentSeason}
-          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold"
-        >
-          Current Season
-          <span
-            aria-hidden="true"
-            className={`relative h-6 w-11 rounded-full transition-colors ${currentSeasonSelected ? 'bg-carolina-dark' : 'bg-gray-300'}`}
-          >
-            <span
-              className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${currentSeasonSelected ? 'translate-x-6' : 'translate-x-1'}`}
-            />
-          </span>
-        </button>
+          </fieldset>
+        </div>
+        <div className="contents">
+          <div className="bg-gray-50 px-4 py-3 text-sm font-bold text-navy md:border-r">Min Nights</div>
+          <fieldset className="flex flex-wrap gap-2 px-4 py-3">
+            <legend className="sr-only">Minimum nights played</legend>
+            {minNightsOptions.map((value) => (
+              <label className="flex min-w-14 items-center justify-center gap-2 rounded-xl border bg-white px-3 py-2 text-sm font-medium shadow-sm hover:border-carolina" key={value}>
+                <input type="radio" name="min-nights" checked={minNights === value} onChange={() => selectMinNights(value)} />
+                {value}
+              </label>
+            ))}
+          </fieldset>
+        </div>
       </div>
-    </div>
+    </section>
   );
+}
+
+function Toggle({ checked }: { checked: boolean }) {
+  return <span aria-hidden="true" className={`relative h-6 w-11 rounded-full transition-colors ${checked ? 'bg-carolina-dark' : 'bg-gray-300'}`}><span className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${checked ? 'translate-x-6' : 'translate-x-1'}`} /></span>;
 }
