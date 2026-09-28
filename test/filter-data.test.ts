@@ -9,10 +9,11 @@ describe('global filters', () => {
   });
 
   it('respects explicitly selected night types', () => {
-    expect(parseFilters({ nightType: ['10', '20', '50', 'one-off'] }).nightType).toEqual([
+    expect(parseFilters({ nightType: ['10', '20', '50', 'online', 'one-off'] }).nightType).toEqual([
       '10',
       '20',
       '50',
+      'online',
       'one-off',
     ]);
   });

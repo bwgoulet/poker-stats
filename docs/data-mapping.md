@@ -70,7 +70,7 @@ Range A1:E53. Rows are grouped by date header rows, followed by player result ro
 
 ## Normalized model
 
-Players are canonicalized by trimmed lowercase name slug with explicit overrides in `src/lib/data/player-aliases.ts`. Nights are keyed by season, night type, and date. One-offs are included with nightType `one-off` and notes indicating workbook totals exclude them. Profit defaults to workbook Net when valid; otherwise `cashOut - buyIn`. Malformed rows are skipped and reported.
+Players are canonicalized by trimmed lowercase name slug with explicit overrides in `src/lib/data/player-aliases.ts`. Nights are keyed by season, night type, and date. A game block marked by a truthy value in an `Online` column is assigned nightType `online`; one-offs use nightType `one-off` and notes indicating workbook totals exclude them. Profit defaults to workbook Net when valid; otherwise `cashOut - buyIn`. Malformed rows are skipped and reported.
 
 ## Ambiguities
 

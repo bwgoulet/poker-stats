@@ -58,6 +58,35 @@ function sheetType(name: string): NightType | null {
   return null;
 }
 
+function onlineColumn(rows: unknown[][]): number | null {
+  for (const row of rows) {
+    const index = row.findIndex((value) => text(value).toLowerCase() === 'online');
+    if (index >= 0) return index;
+  }
+  return null;
+}
+
+function onlineMarker(value: unknown): boolean {
+  if (value === true) return true;
+  if (typeof value === 'number') return value !== 0;
+  return ['true', 'yes', 'y', 'x', 'online', '1'].includes(text(value).toLowerCase());
+}
+
+function isDateHeader(row: unknown[], season: string): boolean {
+  const first = text(row[0]).toLowerCase();
+  return Boolean(dateFrom(row[1] ?? row[2], season) && (!first || first === 'player'));
+}
+
+export function blockIsOnline(rows: unknown[][], start: number, column: number | null, season: string): boolean {
+  if (column == null) return false;
+  for (let index = start; index < rows.length; index += 1) {
+    if (index > start && isDateHeader(rows[index], season)) break;
+    const value = rows[index][column];
+    if (text(value).toLowerCase() !== 'online' && onlineMarker(value)) return true;
+  }
+  return false;
+}
+
 export function normalizeWorkbooks() {
   const players = new Map<string, Player>();
   const nights: PokerNight[] = [];
@@ -71,6 +100,7 @@ export function normalizeWorkbooks() {
       if (!nt) continue;
 
       const rows = sheetRows(wb.workbook.Sheets[sheetName]);
+      const onlineIndex = onlineColumn(rows);
       let current: PokerNight | null = null;
 
       rows.forEach((r, i) => {
@@ -79,14 +109,15 @@ export function normalizeWorkbooks() {
         const first = text(r[0]);
 
         if (maybeDate && (!first || first.toLowerCase() === 'player')) {
-          const id = `${wb.seasonId}-${nt}-${maybeDate}`;
+          const nightType = blockIsOnline(rows, i, onlineIndex, wb.seasonId) ? 'online' : nt;
+          const id = `${wb.seasonId}-${nightType}-${maybeDate}`;
           current = {
             id,
             date: maybeDate,
-            title: `${nt === 'one-off' ? 'One-off' : `$${nt} night`} · ${maybeDate}`,
+            title: `${nightType === 'one-off' ? 'One-off' : nightType === 'online' ? 'Online game' : `$${nightType} night`} · ${maybeDate}`,
             seasonId: wb.seasonId,
-            nightType: nt,
-            notes: nt === 'one-off' ? 'Excluded from workbook totals' : '',
+            nightType,
+            notes: nightType === 'one-off' ? 'Excluded from workbook totals' : nightType === 'online' ? `Listed on the $${nt} sheet` : '',
           };
           if (!seenNights.has(id)) {
             seenNights.add(id);

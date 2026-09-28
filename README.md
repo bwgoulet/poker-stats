@@ -59,7 +59,7 @@ Player names are trimmed, lowercased, and converted to URL-safe slugs. All sourc
 
 ## Validation and data quality
 
-Normalization validates players, nights, and results with Zod. Dates become `YYYY-MM-DD`; season IDs must follow the naming rule; night types are limited to `10`, `20`, `50`, and `one-off`; monetary values must be finite, and buy-ins/cash-outs cannot be negative.
+Normalization validates players, nights, and results with Zod. Dates become `YYYY-MM-DD`; season IDs must follow the naming rule; night types are limited to `10`, `20`, `50`, `online`, and `one-off`; monetary values must be finite, and buy-ins/cash-outs cannot be negative.
 
 Rows without a usable buy-in or cash-out are skipped and recorded as warnings. A missing/malformed Net value is derived from cash-out minus buy-in. Each night is reconciled after import, and a non-zero profit sum (outside one cent) produces a warning. Schema violations throw and fail the request/build/test rather than silently accepting invalid normalized data. Source workbooks are never modified. See the generated [data quality report](docs/data-quality-report.md) for the documented issues.
 
