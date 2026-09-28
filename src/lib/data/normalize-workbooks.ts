@@ -55,6 +55,7 @@ function sheetType(name: string): NightType | null {
   if (/^Stats \$20/.test(name)) return '20';
   if (/^Stats \$50/.test(name)) return '50';
   if (/^One-offs/.test(name)) return 'one-off';
+  if (/^Online(?:\s|$)/i.test(name)) return 'online';
   return null;
 }
 
@@ -117,7 +118,11 @@ export function normalizeWorkbooks() {
             title: `${nightType === 'one-off' ? 'One-off' : nightType === 'online' ? 'Online' : `$${nightType} night`} · ${maybeDate}`,
             seasonId: wb.seasonId,
             nightType,
-            notes: nightType === 'one-off' ? 'Excluded from workbook totals' : nightType === 'online' ? `Listed on the $${nt} sheet` : '',
+            notes: nightType === 'one-off'
+              ? 'Excluded from workbook totals'
+              : nightType === 'online' && nt !== 'online'
+                ? `Listed on the $${nt} sheet`
+                : '',
           };
           if (!seenNights.has(id)) {
             seenNights.add(id);

@@ -6,6 +6,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 describe('workbook normalization', () => {
+  const normalizedData = normalizeWorkbooks();
+
   it('automatically discovers current and future season workbooks', () => {
     const directory = mkdtempSync(join(tmpdir(), 'poker-workbooks-'));
     writeFileSync(join(directory, 'summer-2026.xlsx'), '');
@@ -19,16 +21,14 @@ describe('workbook normalization', () => {
   });
 
   it('imports summer 2026 games without a hard-coded season registration', () => {
-    const data = normalizeWorkbooks();
-    expect(data.nights.some((night) => night.seasonId === 'summer-2026')).toBe(true);
-    expect(data.results.some((result) => result.nightId.startsWith('summer-2026-'))).toBe(true);
+    expect(normalizedData.nights.some((night) => night.seasonId === 'summer-2026')).toBe(true);
+    expect(normalizedData.results.some((result) => result.nightId.startsWith('summer-2026-'))).toBe(true);
   });
 
   it('imports spring 2026 $20 games whose player cells use spreadsheet dropdowns', () => {
-    const data = normalizeWorkbooks();
-    const apr22Results = data.results.filter((r) => r.nightId === 'spring-2026-20-2026-04-22');
-    const mar26Results = data.results.filter((r) => r.nightId === 'spring-2026-20-2026-03-26');
-    const apr8Results = data.results.filter((r) => r.nightId === 'spring-2026-20-2026-04-08');
+    const apr22Results = normalizedData.results.filter((r) => r.nightId === 'spring-2026-20-2026-04-22');
+    const mar26Results = normalizedData.results.filter((r) => r.nightId === 'spring-2026-20-2026-03-26');
+    const apr8Results = normalizedData.results.filter((r) => r.nightId === 'spring-2026-20-2026-04-08');
 
     expect(apr22Results).toHaveLength(13);
     expect(apr22Results.reduce((sum, r) => sum + r.buyIn, 0)).toBe(380);
@@ -49,5 +49,20 @@ describe('workbook normalization', () => {
 
     expect(blockIsOnline(rows, 0, 5, 'fall-2026')).toBe(true);
     expect(blockIsOnline(rows, 3, 5, 'fall-2026')).toBe(false);
+  });
+
+  it('imports games and results from a dedicated Online sheet', () => {
+    const onlineNight = normalizedData.nights.find(
+      (night) => night.id === 'fall-2026-online-2026-09-27',
+    );
+    const onlineResults = normalizedData.results.filter((result) => result.nightId === onlineNight?.id);
+
+    expect(onlineNight).toMatchObject({
+      title: 'Online · 2026-09-27',
+      seasonId: 'fall-2026',
+      nightType: 'online',
+    });
+    expect(onlineResults).toHaveLength(9);
+    expect(onlineResults.reduce((sum, result) => sum + result.buyIn, 0)).toBe(260);
   });
 });
