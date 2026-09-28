@@ -8,8 +8,8 @@ const nightTypes = [
   ['10', '$10 nights'],
   ['20', '$20 nights'],
   ['50', '$50 nights'],
-  ['online', 'Online games'],
   ['one-off', 'One-offs'],
+  ['online', 'Online'],
 ] as const;
 const currentSeason = 'fall-2026';
 const currentSeasonNightTypes = ['10', '20'];

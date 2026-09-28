@@ -114,7 +114,7 @@ export function normalizeWorkbooks() {
           current = {
             id,
             date: maybeDate,
-            title: `${nightType === 'one-off' ? 'One-off' : nightType === 'online' ? 'Online game' : `$${nightType} night`} · ${maybeDate}`,
+            title: `${nightType === 'one-off' ? 'One-off' : nightType === 'online' ? 'Online' : `$${nightType} night`} · ${maybeDate}`,
             seasonId: wb.seasonId,
             nightType,
             notes: nightType === 'one-off' ? 'Excluded from workbook totals' : nightType === 'online' ? `Listed on the $${nt} sheet` : '',
