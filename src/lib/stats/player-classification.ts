@@ -74,7 +74,7 @@ function percentileRanks(values: Map<string, number>) {
 }
 
 function nominalBuyIn(night: PokerNight) {
-  if (night.nightType === 'one-off') return null;
+  if (night.nightType === 'one-off' || night.nightType === 'online') return null;
   const amount = Number(night.nightType);
   return amount > 0 ? amount : null;
 }
