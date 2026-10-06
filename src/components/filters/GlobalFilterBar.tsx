@@ -191,5 +191,5 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
 }
 
 function Toggle({ checked }: { checked: boolean }) {
-  return <span aria-hidden="true" className={`relative h-6 w-11 rounded-full transition-colors ${checked ? 'bg-carolina-dark' : 'bg-gray-300'}`}><span className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${checked ? 'translate-x-6' : 'translate-x-1'}`} /></span>;
+  return <span aria-hidden="true" className={`relative h-6 w-11 rounded-full transition-colors ${checked ? 'bg-carolina-dark' : 'bg-gray-300'}`}><span className={`absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${checked ? 'translate-x-5' : 'translate-x-0'}`} /></span>;
 }
