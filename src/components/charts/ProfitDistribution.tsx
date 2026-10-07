@@ -20,7 +20,7 @@ export function ProfitDistribution({
   const hasBuyAmounts = rows.some((row) => row.buyIn != null && row.cashOut != null);
 
   return (
-    <div className={hasBuyAmounts ? 'space-y-3' : 'space-y-2'}>
+    <div className="space-y-2">
       {rows.map((row) => {
         const width = `${(Math.abs(row.profit) / maxAbsProfit) * 50}%`;
         const isProfit = row.profit >= 0;
@@ -31,11 +31,11 @@ export function ProfitDistribution({
         return (
           <div
             className={hasBuyAmounts
-              ? 'grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-x-3 gap-y-1 text-sm sm:grid-cols-[11rem_minmax(0,1fr)_4.5rem]'
+              ? 'grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-x-3 gap-y-1 text-sm sm:grid-cols-[16rem_minmax(0,1fr)_4.5rem]'
               : 'grid grid-cols-[6rem_1fr_4.5rem] items-center gap-3 text-sm'}
             key={row.id}
           >
-            <div className={hasBuyAmounts ? 'col-span-2 min-w-0 sm:col-span-1' : 'min-w-0'}>
+            <div className={hasBuyAmounts ? 'col-span-2 grid min-w-0 grid-cols-[5rem_minmax(0,1fr)] items-center gap-2 sm:col-span-1' : 'min-w-0'}>
               {row.href ? (
                 <Link className={`block ${labelClassName}`} href={row.href}>
                   {row.label}
@@ -44,7 +44,7 @@ export function ProfitDistribution({
                 <span className={labelClassName}>{row.label}</span>
               )}
               {row.buyIn != null && row.cashOut != null && (
-                <p className="mt-0.5 flex gap-1.5 whitespace-nowrap text-xs tabular-nums text-gray-500">
+                <p className="flex gap-1.5 whitespace-nowrap text-xs tabular-nums text-gray-500">
                   <span><span aria-label="Buy-in">In</span> {dollars(row.buyIn)}</span>
                   <span aria-hidden="true" className="text-gray-300">·</span>
                   <span><span aria-label="Cash-out">Out</span> {dollars(row.cashOut)}</span>
