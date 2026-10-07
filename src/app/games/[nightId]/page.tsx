@@ -57,6 +57,8 @@ export default async function Game({
               id: result.playerId,
               label: playerById.get(result.playerId)?.displayName ?? result.playerId,
               profit: result.profit,
+              buyIn: result.buyIn,
+              cashOut: result.cashOut,
               href: `/players/${result.playerId}?${paramsString}`,
             }))}
           />
