@@ -12,6 +12,7 @@ export default async function AccountPage() {
   const [portal, links, account] = await Promise.all([getPortalData(), getMyPlayerLinks(), getAccountLinkRequests()]);
   const league = portal.leagues.find(row => row.id === portal.selectedLeagueId) ?? null;
   const reviewer = portal.user?.role === 'admin' || portal.leagues.some(row => canAdmin(row.role));
+  const reviewRequests = account.requests.filter(row => row.status === 'pending' && (portal.user?.role === 'admin' || portal.leagues.some(league => league.id === row.league_id && canAdmin(league.role))));
   const mine = account.requests.filter(row => row.user_id === portal.user?.id);
   return <div className="mx-auto w-full max-w-4xl space-y-6">
     <header><p className="font-semibold text-carolina-dark">Your poker account</p><h1 className="mt-1 text-3xl font-black text-navy sm:text-4xl">My account</h1><p className="mt-2 text-gray-600">Your player profiles across every league.</p></header>
@@ -28,7 +29,7 @@ export default async function AccountPage() {
       {(portal.user.role === 'admin' || (league && canEdit(league.role))) && <Link href="/manage" className="block rounded-xl border border-carolina/40 bg-carolina-light p-4 font-semibold text-navy">Record games and manage your league</Link>}
       {links.filter(link => link.accessible).map(link => <MyPlayerProfile key={link.leagueId} link={link} />)}
       <PlayerLinksPanel key={league?.id ?? 'no-league'} league={league} leagues={portal.leagues} players={portal.players} links={links} requests={mine} choice={account.choice} />
-      {reviewer && <LinkReviewQueue requests={account.requests.filter(row => row.status === 'pending')} userId={portal.user.id} />}
+      {reviewer && <LinkReviewQueue requests={reviewRequests} />}
     </>}
   </div>;
 }

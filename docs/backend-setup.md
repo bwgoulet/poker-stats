@@ -10,7 +10,8 @@ to members; sign-in and linking never grant management privileges.
 
 1. Connect the existing Supabase project using the two public variables described
    below, and apply migrations 001, 002, then
-   `supabase/migrations/202610090003_discord_link_verification.sql`.
+   `supabase/migrations/202610090003_discord_link_verification.sql`, followed by
+   `supabase/migrations/202610090006_admin_self_player_links.sql`.
    Existing player links are preserved; all new claims become pending requests.
 2. In the Discord Developer Portal, create/select your application and add this
    OAuth2 redirect: `https://<project-ref>.supabase.co/auth/v1/callback`.
@@ -31,8 +32,8 @@ to members; sign-in and linking never grant management privileges.
    player links**, then refresh the player account to see its profile. Also test
    rejection, cancellation, no-link, sign-out/session refresh, and Discord denial.
 
-An administrator cannot approve their own claim. Another league owner/admin or
-an app administrator must review it. The review queue shows the Discord user ID from the Auth identity (or the account
+App administrators can approve or reject any account's claim, including their own,
+in every league. League owners/admins can do the same within their leagues. The review queue shows the Discord user ID from the Auth identity (or the account
 ID for email users), so administrators can confirm who is making the claim.
 Review records retain the decision, reviewer,
 and time. Conflicting approvals are rejected atomically; a pending claim reserves

@@ -26,6 +26,9 @@ try {
     // the schema boundary before the production historical records are seeded.
     if (migration === '202610090004_import_historical_workbooks.sql') {
       await runSuite('assertions.sql');
+      // Exercise the current link-review contract on empty-league fixtures.
+      // Migration 006 only replaces the RPC and is safe to apply again below.
+      await db.exec(await readFile(new URL('migrations/202610090006_admin_self_player_links.sql', root), 'utf8'));
       await runSuite('link-verification-assertions.sql');
     }
     await db.exec(await readFile(new URL(`migrations/${migration}`, root), 'utf8'));
