@@ -33,3 +33,5 @@ const formatDate = (date: string, month: 'short' | 'long') =>
 
 export const dateFmt = (date: string) => formatDate(date, 'short');
 export const longDateFmt = (date: string) => formatDate(date, 'long');
+
+export const bigBlinds = (value: number | null) => value == null ? '—' : `${value > 0 ? '+' : ''}${value.toFixed(2)} BB`;
