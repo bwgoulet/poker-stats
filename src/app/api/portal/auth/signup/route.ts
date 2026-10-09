@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { accountReturnTo } from '@/lib/backend/account';
-import { handle, HttpError, mutationClient, parseBody } from '@/lib/backend/http';
+import { handle, HttpError, mutationClient, parseBody, requestOrigin } from '@/lib/backend/http';
 import { signupSchema } from '@/lib/backend/validation';
 
 export async function POST(request: NextRequest) {
   return handle(async () => {
     const client = await mutationClient(request, false);
     const { email, password, displayName, next } = await parseBody(request, signupSchema);
-    const callback = new URL('/auth/callback', request.nextUrl.origin);
+    const callback = new URL('/auth/callback', requestOrigin(request));
     callback.searchParams.set('next', accountReturnTo(next));
     const { data, error } = await client.auth.signUp({ email, password, options: {
       data: { display_name: displayName }, emailRedirectTo: callback.toString(),

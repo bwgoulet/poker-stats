@@ -33,6 +33,17 @@ describe('account signup boundary', () => {
     expect((await signup(request({ ...credentials, role: 'admin' }))).status).toBe(400);
     expect(mocks.signUp).not.toHaveBeenCalled();
   });
+  it('preserves a loopback IP origin in mutations and confirmation links', async () => {
+    const request = new NextRequest('http://127.0.0.1:3000/api/portal/auth/signup', { method: 'POST',
+      headers: { host: '127.0.0.1:3000', origin: 'http://127.0.0.1:3000', 'Content-Type': 'application/json' }, body: JSON.stringify(credentials) });
+    expect((await signup(request)).status).toBe(200);
+    expect(mocks.signUp.mock.calls[0][0].options.emailRedirectTo).toBe('http://127.0.0.1:3000/auth/callback?next=%2Faccount');
+  });
+  it('does not allow a forwarded host to bypass the origin check', async () => {
+    const request = new NextRequest('https://poker.example.test/api/portal/auth/signup', { method: 'POST',
+      headers: { host: 'poker.example.test', 'x-forwarded-host': 'evil.test', origin: 'https://evil.test', 'Content-Type': 'application/json' }, body: JSON.stringify(credentials) });
+    expect((await signup(request)).status).toBe(403); expect(mocks.signUp).not.toHaveBeenCalled();
+  });
   it('rejects metadata injected into signup', async () => {
     expect((await signup(request({ ...credentials, options: { data: { role: 'admin' } } }))).status).toBe(400);
     expect(mocks.signUp).not.toHaveBeenCalled();
@@ -104,6 +115,10 @@ describe('confirmation callback', () => {
   it('never redirects to an external next URL', async () => {
     const response = await callback(new NextRequest('http://localhost:3000/auth/callback?code=confirmation-code&next=https%3A%2F%2Fevil.test'));
     expect(response.headers.get('location')).toBe('http://localhost:3000/account');
+  });
+  it('returns to the same loopback host so session cookies remain usable', async () => {
+    const response = await callback(new NextRequest('http://127.0.0.1:3000/auth/callback?code=confirmed', { headers: { host: '127.0.0.1:3000' } }));
+    expect(response.headers.get('location')).toBe('http://127.0.0.1:3000/account');
   });
   it('returns a helpful login state when confirmation fails', async () => {
     mocks.exchange.mockResolvedValue({ error: { message: 'expired' } });

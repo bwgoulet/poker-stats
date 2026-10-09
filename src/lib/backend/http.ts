@@ -5,8 +5,17 @@ import { serverSupabase, supabaseConfig } from './supabase';
 export class HttpError extends Error {
   constructor(public status: number, message: string) { super(message); }
 }
+export function requestOrigin(request: NextRequest): string {
+  // NextURL normalizes loopback IPs to localhost. The actual Host preserves
+  // browser origins and cookie scope; don't trust a client-supplied forwarded host.
+  const host = request.headers.get('host');
+  if (!host) return request.nextUrl.origin;
+  if (/[\\/\s,@?#]/.test(host)) throw new HttpError(400, 'The request host is invalid.');
+  try { return new URL(`${request.nextUrl.protocol}//${host}`).origin; }
+  catch { throw new HttpError(400, 'The request host is invalid.'); }
+}
 export async function mutationClient(request: NextRequest, requireAuth = true) {
-  if (request.headers.get('origin') !== request.nextUrl.origin) throw new HttpError(403, 'This request must come from the poker portal.');
+  if (request.headers.get('origin') !== requestOrigin(request)) throw new HttpError(403, 'This request must come from the poker portal.');
   if (!request.headers.get('content-type')?.startsWith('application/json')) throw new HttpError(415, 'Send the request as JSON.');
   if (!supabaseConfig()) throw new HttpError(503, 'Connect Supabase before changing records.');
   const client = await serverSupabase();
