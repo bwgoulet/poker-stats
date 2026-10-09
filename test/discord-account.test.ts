@@ -42,7 +42,7 @@ it('handles disabled Discord without disclosing provider secrets', async () => {
 it('uses a caller-scoped review RPC with a strict decision', async () => {
   const requestId = '00000000-0000-4000-8000-000000000001';
   expect((await review(request({ requestId, approve: true }))).status).toBe(200);
-  expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith('review_player_link', { p_request_id: requestId, p_approve: true });
+  expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith('review_player_link_v2', { p_request_id: requestId, p_approve: true });
   expect((await review(request({ requestId, approve: true, userId: 'victim' }))).status).toBe(400);
 });
 it('maps racing approvals to a useful conflict', async () => {
@@ -67,4 +67,30 @@ it('cancels only through a session-scoped RPC', async () => {
   expect((await cancel(request({ requestId }))).status).toBe(200);
   expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith('cancel_player_link_request', { p_request_id: requestId });
   expect((await cancel(request({ requestId, userId: 'victim' }))).status).toBe(400);
+});
+
+for (const code of ['PGRST202', '42883']) {
+  it(`reports the missing review migration instead of falling back to the old self-review rule (${code})`, async () => {
+    mocks.rpc.mockResolvedValue({ error: { code, message: 'private database details' } });
+    const result = await review(request({ requestId: '00000000-0000-4000-8000-000000000001', approve: true }));
+    expect(result.status).toBe(503);
+    const body = await result.json();
+    expect(body.error).toContain('202610090007');
+    expect(body.error).not.toContain('private database details');
+    expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith('review_player_link_v2', {
+      p_request_id: '00000000-0000-4000-8000-000000000001', p_approve: true,
+    });
+  });
+}
+it('keeps actual league permission denials forbidden without disclosing database details', async () => {
+  mocks.rpc.mockResolvedValue({ error: { code: '42501', message: 'private database details' } });
+  const result = await review(request({ requestId: '00000000-0000-4000-8000-000000000001', approve: true }));
+  expect(result.status).toBe(403);
+  const body = await result.json();
+  expect(body.error).toContain('owner/admin of this league');
+  expect(body.error).not.toContain('private database details');
+});
+it('rejects cross-origin link reviews before calling the database', async () => {
+  expect((await review(request({ requestId: '00000000-0000-4000-8000-000000000001', approve: true }, 'https://evil.example'))).status).toBe(403);
+  expect(mocks.rpc).not.toHaveBeenCalled();
 });
