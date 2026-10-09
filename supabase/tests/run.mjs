@@ -11,6 +11,8 @@ try {
   await db.exec(await readFile(new URL('tests/bootstrap.sql', root), 'utf8'));
   const migrations = (await readdir(fileURLToPath(new URL('migrations/', root))))
     .filter((name) => name.endsWith('.sql')).sort();
+  const versions = migrations.map(name => name.split('_')[0]);
+  if (new Set(versions).size !== versions.length) throw new Error('Supabase migration versions must be unique.');
   let total = 0;
   async function runSuite(suite) {
     const results = await db.exec(await readFile(new URL(`tests/${suite}`, root), 'utf8'));
@@ -25,6 +27,9 @@ try {
     // These suites use empty-league fixtures and roll them back. Run them at
     // the schema boundary before the production historical records are seeded.
     if (migration === '202610090004_import_historical_workbooks.sql') {
+      // Mutation suites need the latest RPC rules before historical fixtures.
+      // Apply 007 here and again in normal order to verify repeatability.
+      await db.exec(await readFile(new URL('migrations/202610090007_allow_unbalanced_completed_games.sql', root), 'utf8'));
       await runSuite('assertions.sql');
       // Exercise the current link-review contract on empty-league fixtures.
       // Migration 006 only replaces the RPC and is safe to apply again below.
