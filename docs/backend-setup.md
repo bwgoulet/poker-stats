@@ -11,7 +11,7 @@ to members; sign-in and linking never grant management privileges.
 1. Connect the existing Supabase project using the two public variables described
    below, and apply migrations 001, 002, then
    `supabase/migrations/202610090003_discord_link_verification.sql`, followed by
-   `supabase/migrations/202610090004_admin_self_player_links.sql`.
+   `supabase/migrations/202610090006_admin_self_player_links.sql`.
    Existing player links are preserved; all new claims become pending requests.
 2. In the Discord Developer Portal, create/select your application and add this
    OAuth2 redirect: `https://<project-ref>.supabase.co/auth/v1/callback`.
@@ -46,8 +46,8 @@ statistics and historical profit overrides as the league dashboards.
 
 No live Supabase project or Discord application was configured by this code
 change. The setup above is necessary before real OAuth sign-in works. Without
-configuration the account page shows the Discord entry point with a clear service
-setup state; it cannot create a simulated account.
+configuration league pages show a database setup error; no simulated account or
+spreadsheet fallback is available.
 
 The earlier setup notes below describe the existing database, email signup,
 privileged administration, and workbook cutover. Where they describe instant
@@ -58,9 +58,8 @@ self-claims, migration 003 supersedes that behavior with administrator review.
 The `/manage` portal is the entry point for recording games, updating results,
 adding players, and creating or configuring leagues. The existing dashboards read
 the selected league's completed database games once Supabase is configured.
-Without configuration the committed workbooks remain a clearly labeled read-only
-archive; writes are disabled. A configured database failure never substitutes old
-workbook data.
+Supabase configuration is required. Missing configuration or a database failure
+shows an error; no archived workbook data is served.
 
 ## Connect a project
 
@@ -191,10 +190,61 @@ this implementation.
 
 ## Move the historical workbooks
 
+### Apply the committed historical migration
+
+Connecting Supabase switches the dashboards to database reads. An empty database
+therefore shows **No completed games yet** before the historical import has been applied. OAuth sign-in does not import those workbooks.
+
+The frozen import of all four original season workbooks is ready to execute:
+
+1. Confirm migrations `202610090001`, `202610090002`, and `202610090003` have
+   already been applied to the same Supabase project used by the deployed app.
+2. Review `supabase/imports/202610090004/manifest.json` for workbook SHA-256
+   fingerprints, counts, source discrepancies, and import assumptions.
+3. In Supabase **SQL Editor**, run the entire
+   `supabase/migrations/202610090004_import_historical_workbooks.sql` as the project
+   administrator. Alternatively, after reviewing `npx supabase db push --dry-run`,
+   apply the pending migrations with `npx supabase db push`.
+4. Run the entire `supabase/imports/202610090004/verify.sql`. The `game`, `player`,
+   and `result` rows must each have `passed = true` and zero missing, changed, or
+   unexpected records. Run this before editing historical records in the portal.
+5. Refresh the deployed dashboard. No website redeployment is required for this
+   database-only import. UNC Poker's existing visibility and memberships remain
+   unchanged; its seeded public history is readable by newly signed-in accounts.
+
+The migration inserts completed games, canonical players and aliases, buy-ins,
+cash-outs, inferred placements, original dates, and historical Net overrides.
+It contains 49 players, 62 games, and 696 valid results across fall 2025, spring
+2026, summer 2026, and fall 2026. The one incomplete source result is Drew's
+October 3, 2025 one-off: a $50 buy-in with `?` for cash-out and Net
+(`fall-2025.xlsx`, `One-offs (not in totals)`, row 6). It remains in the external source archive
+and is reported in the manifest; no payout or profit is invented. Correct this
+record separately once its actual cash-out is known. Other source reconciliation
+warnings and six Net overrides are preserved, not balanced artificially.
+Exact reruns are safe. Conflicting existing records or previously deleted games
+abort the whole transaction rather than overwriting portal edits. It does not
+create accounts, grant administrator privileges, or claim player profiles.
+
+Keep this applied migration frozen. For later spreadsheet changes, generate and
+review a new export; do not regenerate an already-applied migration.
+
+### Apply confirmed historical corrections
+
+The owner-confirmed payout and Net corrections are a separate migration:
+`supabase/migrations/202610090005_correct_historical_results.sql`. Apply it after
+004, then run `supabase/imports/202610090005/verify.sql` and require both counts
+to be 7 and `passed = true`. Drew's October 3 cash-out is $36.10 against a $50.00
+buy-in (Net -$13.90); six erroneous spreadsheet Net overrides are cleared.
+The original import verification intentionally reports these later corrections
+as changes. Keep migration 004 frozen and do not rerun it to restore old figures.
+See [Historical corrections and counting differences](data-quality-report.md).
+
+### Generate a new export
+
 Run from the repository root:
 
 ```bash
-npm run db:export
+npm run db:export -- --input-dir /path/to/archive
 ```
 
 This creates `work/supabase-import.sql`, `work/supabase-import-manifest.json`, and
@@ -232,7 +282,7 @@ records; regenerating it from changed workbooks changes the comparison baseline.
 
 After cutover, record new games in the portal. This is an initial migration, not a
 synchronization job. Follow [Spreadsheet retirement](spreadsheet-retirement.md)
-to archive the workbooks and later remove them from the deployed repository.
+for the source archive and database-only runtime.
 
 ## Data and access model
 

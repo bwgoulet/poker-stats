@@ -1,0 +1,1013 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T18:10:00.706Z",
+  "league": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "slug": "unc-poker",
+    "name": "UNC Poker"
+  },
+  "sources": [
+    {
+      "seasonId": "fall-2025",
+      "file": "fall-2025.xlsx",
+      "sha256": "d6bd799e38ec673fea62ea7593531184e09da870b2946c7dab420ae57f311645"
+    },
+    {
+      "seasonId": "fall-2026",
+      "file": "fall-2026.xlsx",
+      "sha256": "5d4be77fe812b25eabbd4b9290034ee5a44db2327227228b75cfcb1317e634f7"
+    },
+    {
+      "seasonId": "spring-2026",
+      "file": "spring-2026.xlsx",
+      "sha256": "5ce93f9089fe8485876fdde5138f19150109c13678081bd6f57dbfa24da0ef9b"
+    },
+    {
+      "seasonId": "summer-2026",
+      "file": "summer-2026.xlsx",
+      "sha256": "b5435dd546f2071f7ddbbf320cf9b05e54ef2922efc6276f34224eeb02aab907"
+    }
+  ],
+  "counts": {
+    "players": 49,
+    "games": 62,
+    "results": 696,
+    "legacyProfitOverrides": 6,
+    "normalizerIssues": 40
+  },
+  "assumptions": [
+    "All existing workbooks belong to UNC Poker; canonical player and game IDs are retained.",
+    "Workbooks do not establish cash versus tournament format. Imported games assume cash; an organizer should review the format.",
+    "Placements are inferred by descending normalized source Net. They are not explicit tournament placements; ties retain the normalizer order.",
+    "Valid source Net is authoritative for historical standings. Missing or malformed Net falls back to cash-out minus buy-in in the existing normalizer.",
+    "Missing or malformed buy-in/cash-out rows reported by the normalizer remain excluded; no values are fabricated."
+  ],
+  "normalizerIssues": [
+    {
+      "workbook": "fall-2025.xlsx",
+      "sheet": "One-offs (not in totals)",
+      "row": 6,
+      "severity": "warning",
+      "message": "Skipped Drew: malformed buy-in/cash-out"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-08-27",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.25"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-09-10",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.05"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-09-22",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.15"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-10-23",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -3.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-11-13",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.50"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-11-24",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.50"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-09-03",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.35"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-09-17",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 1.50"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-10-16",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-11-05",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -2.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-11-20",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -5.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-one-off-2025-10-03",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 13.90"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-one-off-2025-10-10",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-one-off-2025-10-27",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 10.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-one-off-2025-12-07",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 19.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-20-2026-08-19",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -3.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-20-2026-08-26",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-20-2026-09-02",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.10"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-one-off-2026-08-20",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.25"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-one-off-2026-09-03",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 6.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-one-off-2026-09-30",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.20"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-one-off-2026-10-05",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 5.20"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-01-14",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.25"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-01-28",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 9.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-02-11",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.45"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-02-25",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.35"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-04-01",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.30"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-01-07",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 1.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-02-04",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -2.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-02-18",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-03-26",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 5.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-04-22",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-50-2026-05-03",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -20.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-one-off-2026-01-31",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-10-2026-06-05",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.25"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-20-2026-06-30",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.20"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-20-2026-07-14",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.10"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-20-2026-07-28",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-20-2026-08-16",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -2.00"
+    }
+  ],
+  "games": [
+    {
+      "id": "fall-2025-10-2025-08-27",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-10-2025-08-27",
+      "resultCount": 11,
+      "sourceProfitTotalCents": -25,
+      "cashFlowTotalCents": -25,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-25 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-25 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-10-2025-09-10",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-10-2025-09-10",
+      "resultCount": 10,
+      "sourceProfitTotalCents": -5,
+      "cashFlowTotalCents": -5,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-5 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-5 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-10-2025-09-22",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-10-2025-09-22",
+      "resultCount": 12,
+      "sourceProfitTotalCents": 15,
+      "cashFlowTotalCents": 15,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (15 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (15 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-10-2025-10-07",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-10-2025-10-07",
+      "resultCount": 12,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2025-10-2025-10-23",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-10-2025-10-23",
+      "resultCount": 13,
+      "sourceProfitTotalCents": -300,
+      "cashFlowTotalCents": -300,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-300 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-300 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-10-2025-11-13",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-10-2025-11-13",
+      "resultCount": 13,
+      "sourceProfitTotalCents": 50,
+      "cashFlowTotalCents": 50,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (50 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (50 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-10-2025-11-24",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-10-2025-11-24",
+      "resultCount": 12,
+      "sourceProfitTotalCents": 50,
+      "cashFlowTotalCents": 50,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (50 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (50 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-20-2025-09-03",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-20-2025-09-03",
+      "resultCount": 8,
+      "sourceProfitTotalCents": -35,
+      "cashFlowTotalCents": -35,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-35 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-35 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-20-2025-09-17",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-20-2025-09-17",
+      "resultCount": 11,
+      "sourceProfitTotalCents": 150,
+      "cashFlowTotalCents": 150,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (150 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (150 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-20-2025-10-01",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-20-2025-10-01",
+      "resultCount": 12,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2025-20-2025-10-16",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-20-2025-10-16",
+      "resultCount": 10,
+      "sourceProfitTotalCents": -140,
+      "cashFlowTotalCents": -40,
+      "legacyProfitOverrides": 1,
+      "warnings": [
+        "Historical source Net does not reconcile (-140 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-40 cents); preserved without adjustment.",
+        "1 source Net value(s) differ from cash-out minus buy-in and are preserved as legacy_profit_cents."
+      ]
+    },
+    {
+      "id": "fall-2025-20-2025-11-05",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-20-2025-11-05",
+      "resultCount": 12,
+      "sourceProfitTotalCents": -200,
+      "cashFlowTotalCents": -200,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-200 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-200 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-20-2025-11-20",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-20-2025-11-20",
+      "resultCount": 14,
+      "sourceProfitTotalCents": -500,
+      "cashFlowTotalCents": -500,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-500 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-500 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-one-off-2025-10-03",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-one-off-2025-10-03",
+      "resultCount": 7,
+      "sourceProfitTotalCents": 1390,
+      "cashFlowTotalCents": 1390,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (1390 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (1390 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-one-off-2025-10-10",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-one-off-2025-10-10",
+      "resultCount": 11,
+      "sourceProfitTotalCents": -100,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 1,
+      "warnings": [
+        "Historical source Net does not reconcile (-100 cents); preserved without adjustment.",
+        "1 source Net value(s) differ from cash-out minus buy-in and are preserved as legacy_profit_cents."
+      ]
+    },
+    {
+      "id": "fall-2025-one-off-2025-10-27",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-one-off-2025-10-27",
+      "resultCount": 10,
+      "sourceProfitTotalCents": 1000,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 1,
+      "warnings": [
+        "Historical source Net does not reconcile (1000 cents); preserved without adjustment.",
+        "1 source Net value(s) differ from cash-out minus buy-in and are preserved as legacy_profit_cents."
+      ]
+    },
+    {
+      "id": "fall-2025-one-off-2025-12-07",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-one-off-2025-12-07",
+      "resultCount": 12,
+      "sourceProfitTotalCents": 1940,
+      "cashFlowTotalCents": 1940,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (1940 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (1940 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2025-one-off-2025-12-12",
+      "sourceRef": "workbook:v1:fall-2025.xlsx#fall-2025-one-off-2025-12-12",
+      "resultCount": 6,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-20-2026-08-19",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-20-2026-08-19",
+      "resultCount": 20,
+      "sourceProfitTotalCents": -300,
+      "cashFlowTotalCents": -300,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-300 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-300 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2026-20-2026-08-26",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-20-2026-08-26",
+      "resultCount": 20,
+      "sourceProfitTotalCents": -100,
+      "cashFlowTotalCents": -100,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-100 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-100 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2026-20-2026-09-02",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-20-2026-09-02",
+      "resultCount": 19,
+      "sourceProfitTotalCents": -10,
+      "cashFlowTotalCents": -10,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-10 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-10 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2026-20-2026-09-09",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-20-2026-09-09",
+      "resultCount": 16,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-20-2026-09-16",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-20-2026-09-16",
+      "resultCount": 16,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-20-2026-09-23",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-20-2026-09-23",
+      "resultCount": 18,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-20-2026-10-06",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-20-2026-10-06",
+      "resultCount": 19,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-50-2026-10-04",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-50-2026-10-04",
+      "resultCount": 9,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-one-off-2026-08-20",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-one-off-2026-08-20",
+      "resultCount": 3,
+      "sourceProfitTotalCents": 25,
+      "cashFlowTotalCents": 25,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (25 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (25 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2026-one-off-2026-08-30",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-one-off-2026-08-30",
+      "resultCount": 4,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-03",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-one-off-2026-09-03",
+      "resultCount": 9,
+      "sourceProfitTotalCents": 600,
+      "cashFlowTotalCents": 100,
+      "legacyProfitOverrides": 1,
+      "warnings": [
+        "Historical source Net does not reconcile (600 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (100 cents); preserved without adjustment.",
+        "1 source Net value(s) differ from cash-out minus buy-in and are preserved as legacy_profit_cents."
+      ]
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-20",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-one-off-2026-09-20",
+      "resultCount": 3,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-26",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-one-off-2026-09-26",
+      "resultCount": 15,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-27",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-one-off-2026-09-27",
+      "resultCount": 3,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-30",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-one-off-2026-09-30",
+      "resultCount": 10,
+      "sourceProfitTotalCents": -120,
+      "cashFlowTotalCents": -120,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-120 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-120 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2026-one-off-2026-10-05",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-one-off-2026-10-05",
+      "resultCount": 5,
+      "sourceProfitTotalCents": 520,
+      "cashFlowTotalCents": 520,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (520 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (520 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "fall-2026-online-2026-09-27",
+      "sourceRef": "workbook:v1:fall-2026.xlsx#fall-2026-online-2026-09-27",
+      "resultCount": 9,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "spring-2026-10-2026-01-14",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-10-2026-01-14",
+      "resultCount": 13,
+      "sourceProfitTotalCents": 25,
+      "cashFlowTotalCents": 25,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (25 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (25 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-10-2026-01-28",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-10-2026-01-28",
+      "resultCount": 14,
+      "sourceProfitTotalCents": 900,
+      "cashFlowTotalCents": 900,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (900 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (900 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-10-2026-02-11",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-10-2026-02-11",
+      "resultCount": 13,
+      "sourceProfitTotalCents": -45,
+      "cashFlowTotalCents": -45,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-45 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-45 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-10-2026-02-25",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-10-2026-02-25",
+      "resultCount": 16,
+      "sourceProfitTotalCents": 35,
+      "cashFlowTotalCents": 35,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (35 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (35 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-10-2026-03-12",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-10-2026-03-12",
+      "resultCount": 13,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "spring-2026-10-2026-04-01",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-10-2026-04-01",
+      "resultCount": 15,
+      "sourceProfitTotalCents": -30,
+      "cashFlowTotalCents": -30,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-30 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-30 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-10-2026-04-15",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-10-2026-04-15",
+      "resultCount": 14,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "spring-2026-20-2026-01-07",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-20-2026-01-07",
+      "resultCount": 13,
+      "sourceProfitTotalCents": 100,
+      "cashFlowTotalCents": 100,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (100 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (100 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-20-2026-02-04",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-20-2026-02-04",
+      "resultCount": 12,
+      "sourceProfitTotalCents": -200,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 1,
+      "warnings": [
+        "Historical source Net does not reconcile (-200 cents); preserved without adjustment.",
+        "1 source Net value(s) differ from cash-out minus buy-in and are preserved as legacy_profit_cents."
+      ]
+    },
+    {
+      "id": "spring-2026-20-2026-02-18",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-20-2026-02-18",
+      "resultCount": 13,
+      "sourceProfitTotalCents": 40,
+      "cashFlowTotalCents": 40,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (40 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (40 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-20-2026-03-05",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-20-2026-03-05",
+      "resultCount": 13,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "spring-2026-20-2026-03-26",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-20-2026-03-26",
+      "resultCount": 14,
+      "sourceProfitTotalCents": 500,
+      "cashFlowTotalCents": 500,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (500 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (500 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-20-2026-04-08",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-20-2026-04-08",
+      "resultCount": 12,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "spring-2026-20-2026-04-22",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-20-2026-04-22",
+      "resultCount": 13,
+      "sourceProfitTotalCents": 40,
+      "cashFlowTotalCents": 40,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (40 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (40 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-50-2026-01-21",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-50-2026-01-21",
+      "resultCount": 13,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "spring-2026-50-2026-02-13",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-50-2026-02-13",
+      "resultCount": 9,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "spring-2026-50-2026-05-03",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-50-2026-05-03",
+      "resultCount": 10,
+      "sourceProfitTotalCents": -2000,
+      "cashFlowTotalCents": -2000,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-2000 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-2000 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-one-off-2026-01-16",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-one-off-2026-01-16",
+      "resultCount": 9,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "spring-2026-one-off-2026-01-31",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-one-off-2026-01-31",
+      "resultCount": 7,
+      "sourceProfitTotalCents": -100,
+      "cashFlowTotalCents": -100,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-100 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-100 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "spring-2026-one-off-2026-04-28",
+      "sourceRef": "workbook:v1:spring-2026.xlsx#spring-2026-one-off-2026-04-28",
+      "resultCount": 5,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "summer-2026-10-2026-06-05",
+      "sourceRef": "workbook:v1:summer-2026.xlsx#summer-2026-10-2026-06-05",
+      "resultCount": 8,
+      "sourceProfitTotalCents": -25,
+      "cashFlowTotalCents": -25,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-25 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-25 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "summer-2026-20-2026-06-30",
+      "sourceRef": "workbook:v1:summer-2026.xlsx#summer-2026-20-2026-06-30",
+      "resultCount": 10,
+      "sourceProfitTotalCents": -20,
+      "cashFlowTotalCents": -20,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-20 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-20 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "summer-2026-20-2026-07-14",
+      "sourceRef": "workbook:v1:summer-2026.xlsx#summer-2026-20-2026-07-14",
+      "resultCount": 7,
+      "sourceProfitTotalCents": 10,
+      "cashFlowTotalCents": 10,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (10 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (10 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "summer-2026-20-2026-07-18",
+      "sourceRef": "workbook:v1:summer-2026.xlsx#summer-2026-20-2026-07-18",
+      "resultCount": 10,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "summer-2026-20-2026-07-28",
+      "sourceRef": "workbook:v1:summer-2026.xlsx#summer-2026-20-2026-07-28",
+      "resultCount": 10,
+      "sourceProfitTotalCents": -40,
+      "cashFlowTotalCents": -40,
+      "legacyProfitOverrides": 0,
+      "warnings": [
+        "Historical source Net does not reconcile (-40 cents); preserved without adjustment.",
+        "Historical cash flow does not reconcile (-40 cents); preserved without adjustment."
+      ]
+    },
+    {
+      "id": "summer-2026-20-2026-08-11",
+      "sourceRef": "workbook:v1:summer-2026.xlsx#summer-2026-20-2026-08-11",
+      "resultCount": 5,
+      "sourceProfitTotalCents": 0,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 0,
+      "warnings": []
+    },
+    {
+      "id": "summer-2026-20-2026-08-16",
+      "sourceRef": "workbook:v1:summer-2026.xlsx#summer-2026-20-2026-08-16",
+      "resultCount": 11,
+      "sourceProfitTotalCents": -200,
+      "cashFlowTotalCents": 0,
+      "legacyProfitOverrides": 1,
+      "warnings": [
+        "Historical source Net does not reconcile (-200 cents); preserved without adjustment.",
+        "1 source Net value(s) differ from cash-out minus buy-in and are preserved as legacy_profit_cents."
+      ]
+    }
+  ],
+  "safety": [
+    "Generated SQL is a single transaction and performs no live writes until manually executed.",
+    "Any conflicting canonical player, game, source reference, or existing result set aborts the transaction.",
+    "Identical existing games are skipped as a whole; results are inserted only for newly inserted games.",
+    "Audit records for portal-deleted game IDs prevent accidental restoration of deleted historical games.",
+    "The import never updates or deletes existing games, results, players, or league memberships."
+  ]
+}

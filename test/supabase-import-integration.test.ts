@@ -4,13 +4,19 @@ import { PGlite } from '@electric-sql/pglite';
 import { describe, expect, it } from 'vitest';
 import { buildWorkbookImport, type NormalizedWorkbookData } from '@/lib/backend/import-workbooks';
 import { buildWorkbookVerificationSql } from '@/lib/backend/verify-workbooks';
-import { normalizeWorkbooks } from '@/lib/data/normalize-workbooks';
+import { historicalData } from './helpers/historical-data';
 import { UNC_LEAGUE_ID } from '@/lib/backend/types';
 
-async function bootstrapDatabase() {
+const historicalMigration = '202610090004_import_historical_workbooks.sql';
+const historicalArtifacts = 'supabase/imports/202610090004';
+
+async function bootstrapDatabase(includeHistoricalData = false) {
   const db = new PGlite();
   await db.exec(readFileSync(resolve('supabase/tests/bootstrap.sql'), 'utf8'));
   for (const migration of readdirSync(resolve('supabase/migrations')).filter((file) => file.endsWith('.sql')).sort()) {
+    // Synthetic import tests need an empty league; the committed migration is
+    // exercised separately against the complete migration chain below.
+    if (migration > (includeHistoricalData ? historicalMigration : '202610090003_discord_link_verification.sql')) continue;
     await db.exec(readFileSync(resolve('supabase/migrations', migration), 'utf8'));
   }
   return db;
@@ -41,8 +47,44 @@ async function verify(db: PGlite, sql: string) {
 }
 
 describe('workbook import on PostgreSQL', () => {
-  it('imports real workbooks, preserves standings, skips exact reruns and rejects edits atomically', async () => {
-    const normalized = normalizeWorkbooks();
+  it('applies the committed historical migration and exposes verified data through RLS', async () => {
+    const normalized = historicalData();
+    const imported = buildWorkbookImport(normalized);
+    const sql = readFileSync(resolve('supabase/migrations', historicalMigration), 'utf8');
+    const verification = readFileSync(resolve(historicalArtifacts, 'verify.sql'), 'utf8');
+    const manifest = JSON.parse(readFileSync(resolve(historicalArtifacts, 'manifest.json'), 'utf8'));
+    expect(sql).toBe(imported.sql);
+    expect(verification).toBe(buildWorkbookVerificationSql(imported));
+    expect(manifest.counts).toEqual(imported.manifest.counts);
+    expect(manifest.sources).toHaveLength(4);
+    for (const source of manifest.sources) {
+      expect(source.sha256).toMatch(/^[a-f0-9]{64}$/);
+    }
+
+    const db = await bootstrapDatabase(true);
+    try {
+      const expected = { players: normalized.players.length, games: normalized.nights.length, results: normalized.results.length };
+      expect(await recordCounts(db)).toEqual(expected);
+      expect((await verify(db, verification)).every(row => row.passed)).toBe(true);
+      await db.exec(sql);
+      expect(await recordCounts(db)).toEqual(expected);
+
+      // A newly signed-in user needs no league membership to read public history.
+      const userId = '00000000-0000-4000-8000-000000000099';
+      await db.query('insert into auth.users (id, email) values ($1, $2)', [userId, 'historical-reader@example.test']);
+      await db.query("select set_config('request.jwt.claims', $1, false)", [JSON.stringify({ sub: userId, role: 'authenticated' })]);
+      await db.exec('set role authenticated;');
+      expect(await recordCounts(db)).toEqual(expected);
+      expect((await db.query<{ count: number }>("select count(*)::integer as count from public.games where status = 'completed'")).rows[0].count).toBe(expected.games);
+      await db.exec('reset role; set role anon;');
+      expect(await recordCounts(db)).toEqual(expected);
+    } finally {
+      await db.close();
+    }
+  }, 30000);
+
+  it('imports the historical snapshot, preserves standings, skips exact reruns and rejects edits atomically', async () => {
+    const normalized = historicalData();
     const imported = buildWorkbookImport(normalized);
     const db = await bootstrapDatabase();
     try {

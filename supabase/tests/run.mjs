@@ -22,10 +22,17 @@ try {
     // Test the old claim contract at its migration boundary, before claims
     // become requests. Each suite rolls back its fixtures.
     if (migration === '202610090003_discord_link_verification.sql') await runSuite('user-assertions.sql');
+    // These suites use empty-league fixtures and roll them back. Run them at
+    // the schema boundary before the production historical records are seeded.
+    if (migration === '202610090004_import_historical_workbooks.sql') {
+      await runSuite('assertions.sql');
+      // Exercise the current link-review contract on empty-league fixtures.
+      // Migration 006 only replaces the RPC and is safe to apply again below.
+      await db.exec(await readFile(new URL('migrations/202610090006_admin_self_player_links.sql', root), 'utf8'));
+      await runSuite('link-verification-assertions.sql');
+    }
     await db.exec(await readFile(new URL(`migrations/${migration}`, root), 'utf8'));
   }
-  await runSuite('assertions.sql');
-  await runSuite('link-verification-assertions.sql');
   console.log(`Postgres integration tests passed: ${total} assertions (JWT roles, RLS, tenant isolation, atomic games, audit, user profiles, admin promotion, player claims).`);
 } finally {
   await db.close();

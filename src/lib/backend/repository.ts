@@ -1,6 +1,5 @@
 import { cache } from 'react';
 import { cookies } from 'next/headers';
-import { normalizeWorkbooks } from '@/lib/data/normalize-workbooks';
 import type { NightType, PlayerResult, ValidationIssue } from '@/types/poker';
 import { serverSupabase, supabaseConfig } from './supabase';
 import { UNC_LEAGUE_ID, effectiveLeagueRole, type AppUser, type League, type LeagueRole, type ManagedGame, type ManagedPlayer, type ManagedResult, type PlayerLink, type PlayerLinkState, type PortalData } from './types';
@@ -8,7 +7,6 @@ import { UNC_LEAGUE_ID, effectiveLeagueRole, type AppUser, type League, type Lea
 export const LEAGUE_COOKIE = 'poker-active-league';
 const unc: League = { id: UNC_LEAGUE_ID, slug: 'unc-poker', name: 'UNC Poker', currency: 'USD', timezone: 'America/New_York', visibility: 'public', role: null };
 const noLeague: League = { ...unc, id: '', slug: '', name: 'Poker leagues', visibility: 'private' };
-const getWorkbookData = cache(normalizeWorkbooks);
 type ReadResponse = { data: unknown[] | null; error: { message: string } | null };
 export async function readAll<T>(query: () => { range: (from: number, to: number) => PromiseLike<ReadResponse> }): Promise<T[]> {
   const records: T[] = [];
@@ -56,19 +54,7 @@ export const getPlayerLinkState = cache(async (leagueId: string, playerId: strin
 
 export const getPortalData = cache(async (requestedLeagueId?: string): Promise<PortalData> => {
   if (!supabaseConfig()) {
-    const data = getWorkbookData();
-    return {
-      configured: false, user: null, leagues: [unc], selectedLeagueId: UNC_LEAGUE_ID,
-      players: data.players,
-      games: data.nights.map(night => ({
-        id: night.id, leagueId: UNC_LEAGUE_ID, title: night.title, date: night.date, seasonId: night.seasonId,
-        nightType: night.nightType, format: 'cash', status: 'completed', notes: night.notes ?? '', version: 1, sourceRef: `workbook:${night.id}`,
-        results: data.results.filter(row => row.nightId === night.id).map(row => ({
-          playerId: row.playerId, buyInCents: Math.round(row.buyIn * 100), cashOutCents: Math.round(row.cashOut * 100),
-          placement: row.placement ?? null, legacyProfitCents: Math.round(row.profit * 100),
-        })),
-      })),
-    };
+    throw new Error('League data requires Supabase. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY in the hosting environment.');
   }
   const client = await serverSupabase();
   const user = await getCurrentUser();
@@ -97,7 +83,6 @@ export const getPortalData = cache(async (requestedLeagueId?: string): Promise<P
 });
 
 export const getActivePokerData = cache(async () => {
-  if (!supabaseConfig()) return { ...getWorkbookData(), league: unc, source: 'workbooks' as const };
   return portalToPokerData(await getPortalData());
 });
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ManagedGame, ManagedPlayer } from '@/lib/backend/types';
-import { moneyToCents, needsReconciliation, toGameInput, validateFields, type GameFields } from './game-input';
+import { gameCashTotals, moneyToCents, needsReconciliation, toGameInput, validateFields, type GameFields } from './game-input';
 
 const players: ManagedPlayer[] = [{ id: 'a', displayName: 'Alex', aliases: [] }, { id: 'b', displayName: 'Blair', aliases: [] }];
 const fields = (): GameFields => ({ title: 'Friday game', date: '2026-10-09', seasonId: 'fall-2026', nightType: '10', format: 'cash', notes: '', results: [
@@ -47,9 +47,24 @@ describe('game editor financial validation', () => {
       { playerId: 'a', buyInCents: 1010, cashOutCents: 2020, placement: null, legacyProfitCents: 1000 },
       { playerId: 'b', buyInCents: 1010, cashOutCents: 0, placement: null, legacyProfitCents: -1010 },
     ] };
-    expect(needsReconciliation(existing)).toBe(true);
+    expect(needsReconciliation(existing)).toBe(false);
     const input = toGameInput(fields(), 'completed', existing);
     expect(input.expectedVersion).toBe(7);
     expect(input.results[0]).not.toHaveProperty('legacyProfitCents');
   });
+});
+
+
+it('reports exact cash differences and keeps pending payouts distinct from zero', () => {
+  const game: ManagedGame = { ...toGameInput(fields(), 'completed', null), id: 'game', leagueId: 'league', version: 1, sourceRef: null,
+    results: [{ playerId: 'a', buyInCents: 5000, cashOutCents: 3610, placement: null, legacyProfitCents: null }] };
+  expect(gameCashTotals(game)).toEqual({ totalIn: 5000, totalOut: 3610, pendingPayouts: 0, difference: -1390 });
+  expect(needsReconciliation(game)).toBe(true);
+  game.results[0].cashOutCents = 6390;
+  expect(gameCashTotals(game).difference).toBe(1390);
+  game.results[0].cashOutCents = null;
+  expect(gameCashTotals(game).difference).toBeNull();
+  expect(needsReconciliation(game)).toBe(true);
+  game.status = 'draft';
+  expect(needsReconciliation(game)).toBe(false);
 });
