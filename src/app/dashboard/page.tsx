@@ -13,6 +13,7 @@ import {
 } from '@/lib/filters/filter-data';
 import {
   leagueStats,
+  leagueReconciliation,
   nightStats,
   playerStats,
   recentForm,
@@ -33,6 +34,7 @@ export default async function Dashboard({
   const nights = filterNights(data.nights, filters);
   const results = filterResults(data.results, data.nights, filters);
   const league = leagueStats(nights, results);
+  const reconciliation = leagueReconciliation(data.nights, data.results);
   const recentNights = nightStats(nights, results)
     .sort((a, b) => b.night.date.localeCompare(a.night.date))
     .slice(0, 6);
@@ -74,6 +76,29 @@ export default async function Dashboard({
           Live league statistics from completed games.
         </p>
       </header>
+      {data.nights.length > 0 && (
+        <section className="card p-5" aria-labelledby="reconciliation-heading">
+          <h2 id="reconciliation-heading" className="text-sm font-semibold text-gray-600">
+            Reconciliation discrepancies · All-time league
+          </h2>
+          <p className="mt-1 text-2xl font-black">{dollars(reconciliation.totalDiscrepancy)}</p>
+          <dl className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div>
+              <dt className="text-sm text-gray-600">Extra bought in (buy-ins exceed cash-outs)</dt>
+              <dd className="font-bold tabular-nums">{dollars(reconciliation.extraBuyIn)}</dd>
+            </div>
+            <div>
+              <dt className="text-sm text-gray-600">Extra bought out (cash-outs exceed buy-ins)</dt>
+              <dd className="font-bold tabular-nums">{dollars(reconciliation.extraCashOut)}</dd>
+            </div>
+          </dl>
+          <p className="mt-3 text-sm text-gray-500">
+            Sum of each game's buy-in/cash-out mismatch across {reconciliation.affectedGames} completed
+            {reconciliation.affectedGames === 1 ? ' game' : ' games'}. Covers all seasons and night types,
+            regardless of filters. Recorded discrepancies do not necessarily represent money lost.
+          </p>
+        </section>
+      )}
       {nights.length === 0 ? (
         <div className="card p-10 text-center">
           <h2 className="text-xl font-bold">{!data.league.id ? 'Choose a league to get started' : data.nights.length === 0 ? 'No completed games yet' : 'No poker nights match this filter'}</h2>
