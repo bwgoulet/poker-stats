@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { nightTypeLabel } from '@/lib/filters/night-types';
+import type { NightType } from '@/types/poker';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 import type { GameListingRow } from '@/lib/backend/game-listing';
@@ -23,7 +25,7 @@ export default function GamesListing({ rows }: { rows: Row[] }) {
 
   const filtered = useMemo(() => rows.filter(row => {
     const needle = query.trim().toLocaleLowerCase();
-    return (!needle || `${row.title} ${row.seasonId} ${row.nightType} ${row.winner}`.toLocaleLowerCase().includes(needle))
+    return (!needle || `${row.title} ${row.seasonId} ${nightTypeLabel(row.nightType)} ${row.winner}`.toLocaleLowerCase().includes(needle))
       && (!from || row.date >= from) && (!to || row.date <= to);
   }).sort((a, b) => compare(a, b, sort) * (direction === 'asc' ? 1 : -1)), [rows, query, from, to, sort, direction]);
   const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));

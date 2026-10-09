@@ -1,15 +1,13 @@
+import { toSearchParams, type SearchParams } from '@/lib/filters/scope-query';
 import Link from 'next/link';
 
 import { getPokerData } from '@/lib/data/poker-repository';
 import {
   filterNights,
   filterResults,
-  getCurrentSeasonId,
   getDataSeasonIds,
-  type GlobalFilters,
   parseFilters,
   scopeLabel,
-  seasonLabel,
 } from '@/lib/filters/filter-data';
 import {
   leagueStats,
@@ -20,12 +18,13 @@ import {
 } from '@/lib/stats/statistics';
 import { ProfitDistribution } from '@/components/charts/ProfitDistribution';
 import { dateFmt, dollars, pct } from '@/lib/formatting/format';
+import { ReconciliationCard } from '@/components/dashboard/ReconciliationCard';
 import { canEdit } from '@/lib/backend/types';
 
 export default async function Dashboard({
   searchParams,
 }: {
-  searchParams: Promise<Record<string, string | undefined>>;
+  searchParams: Promise<SearchParams>;
 }) {
   const sp = await searchParams;
   const data = await getPokerData();
@@ -34,7 +33,7 @@ export default async function Dashboard({
   const nights = filterNights(data.nights, filters);
   const results = filterResults(data.results, data.nights, filters);
   const league = leagueStats(nights, results);
-  const reconciliation = leagueReconciliation(data.nights, data.results);
+  const reconciliation = leagueReconciliation(nights, results);
   const recentNights = nightStats(nights, results)
     .sort((a, b) => b.night.date.localeCompare(a.night.date))
     .slice(0, 6);
@@ -43,29 +42,12 @@ export default async function Dashboard({
     .map((stat) => stat.player.id));
   const hot = recentForm(data.players, nights, results, 10)
     .filter((stat) => eligiblePlayerIds.has(stat.player.id))
-    .slice(0, 5);
+    .slice(0, 5)
+    .map((stat, index) => ({ ...stat, rank: index + 1 }));
   const playerBalance = playerStats(data.players, nights, results).filter(
     (stat) => stat.nightsPlayed >= filters.minNights,
   );
-  const params = new URLSearchParams(sp as Record<string, string>);
-  const currentSeason = getCurrentSeasonId(data.nights);
-  const snapshotFilters: GlobalFilters = {
-    season: currentSeason ? [currentSeason] : [],
-    nightType: ['20', '10'],
-    minNights: 1,
-  };
-  const snapshotNights = filterNights(data.nights, snapshotFilters);
-  const snapshotResults = filterResults(data.results, data.nights, snapshotFilters);
-  const snapshotBalance = playerStats(
-    data.players,
-    snapshotNights,
-    snapshotResults,
-  ).filter((stat) => stat.nightsPlayed >= snapshotFilters.minNights);
-  const snapshotParams = new URLSearchParams({
-    season: snapshotFilters.season.join(','),
-    nightType: snapshotFilters.nightType.join(','),
-    minNights: String(snapshotFilters.minNights),
-  });
+  const params = toSearchParams(sp);
 
   return (
     <>
@@ -76,35 +58,15 @@ export default async function Dashboard({
           Live league statistics from completed games.
         </p>
       </header>
-      {data.nights.length > 0 && (
-        <section className="card p-5" aria-labelledby="reconciliation-heading">
-          <h2 id="reconciliation-heading" className="text-sm font-semibold text-gray-600">
-            Reconciliation discrepancies · All-time league
-          </h2>
-          <p className="mt-1 text-2xl font-black">{dollars(reconciliation.totalDiscrepancy)}</p>
-          <dl className="mt-3 grid gap-3 sm:grid-cols-2">
-            <div>
-              <dt className="text-sm text-gray-600">Extra bought in (buy-ins exceed cash-outs)</dt>
-              <dd className="font-bold tabular-nums">{dollars(reconciliation.extraBuyIn)}</dd>
-            </div>
-            <div>
-              <dt className="text-sm text-gray-600">Extra bought out (cash-outs exceed buy-ins)</dt>
-              <dd className="font-bold tabular-nums">{dollars(reconciliation.extraCashOut)}</dd>
-            </div>
-          </dl>
-          <p className="mt-3 text-sm text-gray-500">
-            Sum of each game's buy-in/cash-out mismatch across {reconciliation.affectedGames} completed
-            {reconciliation.affectedGames === 1 ? ' game' : ' games'}. Covers all seasons and night types,
-            regardless of filters. Recorded discrepancies do not necessarily represent money lost.
-          </p>
-        </section>
-      )}
+      {nights.length > 0 && <ReconciliationCard reconciliation={reconciliation} query={params.toString()} />}
       {nights.length === 0 ? (
-        <div className="card p-10 text-center">
-          <h2 className="text-xl font-bold">{!data.league.id ? 'Choose a league to get started' : data.nights.length === 0 ? 'No completed games yet' : 'No poker nights match this filter'}</h2>
-          {!data.league.id && <Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage">Open league management</Link>}
-          {data.nights.length === 0 && canEdit(data.league.role) && <><p className="mt-2 text-gray-600">Complete a game to start building your league statistics.</p><Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage?new=1">Record a game</Link></>}
-        </div>
+        <>
+          <div className="card p-10 text-center">
+            <h2 className="text-xl font-bold">{!data.league.id ? 'Choose a league to get started' : data.nights.length === 0 ? 'No completed games yet' : 'No poker nights match this filter'}</h2>
+            {!data.league.id && <Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage">Open league management</Link>}
+            {data.nights.length === 0 && canEdit(data.league.role) && <><p className="mt-2 text-gray-600">Complete a game to start building your league statistics.</p><Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage?new=1">Record a game</Link></>}
+          </div>
+        </>
       ) : (
         <>
           <section className="grid md:grid-cols-4 gap-4">
@@ -177,23 +139,6 @@ export default async function Dashboard({
                   label: stat.player.displayName,
                   profit: stat.totalProfit,
                   href: `/players/${stat.player.id}?${params}`,
-                }))}
-              />
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-black mb-4">Season snapshot</h2>
-            <div className="card p-6 md:p-8">
-              <p className="text-sm text-gray-700 mb-4">
-                Profit distribution ({snapshotFilters.season.map(seasonLabel).join(' + ')} · $20 nights + $10 nights)
-              </p>
-              <ProfitDistribution
-                rows={snapshotBalance.map((stat) => ({
-                  id: stat.player.id,
-                  label: stat.player.displayName,
-                  profit: stat.totalProfit,
-                  href: `/players/${stat.player.id}?${snapshotParams}`,
                 }))}
               />
             </div>

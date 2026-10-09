@@ -1,0 +1,7 @@
+# Historical stakes and player big blinds
+
+Apply `supabase/migrations/202610090008_classify_historical_stakes.sql` after the earlier migrations. It classifies all 17 imported UNC one-off/online games: 10 as $10, 7 as $20. A recorded $10 buy-in identifies a $10 game; games with no $10 entry are inferred as $20. Original import IDs and financial results are retained, and titles/notes preserve the original one-off/online context. Migrations 009 and 010 subsequently separate those stakes into $10/$20 one-off categories for the 16 one-off games. Regular/default scopes exclude these one-offs; the scope can include them separately.
+
+The migration increments game versions, audits changes, and is safe to rerun. It rejects unexpectedly edited source games and requires correction 005 first. No live database connection is configured in this workspace; apply the migration to the application's Supabase project to update live records.
+
+Player pages show signed total and average BB for the selected filters. Per-game BB = recorded profit / big blind, with owner-confirmed blinds of $0.10 for $10 games and $0.20 for $20 games. Average BB is the mean per qualifying game (including breakeven games), not BB/100 hands. $50 games, one-offs without an explicit stake, unclassified online games and tournaments are excluded because their cash-game blind amounts are undefined. With no qualifying games the value is a dash.

@@ -3,6 +3,7 @@ import { PokerNight, Player, PlayerResult, NightType, ValidationIssue } from '@/
 import { canonicalPlayerId } from './player-aliases';
 import { loadWorkbooks } from './load-workbooks';
 import { nightSchema, playerSchema, resultSchema } from './validate-data';
+import { isOneOff, nightTypeLabel } from '@/lib/filters/night-types';
 
 function cellValue(cell: XLSX.CellObject | undefined): unknown {
   if (!cell) return null;
@@ -51,10 +52,14 @@ function dateFrom(v: unknown, season: string): string | null {
 }
 
 function sheetType(name: string): NightType | null {
+  if (/\bone[\s‐‑–—-]*offs?\b/i.test(name)) {
+    if (/\$10\b/.test(name) && !/\$20\b/.test(name)) return 'one-off-10';
+    if (/\$20\b/.test(name) && !/\$10\b/.test(name)) return 'one-off-20';
+    return 'one-off';
+  }
   if (/^Stats \$10/.test(name)) return '10';
   if (/^Stats \$20/.test(name)) return '20';
   if (/^Stats \$50/.test(name)) return '50';
-  if (/^One-offs/.test(name)) return 'one-off';
   if (/^Online(?:\s|$)/i.test(name)) return 'online';
   return null;
 }
@@ -115,10 +120,10 @@ export function normalizeWorkbooks(dataDir?: string) {
           current = {
             id,
             date: maybeDate,
-            title: `${nightType === 'one-off' ? 'One-off' : nightType === 'online' ? 'Online' : `$${nightType} night`} · ${maybeDate}`,
+            title: `${isOneOff(nightType) ? nightTypeLabel(nightType) : nightType === 'online' ? 'Online' : `$${nightType} night`} · ${maybeDate}`,
             seasonId: wb.seasonId,
             nightType,
-            notes: nightType === 'one-off'
+            notes: isOneOff(nightType)
               ? 'Excluded from workbook totals'
               : nightType === 'online' && nt !== 'online'
                 ? `Listed on the $${nt} sheet`

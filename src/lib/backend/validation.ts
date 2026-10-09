@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { NIGHT_TYPES, classifyNightType } from '@/lib/filters/night-types';
 
 const identifier = z.string().min(1).max(180).regex(/^[a-zA-Z0-9_-]+$/);
 const amount = z.number().int().min(0).max(100_000_000);
@@ -13,7 +14,7 @@ export const gameInputSchema = z.object({
   title: z.string().trim().min(1).max(120),
   date,
   seasonId: z.string().regex(/^[a-z][a-z0-9-]*-\d{4}$/).max(80),
-  nightType: z.enum(['10', '20', '50', 'online', 'one-off']),
+  nightType: z.enum(NIGHT_TYPES),
   format: z.enum(['cash', 'tournament']),
   status: z.enum(['draft', 'completed']),
   notes: z.string().max(2000),
@@ -42,7 +43,7 @@ export const gameInputSchema = z.object({
       if (game.results.some(row => row.placement !== null && row.placement > game.results.length)) add('Tournament placements must run from first place to the number of players.');
     }
   }
-});
+}).transform(game => ({ ...game, nightType: classifyNightType(game.nightType, game.title) }));
 
 export const saveGameSchema = z.object({ leagueId: z.uuid(), game: gameInputSchema }).strict();
 export const deleteGameSchema = z.object({ leagueId: z.uuid(), expectedVersion: z.number().int().positive().max(2_147_483_647) }).strict();

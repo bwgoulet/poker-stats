@@ -1,5 +1,8 @@
 'use client';
 
+import { nightTypeLabel } from '@/lib/filters/night-types';
+import type { NightType } from '@/types/poker';
+
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -14,7 +17,7 @@ const primaryClass = 'inline-flex items-center justify-center gap-2 rounded-lg b
 const secondaryClass = 'inline-flex items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2.5 text-sm font-semibold text-navy hover:bg-carolina-light disabled:opacity-40';
 const money = (cents: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
 const dateLabel = (date: string) => new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T12:00:00Z`));
-const nightLabel = (value: string) => ['10', '20', '50'].includes(value) ? `$${value} night` : value === 'one-off' ? 'One-off' : 'Online';
+const nightLabel = (value: NightType) => nightTypeLabel(value);
 const pageSize = 20;
 type Notice = { text: string; tone: 'success' | 'error' } | null;
 type DialogState = { kind: 'league'; league: League | null } | { kind: 'delete'; game: ManagedGame } | { kind: 'players' } | { kind: 'reload'; game: ManagedGame } | null;

@@ -1,4 +1,6 @@
+import { toSearchParams, type SearchParams } from '@/lib/filters/scope-query';
 import Link from 'next/link';
+import { nightTypeLabel } from '@/lib/filters/night-types';
 import { notFound } from 'next/navigation';
 
 import { ProfitDistribution } from '@/components/charts/ProfitDistribution';
@@ -13,7 +15,7 @@ export default async function Game({
   searchParams,
 }: {
   params: Promise<{ nightId: string }>;
-  searchParams: Promise<Record<string, string | undefined>>;
+  searchParams: Promise<SearchParams>;
 }) {
   const { nightId } = await params;
   const sp = await searchParams;
@@ -28,7 +30,7 @@ export default async function Game({
 
   if (!night) notFound();
 
-  const paramsString = new URLSearchParams(sp as Record<string, string>).toString();
+  const paramsString = toSearchParams(sp).toString();
   const results = data.results
     .filter((result) => result.nightId === nightId)
     .sort((a, b) => (a.placement ?? 99) - (b.placement ?? 99));
@@ -39,7 +41,7 @@ export default async function Game({
     <>
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div><p className="text-carolina-dark text-sm font-semibold">
-          {night.seasonId} · {night.nightType}
+          {night.seasonId} · {nightTypeLabel(night.nightType)}
         </p>
         <h1 className="text-4xl font-black">{longDateFmt(night.date)}</h1></div>
         {canEdit(data.league.role) && <Link href={`/manage?gameId=${encodeURIComponent(night.id)}`} className="rounded-lg bg-carolina-dark px-5 py-2.5 text-sm font-bold text-white">Edit game</Link>}

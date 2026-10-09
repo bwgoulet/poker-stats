@@ -19,3 +19,23 @@ describe('champion statistics', () => {
     expect(stats.find((stat) => stat.player.id === 'b')?.champions).toBe(2);
   });
 });
+
+it('normalizes mixed stakes per game and excludes unknown blinds and tournaments', () => {
+  const games = [
+    { ...nights[0], id: 'ten', nightType: '10' as const },
+    { ...nights[0], id: 'twenty', nightType: '20' as const },
+    { ...nights[0], id: 'even', nightType: '20' as const },
+    { ...nights[0], id: 'fifty', nightType: '50' as const },
+    { ...nights[0], id: 'tournament', nightType: '10' as const, format: 'tournament' as const },
+  ];
+  const rows = games.map((n, i) => ({ nightId: n.id, playerId: 'a', buyIn: 100, cashOut: 100 + [10, -10, 0, 50, 30][i], profit: [10, -10, 0, 50, 30][i], sourceName: 'A' }));
+  const stats = playerStats(players, games, rows).find(s => s.player.id === 'a')!;
+  expect(stats.totalBB).toBeCloseTo(50);
+  expect(stats.avgBB).toBeCloseTo(50 / 3);
+  expect(stats.bbNights).toBe(3);
+  expect(playerStats(players, [], [])[0].totalBB).toBeNull();
+  expect(playerStats(players, [], [])[0].avgBB).toBeNull();
+  const filtered = playerStats(players, games.slice(1, 3), rows).find(s => s.player.id === 'a')!;
+  expect(filtered.totalBB).toBeCloseTo(-50);
+  expect(filtered.avgBB).toBeCloseTo(-25);
+});

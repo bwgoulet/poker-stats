@@ -5,11 +5,12 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, CheckCircle2, Plus, Trash2, UserPlus, Wallet } from 'lucide-react';
 import type { GameInput, League, ManagedGame, ManagedPlayer } from '@/lib/backend/types';
 import { blankResult, initialFields, needsReconciliation, toGameInput, validateFields, type GameFields } from './game-input';
+import { NIGHT_TYPES, nightTypeLabel, classifyNightType } from '@/lib/filters/night-types';
 import { PortalDialog } from './PortalDialog';
 
 const fieldClass = 'mt-1.5 block w-full rounded-lg border bg-white px-3 py-2.5 text-sm font-normal text-ink focus:border-carolina-dark focus:outline-2 focus:outline-carolina/40 disabled:bg-slate-50';
 const money = (cents: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
-const types = [{ value: '10', label: '$10 night' }, { value: '20', label: '$20 night' }, { value: '50', label: '$50 night' }, { value: 'online', label: 'Online' }, { value: 'one-off', label: 'One-off' }] as const;
+const types = NIGHT_TYPES.map(value => ({ value, label: nightTypeLabel(value) }));
 
 export function GameEditor({ game, league, players, seasons, busy, onSave, onCancel, onCreatePlayer }: {
   game: ManagedGame | null; league: League; players: ManagedPlayer[]; seasons: string[]; busy: boolean;
@@ -65,7 +66,13 @@ export function GameEditor({ game, league, players, seasons, busy, onSave, onCan
     };
   }, [isDirty, router]);
 
-  function update<K extends keyof GameFields>(key: K, value: GameFields[K]) { setFields(current => ({ ...current, [key]: value })); }
+  function update<K extends keyof GameFields>(key: K, value: GameFields[K]) {
+    setFields(current => {
+      const next = { ...current, [key]: value };
+      if (key === 'title' || key === 'nightType') next.nightType = classifyNightType(next.nightType, next.title);
+      return next;
+    });
+  }
   function updateRow(key: string, property: 'playerId' | 'buyIn' | 'cashOut' | 'placement', value: string) {
     setFields(current => ({ ...current, results: current.results.map(row => row.key === key ? { ...row, [property]: value } : row) }));
   }

@@ -1,17 +1,18 @@
+import { toSearchParams, type SearchParams } from '@/lib/filters/scope-query';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getPokerData } from '@/lib/data/poker-repository';
 import { getDataSeasonIds, parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
 import { playerStats, sortResultsByDate } from '@/lib/stats/statistics';
 import { classifyPlayers } from '@/lib/stats/player-classification';
-import { buyInUnits, dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
+import { bigBlinds, buyInUnits, dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
 import { ProfitTimeline } from '@/components/charts/ProfitTimeline';
 import { PlayerPageLink } from '@/components/account/PlayerPageLink';
 import { getCurrentUser, getPlayerLinkState } from '@/lib/backend/repository';
 
 export default async function Player({ params, searchParams }: {
   params: Promise<{ playerId: string }>;
-  searchParams: Promise<Record<string, string | undefined>>;
+  searchParams: Promise<SearchParams>;
 }) {
   const { playerId } = await params;
   const sp = await searchParams;
@@ -26,6 +27,8 @@ export default async function Player({ params, searchParams }: {
   const results = filterResults(data.results, data.nights, filters);
   const allStats = playerStats(data.players, nights, results);
   const stats = allStats.find((stat) => stat.player.id === player.id)!;
+  const eligibleStats = allStats.filter(stat => stat.nightsPlayed >= filters.minNights);
+  const rank = eligibleStats.findIndex(stat => stat.player.id === player.id) + 1;
   const classification = classifyPlayers(allStats, nights).get(player.id)!;
   let cumulativeProfit = 0;
   const timeline = sortResultsByDate(stats.results, data.nights).map((result) => {
@@ -40,6 +43,8 @@ export default async function Player({ params, searchParams }: {
     { label: 'Win rate', value: pct(stats.winRate) },
   ];
   const detailStats = [
+    { label: 'Total BB up/down', value: bigBlinds(stats.totalBB), help: `Sum of game profit divided by the big blind ($0.10 for $10 cash games, $0.20 for $20 cash games). ${stats.bbNights} qualifying games in the selected filters; $50, unclassified games and tournaments excluded.` },
+    { label: 'Average BB up/down', value: bigBlinds(stats.avgBB), help: 'Total BB divided by qualifying cash games played, including breakeven games. This is per game, not per 100 hands.' },
     { label: 'Total buy-in', value: dollars(stats.totalBuyIn) },
     { label: 'Average profit', value: dollars(stats.avgProfit) },
     { label: 'Median profit', value: dollars(stats.medianProfit) },
@@ -58,7 +63,7 @@ export default async function Player({ params, searchParams }: {
     <header>
       <p className="text-carolina-dark font-semibold">{scopeLabel(filters, seasonIds)}</p>
       <h1 className="text-4xl font-black">{player.displayName}</h1>
-      <p className="text-gray-500">Rank #{stats.rank}</p>
+      <p className="text-gray-500">{rank ? `Rank #${rank}` : `Below the ${filters.minNights}-night minimum for rankings in this scope.`}</p>
     </header>
     <PlayerPageLink leagueId={data.league.id} playerId={playerId} playerName={player.displayName} signedIn={!!user} state={linkState} />
     <section className="grid md:grid-cols-4 gap-4" aria-label="Player highlights">
@@ -85,7 +90,7 @@ export default async function Player({ params, searchParams }: {
       {gameHistory.length === 0 && <p className="text-gray-500">No games match the selected filters.</p>}
       {gameHistory.map((result) => {
         const night = data.nights.find((candidate) => candidate.id === result.nightId)!;
-        return <Link className="flex justify-between border-t py-3" href={`/games/${night.id}?${new URLSearchParams(sp as Record<string, string>)}`} key={night.id}>
+        return <Link className="flex justify-between border-t py-3" href={`/games/${night.id}?${toSearchParams(sp)}`} key={night.id}>
           <span>{dateFmt(night.date)} · {night.title}</span>
           <b className={result.profit >= 0 ? 'text-green-700' : 'text-rose-700'}>{dollars(result.profit)}</b>
         </Link>;
