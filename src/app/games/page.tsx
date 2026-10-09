@@ -3,6 +3,8 @@ import { gameListingRows } from '@/lib/backend/game-listing';
 import { getDataSeasonIds, parseFilters, scopeLabel } from '@/lib/filters/filter-data';
 import GamesListing from './games-listing';
 
+type SearchParams = Record<string, string | string[] | undefined>;
+
 export default async function Games({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const sp = await searchParams;
   const portal = await getPortalData();
