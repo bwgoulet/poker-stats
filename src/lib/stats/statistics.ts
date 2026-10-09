@@ -10,10 +10,11 @@ export function leagueReconciliation(nights: PokerNight[], results: PlayerResult
   }
   let extraBuyInCents = 0;
   let extraCashOutCents = 0;
-  let affectedGames = 0;
-  for (const difference of differences.values()) {
+  const games: { night: PokerNight; difference: number }[] = [];
+  for (const night of nights) {
+    const difference = differences.get(night.id)!;
     if (difference === 0) continue;
-    affectedGames++;
+    games.push({ night, difference: difference / 100 });
     if (difference < 0) extraBuyInCents -= difference;
     else extraCashOutCents += difference;
   }
@@ -21,7 +22,8 @@ export function leagueReconciliation(nights: PokerNight[], results: PlayerResult
     extraBuyIn: extraBuyInCents / 100,
     extraCashOut: extraCashOutCents / 100,
     totalDiscrepancy: (extraBuyInCents + extraCashOutCents) / 100,
-    affectedGames,
+    affectedGames: games.length,
+    games: games.sort((a, b) => b.night.date.localeCompare(a.night.date) || a.night.id.localeCompare(b.night.id)),
   };
 }
 export function sortResultsByDate(results:PlayerResult[], nights:PokerNight[], direction:'asc'|'desc'='asc'){const dates=new Map(nights.map(n=>[n.id,n.date])); const multiplier=direction==='asc'?1:-1; return results.slice().sort((a,b)=>(dates.get(a.nightId)??'').localeCompare(dates.get(b.nightId)??'')*multiplier);}
