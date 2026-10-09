@@ -65,11 +65,12 @@ shows an error; no archived workbook data is served.
 
 1. Create or select a Supabase project. Back up an existing project before applying
    migrations; these migrations create new `public` tables and functions.
-2. Apply both files in `supabase/migrations/` in filename order, using the SQL
-   editor as project administrator or the CLI below. The first migration seeds
-   **UNC Poker**, with ID `00000000-0000-4000-8000-000000000001`; the second adds
-   account profiles, player-page links, and app-wide admin permissions. If the
-   first migration is already applied, apply only the second.
+2. Apply pending files in `supabase/migrations/` in filename order, using the SQL
+   editor as project administrator or the CLI below. Migration 001 seeds
+   **UNC Poker**, with ID `00000000-0000-4000-8000-000000000001`; migration 002 adds
+   account profiles, player-page links, and app-wide admin permissions. Migration
+   007 enables completed games with differing buy-in and cash-out totals.
+   Apply only pending migrations; keep existing historical imports unchanged.
 3. Copy `.env.example` to `.env.local` and set the project's URL and **publishable**
    key. A legacy anon key also works through `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
    Never configure a service-role or secret key in this application. Set the same
@@ -264,8 +265,8 @@ assumptions are recorded in the manifest.
 
 Historical games remain completed to preserve existing standings, even where
 their financial totals require review. The portal flags those records. Editing
-one removes any legacy profit overrides and requires balanced payouts to complete
-it again; saving a draft removes it from standings until it is reconciled.
+one removes any legacy profit overrides. Buy-in and cash-out totals may differ
+when completing it; saving a draft removes it from standings.
 
 An identical rerun skips complete existing games. Changed source records,
 portal-edited records, mismatched provenance, missing result rows, and deleted
@@ -316,13 +317,13 @@ same-origin JSON requests and a server-verified session; the server uses the pub
 key and the caller's cookies.
 
 Completed games require at least two distinct players, positive buy-ins, every
-cash-out entered, and balanced total buy-ins/cash-outs. A blank cash-out in a draft
+cash-out entered. Total buy-ins and cash-outs may differ. A blank cash-out in a draft
 means unknown; zero means no payout. Completed tournaments require a unique
 finishing order from 1 through the participant count. Cash champions retain the
 existing highest-profit tie semantics; tournament championships use first place.
 Both formats store total contributions per player, including rebuys. Fees, rake,
-and carryover are outside this first version; such games need reconciliation
-before completion. Existing `$10`, `$20`, `$50`, `Online`, and `One-off` categories
+counting differences, and carryover may leave a visible balance; they do not block
+completion. Existing `$10`, `$20`, `$50`, `Online`, and `One-off` categories
 remain available. Seasons are derived from league data rather than workbook files.
 
 ## Verify and run
@@ -352,3 +353,37 @@ sign-in/session refresh, profile creation, admin game CRUD without a membership,
 and account/player-page linking in Auth/PostgREST. Confirm a player/viewer is
 read-only and a second private league is invisible to unrelated accounts. These
 project-specific checks require a live Supabase connection.
+
+## Fix completion errors after the mismatch UI is deployed
+
+The app and Supabase database deploy independently. The updated form can show
+**Ready to complete** while the old database `save_game` function still rejects
+differing totals with SQLSTATE `22023`, returned by the API as HTTP 400.
+
+Apply `supabase/migrations/202610090007_allow_unbalanced_completed_games.sql`
+in the connected production project's SQL editor as the project administrator,
+or use `supabase db push` after reviewing its dry run. This replaces only the
+save function; permissions, required payouts, positive buy-ins, tournament
+placements, optimistic versions, and audit writes remain enforced. It does not
+change any existing game or payout. Applying the function update again is safe.
+
+The previous fix reused version `202610090004`, already assigned to the historical
+import. Supabase tracks migrations by numeric version, so that collision could
+prevent the completion fix from applying. Version `202610090007` is unique and
+follows the existing migrations. Keep the historical import at version 004; do
+not mark version 007 applied without running its SQL.
+
+Verify the live function with this read-only query:
+
+```sql
+select
+  position('v_buy_total <> v_cash_total' in pg_get_functiondef(
+    'public.save_game(uuid,jsonb)'::regprocedure)) = 0 as mismatch_check_removed,
+  position('v_missing_cash or v_buy_total <= 0' in pg_get_functiondef(
+    'public.save_game(uuid,jsonb)'::regprocedure)) > 0 as required_results_check_present;
+```
+
+Both values should be `true`. Then retry the existing form without changing its
+amounts (for example, $80 buy-ins and $70 cash-outs). A valid new game should
+return HTTP 201; editing a completed game should return HTTP 200. No app rebuild
+is required if the mismatch UI and relaxed API validation are already deployed.
