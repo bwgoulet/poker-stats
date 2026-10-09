@@ -107,6 +107,37 @@ npx supabase migration repair 202610090001 --status applied
 Do not mark unapplied migrations as applied.
 Keep CLI-generated `supabase/.temp/` and database passwords out of Git.
 
+### Recover from the duplicate migration 004
+
+An earlier main branch had two migrations numbered `202610090004`: the frozen
+historical import and the later game-validation change. The game-validation
+change now uses `202610090007`; the import and corrections keep their original
+versions and SQL. Update your checkout before retrying a push.
+
+If your push failed while recording `202610090004_import_historical_workbooks.sql`
+with `schema_migrations_pkey` / SQLSTATE `23505`, and corrections 005 and admin
+links 006 are still pending, run:
+
+```bash
+npx supabase migration list
+npx supabase migration repair 202610090004 --status reverted
+npx supabase db push --dry-run
+npx supabase db push
+```
+
+The repair removes only the conflicting migration-history entry; it does not
+undo SQL or delete application data. The import commits its own transaction, so
+its data may already exist despite the history error. An identical import rerun
+skips existing records, then records version 004 correctly before applying 005,
+006, and 007. Migration 007 safely replaces the game-saving function even if the
+old conflicting migration already ran.
+
+If corrections 005 have already been applied, do not replay the original import:
+it intentionally rejects corrected or portal-edited history. Check the remote
+history and database state before repairing that case. The frozen import's
+`supabase/imports/202610090004/verify.sql` can confirm an unmodified original
+import; the correction verification is `supabase/imports/202610090005/verify.sql`.
+
 ### Create the first admin
 
 1. Visit `/auth/signup`, create your account, and confirm its email. Alternatively,
