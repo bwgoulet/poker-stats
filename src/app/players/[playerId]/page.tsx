@@ -6,6 +6,8 @@ import { playerStats, sortResultsByDate } from '@/lib/stats/statistics';
 import { classifyPlayers } from '@/lib/stats/player-classification';
 import { buyInUnits, dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
 import { ProfitTimeline } from '@/components/charts/ProfitTimeline';
+import { PlayerPageLink } from '@/components/account/PlayerPageLink';
+import { getCurrentUser, getPlayerLinkState } from '@/lib/backend/repository';
 
 export default async function Player({ params, searchParams }: {
   params: Promise<{ playerId: string }>;
@@ -18,6 +20,7 @@ export default async function Player({ params, searchParams }: {
   const filters = parseFilters(sp, seasonIds);
   const player = data.players.find((candidate) => candidate.id === playerId);
   if (!player) notFound();
+  const [user, linkState] = await Promise.all([getCurrentUser(), getPlayerLinkState(data.league.id, playerId)]);
 
   const nights = filterNights(data.nights, filters);
   const results = filterResults(data.results, data.nights, filters);
@@ -57,6 +60,7 @@ export default async function Player({ params, searchParams }: {
       <h1 className="text-4xl font-black">{player.displayName}</h1>
       <p className="text-gray-500">Rank #{stats.rank}</p>
     </header>
+    <PlayerPageLink leagueId={data.league.id} playerId={playerId} playerName={player.displayName} signedIn={!!user} state={linkState} />
     <section className="grid md:grid-cols-4 gap-4" aria-label="Player highlights">
       {headlineStats.map(({ label, value, help }) => <div className="card p-5" key={label}>
         <p className="text-gray-500" title={help}>{label}{help && <span aria-label={help}> ⓘ</span>}</p>

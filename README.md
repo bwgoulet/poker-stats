@@ -4,7 +4,7 @@
 
 Poker Stats turns our home game's historical Excel workbooks into a searchable analytics application with player profiles, game history, league-wide statistics, head-to-head comparisons, interactive charts, and data-driven player classifications.
 
-The application now includes a Supabase-backed league management portal at `/manage` for game and result CRUD. Once configured, Supabase is the source of truth for league analytics. Without database configuration, the committed workbooks remain available as a read-only archive.
+The application includes a Supabase-backed league management portal at `/manage` for game and result CRUD. Sign up at `/auth/signup` and link your player pages from `/account`. New accounts default to `player`; a project administrator can promote `public.users.role` to `admin` to manage games across leagues. Once configured, Supabase is the source of truth for league analytics. Without database configuration, the committed workbooks remain available as a read-only archive.
 
 See [Backend setup](docs/backend-setup.md) for the schema, authentication and roles, safe historical import, and database validation. All historical records migrate into **UNC Poker**; additional leagues have isolated games, players, and membership.
 

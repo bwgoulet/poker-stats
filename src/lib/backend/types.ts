@@ -1,6 +1,24 @@
 import type { NightType } from '@/types/poker';
 
 export type LeagueRole = 'owner' | 'admin' | 'scorekeeper' | 'viewer';
+export interface AppUser {
+  id: string;
+  email: string | null;
+  displayName: string;
+  role: 'player' | 'admin';
+}
+export interface PlayerLink {
+  leagueId: string;
+  leagueName: string;
+  playerId: string;
+  playerName: string;
+  accessible: boolean;
+}
+export interface PlayerLinkState {
+  linked: boolean;
+  linkedToYou: boolean;
+  yourPlayerId: string | null;
+}
 export interface League {
   id: string;
   slug: string;
@@ -50,7 +68,7 @@ export interface GameInput {
 }
 export interface PortalData {
   configured: boolean;
-  user: { id: string; email: string | null } | null;
+  user: AppUser | null;
   leagues: League[];
   selectedLeagueId: string | null;
   players: ManagedPlayer[];
@@ -59,3 +77,7 @@ export interface PortalData {
 export const UNC_LEAGUE_ID = '00000000-0000-4000-8000-000000000001';
 export const canEdit = (role: LeagueRole | null) => role === 'owner' || role === 'admin' || role === 'scorekeeper';
 export const canAdmin = (role: LeagueRole | null) => role === 'owner' || role === 'admin';
+
+export function effectiveLeagueRole(user: AppUser | null, membership: LeagueRole | null): LeagueRole | null {
+  return membership === 'owner' ? 'owner' : user?.role === 'admin' ? 'admin' : membership;
+}

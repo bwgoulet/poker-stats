@@ -3,7 +3,9 @@ create role anon nologin;
 create role authenticated nologin;
 create role service_role nologin bypassrls;
 create schema auth;
-create table auth.users(id uuid primary key, email text);
+create table auth.users(id uuid primary key, email text, raw_user_meta_data jsonb not null default '{}', email_confirmed_at timestamptz);
+-- Exists before migrations so the profile backfill is exercised too.
+insert into auth.users values ('90000000-0000-4000-8000-000000000001', 'legacy@example.test', '{"full_name":"Legacy Player","role":"admin"}', now());
 create function auth.uid() returns uuid language sql stable as $$
   select nullif(current_setting('request.jwt.claims', true)::jsonb->>'sub', '')::uuid;
 $$;

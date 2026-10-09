@@ -56,3 +56,10 @@ export const createLeagueSchema = z.object({
 }).strict();
 export const updateLeagueSchema = createLeagueSchema.omit({ slug: true });
 export const createPlayerSchema = z.object({ leagueId: z.uuid(), displayName: z.string().trim().min(1).max(100) }).strict();
+export const signupSchema = z.object({
+  email: z.email().max(320),
+  password: z.string().min(8, 'Use at least 8 characters for your password.').max(72),
+  displayName: z.string().trim().min(1).max(100),
+  next: z.string().max(200).optional(),
+}).strict();
+export const playerLinkSchema = z.object({ leagueId: z.uuid(), playerId: identifier }).strict();

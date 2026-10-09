@@ -87,6 +87,7 @@ export function LeagueSwitcher({ configured, leagues, selectedLeagueId, user }: 
       <p className="text-xs text-blue-100/65">{saving || pending ? 'Switching leagues…' : active?.role ? `${active.role.charAt(0).toUpperCase()}${active.role.slice(1)} access` : 'Public statistics'}</p>
     </> : <Link href="/manage" className="block rounded-xl border border-white/20 px-3 py-2.5 text-sm font-semibold text-blue-100 hover:bg-white/10">{user ? 'Create your first league' : 'Sign in to your league'}</Link>}
     {user && <div className="flex items-center justify-between gap-2 border-t border-white/10 pt-3 text-xs text-blue-100/75"><span className="truncate" title={user.email ?? undefined}>{user.email ?? 'Signed in'}</span><button type="button" disabled={saving || pending || signingOut} onClick={() => void signOut()} className="shrink-0 rounded-lg px-2 py-1 font-semibold hover:bg-white/10 disabled:opacity-50">{signingOut ? 'Signing out…' : 'Sign out'}</button></div>}
+    {!user && <div className="flex gap-3 border-t border-white/10 pt-3 text-xs font-semibold text-blue-100"><Link href="/auth/login" className="hover:text-white">Sign in</Link><Link href="/auth/signup" className="hover:text-white">Create account</Link></div>}
     {error && <p className="rounded-lg bg-rose-950/30 px-3 py-2 text-xs text-rose-100" role="alert">{error}</p>}
   </div>;
 }
