@@ -16,7 +16,7 @@ async function bootstrapDatabase(includeHistoricalData = false) {
   for (const migration of readdirSync(resolve('supabase/migrations')).filter((file) => file.endsWith('.sql')).sort()) {
     // Synthetic import tests need an empty league; the committed migration is
     // exercised separately against the complete migration chain below.
-    if (migration === historicalMigration && !includeHistoricalData) continue;
+    if (migration > (includeHistoricalData ? historicalMigration : '202610090003_discord_link_verification.sql')) continue;
     await db.exec(readFileSync(resolve('supabase/migrations', migration), 'utf8'));
   }
   return db;
