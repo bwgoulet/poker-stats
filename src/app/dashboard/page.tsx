@@ -4,9 +4,12 @@ import { getPokerData } from '@/lib/data/poker-repository';
 import {
   filterNights,
   filterResults,
+  getCurrentSeasonId,
+  getDataSeasonIds,
   type GlobalFilters,
   parseFilters,
   scopeLabel,
+  seasonLabel,
 } from '@/lib/filters/filter-data';
 import {
   leagueStats,
@@ -16,6 +19,7 @@ import {
 } from '@/lib/stats/statistics';
 import { ProfitDistribution } from '@/components/charts/ProfitDistribution';
 import { dateFmt, dollars, pct } from '@/lib/formatting/format';
+import { canEdit } from '@/lib/backend/types';
 
 export default async function Dashboard({
   searchParams,
@@ -23,8 +27,9 @@ export default async function Dashboard({
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const sp = await searchParams;
-  const filters = parseFilters(sp);
-  const data = getPokerData();
+  const data = await getPokerData();
+  const seasonIds = getDataSeasonIds(data.nights);
+  const filters = parseFilters(sp, seasonIds);
   const nights = filterNights(data.nights, filters);
   const results = filterResults(data.results, data.nights, filters);
   const league = leagueStats(nights, results);
@@ -41,8 +46,9 @@ export default async function Dashboard({
     (stat) => stat.nightsPlayed >= filters.minNights,
   );
   const params = new URLSearchParams(sp as Record<string, string>);
+  const currentSeason = getCurrentSeasonId(data.nights);
   const snapshotFilters: GlobalFilters = {
-    season: ['fall-2026'],
+    season: currentSeason ? [currentSeason] : [],
     nightType: ['20', '10'],
     minNights: 1,
   };
@@ -62,14 +68,20 @@ export default async function Dashboard({
   return (
     <>
       <header>
-        <p className="text-carolina-dark font-semibold">{scopeLabel(filters)}</p>
-        <h1 className="text-4xl font-black">UNC Poker</h1>
+        <p className="text-carolina-dark font-semibold">{scopeLabel(filters, seasonIds)}</p>
+        <h1 className="text-4xl font-black">{data.league.name}</h1>
         <p className="text-gray-600">
-          A live read-only dashboard built from the league workbooks.
+          {data.source === 'supabase'
+            ? 'Live league statistics from completed games.'
+            : 'Historical league statistics from the original workbooks.'}
         </p>
       </header>
       {nights.length === 0 ? (
-        <div className="card p-10 text-center">No poker nights match this filter.</div>
+        <div className="card p-10 text-center">
+          <h2 className="text-xl font-bold">{!data.league.id ? 'Choose a league to get started' : data.nights.length === 0 ? 'No completed games yet' : 'No poker nights match this filter'}</h2>
+          {!data.league.id && <Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage">Open league management</Link>}
+          {data.nights.length === 0 && canEdit(data.league.role) && <><p className="mt-2 text-gray-600">Complete a game to start building your league statistics.</p><Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage?new=1">Record a game</Link></>}
+        </div>
       ) : (
         <>
           <section className="grid md:grid-cols-4 gap-4">
@@ -134,7 +146,7 @@ export default async function Dashboard({
             <h2 className="text-xl font-black mb-4">League balance</h2>
             <div className="card p-6 md:p-8">
               <p className="text-sm text-gray-700 mb-4">
-                Profit distribution ({scopeLabel(filters).toLowerCase()})
+                Profit distribution ({scopeLabel(filters, seasonIds).toLowerCase()})
               </p>
               <ProfitDistribution
                 rows={playerBalance.map((stat) => ({
@@ -151,7 +163,7 @@ export default async function Dashboard({
             <h2 className="text-xl font-black mb-4">Season snapshot</h2>
             <div className="card p-6 md:p-8">
               <p className="text-sm text-gray-700 mb-4">
-                Profit distribution (Fall ’26 · $20 nights + $10 nights)
+                Profit distribution ({snapshotFilters.season.map(seasonLabel).join(' + ')} · $20 nights + $10 nights)
               </p>
               <ProfitDistribution
                 rows={snapshotBalance.map((stat) => ({

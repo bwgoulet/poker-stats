@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getPokerData } from '@/lib/data/poker-repository';
-import { parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
+import { getDataSeasonIds, parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
 import { playerStats, sortResultsByDate } from '@/lib/stats/statistics';
 import { classifyPlayers } from '@/lib/stats/player-classification';
 import { buyInUnits, dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
@@ -13,8 +13,9 @@ export default async function Player({ params, searchParams }: {
 }) {
   const { playerId } = await params;
   const sp = await searchParams;
-  const filters = parseFilters(sp);
-  const data = getPokerData();
+  const data = await getPokerData();
+  const seasonIds = getDataSeasonIds(data.nights);
+  const filters = parseFilters(sp, seasonIds);
   const player = data.players.find((candidate) => candidate.id === playerId);
   if (!player) notFound();
 
@@ -52,7 +53,7 @@ export default async function Player({ params, searchParams }: {
 
   return <>
     <header>
-      <p className="text-carolina-dark font-semibold">{scopeLabel(filters)}</p>
+      <p className="text-carolina-dark font-semibold">{scopeLabel(filters, seasonIds)}</p>
       <h1 className="text-4xl font-black">{player.displayName}</h1>
       <p className="text-gray-500">Rank #{stats.rank}</p>
     </header>

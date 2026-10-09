@@ -25,9 +25,25 @@ function parseMinNights(value:FilterParam){
   return (MIN_NIGHTS_OPTIONS as readonly number[]).includes(parsed)?parsed:DEFAULT_MIN_NIGHTS;
 }
 
-export function parseFilters(sp:Record<string,FilterParam>):GlobalFilters{return {season:parseMulti(sp.season,getSeasonIds()), nightType:parseMulti(sp.nightType,NIGHT_TYPES,DEFAULT_NIGHT_TYPES), minNights:parseMinNights(sp.minNights)};}
+/** Use the selected league's actual seasons, including seasons added in the portal. */
+export function getDataSeasonIds(nights: readonly PokerNight[]): SeasonId[] {
+  const newestDateBySeason = new Map<SeasonId, string>();
+  for (const night of nights) {
+    const newest = newestDateBySeason.get(night.seasonId);
+    if (!newest || night.date > newest) newestDateBySeason.set(night.seasonId, night.date);
+  }
+  return [...newestDateBySeason].sort(([leftId, leftDate], [rightId, rightDate]) =>
+    rightDate.localeCompare(leftDate) || leftId.localeCompare(rightId),
+  ).map(([seasonId]) => seasonId);
+}
+
+export function getCurrentSeasonId(nights: readonly PokerNight[]): SeasonId | undefined {
+  return getDataSeasonIds(nights)[0];
+}
+
+export function parseFilters(sp:Record<string,FilterParam>, seasonIds: readonly SeasonId[] = getSeasonIds()):GlobalFilters{return {season:parseMulti(sp.season,seasonIds), nightType:parseMulti(sp.nightType,NIGHT_TYPES,DEFAULT_NIGHT_TYPES), minNights:parseMinNights(sp.minNights)};}
 export function filterNights(nights:PokerNight[], f:GlobalFilters){return nights.filter(n=>f.season.includes(n.seasonId)&&f.nightType.includes(n.nightType));}
 export function filterResults(results:PlayerResult[], nights:PokerNight[], f:GlobalFilters){const ids=new Set(filterNights(nights,f).map(n=>n.id)); return results.filter(r=>ids.has(r.nightId));}
 export function seasonLabel(season: SeasonId){const [name,...rest]=season.split('-'); const year=rest.at(-1); return `${name.charAt(0).toUpperCase()}${name.slice(1)}${year ? ` ’${year.slice(-2)}` : ''}`;}
-export function scopeLabel(f:GlobalFilters){const seasons=getSeasonIds(); const s=isAllSelected(f.season,seasons)?'All-time':f.season.map(seasonLabel).join(' + '); const n=isAllSelected(f.nightType,NIGHT_TYPES)?'All night types':f.nightType.map(v=>v==='one-off'?'One-offs':v==='online'?'Online':`$${v} nights`).join(' + '); return `${s} · ${n} · ${f.minNights}+ nights`;
+export function scopeLabel(f:GlobalFilters, seasons: readonly SeasonId[] = getSeasonIds()){const s=isAllSelected(f.season,seasons)?'All-time':f.season.map(seasonLabel).join(' + '); const n=isAllSelected(f.nightType,NIGHT_TYPES)?'All night types':f.nightType.map(v=>v==='one-off'?'One-offs':v==='online'?'Online':`$${v} nights`).join(' + '); return `${s} · ${n} · ${f.minNights}+ nights`;
 }
