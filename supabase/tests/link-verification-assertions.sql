@@ -25,15 +25,18 @@ $$;
 insert into auth.users(id,email,email_confirmed_at,raw_user_meta_data) values
  ('30000000-0000-4000-8000-000000000001','player@test.example',now(),'{"full_name":"Discord Player","role":"admin"}'),
  ('30000000-0000-4000-8000-000000000002','owner@test.example',now(),'{}'),
- ('30000000-0000-4000-8000-000000000003','other@test.example',now(),'{}');
+ ('30000000-0000-4000-8000-000000000003','other@test.example',now(),'{}'),
+ ('30000000-0000-4000-8000-000000000004','admin@test.example',now(),'{}');
 insert into auth.identities(provider_id,user_id,provider) values('123456789012345678','30000000-0000-4000-8000-000000000001','discord');
 insert into public.leagues(id,slug,name,visibility) values('00000000-0000-4000-8000-000000000002','secret','Secret','private');
 insert into public.players(league_id,id,display_name) values
  ('00000000-0000-4000-8000-000000000001','alice','Alice'),
  ('00000000-0000-4000-8000-000000000001','bob','Bob'),
+ ('00000000-0000-4000-8000-000000000001','carol','Carol'),
  ('00000000-0000-4000-8000-000000000002','private','Private');
 insert into public.league_members(league_id,user_id,role) values
- ('00000000-0000-4000-8000-000000000001','30000000-0000-4000-8000-000000000002','owner');
+ ('00000000-0000-4000-8000-000000000001','30000000-0000-4000-8000-000000000002','owner'),
+ ('00000000-0000-4000-8000-000000000001','30000000-0000-4000-8000-000000000004','admin');
 insert into public.player_link_requests(id,league_id,player_id,user_id) values('40000000-0000-4000-8000-000000000001','00000000-0000-4000-8000-000000000002','private','30000000-0000-4000-8000-000000000003');
 set local role authenticated;
 select tests.login('30000000-0000-4000-8000-000000000001');
@@ -74,17 +77,36 @@ select public.claim_player_page('00000000-0000-4000-8000-000000000001','alice');
 select tests.assert('cancelled claim can be resubmitted',(select count(*)=1 from public.player_link_requests where status='pending'));
 select public.cancel_player_link_request(id) from public.player_link_requests where status='pending';
 reset role;
--- Even an owner needs another administrator to verify their own claim.
+-- League owners/admins can review their own requests with the same audit trail.
 set local role authenticated;
 select tests.login('30000000-0000-4000-8000-000000000002');
 select public.claim_player_page('00000000-0000-4000-8000-000000000001','bob');
-select tests.raises('owner cannot self verify',format('select public.review_player_link(%L,true)',(select id from public.player_link_requests where user_id=auth.uid())),'42501');
+select public.review_player_link(id,true) from public.player_link_requests where user_id=auth.uid() and status='pending';
+select tests.assert('owner can self approve with audit',exists(select 1 from public.player_links where user_id=auth.uid() and player_id='bob') and exists(select 1 from public.player_link_requests where user_id=auth.uid() and status='approved' and reviewed_by=auth.uid() and reviewed_at is not null));
+select tests.login('30000000-0000-4000-8000-000000000004');
+select public.claim_player_page('00000000-0000-4000-8000-000000000001','carol');
+select public.review_player_link(id,false) from public.player_link_requests where user_id=auth.uid() and status='pending';
+select tests.assert('league admin can self reject with audit',not exists(select 1 from public.player_links where user_id=auth.uid()) and exists(select 1 from public.player_link_requests where user_id=auth.uid() and status='rejected' and reviewed_by=auth.uid() and reviewed_at is not null));
+select public.claim_player_page('00000000-0000-4000-8000-000000000001','carol');
+select public.review_player_link(id,true) from public.player_link_requests where user_id=auth.uid() and status='pending';
+select tests.assert('league admin can self approve',exists(select 1 from public.player_links where user_id=auth.uid() and player_id='carol'));
+select tests.raises('league admin cannot review another league', $$select public.review_player_link('40000000-0000-4000-8000-000000000001',true)$$,'42501');
 reset role;
 update public.users set role='admin' where id='30000000-0000-4000-8000-000000000003';
 set local role authenticated;
 select tests.login('30000000-0000-4000-8000-000000000003');
-select public.review_player_link(id,true) from public.player_link_requests where status='pending' and user_id<>auth.uid();
-select tests.assert('global admin can independently verify',(select count(*)=1 from public.list_player_link_requests() where status='approved' and user_id='30000000-0000-4000-8000-000000000002'));
+select public.claim_player_page('00000000-0000-4000-8000-000000000001','alice');
+select public.review_player_link(id,true) from public.player_link_requests where status='pending' and user_id=auth.uid();
+select tests.assert('global admin can self approve across leagues', (select count(*)=2 from public.player_links where user_id=auth.uid()) and (select count(*)=2 from public.player_link_requests where user_id=auth.uid() and status='approved' and reviewed_by=auth.uid() and reviewed_at is not null));
+select public.unlink_player_page('00000000-0000-4000-8000-000000000002','private');
+select public.claim_player_page('00000000-0000-4000-8000-000000000002','private');
+select public.review_player_link(id,false) from public.player_link_requests where status='pending' and user_id=auth.uid();
+select tests.assert('global admin can self reject',exists(select 1 from public.player_link_requests where user_id=auth.uid() and league_id='00000000-0000-4000-8000-000000000002' and status='rejected' and reviewed_by=auth.uid()) and not exists(select 1 from public.player_links where league_id='00000000-0000-4000-8000-000000000002'));
+select public.claim_player_page('00000000-0000-4000-8000-000000000002','private');
+reset role;
+update public.users set role='player' where id='30000000-0000-4000-8000-000000000003';
+set local role authenticated;
+select tests.raises('demoted admin cannot self approve',format('select public.review_player_link(%L,true)',(select id from public.player_link_requests where user_id=auth.uid() and status='pending')),'42501');
 reset role;
 set local role anon;
 select tests.raises('anonymous request reader denied','select public.list_player_link_requests()','42501');
