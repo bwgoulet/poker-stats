@@ -86,7 +86,6 @@ export function validateFields(fields: GameFields, players: ManagedPlayer[]) {
   if (fields.results.length < 2) completionErrors.push('Add at least two players before completing this game.');
   if (!buyInCents) completionErrors.push('Enter a positive total buy-in before completing this game.');
   if (missingCashOuts) completionErrors.push(`Enter cash-outs for ${missingCashOuts} ${missingCashOuts === 1 ? 'player' : 'players'} (use 0 for no payout).`);
-  if (buyInCents !== cashOutCents) completionErrors.push('Total cash-outs must equal total buy-ins before completing the game.');
   return { draftErrors, completionErrors, buyInCents, cashOutCents, missingCashOuts };
 }
 

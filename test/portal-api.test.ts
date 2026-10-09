@@ -26,6 +26,14 @@ describe('game mutation boundary', () => {
     expect(response.status).toBe(201);
     expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith('save_game', { p_league_id: leagueId, p_game: game });
   });
+  it('passes mismatched completed totals through without changing payouts', async () => {
+    const completed = { ...game, status: 'completed', results: [
+      { playerId: 'alice', buyInCents: 4000, cashOutCents: 9000, placement: null },
+      { playerId: 'bob', buyInCents: 4000, cashOutCents: 0, placement: null },
+    ] };
+    expect((await POST(request({ leagueId, game: completed }))).status).toBe(201);
+    expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith('save_game', { p_league_id: leagueId, p_game: completed });
+  });
   it('rejects another origin before checking credentials or writing', async () => {
     expect((await POST(request({ leagueId, game }, 'https://unrelated.example'))).status).toBe(403);
     expect(mocks.getUser).not.toHaveBeenCalled(); expect(mocks.rpc).not.toHaveBeenCalled();

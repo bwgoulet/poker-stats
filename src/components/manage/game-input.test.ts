@@ -21,15 +21,23 @@ describe('game editor financial validation', () => {
     expect(result.completionErrors.length).toBeGreaterThan(0);
     expect(toGameInput(game, 'draft', null).results[0].cashOutCents).toBeNull();
   });
-  it('requires exact reconciliation and unique league players', () => {
+  it('allows differing totals and requires unique league players', () => {
     const game = fields();
     expect(validateFields(game, players).completionErrors).toEqual([]);
     game.results[0].cashOut = '20.19';
-    expect(validateFields(game, players).completionErrors).toContain('Total cash-outs must equal total buy-ins before completing the game.');
+    expect(validateFields(game, players).completionErrors).toEqual([]);
     game.results[1].playerId = 'a';
     expect(validateFields(game, players).draftErrors).toContain('Player row 2: this player is already entered.');
     game.results[1].playerId = 'another-league-player';
     expect(validateFields(game, players).draftErrors).toContain('Player row 2: choose a player.');
+  });
+  it.each(['19.20', '21.20', '0'])('allows completion with a cash-out total of %s', cashOut => {
+    const game = fields(); game.results[0].cashOut = cashOut;
+    const result = validateFields(game, players);
+    expect(result.draftErrors).toEqual([]);
+    expect(result.completionErrors).toEqual([]);
+    expect(result.buyInCents).toBe(2020);
+    expect(result.cashOutCents).toBe(moneyToCents(cashOut));
   });
   it('rejects impossible dates and respects server field constraints', () => {
     const game = fields(); game.date = '2026-02-30'; game.seasonId = 'Fall 2026'; game.title = 'x'.repeat(121); game.notes = 'x'.repeat(2001);

@@ -119,7 +119,6 @@ select tests.assert_raises('reject invalid season ID', format('select public.sav
 select tests.assert_raises('reject client supplied provenance', format('select public.save_game(%L,%L::jsonb)','00000000-0000-4000-8000-000000000001',tests.game_payload()||'{"sourceRef":"fake"}'::jsonb), '22023');
 select tests.assert_raises('reject incomplete completed game', format('select public.save_game(%L,%L::jsonb)','00000000-0000-4000-8000-000000000001',tests.game_payload()||'{"results":[]}'::jsonb), '22023');
 select tests.assert_raises('reject unknown completed payout', format('select public.save_game(%L,%L::jsonb)','00000000-0000-4000-8000-000000000001',jsonb_set(tests.game_payload(),'{results,0,cashOutCents}','null')), '22023');
-select tests.assert_raises('reject unbalanced completed game', format('select public.save_game(%L,%L::jsonb)','00000000-0000-4000-8000-000000000001',jsonb_set(tests.game_payload(),'{results,0,cashOutCents}','1900')), '22023');
 select tests.assert_raises('reject fractional cents', format('select public.save_game(%L,%L::jsonb)','00000000-0000-4000-8000-000000000001',jsonb_set(tests.game_payload(),'{results,0,buyInCents}','1.5')), '22023');
 select tests.assert_raises('reject negative cents', format('select public.save_game(%L,%L::jsonb)','00000000-0000-4000-8000-000000000001',jsonb_set(tests.game_payload(),'{results,0,buyInCents}','-1')), '22023');
 select tests.assert_raises('reject overflowing cents', format('select public.save_game(%L,%L::jsonb)','00000000-0000-4000-8000-000000000001',jsonb_set(tests.game_payload(),'{results,0,buyInCents}','2147483648')), '22023');
@@ -141,6 +140,12 @@ select tests.assert_raises('cross league update cannot target another game', for
 
 select tests.login('10000000-0000-4000-8000-000000000005');
 select tests.assert('admin can save games', (public.save_game('00000000-0000-4000-8000-000000000001',tests.game_payload()||'{"status":"draft","results":[]}'::jsonb)->>'version')::integer=1);
+-- Admins can create and edit completed games on either side of the balance.
+select set_config('tests.unbalanced_game_id', public.save_game('00000000-0000-4000-8000-000000000001',jsonb_set(tests.game_payload(),'{results,0,cashOutCents}','1900'))->>'id', true);
+select tests.assert('admin completes game with lower cash-outs', exists(select 1 from public.games where id=current_setting('tests.unbalanced_game_id') and status='completed' and version=1) and (select sum(buy_in_cents)=2000 and sum(cash_out_cents)=1900 from public.game_results where game_id=current_setting('tests.unbalanced_game_id')));
+select tests.assert('admin edits completed game with higher cash-outs', (public.save_game('00000000-0000-4000-8000-000000000001',jsonb_set(tests.game_payload(),'{results,0,cashOutCents}','2100')||jsonb_build_object('id',current_setting('tests.unbalanced_game_id'),'expectedVersion',1))->>'version')::integer=2);
+select tests.assert('mismatched payouts are stored unchanged', (select sum(buy_in_cents)=2000 and sum(cash_out_cents)=2100 from public.game_results where game_id=current_setting('tests.unbalanced_game_id')));
+select tests.assert('admin completes mismatched tournament', (public.save_game('00000000-0000-4000-8000-000000000001',jsonb_set(jsonb_set(jsonb_set(tests.game_payload()||'{"format":"tournament"}'::jsonb,'{results,0,placement}','1'),'{results,1,placement}','2'),'{results,0,cashOutCents}','0'))->>'version')::integer=1);
 select public.update_league('00000000-0000-4000-8000-000000000001','UNC Poker Admin','public');
 select tests.assert('admin can update league', exists(select 1 from public.leagues where slug='unc-poker' and name='UNC Poker Admin'));
 select tests.assert_raises('admin cannot delete league', $$select public.delete_league('00000000-0000-4000-8000-000000000001')$$, '42501');
