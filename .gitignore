@@ -3,6 +3,7 @@ node_modules
 tsconfig.tsbuildinfo
 .env*.local
 work/
+supabase/.temp/
 .env
 .env.*
 !.env.example

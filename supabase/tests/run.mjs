@@ -14,10 +14,14 @@ try {
   for (const migration of migrations) {
     await db.exec(await readFile(new URL(`migrations/${migration}`, root), 'utf8'));
   }
-  const results = await db.exec(await readFile(new URL('tests/assertions.sql', root), 'utf8'));
-  const passed = results.flatMap(({ rows }) => rows).find((row) => 'passed_assertions' in row);
-  if (!passed) throw new Error('SQL tests did not produce their assertion count.');
-  console.log(`Postgres integration tests passed: ${passed.passed_assertions} assertions (JWT roles, RLS, tenant isolation, validation, atomic RPCs, optimistic locking, audit).`);
+  let total = 0;
+  for (const suite of ['assertions.sql', 'user-assertions.sql']) {
+    const results = await db.exec(await readFile(new URL(`tests/${suite}`, root), 'utf8'));
+    const passed = results.flatMap(({ rows }) => rows).find((row) => 'passed_assertions' in row);
+    if (!passed) throw new Error(`${suite} did not produce its assertion count.`);
+    total += Number(passed.passed_assertions);
+  }
+  console.log(`Postgres integration tests passed: ${total} assertions (JWT roles, RLS, tenant isolation, atomic games, audit, user profiles, admin promotion, player claims).`);
 } finally {
   await db.close();
 }

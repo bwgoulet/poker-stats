@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { normalizeWorkbooks } from '@/lib/data/normalize-workbooks';
 import type { NightType, PlayerResult, ValidationIssue } from '@/types/poker';
 import { serverSupabase, supabaseConfig } from './supabase';
-import { UNC_LEAGUE_ID, type League, type LeagueRole, type ManagedGame, type ManagedPlayer, type ManagedResult, type PortalData } from './types';
+import { UNC_LEAGUE_ID, effectiveLeagueRole, type AppUser, type League, type LeagueRole, type ManagedGame, type ManagedPlayer, type ManagedResult, type PlayerLink, type PlayerLinkState, type PortalData } from './types';
 
 export const LEAGUE_COOKIE = 'poker-active-league';
 const unc: League = { id: UNC_LEAGUE_ID, slug: 'unc-poker', name: 'UNC Poker', currency: 'USD', timezone: 'America/New_York', visibility: 'public', role: null };
@@ -24,6 +24,36 @@ interface PlayerRow { id: string; display_name: string; aliases: string[] }
 interface GameRow { id: string; league_id: string; title: string; date: string; season_id: string; night_type: NightType; format: 'cash' | 'tournament'; status: 'draft' | 'completed'; notes: string | null; version: number; source_ref: string | null; results: ResultRow[] }
 interface ResultRow { game_id: string; player_id: string; buy_in_cents: number; cash_out_cents: number | null; placement: number | null; legacy_profit_cents: number | null }
 
+export const getCurrentUser = cache(async (): Promise<AppUser | null> => {
+  if (!supabaseConfig()) return null;
+  const client = await serverSupabase();
+  const { data: auth, error } = await client.auth.getUser();
+  if (error && error.name !== 'AuthSessionMissingError'
+    && !(error.name === 'AuthApiError' && [400, 401, 403].includes(error.status ?? 0))) throw new Error('Unable to verify your session.');
+  if (!auth.user) return null;
+  const { data: profile, error: profileError } = await client.from('users').select('id,email,display_name,role').eq('id', auth.user.id).single();
+  if (profileError || !profile || !['player', 'admin'].includes(profile.role)) throw new Error('Unable to load your account profile. Apply the user profiles migration.');
+  return { id: profile.id, email: profile.email, displayName: profile.display_name, role: profile.role };
+});
+
+export const getMyPlayerLinks = cache(async (): Promise<PlayerLink[]> => {
+  const user = await getCurrentUser();
+  if (!user) return [];
+  const client = await serverSupabase();
+  const rows = await readAll<{ league_id: string; player_id: string; league: { name: string } | null; player: { display_name: string } | null }>(() =>
+    client.from('player_links').select('league_id,player_id,league:leagues(name),player:players(display_name)').eq('user_id', user.id).order('league_id'));
+  return rows.map(row => ({ leagueId: row.league_id, playerId: row.player_id,
+    leagueName: row.league?.name ?? 'Private league', playerName: row.player?.display_name ?? 'Linked player',
+    accessible: !!row.league && !!row.player }));
+});
+
+export const getPlayerLinkState = cache(async (leagueId: string, playerId: string): Promise<PlayerLinkState | null> => {
+  if (!supabaseConfig()) return null;
+  const { data, error } = await (await serverSupabase()).rpc('get_player_link_state', { p_league_id: leagueId, p_player_id: playerId });
+  if (error) throw new Error('Unable to load the player page link.');
+  return data as PlayerLinkState;
+});
+
 export const getPortalData = cache(async (requestedLeagueId?: string): Promise<PortalData> => {
   if (!supabaseConfig()) {
     const data = getWorkbookData();
@@ -41,15 +71,12 @@ export const getPortalData = cache(async (requestedLeagueId?: string): Promise<P
     };
   }
   const client = await serverSupabase();
-  const { data: auth, error: authError } = await client.auth.getUser();
-  // A missing session is expected for public analytics; invalid sessions never grant writes.
-  if (authError && !['AuthSessionMissingError', 'AuthApiError'].includes(authError.name)) throw new Error('Unable to verify your session.');
-  const user = auth.user ? { id: auth.user.id, email: auth.user.email ?? null } : null;
+  const user = await getCurrentUser();
   const [leagueRows, memberships] = await Promise.all([
     readAll<LeagueRow>(() => client.from('leagues').select('*').order('name').order('id')),
     user ? readAll<{ league_id: string; role: LeagueRole }>(() => client.from('league_members').select('league_id,role').eq('user_id', user.id).order('league_id')) : Promise.resolve([]),
   ]);
-  const leagues = leagueRows.map(row => ({ ...row, role: memberships.find(member => member.league_id === row.id)?.role ?? null }));
+  const leagues = leagueRows.map(row => ({ ...row, role: effectiveLeagueRole(user, memberships.find(member => member.league_id === row.id)?.role ?? null) }));
   const selected = requestedLeagueId ?? (await cookies()).get(LEAGUE_COOKIE)?.value;
   const league = leagues.find(row => row.id === selected)
     ?? (requestedLeagueId ? undefined : leagues.find(row => row.id === UNC_LEAGUE_ID) ?? leagues[0]);

@@ -5,6 +5,6 @@ import { GlobalFilterBar } from '@/components/filters/GlobalFilterBar';
 
 export function AnalyticsFilters({ seasonIds, currentSeason }: { seasonIds: string[]; currentSeason?: string }) {
   const pathname = usePathname();
-  if (pathname.startsWith('/manage') || pathname.startsWith('/auth') || seasonIds.length === 0) return null;
+  if (pathname.startsWith('/manage') || pathname.startsWith('/auth') || pathname.startsWith('/account') || seasonIds.length === 0) return null;
   return <GlobalFilterBar seasonIds={seasonIds} currentSeason={currentSeason} />;
 }
