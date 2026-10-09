@@ -22,16 +22,8 @@ export function discoverWorkbooks(dataDir = DATA_DIR): WorkbookSource[] {
     .sort((a, b) => a.seasonId.localeCompare(b.seasonId));
 }
 
-export function getSeasonIds(): SeasonId[] {
-  return discoverWorkbooks().map(({ seasonId }) => seasonId);
-}
-
-function workbookPath(file: string) {
-  return path.join(DATA_DIR, file);
-}
-
-function readWorkbook(file: string) {
-  const filePath = workbookPath(file);
+function readWorkbook(file: string, dataDir: string) {
+  const filePath = path.join(dataDir, file);
 
   try {
     fs.accessSync(filePath, fs.constants.R_OK);
@@ -39,7 +31,7 @@ function readWorkbook(file: string) {
     const detail = error instanceof Error ? error.message : String(error);
     throw new Error(
       `Unable to read workbook "${file}" at ${filePath}. ` +
-        'Make sure you are running the app from the repository root and that the data/*.xlsx files exist locally. ' +
+        'Provide the directory containing your archived season workbooks. ' +
         `Original error: ${detail}`,
     );
   }
@@ -48,10 +40,10 @@ function readWorkbook(file: string) {
   return XLSX.read(workbookBuffer, { cellDates: true, cellFormula: true, type: 'buffer' });
 }
 
-export function loadWorkbooks() {
-  return discoverWorkbooks().map((workbook) => ({
+export function loadWorkbooks(dataDir = DATA_DIR) {
+  return discoverWorkbooks(dataDir).map((workbook) => ({
     ...workbook,
-    path: workbookPath(workbook.file),
-    workbook: readWorkbook(workbook.file),
+    path: path.join(dataDir, workbook.file),
+    workbook: readWorkbook(workbook.file, dataDir),
   }));
 }

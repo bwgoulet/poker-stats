@@ -71,9 +71,7 @@ export default async function Dashboard({
         <p className="text-carolina-dark font-semibold">{scopeLabel(filters, seasonIds)}</p>
         <h1 className="text-4xl font-black">{data.league.name}</h1>
         <p className="text-gray-600">
-          {data.source === 'supabase'
-            ? 'Live league statistics from completed games.'
-            : 'Historical league statistics from the original workbooks.'}
+          Live league statistics from completed games.
         </p>
       </header>
       {nights.length === 0 ? (

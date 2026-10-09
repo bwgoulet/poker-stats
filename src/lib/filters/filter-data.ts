@@ -1,5 +1,4 @@
 import { NightType, PokerNight, SeasonId, PlayerResult } from '@/types/poker';
-import { getSeasonIds } from '@/lib/data/load-workbooks';
 
 type FilterParam = string | string[] | undefined;
 export type MultiFilterValue<T extends string> = T[];
@@ -41,9 +40,9 @@ export function getCurrentSeasonId(nights: readonly PokerNight[]): SeasonId | un
   return getDataSeasonIds(nights)[0];
 }
 
-export function parseFilters(sp:Record<string,FilterParam>, seasonIds: readonly SeasonId[] = getSeasonIds()):GlobalFilters{return {season:parseMulti(sp.season,seasonIds), nightType:parseMulti(sp.nightType,NIGHT_TYPES,DEFAULT_NIGHT_TYPES), minNights:parseMinNights(sp.minNights)};}
+export function parseFilters(sp:Record<string,FilterParam>, seasonIds: readonly SeasonId[] = []):GlobalFilters{return {season:parseMulti(sp.season,seasonIds), nightType:parseMulti(sp.nightType,NIGHT_TYPES,DEFAULT_NIGHT_TYPES), minNights:parseMinNights(sp.minNights)};}
 export function filterNights(nights:PokerNight[], f:GlobalFilters){return nights.filter(n=>f.season.includes(n.seasonId)&&f.nightType.includes(n.nightType));}
 export function filterResults(results:PlayerResult[], nights:PokerNight[], f:GlobalFilters){const ids=new Set(filterNights(nights,f).map(n=>n.id)); return results.filter(r=>ids.has(r.nightId));}
 export function seasonLabel(season: SeasonId){const [name,...rest]=season.split('-'); const year=rest.at(-1); return `${name.charAt(0).toUpperCase()}${name.slice(1)}${year ? ` ’${year.slice(-2)}` : ''}`;}
-export function scopeLabel(f:GlobalFilters, seasons: readonly SeasonId[] = getSeasonIds()){const s=isAllSelected(f.season,seasons)?'All-time':f.season.map(seasonLabel).join(' + '); const n=isAllSelected(f.nightType,NIGHT_TYPES)?'All night types':f.nightType.map(v=>v==='one-off'?'One-offs':v==='online'?'Online':`$${v} nights`).join(' + '); return `${s} · ${n} · ${f.minNights}+ nights`;
+export function scopeLabel(f:GlobalFilters, seasons: readonly SeasonId[] = []){const s=isAllSelected(f.season,seasons)?'All-time':f.season.map(seasonLabel).join(' + '); const n=isAllSelected(f.nightType,NIGHT_TYPES)?'All night types':f.nightType.map(v=>v==='one-off'?'One-offs':v==='online'?'Online':`$${v} nights`).join(' + '); return `${s} · ${n} · ${f.minNights}+ nights`;
 }

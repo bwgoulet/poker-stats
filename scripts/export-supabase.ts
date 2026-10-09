@@ -7,19 +7,21 @@ import { buildWorkbookVerificationSql } from '../src/lib/backend/verify-workbook
 import { discoverWorkbooks } from '../src/lib/data/load-workbooks';
 import { normalizeWorkbooks } from '../src/lib/data/normalize-workbooks';
 
-const { values } = parseArgs({ options: { 'output-dir': { type: 'string', default: 'work' }, help: { type: 'boolean', short: 'h' } } });
+const { values } = parseArgs({ options: { 'input-dir': { type: 'string' }, 'output-dir': { type: 'string', default: 'work' }, help: { type: 'boolean', short: 'h' } } });
 if (values.help) {
-  console.log('Usage: npm run db:export -- [--output-dir work]\n\nExports workbook data to supabase-import.sql, supabase-import-manifest.json, and supabase-verify.sql.\nDoes not connect to Supabase or perform database writes.');
+  console.log('Usage: npm run db:export -- --input-dir /path/to/archive [--output-dir work]\n\nExports archived workbook data to supabase-import.sql, supabase-import-manifest.json, and supabase-verify.sql.\nDoes not connect to Supabase or perform database writes.');
 } else {
-  const sources = discoverWorkbooks().map((source) => ({
+  if (!values['input-dir']) throw new Error('Provide --input-dir with the directory containing the archived workbooks.');
+  const inputDir = resolve(values['input-dir']);
+  const sources = discoverWorkbooks(inputDir).map((source) => ({
     ...source,
-    sha256: createHash('sha256').update(readFileSync(resolve('data', source.file))).digest('hex'),
+    sha256: createHash('sha256').update(readFileSync(resolve(inputDir, source.file))).digest('hex'),
   }));
-  if (!sources.length) throw new Error('No season workbooks found in data/. Nothing was exported.');
-  const imported = buildWorkbookImport(normalizeWorkbooks(), { sources });
+  if (!sources.length) throw new Error('No season workbooks found in the archive directory. Nothing was exported.');
+  const imported = buildWorkbookImport(normalizeWorkbooks(inputDir), { sources });
   const verificationSql = buildWorkbookVerificationSql(imported);
   for (const source of sources) {
-    const currentHash = createHash('sha256').update(readFileSync(resolve('data', source.file))).digest('hex');
+    const currentHash = createHash('sha256').update(readFileSync(resolve(inputDir, source.file))).digest('hex');
     if (currentHash !== source.sha256) throw new Error(`Workbook ${source.file} changed during export. Run the export again.`);
   }
   const directory = resolve(values['output-dir']!);

@@ -30,7 +30,7 @@ it('does not hide an Auth service failure as a signed-out session', async () => 
   fixtures.getUser.mockResolvedValue({ data: { user: null }, error: { name: 'AuthApiError', status: 503 } });
   await expect(getCurrentUser()).rejects.toThrow('verify your session');
 });
-it('keeps the read-only archive usable without Supabase', async () => {
+it('does not contact Auth when database configuration is missing', async () => {
   fixtures.configured = false;
   expect(await getCurrentUser()).toBeNull(); expect(fixtures.getUser).not.toHaveBeenCalled();
 });

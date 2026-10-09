@@ -1,2 +1,2 @@
 import type { NextConfig } from 'next';
-export default { transpilePackages: ['xlsx'] } satisfies NextConfig;
+export default {} satisfies NextConfig;

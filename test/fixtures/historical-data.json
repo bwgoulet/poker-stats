@@ -1,0 +1,7393 @@
+{
+  "players": [
+    {
+      "id": "aidan-pirc",
+      "displayName": "Aidan Pirc",
+      "aliases": [
+        "Aidan Pirc"
+      ]
+    },
+    {
+      "id": "aiden",
+      "displayName": "Aiden",
+      "aliases": [
+        "Aiden"
+      ]
+    },
+    {
+      "id": "avery",
+      "displayName": "Avery",
+      "aliases": [
+        "Avery"
+      ]
+    },
+    {
+      "id": "ben",
+      "displayName": "Ben",
+      "aliases": [
+        "Ben"
+      ]
+    },
+    {
+      "id": "brett",
+      "displayName": "Brett",
+      "aliases": [
+        "Brett"
+      ]
+    },
+    {
+      "id": "caleb",
+      "displayName": "Caleb",
+      "aliases": [
+        "Caleb"
+      ]
+    },
+    {
+      "id": "calen",
+      "displayName": "Calen",
+      "aliases": [
+        "Calen"
+      ]
+    },
+    {
+      "id": "cam",
+      "displayName": "Cam",
+      "aliases": [
+        "Cam"
+      ]
+    },
+    {
+      "id": "charlie",
+      "displayName": "Charlie",
+      "aliases": [
+        "Charlie"
+      ]
+    },
+    {
+      "id": "choliver",
+      "displayName": "Choliver",
+      "aliases": [
+        "Choliver"
+      ]
+    },
+    {
+      "id": "chris",
+      "displayName": "Chris",
+      "aliases": [
+        "Chris"
+      ]
+    },
+    {
+      "id": "chris-s",
+      "displayName": "Chris S",
+      "aliases": [
+        "Chris S"
+      ]
+    },
+    {
+      "id": "connor",
+      "displayName": "Connor",
+      "aliases": [
+        "Connor"
+      ]
+    },
+    {
+      "id": "donovan",
+      "displayName": "Donovan",
+      "aliases": [
+        "Donovan"
+      ]
+    },
+    {
+      "id": "drew",
+      "displayName": "Drew",
+      "aliases": [
+        "Drew"
+      ]
+    },
+    {
+      "id": "favor",
+      "displayName": "Favor",
+      "aliases": [
+        "Favor"
+      ]
+    },
+    {
+      "id": "gage",
+      "displayName": "Gage",
+      "aliases": [
+        "Gage"
+      ]
+    },
+    {
+      "id": "grace",
+      "displayName": "Grace",
+      "aliases": [
+        "Grace"
+      ]
+    },
+    {
+      "id": "jack",
+      "displayName": "Jack",
+      "aliases": [
+        "Jack"
+      ]
+    },
+    {
+      "id": "jackson",
+      "displayName": "Jackson",
+      "aliases": [
+        "Jackson"
+      ]
+    },
+    {
+      "id": "jake",
+      "displayName": "Jake",
+      "aliases": [
+        "Jake"
+      ]
+    },
+    {
+      "id": "james",
+      "displayName": "James",
+      "aliases": [
+        "James"
+      ]
+    },
+    {
+      "id": "joey",
+      "displayName": "Joey",
+      "aliases": [
+        "Joey"
+      ]
+    },
+    {
+      "id": "johnny",
+      "displayName": "Johnny 😎",
+      "aliases": [
+        "Johnny 😎"
+      ]
+    },
+    {
+      "id": "josh",
+      "displayName": "Josh",
+      "aliases": [
+        "Josh"
+      ]
+    },
+    {
+      "id": "jp",
+      "displayName": "JP",
+      "aliases": [
+        "JP"
+      ]
+    },
+    {
+      "id": "killian",
+      "displayName": "Killian",
+      "aliases": [
+        "Killian"
+      ]
+    },
+    {
+      "id": "liv",
+      "displayName": "Liv",
+      "aliases": [
+        "Liv"
+      ]
+    },
+    {
+      "id": "louis",
+      "displayName": "Louis",
+      "aliases": [
+        "Louis"
+      ]
+    },
+    {
+      "id": "lucas",
+      "displayName": "Lucas",
+      "aliases": [
+        "Lucas"
+      ]
+    },
+    {
+      "id": "maggie",
+      "displayName": "Maggie",
+      "aliases": [
+        "Maggie"
+      ]
+    },
+    {
+      "id": "maria",
+      "displayName": "Maria",
+      "aliases": [
+        "Maria"
+      ]
+    },
+    {
+      "id": "mason",
+      "displayName": "Mason",
+      "aliases": [
+        "Mason"
+      ]
+    },
+    {
+      "id": "matthew",
+      "displayName": "Matthew",
+      "aliases": [
+        "Matthew"
+      ]
+    },
+    {
+      "id": "max",
+      "displayName": "Max",
+      "aliases": [
+        "Max"
+      ]
+    },
+    {
+      "id": "michael",
+      "displayName": "Michael",
+      "aliases": [
+        "Michael"
+      ]
+    },
+    {
+      "id": "nathan",
+      "displayName": "Nathan",
+      "aliases": [
+        "Nathan"
+      ]
+    },
+    {
+      "id": "owen",
+      "displayName": "Owen",
+      "aliases": [
+        "Owen"
+      ]
+    },
+    {
+      "id": "parag",
+      "displayName": "Parag",
+      "aliases": [
+        "Parag"
+      ]
+    },
+    {
+      "id": "raghav",
+      "displayName": "Raghav",
+      "aliases": [
+        "Raghav"
+      ]
+    },
+    {
+      "id": "ryan",
+      "displayName": "Ryan",
+      "aliases": [
+        "Ryan"
+      ]
+    },
+    {
+      "id": "sam",
+      "displayName": "Sam",
+      "aliases": [
+        "Sam"
+      ]
+    },
+    {
+      "id": "stone",
+      "displayName": "Stone",
+      "aliases": [
+        "Stone"
+      ]
+    },
+    {
+      "id": "tim",
+      "displayName": "Tim",
+      "aliases": [
+        "Tim"
+      ]
+    },
+    {
+      "id": "tyler",
+      "displayName": "Tyler",
+      "aliases": [
+        "Tyler"
+      ]
+    },
+    {
+      "id": "william",
+      "displayName": "William",
+      "aliases": [
+        "William"
+      ]
+    },
+    {
+      "id": "zach",
+      "displayName": "Zach",
+      "aliases": [
+        "Zach"
+      ]
+    },
+    {
+      "id": "zack",
+      "displayName": "Zack",
+      "aliases": [
+        "Zack"
+      ]
+    },
+    {
+      "id": "zimmy",
+      "displayName": "Zimmy",
+      "aliases": [
+        "Zimmy"
+      ]
+    }
+  ],
+  "nights": [
+    {
+      "id": "fall-2025-10-2025-08-27",
+      "date": "2025-08-27",
+      "title": "$10 night · 2025-08-27",
+      "seasonId": "fall-2025",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-20-2025-09-03",
+      "date": "2025-09-03",
+      "title": "$20 night · 2025-09-03",
+      "seasonId": "fall-2025",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-10-2025-09-10",
+      "date": "2025-09-10",
+      "title": "$10 night · 2025-09-10",
+      "seasonId": "fall-2025",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-20-2025-09-17",
+      "date": "2025-09-17",
+      "title": "$20 night · 2025-09-17",
+      "seasonId": "fall-2025",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-10-2025-09-22",
+      "date": "2025-09-22",
+      "title": "$10 night · 2025-09-22",
+      "seasonId": "fall-2025",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-20-2025-10-01",
+      "date": "2025-10-01",
+      "title": "$20 night · 2025-10-01",
+      "seasonId": "fall-2025",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-one-off-2025-10-03",
+      "date": "2025-10-03",
+      "title": "One-off · 2025-10-03",
+      "seasonId": "fall-2025",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2025-10-2025-10-07",
+      "date": "2025-10-07",
+      "title": "$10 night · 2025-10-07",
+      "seasonId": "fall-2025",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-one-off-2025-10-10",
+      "date": "2025-10-10",
+      "title": "One-off · 2025-10-10",
+      "seasonId": "fall-2025",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2025-20-2025-10-16",
+      "date": "2025-10-16",
+      "title": "$20 night · 2025-10-16",
+      "seasonId": "fall-2025",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-10-2025-10-23",
+      "date": "2025-10-23",
+      "title": "$10 night · 2025-10-23",
+      "seasonId": "fall-2025",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-one-off-2025-10-27",
+      "date": "2025-10-27",
+      "title": "One-off · 2025-10-27",
+      "seasonId": "fall-2025",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2025-20-2025-11-05",
+      "date": "2025-11-05",
+      "title": "$20 night · 2025-11-05",
+      "seasonId": "fall-2025",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-10-2025-11-13",
+      "date": "2025-11-13",
+      "title": "$10 night · 2025-11-13",
+      "seasonId": "fall-2025",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-20-2025-11-20",
+      "date": "2025-11-20",
+      "title": "$20 night · 2025-11-20",
+      "seasonId": "fall-2025",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-10-2025-11-24",
+      "date": "2025-11-24",
+      "title": "$10 night · 2025-11-24",
+      "seasonId": "fall-2025",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "fall-2025-one-off-2025-12-07",
+      "date": "2025-12-07",
+      "title": "One-off · 2025-12-07",
+      "seasonId": "fall-2025",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2025-one-off-2025-12-12",
+      "date": "2025-12-12",
+      "title": "One-off · 2025-12-12",
+      "seasonId": "fall-2025",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "spring-2026-20-2026-01-07",
+      "date": "2026-01-07",
+      "title": "$20 night · 2026-01-07",
+      "seasonId": "spring-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-10-2026-01-14",
+      "date": "2026-01-14",
+      "title": "$10 night · 2026-01-14",
+      "seasonId": "spring-2026",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-one-off-2026-01-16",
+      "date": "2026-01-16",
+      "title": "One-off · 2026-01-16",
+      "seasonId": "spring-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "spring-2026-50-2026-01-21",
+      "date": "2026-01-21",
+      "title": "$50 night · 2026-01-21",
+      "seasonId": "spring-2026",
+      "nightType": "50",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-10-2026-01-28",
+      "date": "2026-01-28",
+      "title": "$10 night · 2026-01-28",
+      "seasonId": "spring-2026",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-one-off-2026-01-31",
+      "date": "2026-01-31",
+      "title": "One-off · 2026-01-31",
+      "seasonId": "spring-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "spring-2026-20-2026-02-04",
+      "date": "2026-02-04",
+      "title": "$20 night · 2026-02-04",
+      "seasonId": "spring-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-10-2026-02-11",
+      "date": "2026-02-11",
+      "title": "$10 night · 2026-02-11",
+      "seasonId": "spring-2026",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-50-2026-02-13",
+      "date": "2026-02-13",
+      "title": "$50 night · 2026-02-13",
+      "seasonId": "spring-2026",
+      "nightType": "50",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-20-2026-02-18",
+      "date": "2026-02-18",
+      "title": "$20 night · 2026-02-18",
+      "seasonId": "spring-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-10-2026-02-25",
+      "date": "2026-02-25",
+      "title": "$10 night · 2026-02-25",
+      "seasonId": "spring-2026",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-20-2026-03-05",
+      "date": "2026-03-05",
+      "title": "$20 night · 2026-03-05",
+      "seasonId": "spring-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-10-2026-03-12",
+      "date": "2026-03-12",
+      "title": "$10 night · 2026-03-12",
+      "seasonId": "spring-2026",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-20-2026-03-26",
+      "date": "2026-03-26",
+      "title": "$20 night · 2026-03-26",
+      "seasonId": "spring-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-10-2026-04-01",
+      "date": "2026-04-01",
+      "title": "$10 night · 2026-04-01",
+      "seasonId": "spring-2026",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-20-2026-04-08",
+      "date": "2026-04-08",
+      "title": "$20 night · 2026-04-08",
+      "seasonId": "spring-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-10-2026-04-15",
+      "date": "2026-04-15",
+      "title": "$10 night · 2026-04-15",
+      "seasonId": "spring-2026",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-20-2026-04-22",
+      "date": "2026-04-22",
+      "title": "$20 night · 2026-04-22",
+      "seasonId": "spring-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "spring-2026-one-off-2026-04-28",
+      "date": "2026-04-28",
+      "title": "One-off · 2026-04-28",
+      "seasonId": "spring-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "spring-2026-50-2026-05-03",
+      "date": "2026-05-03",
+      "title": "$50 night · 2026-05-03",
+      "seasonId": "spring-2026",
+      "nightType": "50",
+      "notes": ""
+    },
+    {
+      "id": "summer-2026-10-2026-06-05",
+      "date": "2026-06-05",
+      "title": "$10 night · 2026-06-05",
+      "seasonId": "summer-2026",
+      "nightType": "10",
+      "notes": ""
+    },
+    {
+      "id": "summer-2026-20-2026-06-30",
+      "date": "2026-06-30",
+      "title": "$20 night · 2026-06-30",
+      "seasonId": "summer-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "summer-2026-20-2026-07-14",
+      "date": "2026-07-14",
+      "title": "$20 night · 2026-07-14",
+      "seasonId": "summer-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "summer-2026-20-2026-07-18",
+      "date": "2026-07-18",
+      "title": "$20 night · 2026-07-18",
+      "seasonId": "summer-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "summer-2026-20-2026-07-28",
+      "date": "2026-07-28",
+      "title": "$20 night · 2026-07-28",
+      "seasonId": "summer-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "summer-2026-20-2026-08-11",
+      "date": "2026-08-11",
+      "title": "$20 night · 2026-08-11",
+      "seasonId": "summer-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "summer-2026-20-2026-08-16",
+      "date": "2026-08-16",
+      "title": "$20 night · 2026-08-16",
+      "seasonId": "summer-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-20-2026-08-19",
+      "date": "2026-08-19",
+      "title": "$20 night · 2026-08-19",
+      "seasonId": "fall-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-one-off-2026-08-20",
+      "date": "2026-08-20",
+      "title": "One-off · 2026-08-20",
+      "seasonId": "fall-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2026-20-2026-08-26",
+      "date": "2026-08-26",
+      "title": "$20 night · 2026-08-26",
+      "seasonId": "fall-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-one-off-2026-08-30",
+      "date": "2026-08-30",
+      "title": "One-off · 2026-08-30",
+      "seasonId": "fall-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2026-20-2026-09-02",
+      "date": "2026-09-02",
+      "title": "$20 night · 2026-09-02",
+      "seasonId": "fall-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-03",
+      "date": "2026-09-03",
+      "title": "One-off · 2026-09-03",
+      "seasonId": "fall-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2026-20-2026-09-09",
+      "date": "2026-09-09",
+      "title": "$20 night · 2026-09-09",
+      "seasonId": "fall-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-20-2026-09-16",
+      "date": "2026-09-16",
+      "title": "$20 night · 2026-09-16",
+      "seasonId": "fall-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-20",
+      "date": "2026-09-20",
+      "title": "One-off · 2026-09-20",
+      "seasonId": "fall-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2026-20-2026-09-23",
+      "date": "2026-09-23",
+      "title": "$20 night · 2026-09-23",
+      "seasonId": "fall-2026",
+      "nightType": "20",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-26",
+      "date": "2026-09-26",
+      "title": "One-off · 2026-09-26",
+      "seasonId": "fall-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-27",
+      "date": "2026-09-27",
+      "title": "One-off · 2026-09-27",
+      "seasonId": "fall-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2026-online-2026-09-27",
+      "date": "2026-09-27",
+      "title": "Online · 2026-09-27",
+      "seasonId": "fall-2026",
+      "nightType": "online",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-one-off-2026-09-30",
+      "date": "2026-09-30",
+      "title": "One-off · 2026-09-30",
+      "seasonId": "fall-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2026-50-2026-10-04",
+      "date": "2026-10-04",
+      "title": "$50 night · 2026-10-04",
+      "seasonId": "fall-2026",
+      "nightType": "50",
+      "notes": ""
+    },
+    {
+      "id": "fall-2026-one-off-2026-10-05",
+      "date": "2026-10-05",
+      "title": "One-off · 2026-10-05",
+      "seasonId": "fall-2026",
+      "nightType": "one-off",
+      "notes": "Excluded from workbook totals"
+    },
+    {
+      "id": "fall-2026-20-2026-10-06",
+      "date": "2026-10-06",
+      "title": "$20 night · 2026-10-06",
+      "seasonId": "fall-2026",
+      "nightType": "20",
+      "notes": ""
+    }
+  ],
+  "results": [
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 76.1,
+      "profit": 66.1,
+      "sourceName": "Max",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "jake",
+      "buyIn": 10,
+      "cashOut": 50.6,
+      "profit": 40.6,
+      "sourceName": "Jake",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 26.1,
+      "profit": 6.1,
+      "sourceName": "Aiden",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "favor",
+      "buyIn": 40,
+      "cashOut": 42.1,
+      "profit": 2.1,
+      "sourceName": "Favor",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "william",
+      "buyIn": 10,
+      "cashOut": 9.85,
+      "profit": -0.15,
+      "sourceName": "William",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "matthew",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Matthew",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "raghav",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Raghav",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Drew",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "avery",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Avery",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-10-2025-08-27",
+      "playerId": "stone",
+      "buyIn": 35,
+      "cashOut": 0,
+      "profit": -35,
+      "sourceName": "Stone",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "cam",
+      "buyIn": 10,
+      "cashOut": 53.9,
+      "profit": 43.9,
+      "sourceName": "Cam",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "owen",
+      "buyIn": 20,
+      "cashOut": 36,
+      "profit": 16,
+      "sourceName": "Owen",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 24.2,
+      "profit": 14.2,
+      "sourceName": "Aiden",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 28.3,
+      "profit": 8.3,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 20,
+      "profit": 0,
+      "sourceName": "Stone",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 15.45,
+      "profit": -4.55,
+      "sourceName": "Ben",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "matthew",
+      "buyIn": 10,
+      "cashOut": 2.1,
+      "profit": -7.9,
+      "sourceName": "Matthew",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Max",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "drew",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Drew",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-10",
+      "playerId": "raghav",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Raghav",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "ben",
+      "buyIn": 10,
+      "cashOut": 98.3,
+      "profit": 88.3,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "tim",
+      "buyIn": 10,
+      "cashOut": 55,
+      "profit": 45,
+      "sourceName": "Tim",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "william",
+      "buyIn": 20,
+      "cashOut": 30.7,
+      "profit": 10.7,
+      "sourceName": "William",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 24.25,
+      "profit": 4.25,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 13,
+      "profit": 3,
+      "sourceName": "Max",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "jack",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Jack",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 8.9,
+      "profit": -11.1,
+      "sourceName": "Cam",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Aiden",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Stone",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "drew",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Drew",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "aidan-pirc",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Aidan Pirc",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-10-2025-09-22",
+      "playerId": "raghav",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Raghav",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "jake",
+      "buyIn": 10,
+      "cashOut": 70.55,
+      "profit": 60.55,
+      "sourceName": "Jake",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "raghav",
+      "buyIn": 10,
+      "cashOut": 36.5,
+      "profit": 26.5,
+      "sourceName": "Raghav",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "chris",
+      "buyIn": 10,
+      "cashOut": 26,
+      "profit": 16,
+      "sourceName": "Chris",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "drew",
+      "buyIn": 10,
+      "cashOut": 18.6,
+      "profit": 8.6,
+      "sourceName": "Drew",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 17.55,
+      "profit": 7.55,
+      "sourceName": "Aiden",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "william",
+      "buyIn": 10,
+      "cashOut": 17.05,
+      "profit": 7.05,
+      "sourceName": "William",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 10.05,
+      "profit": 0.05,
+      "sourceName": "Max",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "ben",
+      "buyIn": 30,
+      "cashOut": 24.7,
+      "profit": -5.3,
+      "sourceName": "Ben",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "owen",
+      "buyIn": 30,
+      "cashOut": 19,
+      "profit": -11,
+      "sourceName": "Owen",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Stone",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "favor",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Favor",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-07",
+      "playerId": "tim",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Tim",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "william",
+      "buyIn": 10,
+      "cashOut": 50.65,
+      "profit": 40.65,
+      "sourceName": "William",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "tim",
+      "buyIn": 10,
+      "cashOut": 36.75,
+      "profit": 26.75,
+      "sourceName": "Tim",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "stone",
+      "buyIn": 10,
+      "cashOut": 27.9,
+      "profit": 17.9,
+      "sourceName": "Stone",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 17.6,
+      "profit": 7.6,
+      "sourceName": "Aiden",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "jake",
+      "buyIn": 10,
+      "cashOut": 14.2,
+      "profit": 4.2,
+      "sourceName": "Jake",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "michael",
+      "buyIn": 10,
+      "cashOut": 14,
+      "profit": 4,
+      "sourceName": "Michael",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 23.5,
+      "profit": 3.5,
+      "sourceName": "Ben",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "cam",
+      "buyIn": 10,
+      "cashOut": 7.55,
+      "profit": -2.45,
+      "sourceName": "Cam",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 14.85,
+      "profit": -5.15,
+      "sourceName": "Max",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "matthew",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Matthew",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "jack",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Jack",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Chris",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-10-2025-10-23",
+      "playerId": "drew",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Drew",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 62.8,
+      "profit": 42.8,
+      "sourceName": "Raghav",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 46.2,
+      "profit": 26.2,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "jake",
+      "buyIn": 10,
+      "cashOut": 30.6,
+      "profit": 20.6,
+      "sourceName": "Jake",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "chris",
+      "buyIn": 10,
+      "cashOut": 28.7,
+      "profit": 18.7,
+      "sourceName": "Chris",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "cam",
+      "buyIn": 10,
+      "cashOut": 12.95,
+      "profit": 2.95,
+      "sourceName": "Cam",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 18.3,
+      "profit": -1.7,
+      "sourceName": "Jack",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "owen",
+      "buyIn": 40,
+      "cashOut": 31,
+      "profit": -9,
+      "sourceName": "Owen",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Aiden",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Max",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "matthew",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Matthew",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Stone",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "drew",
+      "buyIn": 30,
+      "cashOut": 9.95,
+      "profit": -20.05,
+      "sourceName": "Drew",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-13",
+      "playerId": "tim",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Tim",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "william",
+      "buyIn": 10,
+      "cashOut": 32,
+      "profit": 22,
+      "sourceName": "William",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 27.8,
+      "profit": 17.8,
+      "sourceName": "Max",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 30.8,
+      "profit": 10.8,
+      "sourceName": "Tim",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "owen",
+      "buyIn": 10,
+      "cashOut": 20,
+      "profit": 10,
+      "sourceName": "Owen",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "raghav",
+      "buyIn": 10,
+      "cashOut": 17.95,
+      "profit": 7.95,
+      "sourceName": "Raghav",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 26.5,
+      "profit": 6.5,
+      "sourceName": "Jake",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "favor",
+      "buyIn": 10,
+      "cashOut": 12.7,
+      "profit": 2.7,
+      "sourceName": "Favor",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 17.5,
+      "profit": -2.5,
+      "sourceName": "Jack",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 10.25,
+      "profit": -9.75,
+      "sourceName": "Drew",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Stone",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "matthew",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Matthew",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-10-2025-11-24",
+      "playerId": "aidan-pirc",
+      "buyIn": 25,
+      "cashOut": 0,
+      "profit": -25,
+      "sourceName": "Aidan Pirc",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-03",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 90.2,
+      "profit": 70.2,
+      "sourceName": "Aiden",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-03",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 72.05,
+      "profit": 32.05,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-03",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 37.95,
+      "profit": 17.95,
+      "sourceName": "Chris",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-03",
+      "playerId": "jake",
+      "buyIn": 40,
+      "cashOut": 26.4,
+      "profit": -13.6,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-03",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Drew",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-03",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-03",
+      "playerId": "stone",
+      "buyIn": 40,
+      "cashOut": 13.05,
+      "profit": -26.95,
+      "sourceName": "Stone",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-03",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Max",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 95.6,
+      "profit": 75.6,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "tim",
+      "buyIn": 60,
+      "cashOut": 82.9,
+      "profit": 22.9,
+      "sourceName": "Tim",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 35.25,
+      "profit": 15.25,
+      "sourceName": "Stone",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 28.15,
+      "profit": 8.15,
+      "sourceName": "Aiden",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "aidan-pirc",
+      "buyIn": 34,
+      "cashOut": 36.95,
+      "profit": 2.95,
+      "sourceName": "Aidan Pirc",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 22,
+      "profit": 2,
+      "sourceName": "Drew",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 15.7,
+      "profit": -4.3,
+      "sourceName": "Raghav",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "cam",
+      "buyIn": 30,
+      "cashOut": 18.95,
+      "profit": -11.05,
+      "sourceName": "Cam",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "charlie",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Charlie",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "chris",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Chris",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-20-2025-09-17",
+      "playerId": "favor",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Favor",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 57.2,
+      "profit": 37.2,
+      "sourceName": "Raghav",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 52,
+      "profit": 32,
+      "sourceName": "Jake",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 70.9,
+      "profit": 30.9,
+      "sourceName": "Drew",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 70.2,
+      "profit": 30.2,
+      "sourceName": "Tim",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 43.7,
+      "profit": 23.7,
+      "sourceName": "Ben",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 26,
+      "profit": 6,
+      "sourceName": "Cam",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Max",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "owen",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Owen",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Chris",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "favor",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Favor",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-01",
+      "playerId": "stone",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Stone",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "stone",
+      "buyIn": 40,
+      "cashOut": 108.8,
+      "profit": 68.8,
+      "sourceName": "Stone",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 85.5,
+      "profit": 65.5,
+      "sourceName": "Max",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "cam",
+      "buyIn": 40,
+      "cashOut": 74.4,
+      "profit": 34.4,
+      "sourceName": "Cam",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "aidan-pirc",
+      "buyIn": 20,
+      "cashOut": 41.2,
+      "profit": 21.2,
+      "sourceName": "Aidan Pirc",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "louis",
+      "buyIn": 20,
+      "cashOut": 34.9,
+      "profit": 14.9,
+      "sourceName": "Louis",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "chris",
+      "buyIn": 30,
+      "cashOut": 15.4,
+      "profit": -15.6,
+      "sourceName": "Chris",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Ben",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "drew",
+      "buyIn": 80,
+      "cashOut": 39.4,
+      "profit": -40.6,
+      "sourceName": "Drew",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "raghav",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Raghav",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-20-2025-10-16",
+      "playerId": "tim",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Tim",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 75.3,
+      "profit": 55.3,
+      "sourceName": "Drew",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 57.1,
+      "profit": 37.1,
+      "sourceName": "Jake",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 66,
+      "profit": 26,
+      "sourceName": "Tim",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "choliver",
+      "buyIn": 20,
+      "cashOut": 40.9,
+      "profit": 20.9,
+      "sourceName": "Choliver",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 47.9,
+      "profit": 7.9,
+      "sourceName": "Ben",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 20.7,
+      "profit": 0.7,
+      "sourceName": "Aiden",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "zack",
+      "buyIn": 20,
+      "cashOut": 14.7,
+      "profit": -5.3,
+      "sourceName": "Zack",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "william",
+      "buyIn": 60,
+      "cashOut": 45.4,
+      "profit": -14.6,
+      "sourceName": "William",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "aidan-pirc",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Aidan Pirc",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "chris",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Chris",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Max",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-05",
+      "playerId": "stone",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Stone",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "owen",
+      "buyIn": 60,
+      "cashOut": 189.3,
+      "profit": 129.3,
+      "sourceName": "Owen",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 70.4,
+      "profit": 50.4,
+      "sourceName": "Stone",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "drew",
+      "buyIn": 30,
+      "cashOut": 78.2,
+      "profit": 48.2,
+      "sourceName": "Drew",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 38.5,
+      "profit": 18.5,
+      "sourceName": "Cam",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 28.7,
+      "profit": 8.7,
+      "sourceName": "Jake",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 26,
+      "profit": 6,
+      "sourceName": "Chris",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "zack",
+      "buyIn": 20,
+      "cashOut": 15,
+      "profit": -5,
+      "sourceName": "Zack",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "aidan-pirc",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Aidan Pirc",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "choliver",
+      "buyIn": 40,
+      "cashOut": 18.9,
+      "profit": -21.1,
+      "sourceName": "Choliver",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Ben",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Max",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "william",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "William",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2025-20-2025-11-20",
+      "playerId": "tim",
+      "buyIn": 80,
+      "cashOut": 0,
+      "profit": -80,
+      "sourceName": "Tim",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-03",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 56.4,
+      "profit": 36.4,
+      "sourceName": "Raghav",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-03",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 39,
+      "profit": 19,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-03",
+      "playerId": "parag",
+      "buyIn": 20,
+      "cashOut": 31.5,
+      "profit": 11.5,
+      "sourceName": "Parag",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-03",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 27,
+      "profit": 7,
+      "sourceName": "Aiden",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-03",
+      "playerId": "avery",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Avery",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-03",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-03",
+      "playerId": "jake",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Jake",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 67,
+      "profit": 47,
+      "sourceName": "Raghav",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 62,
+      "profit": 42,
+      "sourceName": "Stone",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 50.6,
+      "profit": 30.6,
+      "sourceName": "Jake",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 27.6,
+      "profit": 7.6,
+      "sourceName": "Aiden",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "aidan-pirc",
+      "buyIn": 20,
+      "cashOut": 25.4,
+      "profit": 5.4,
+      "sourceName": "Aidan Pirc",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "favor",
+      "buyIn": 40,
+      "cashOut": 39,
+      "profit": -1,
+      "sourceName": "Favor",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "drew",
+      "buyIn": 60,
+      "cashOut": 48.5,
+      "profit": -11.5,
+      "sourceName": "Drew",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "parag",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Parag",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 19.9,
+      "profit": -21.1,
+      "sourceName": "Tim",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-10",
+      "playerId": "ben",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Ben",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "aidan-pirc",
+      "buyIn": 10,
+      "cashOut": 46.35,
+      "profit": 36.35,
+      "sourceName": "Aidan Pirc",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "chris",
+      "buyIn": 10,
+      "cashOut": 27.85,
+      "profit": 17.85,
+      "sourceName": "Chris",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "stone",
+      "buyIn": 10,
+      "cashOut": 20.15,
+      "profit": 10.15,
+      "sourceName": "Stone",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 41.4,
+      "profit": 1.4,
+      "sourceName": "Ben",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "tim",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": 0,
+      "sourceName": "Tim",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "michael",
+      "buyIn": 10,
+      "cashOut": 9.25,
+      "profit": -0.75,
+      "sourceName": "Michael",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "drew",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Drew",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "donovan",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Donovan",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "cam",
+      "buyIn": 15,
+      "cashOut": 0,
+      "profit": -15,
+      "sourceName": "Cam",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-10-27",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jake",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "zimmy",
+      "buyIn": 20,
+      "cashOut": 89,
+      "profit": 69,
+      "sourceName": "Zimmy",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "jake",
+      "buyIn": 40,
+      "cashOut": 78,
+      "profit": 38,
+      "sourceName": "Jake",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "raghav",
+      "buyIn": 40,
+      "cashOut": 74,
+      "profit": 34,
+      "sourceName": "Raghav",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 52,
+      "profit": 32,
+      "sourceName": "Chris",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 47,
+      "profit": 27,
+      "sourceName": "Max",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "william",
+      "buyIn": 20,
+      "cashOut": 32,
+      "profit": 12,
+      "sourceName": "William",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 37.9,
+      "profit": -2.1,
+      "sourceName": "Drew",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "stone",
+      "buyIn": 50,
+      "cashOut": 39.5,
+      "profit": -10.5,
+      "sourceName": "Stone",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Ben",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "aidan-pirc",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Aidan Pirc",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-07",
+      "playerId": "tim",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Tim",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-12",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 96,
+      "profit": 76,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-12",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 64,
+      "profit": 44,
+      "sourceName": "Raghav",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-12",
+      "playerId": "stone",
+      "buyIn": 25,
+      "cashOut": 0,
+      "profit": -25,
+      "sourceName": "Stone",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-12",
+      "playerId": "nathan",
+      "buyIn": 25,
+      "cashOut": 0,
+      "profit": -25,
+      "sourceName": "Nathan",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-12",
+      "playerId": "max",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Max",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2025-one-off-2025-12-12",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Drew",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 84.8,
+      "profit": 64.8,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "calen",
+      "buyIn": 20,
+      "cashOut": 54.9,
+      "profit": 34.9,
+      "sourceName": "Calen",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "maria",
+      "buyIn": 20,
+      "cashOut": 54.2,
+      "profit": 34.2,
+      "sourceName": "Maria",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "william",
+      "buyIn": 20,
+      "cashOut": 53,
+      "profit": 33,
+      "sourceName": "William",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "jp",
+      "buyIn": 40,
+      "cashOut": 71.2,
+      "profit": 31.2,
+      "sourceName": "JP",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 43.6,
+      "profit": 23.6,
+      "sourceName": "Chris S",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "aiden",
+      "buyIn": 40,
+      "cashOut": 60.8,
+      "profit": 20.8,
+      "sourceName": "Aiden",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "jake",
+      "buyIn": 60,
+      "cashOut": 69.4,
+      "profit": 9.4,
+      "sourceName": "Jake",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 28.4,
+      "profit": 8.4,
+      "sourceName": "Raghav",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "tim",
+      "buyIn": 80,
+      "cashOut": 83.6,
+      "profit": 3.6,
+      "sourceName": "Tim",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "cam",
+      "buyIn": 40,
+      "cashOut": 32.3,
+      "profit": -7.7,
+      "sourceName": "Cam",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "chris",
+      "buyIn": 40,
+      "cashOut": 29,
+      "profit": -11,
+      "sourceName": "Chris",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "ryan",
+      "buyIn": 20,
+      "cashOut": 6.6,
+      "profit": -13.4,
+      "sourceName": "Ryan",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "favor",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Favor",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 15
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Max",
+      "placement": 16
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "stone",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Stone",
+      "placement": 17
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "mason",
+      "buyIn": 60,
+      "cashOut": 27.6,
+      "profit": -32.4,
+      "sourceName": "Mason",
+      "placement": 18
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "zimmy",
+      "buyIn": 60,
+      "cashOut": 27.6,
+      "profit": -32.4,
+      "sourceName": "Zimmy",
+      "placement": 19
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-19",
+      "playerId": "drew",
+      "buyIn": 80,
+      "cashOut": 0,
+      "profit": -80,
+      "sourceName": "Drew",
+      "placement": 20
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 117.8,
+      "profit": 97.8,
+      "sourceName": "Tim",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "aiden",
+      "buyIn": 40,
+      "cashOut": 82.7,
+      "profit": 42.7,
+      "sourceName": "Aiden",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 80.4,
+      "profit": 40.4,
+      "sourceName": "Drew",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 80,
+      "profit": 40,
+      "sourceName": "Ben",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "killian",
+      "buyIn": 20,
+      "cashOut": 48.9,
+      "profit": 28.9,
+      "sourceName": "Killian",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "johnny",
+      "buyIn": 20,
+      "cashOut": 48.1,
+      "profit": 28.1,
+      "sourceName": "Johnny 😎",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 34.6,
+      "profit": 14.6,
+      "sourceName": "Chris",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "zack",
+      "buyIn": 20,
+      "cashOut": 33.7,
+      "profit": 13.7,
+      "sourceName": "Zack",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 46.7,
+      "profit": 6.7,
+      "sourceName": "Max",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "zimmy",
+      "buyIn": 40,
+      "cashOut": 43.3,
+      "profit": 3.3,
+      "sourceName": "Zimmy",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "mason",
+      "buyIn": 40,
+      "cashOut": 30.2,
+      "profit": -9.8,
+      "sourceName": "Mason",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "maria",
+      "buyIn": 20,
+      "cashOut": 8.3,
+      "profit": -11.7,
+      "sourceName": "Maria",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 4.3,
+      "profit": -15.7,
+      "sourceName": "Chris S",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jake",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Stone",
+      "placement": 15
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "favor",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Favor",
+      "placement": 16
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "raghav",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Raghav",
+      "placement": 17
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "ryan",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Ryan",
+      "placement": 18
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "william",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "William",
+      "placement": 19
+    },
+    {
+      "nightId": "fall-2026-20-2026-08-26",
+      "playerId": "calen",
+      "buyIn": 80,
+      "cashOut": 0,
+      "profit": -80,
+      "sourceName": "Calen",
+      "placement": 20
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 149.9,
+      "profit": 129.9,
+      "sourceName": "Drew",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "zimmy",
+      "buyIn": 20,
+      "cashOut": 130.4,
+      "profit": 110.4,
+      "sourceName": "Zimmy",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 67.8,
+      "profit": 47.8,
+      "sourceName": "Aiden",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 64.1,
+      "profit": 44.1,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 62.5,
+      "profit": 22.5,
+      "sourceName": "Calen",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 41.4,
+      "profit": 21.4,
+      "sourceName": "Ben",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "william",
+      "buyIn": 20,
+      "cashOut": 40,
+      "profit": 20,
+      "sourceName": "William",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "raghav",
+      "buyIn": 40,
+      "cashOut": 41.7,
+      "profit": 1.7,
+      "sourceName": "Raghav",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "max",
+      "buyIn": 50,
+      "cashOut": 42.7,
+      "profit": -7.3,
+      "sourceName": "Max",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 20.9,
+      "profit": -19.1,
+      "sourceName": "Tim",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "jp",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "JP",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "mason",
+      "buyIn": 40,
+      "cashOut": 18,
+      "profit": -22,
+      "sourceName": "Mason",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "killian",
+      "buyIn": 40,
+      "cashOut": 15,
+      "profit": -25,
+      "sourceName": "Killian",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "cam",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Cam",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "jack",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Jack",
+      "placement": 15
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "lucas",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Lucas",
+      "placement": 16
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "stone",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Stone",
+      "placement": 17
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "johnny",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Johnny 😎",
+      "placement": 18
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-02",
+      "playerId": "chris-s",
+      "buyIn": 85,
+      "cashOut": 10.5,
+      "profit": -74.5,
+      "sourceName": "Chris S",
+      "placement": 19
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 119.6,
+      "profit": 99.6,
+      "sourceName": "Chris",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "ben",
+      "buyIn": 60,
+      "cashOut": 135.8,
+      "profit": 75.8,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "raghav",
+      "buyIn": 30,
+      "cashOut": 71.3,
+      "profit": 41.3,
+      "sourceName": "Raghav",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "aiden",
+      "buyIn": 40,
+      "cashOut": 74.7,
+      "profit": 34.7,
+      "sourceName": "Aiden",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 63.6,
+      "profit": 23.6,
+      "sourceName": "Max",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "jake",
+      "buyIn": 40,
+      "cashOut": 55.5,
+      "profit": 15.5,
+      "sourceName": "Jake",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "lucas",
+      "buyIn": 20,
+      "cashOut": 28.7,
+      "profit": 8.7,
+      "sourceName": "Lucas",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 28.2,
+      "profit": 8.2,
+      "sourceName": "Mason",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "johnny",
+      "buyIn": 60,
+      "cashOut": 52.6,
+      "profit": -7.4,
+      "sourceName": "Johnny 😎",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "jp",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "JP",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "cam",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Cam",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Drew",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Tim",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "william",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "William",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "calen",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Calen",
+      "placement": 15
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-09",
+      "playerId": "zimmy",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Zimmy",
+      "placement": 16
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 112.5,
+      "profit": 92.5,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 76,
+      "profit": 56,
+      "sourceName": "Jake",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 55.5,
+      "profit": 35.5,
+      "sourceName": "Tim",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 73,
+      "profit": 33,
+      "sourceName": "Calen",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "drew",
+      "buyIn": 60,
+      "cashOut": 83.7,
+      "profit": 23.7,
+      "sourceName": "Drew",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 34.8,
+      "profit": 14.8,
+      "sourceName": "Stone",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 29.8,
+      "profit": 9.8,
+      "sourceName": "Max",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 23.4,
+      "profit": 3.4,
+      "sourceName": "Chris S",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "cam",
+      "buyIn": 60,
+      "cashOut": 60,
+      "profit": 0,
+      "sourceName": "Cam",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "mason",
+      "buyIn": 40,
+      "cashOut": 26.3,
+      "profit": -13.7,
+      "sourceName": "Mason",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "josh",
+      "buyIn": 20,
+      "cashOut": 5,
+      "profit": -15,
+      "sourceName": "Josh",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "favor",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Favor",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "ryan",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Ryan",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "william",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "William",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "lucas",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Lucas",
+      "placement": 15
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-16",
+      "playerId": "raghav",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Raghav",
+      "placement": 16
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "gage",
+      "buyIn": 20,
+      "cashOut": 57,
+      "profit": 37,
+      "sourceName": "Gage",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 55.1,
+      "profit": 35.1,
+      "sourceName": "Chris S",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "lucas",
+      "buyIn": 20,
+      "cashOut": 49.9,
+      "profit": 29.9,
+      "sourceName": "Lucas",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 45.4,
+      "profit": 25.4,
+      "sourceName": "Tim",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 45,
+      "profit": 25,
+      "sourceName": "Mason",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "zimmy",
+      "buyIn": 80,
+      "cashOut": 92,
+      "profit": 12,
+      "sourceName": "Zimmy",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "calen",
+      "buyIn": 20,
+      "cashOut": 30,
+      "profit": 10,
+      "sourceName": "Calen",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 27.9,
+      "profit": 7.9,
+      "sourceName": "Cam",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 25.7,
+      "profit": 5.7,
+      "sourceName": "Raghav",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "chris",
+      "buyIn": 40,
+      "cashOut": 40.9,
+      "profit": 0.9,
+      "sourceName": "Chris",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 40.3,
+      "profit": 0.3,
+      "sourceName": "Ben",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "killian",
+      "buyIn": 20,
+      "cashOut": 20,
+      "profit": 0,
+      "sourceName": "Killian",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 24.7,
+      "profit": -15.3,
+      "sourceName": "Max",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "jake",
+      "buyIn": 60,
+      "cashOut": 41,
+      "profit": -19,
+      "sourceName": "Jake",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Stone",
+      "placement": 15
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "drew",
+      "buyIn": 60,
+      "cashOut": 35.9,
+      "profit": -24.1,
+      "sourceName": "Drew",
+      "placement": 16
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "johnny",
+      "buyIn": 100,
+      "cashOut": 46.7,
+      "profit": -53.3,
+      "sourceName": "Johnny 😎",
+      "placement": 17
+    },
+    {
+      "nightId": "fall-2026-20-2026-09-23",
+      "playerId": "aiden",
+      "buyIn": 80,
+      "cashOut": 22.5,
+      "profit": -57.5,
+      "sourceName": "Aiden",
+      "placement": 18
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 76.4,
+      "profit": 56.4,
+      "sourceName": "Aiden",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 72.7,
+      "profit": 52.7,
+      "sourceName": "Chris",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "raghav",
+      "buyIn": 30,
+      "cashOut": 76,
+      "profit": 46,
+      "sourceName": "Raghav",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "william",
+      "buyIn": 20,
+      "cashOut": 60,
+      "profit": 40,
+      "sourceName": "William",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "ben",
+      "buyIn": 60,
+      "cashOut": 98.6,
+      "profit": 38.6,
+      "sourceName": "Ben",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 49.1,
+      "profit": 29.1,
+      "sourceName": "Stone",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 48.6,
+      "profit": 28.6,
+      "sourceName": "Cam",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "mason",
+      "buyIn": 40,
+      "cashOut": 65,
+      "profit": 25,
+      "sourceName": "Mason",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "chris-s",
+      "buyIn": 30,
+      "cashOut": 47.8,
+      "profit": 17.8,
+      "sourceName": "Chris S",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "jp",
+      "buyIn": 20,
+      "cashOut": 22.5,
+      "profit": 2.5,
+      "sourceName": "JP",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 22,
+      "profit": 2,
+      "sourceName": "Max",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "johnny",
+      "buyIn": 60,
+      "cashOut": 43.5,
+      "profit": -16.5,
+      "sourceName": "Johnny 😎",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "drew",
+      "buyIn": 60,
+      "cashOut": 40.6,
+      "profit": -19.4,
+      "sourceName": "Drew",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "lucas",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Lucas",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "gage",
+      "buyIn": 40,
+      "cashOut": 2.2,
+      "profit": -37.8,
+      "sourceName": "Gage",
+      "placement": 15
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Calen",
+      "placement": 16
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "favor",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Favor",
+      "placement": 17
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "jake",
+      "buyIn": 45,
+      "cashOut": 0,
+      "profit": -45,
+      "sourceName": "Jake",
+      "placement": 18
+    },
+    {
+      "nightId": "fall-2026-20-2026-10-06",
+      "playerId": "tim",
+      "buyIn": 120,
+      "cashOut": 0,
+      "profit": -120,
+      "sourceName": "Tim",
+      "placement": 19
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "aiden",
+      "buyIn": 50,
+      "cashOut": 239.25,
+      "profit": 189.25,
+      "sourceName": "Aiden",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "drew",
+      "buyIn": 50,
+      "cashOut": 126.75,
+      "profit": 76.75,
+      "sourceName": "Drew",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "raghav",
+      "buyIn": 50,
+      "cashOut": 87.25,
+      "profit": 37.25,
+      "sourceName": "Raghav",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "tim",
+      "buyIn": 100,
+      "cashOut": 106.25,
+      "profit": 6.25,
+      "sourceName": "Tim",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "cam",
+      "buyIn": 50,
+      "cashOut": 28,
+      "profit": -22,
+      "sourceName": "Cam",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "zimmy",
+      "buyIn": 50,
+      "cashOut": 14,
+      "profit": -36,
+      "sourceName": "Zimmy",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "connor",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Connor",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "johnny",
+      "buyIn": 150,
+      "cashOut": 68.5,
+      "profit": -81.5,
+      "sourceName": "Johnny 😎",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-50-2026-10-04",
+      "playerId": "stone",
+      "buyIn": 120,
+      "cashOut": 0,
+      "profit": -120,
+      "sourceName": "Stone",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-08-20",
+      "playerId": "ben",
+      "buyIn": 30,
+      "cashOut": 55.6,
+      "profit": 25.6,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-08-20",
+      "playerId": "chris-s",
+      "buyIn": 10,
+      "cashOut": 15,
+      "profit": 5,
+      "sourceName": "Chris S",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-08-20",
+      "playerId": "mason",
+      "buyIn": 40,
+      "cashOut": 9.65,
+      "profit": -30.35,
+      "sourceName": "Mason",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-08-30",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 43,
+      "profit": 23,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-08-30",
+      "playerId": "chris-s",
+      "buyIn": 10,
+      "cashOut": 27,
+      "profit": 17,
+      "sourceName": "Chris S",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-08-30",
+      "playerId": "calen",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Calen",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-08-30",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Mason",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "zimmy",
+      "buyIn": 20,
+      "cashOut": 91.4,
+      "profit": 71.4,
+      "sourceName": "Zimmy",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "tim",
+      "buyIn": 60,
+      "cashOut": 111.6,
+      "profit": 56.6,
+      "sourceName": "Tim",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 67.7,
+      "profit": 47.7,
+      "sourceName": "Chris S",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "jake",
+      "buyIn": 40,
+      "cashOut": 37.9,
+      "profit": -2.1,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "lucas",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Lucas",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Raghav",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 12.4,
+      "profit": -27.6,
+      "sourceName": "Ben",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "mason",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Mason",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-03",
+      "playerId": "calen",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Calen",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-20",
+      "playerId": "calen",
+      "buyIn": 20,
+      "cashOut": 32,
+      "profit": 12,
+      "sourceName": "Calen",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-20",
+      "playerId": "mason",
+      "buyIn": 10,
+      "cashOut": 18,
+      "profit": 8,
+      "sourceName": "Mason",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-20",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Chris S",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "gage",
+      "buyIn": 20,
+      "cashOut": 98.4,
+      "profit": 78.4,
+      "sourceName": "Gage",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 60.4,
+      "profit": 40.4,
+      "sourceName": "Mason",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "william",
+      "buyIn": 20,
+      "cashOut": 53,
+      "profit": 33,
+      "sourceName": "William",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 37.7,
+      "profit": 17.7,
+      "sourceName": "Tim",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "ben",
+      "buyIn": 60,
+      "cashOut": 75.2,
+      "profit": 15.2,
+      "sourceName": "Ben",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 34.5,
+      "profit": 14.5,
+      "sourceName": "Jake",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "cam",
+      "buyIn": 40,
+      "cashOut": 45.6,
+      "profit": 5.6,
+      "sourceName": "Cam",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 18.1,
+      "profit": -1.9,
+      "sourceName": "Aiden",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "favor",
+      "buyIn": 20,
+      "cashOut": 15.3,
+      "profit": -4.7,
+      "sourceName": "Favor",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "zimmy",
+      "buyIn": 40,
+      "cashOut": 22.8,
+      "profit": -17.2,
+      "sourceName": "Zimmy",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Drew",
+      "placement": 11
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "aidan-pirc",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Aidan Pirc",
+      "placement": 12
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "jack",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Jack",
+      "placement": 13
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "lucas",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Lucas",
+      "placement": 14
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-26",
+      "playerId": "raghav",
+      "buyIn": 41,
+      "cashOut": 0,
+      "profit": -41,
+      "sourceName": "Raghav",
+      "placement": 15
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-27",
+      "playerId": "ben",
+      "buyIn": 10,
+      "cashOut": 50,
+      "profit": 40,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-27",
+      "playerId": "mason",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Mason",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-27",
+      "playerId": "calen",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Calen",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "johnny",
+      "buyIn": 20,
+      "cashOut": 105,
+      "profit": 85,
+      "sourceName": "Johnny 😎",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 93.5,
+      "profit": 73.5,
+      "sourceName": "Stone",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 67.2,
+      "profit": 47.2,
+      "sourceName": "Jake",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 32.7,
+      "profit": 12.7,
+      "sourceName": "Tim",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 26,
+      "profit": 6,
+      "sourceName": "Aiden",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "lucas",
+      "buyIn": 40,
+      "cashOut": 24.3,
+      "profit": -15.7,
+      "sourceName": "Lucas",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Raghav",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "ben",
+      "buyIn": 60,
+      "cashOut": 28.3,
+      "profit": -31.7,
+      "sourceName": "Ben",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "chris-s",
+      "buyIn": 60,
+      "cashOut": 5.2,
+      "profit": -54.8,
+      "sourceName": "Chris S",
+      "placement": 9
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-09-30",
+      "playerId": "calen",
+      "buyIn": 110,
+      "cashOut": 6.6,
+      "profit": -103.4,
+      "sourceName": "Calen",
+      "placement": 10
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-10-05",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 46.5,
+      "profit": 26.5,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-10-05",
+      "playerId": "mason",
+      "buyIn": 10,
+      "cashOut": 34.5,
+      "profit": 24.5,
+      "sourceName": "Mason",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-10-05",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 20.4,
+      "profit": 0.4,
+      "sourceName": "Chris S",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-10-05",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 23.8,
+      "profit": -16.2,
+      "sourceName": "Calen",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-one-off-2026-10-05",
+      "playerId": "jake",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Jake",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 80.88,
+      "profit": 60.88,
+      "sourceName": "Raghav",
+      "placement": 1
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 42.74,
+      "profit": 22.74,
+      "sourceName": "Tim",
+      "placement": 2
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "favor",
+      "buyIn": 20,
+      "cashOut": 40.81,
+      "profit": 20.81,
+      "sourceName": "Favor",
+      "placement": 3
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "liv",
+      "buyIn": 20,
+      "cashOut": 40.07,
+      "profit": 20.07,
+      "sourceName": "Liv",
+      "placement": 4
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "zimmy",
+      "buyIn": 40,
+      "cashOut": 55.5,
+      "profit": 15.5,
+      "sourceName": "Zimmy",
+      "placement": 5
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Ben",
+      "placement": 6
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "aiden",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Aiden",
+      "placement": 7
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "gage",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Gage",
+      "placement": 8
+    },
+    {
+      "nightId": "fall-2026-online-2026-09-27",
+      "playerId": "stone",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Stone",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "jack",
+      "buyIn": 10,
+      "cashOut": 62.7,
+      "profit": 52.7,
+      "sourceName": "Jack",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "raghav",
+      "buyIn": 30,
+      "cashOut": 58.3,
+      "profit": 28.3,
+      "sourceName": "Raghav",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "ben",
+      "buyIn": 10,
+      "cashOut": 32.8,
+      "profit": 22.8,
+      "sourceName": "Ben",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 13.7,
+      "profit": 3.7,
+      "sourceName": "Max",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 22,
+      "profit": 2,
+      "sourceName": "Jake",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "drew",
+      "buyIn": 10,
+      "cashOut": 9.65,
+      "profit": -0.35,
+      "sourceName": "Drew",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Aiden",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "chris",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Chris",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "jackson",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Jackson",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "william",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "William",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "zimmy",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Zimmy",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "tim",
+      "buyIn": 30,
+      "cashOut": 11.1,
+      "profit": -18.9,
+      "sourceName": "Tim",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-14",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Calen",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "owen",
+      "buyIn": 10,
+      "cashOut": 75.7,
+      "profit": 65.7,
+      "sourceName": "Owen",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "ben",
+      "buyIn": 10,
+      "cashOut": 56.7,
+      "profit": 46.7,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "tim",
+      "buyIn": 65,
+      "cashOut": 79,
+      "profit": 14,
+      "sourceName": "Tim",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "william",
+      "buyIn": 10,
+      "cashOut": 22.15,
+      "profit": 12.15,
+      "sourceName": "William",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "raghav",
+      "buyIn": 10,
+      "cashOut": 18.4,
+      "profit": 8.4,
+      "sourceName": "Raghav",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "drew",
+      "buyIn": 80,
+      "cashOut": 80,
+      "profit": 0,
+      "sourceName": "Drew",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 15.55,
+      "profit": -4.45,
+      "sourceName": "Jake",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "jack",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Jack",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "jackson",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Jackson",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Chris",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "matthew",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Matthew",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Max",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "calen",
+      "buyIn": 50,
+      "cashOut": 26.5,
+      "profit": -23.5,
+      "sourceName": "Calen",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-10-2026-01-28",
+      "playerId": "zimmy",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Zimmy",
+      "placement": 14
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 85,
+      "profit": 65,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 68.95,
+      "profit": 48.95,
+      "sourceName": "Aiden",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "owen",
+      "buyIn": 15,
+      "cashOut": 40,
+      "profit": 25,
+      "sourceName": "Owen",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "raghav",
+      "buyIn": 10,
+      "cashOut": 22.9,
+      "profit": 12.9,
+      "sourceName": "Raghav",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "max",
+      "buyIn": 13.5,
+      "cashOut": 21.2,
+      "profit": 7.7,
+      "sourceName": "Max",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 20,
+      "profit": 0,
+      "sourceName": "Jake",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "william",
+      "buyIn": 16,
+      "cashOut": 16,
+      "profit": 0,
+      "sourceName": "William",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "zimmy",
+      "buyIn": 30,
+      "cashOut": 30,
+      "profit": 0,
+      "sourceName": "Zimmy",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "chris",
+      "buyIn": 30,
+      "cashOut": 20,
+      "profit": -10,
+      "sourceName": "Chris",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Stone",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Calen",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Drew",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-11",
+      "playerId": "tim",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Tim",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "william",
+      "buyIn": 10,
+      "cashOut": 61.3,
+      "profit": 51.3,
+      "sourceName": "William",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "owen",
+      "buyIn": 10,
+      "cashOut": 58.2,
+      "profit": 48.2,
+      "sourceName": "Owen",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 32.7,
+      "profit": 22.7,
+      "sourceName": "Aiden",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "zimmy",
+      "buyIn": 10,
+      "cashOut": 21.3,
+      "profit": 11.3,
+      "sourceName": "Zimmy",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 21,
+      "profit": 11,
+      "sourceName": "Max",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "stone",
+      "buyIn": 30,
+      "cashOut": 33.55,
+      "profit": 3.55,
+      "sourceName": "Stone",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 17.35,
+      "profit": -2.65,
+      "sourceName": "Ben",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 17.3,
+      "profit": -2.7,
+      "sourceName": "Mason",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "gage",
+      "buyIn": 20,
+      "cashOut": 13.1,
+      "profit": -6.9,
+      "sourceName": "Gage",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "sam",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Sam",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 26.2,
+      "profit": -13.8,
+      "sourceName": "Tim",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "raghav",
+      "buyIn": 30,
+      "cashOut": 15.65,
+      "profit": -14.35,
+      "sourceName": "Raghav",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "caleb",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Caleb",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "maria",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Maria",
+      "placement": 14
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 12.7,
+      "profit": -27.3,
+      "sourceName": "Calen",
+      "placement": 15
+    },
+    {
+      "nightId": "spring-2026-10-2026-02-25",
+      "playerId": "jack",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Jack",
+      "placement": 16
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "jake",
+      "buyIn": 10,
+      "cashOut": 53.5,
+      "profit": 43.5,
+      "sourceName": "Jake",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "calen",
+      "buyIn": 10,
+      "cashOut": 38.35,
+      "profit": 28.35,
+      "sourceName": "Calen",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 31.4,
+      "profit": 11.4,
+      "sourceName": "Stone",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 27.35,
+      "profit": 7.35,
+      "sourceName": "Tim",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "drew",
+      "buyIn": 10,
+      "cashOut": 15.3,
+      "profit": 5.3,
+      "sourceName": "Drew",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "favor",
+      "buyIn": 20,
+      "cashOut": 21.25,
+      "profit": 1.25,
+      "sourceName": "Favor",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "ben",
+      "buyIn": 25,
+      "cashOut": 25.35,
+      "profit": 0.35,
+      "sourceName": "Ben",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Aiden",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "ryan",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Ryan",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "aidan-pirc",
+      "buyIn": 25,
+      "cashOut": 12.5,
+      "profit": -12.5,
+      "sourceName": "Aidan Pirc",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "raghav",
+      "buyIn": 15,
+      "cashOut": 0,
+      "profit": -15,
+      "sourceName": "Raghav",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Max",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-10-2026-03-12",
+      "playerId": "mason",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Mason",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "raghav",
+      "buyIn": 10,
+      "cashOut": 74.4,
+      "profit": 64.4,
+      "sourceName": "Raghav",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "ben",
+      "buyIn": 15,
+      "cashOut": 70.4,
+      "profit": 55.4,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 51.3,
+      "profit": 41.3,
+      "sourceName": "Max",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "calen",
+      "buyIn": 35,
+      "cashOut": 75.15,
+      "profit": 40.15,
+      "sourceName": "Calen",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 39.3,
+      "profit": 29.3,
+      "sourceName": "Aiden",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "zimmy",
+      "buyIn": 10,
+      "cashOut": 22.6,
+      "profit": 12.6,
+      "sourceName": "Zimmy",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 22.2,
+      "profit": 2.2,
+      "sourceName": "Jake",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 14.5,
+      "profit": -5.5,
+      "sourceName": "Jack",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "chris",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Chris",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "james",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "James",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Mason",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "aidan-pirc",
+      "buyIn": 25,
+      "cashOut": 0,
+      "profit": -25,
+      "sourceName": "Aidan Pirc",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "matthew",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Matthew",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "drew",
+      "buyIn": 90,
+      "cashOut": 24.85,
+      "profit": -65.15,
+      "sourceName": "Drew",
+      "placement": 14
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-01",
+      "playerId": "tim",
+      "buyIn": 70,
+      "cashOut": 0,
+      "profit": -70,
+      "sourceName": "Tim",
+      "placement": 15
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 65.15,
+      "profit": 45.15,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "mason",
+      "buyIn": 15,
+      "cashOut": 56.45,
+      "profit": 41.45,
+      "sourceName": "Mason",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 46.3,
+      "profit": 36.3,
+      "sourceName": "Max",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 37.8,
+      "profit": 27.8,
+      "sourceName": "Aiden",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "chris",
+      "buyIn": 10,
+      "cashOut": 25.3,
+      "profit": 15.3,
+      "sourceName": "Chris",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 26.25,
+      "profit": 6.25,
+      "sourceName": "Jake",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "calen",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Calen",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "jack",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Jack",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "zimmy",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Zimmy",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "raghav",
+      "buyIn": 15,
+      "cashOut": 0,
+      "profit": -15,
+      "sourceName": "Raghav",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "matthew",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Matthew",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 7.75,
+      "profit": -32.25,
+      "sourceName": "Drew",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "stone",
+      "buyIn": 35,
+      "cashOut": 0,
+      "profit": -35,
+      "sourceName": "Stone",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-10-2026-04-15",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Tim",
+      "placement": 14
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 138.3,
+      "profit": 98.3,
+      "sourceName": "Drew",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 107,
+      "profit": 67,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 39.7,
+      "profit": 19.7,
+      "sourceName": "Cam",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 32.4,
+      "profit": 12.4,
+      "sourceName": "Chris",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 31.5,
+      "profit": 11.5,
+      "sourceName": "Tim",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "raghav",
+      "buyIn": 40,
+      "cashOut": 31.5,
+      "profit": -8.5,
+      "sourceName": "Raghav",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "aidan-pirc",
+      "buyIn": 40,
+      "cashOut": 31,
+      "profit": -9,
+      "sourceName": "Aidan Pirc",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 10,
+      "profit": -10,
+      "sourceName": "Jack",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Max",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "jake",
+      "buyIn": 60,
+      "cashOut": 39.6,
+      "profit": -20.4,
+      "sourceName": "Jake",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "zimmy",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Zimmy",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "stone",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Stone",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-20-2026-01-07",
+      "playerId": "calen",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Calen",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "owen",
+      "buyIn": 20,
+      "cashOut": 255,
+      "profit": 235,
+      "sourceName": "Owen",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "stone",
+      "buyIn": 40,
+      "cashOut": 76.3,
+      "profit": 36.3,
+      "sourceName": "Stone",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "zimmy",
+      "buyIn": 40,
+      "cashOut": 56.1,
+      "profit": 16.1,
+      "sourceName": "Zimmy",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "calen",
+      "buyIn": 80,
+      "cashOut": 80,
+      "profit": 0,
+      "sourceName": "Calen",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "drew",
+      "buyIn": 43,
+      "cashOut": 25.6,
+      "profit": -19.4,
+      "sourceName": "Drew",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "aidan-pirc",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Aidan Pirc",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "raghav",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Raghav",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "tim",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Tim",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "aiden",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Aiden",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "jake",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Jake",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Max",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-04",
+      "playerId": "brett",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Brett",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 80,
+      "profit": 60,
+      "sourceName": "Aiden",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "owen",
+      "buyIn": 20,
+      "cashOut": 78.5,
+      "profit": 58.5,
+      "sourceName": "Owen",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 51.4,
+      "profit": 31.4,
+      "sourceName": "Chris",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "stone",
+      "buyIn": 30,
+      "cashOut": 56.5,
+      "profit": 26.5,
+      "sourceName": "Stone",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 41.8,
+      "profit": 21.8,
+      "sourceName": "Cam",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 24,
+      "profit": 4,
+      "sourceName": "Jake",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "raghav",
+      "buyIn": 40,
+      "cashOut": 44,
+      "profit": 4,
+      "sourceName": "Raghav",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "maria",
+      "buyIn": 20,
+      "cashOut": 16.6,
+      "profit": -3.4,
+      "sourceName": "Maria",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 34.3,
+      "profit": -5.7,
+      "sourceName": "Max",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 3.3,
+      "profit": -36.7,
+      "sourceName": "Tim",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Calen",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "zimmy",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Zimmy",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-20-2026-02-18",
+      "playerId": "drew",
+      "buyIn": 80,
+      "cashOut": 0,
+      "profit": -80,
+      "sourceName": "Drew",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 76.8,
+      "profit": 56.8,
+      "sourceName": "Stone",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 58.7,
+      "profit": 38.7,
+      "sourceName": "Raghav",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 77.3,
+      "profit": 37.3,
+      "sourceName": "Tim",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "ben",
+      "buyIn": 30,
+      "cashOut": 44,
+      "profit": 14,
+      "sourceName": "Ben",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "max",
+      "buyIn": 30,
+      "cashOut": 44,
+      "profit": 14,
+      "sourceName": "Max",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "zack",
+      "buyIn": 20,
+      "cashOut": 19.2,
+      "profit": -0.8,
+      "sourceName": "Zack",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 19,
+      "profit": -1,
+      "sourceName": "Cam",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Aiden",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "calen",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Calen",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Chris",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "zimmy",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Zimmy",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 1,
+      "profit": -39,
+      "sourceName": "Drew",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-05",
+      "playerId": "jack",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Jack",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "favor",
+      "buyIn": 20,
+      "cashOut": 132.4,
+      "profit": 112.4,
+      "sourceName": "Favor",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 62.5,
+      "profit": 42.5,
+      "sourceName": "Aiden",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 46.6,
+      "profit": 26.6,
+      "sourceName": "Chris",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 38.9,
+      "profit": 18.9,
+      "sourceName": "Raghav",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 30.2,
+      "profit": 10.2,
+      "sourceName": "Ben",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "stone",
+      "buyIn": 50,
+      "cashOut": 55.7,
+      "profit": 5.7,
+      "sourceName": "Stone",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "calen",
+      "buyIn": 35,
+      "cashOut": 26.4,
+      "profit": -8.6,
+      "sourceName": "Calen",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "drew",
+      "buyIn": 80,
+      "cashOut": 66.6,
+      "profit": -13.4,
+      "sourceName": "Drew",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Cam",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Tim",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "jack",
+      "buyIn": 40,
+      "cashOut": 10.7,
+      "profit": -29.3,
+      "sourceName": "Jack",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "zimmy",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Zimmy",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Max",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-20-2026-03-26",
+      "playerId": "aidan-pirc",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Aidan Pirc",
+      "placement": 14
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 110.6,
+      "profit": 90.6,
+      "sourceName": "Mason",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "calen",
+      "buyIn": 20,
+      "cashOut": 73.4,
+      "profit": 53.4,
+      "sourceName": "Calen",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 43.4,
+      "profit": 23.4,
+      "sourceName": "Aiden",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "stone",
+      "buyIn": 30,
+      "cashOut": 51.8,
+      "profit": 21.8,
+      "sourceName": "Stone",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 4,
+      "profit": -16,
+      "sourceName": "Drew",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "tim",
+      "buyIn": 30,
+      "cashOut": 10.7,
+      "profit": -19.3,
+      "sourceName": "Tim",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Cam",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jake",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Max",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "ben",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Ben",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "raghav",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Raghav",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-08",
+      "playerId": "aidan-pirc",
+      "buyIn": 50,
+      "cashOut": 16.1,
+      "profit": -33.9,
+      "sourceName": "Aidan Pirc",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "favor",
+      "buyIn": 20,
+      "cashOut": 95.3,
+      "profit": 75.3,
+      "sourceName": "Favor",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 79.5,
+      "profit": 59.5,
+      "sourceName": "Stone",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 58.9,
+      "profit": 38.9,
+      "sourceName": "Chris S",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 53.3,
+      "profit": 13.3,
+      "sourceName": "Ben",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "gage",
+      "buyIn": 20,
+      "cashOut": 24.4,
+      "profit": 4.4,
+      "sourceName": "Gage",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 23.7,
+      "profit": 3.7,
+      "sourceName": "Tim",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "raghav",
+      "buyIn": 60,
+      "cashOut": 45.3,
+      "profit": -14.7,
+      "sourceName": "Raghav",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Chris",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "tyler",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Tyler",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "zimmy",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Zimmy",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Calen",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "jack",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Jack",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-20-2026-04-22",
+      "playerId": "max",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Max",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "aiden",
+      "buyIn": 50,
+      "cashOut": 204.75,
+      "profit": 154.75,
+      "sourceName": "Aiden",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "owen",
+      "buyIn": 50,
+      "cashOut": 190,
+      "profit": 140,
+      "sourceName": "Owen",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "calen",
+      "buyIn": 100,
+      "cashOut": 182,
+      "profit": 82,
+      "sourceName": "Calen",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "aidan-pirc",
+      "buyIn": 100,
+      "cashOut": 164.5,
+      "profit": 64.5,
+      "sourceName": "Aidan Pirc",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "jake",
+      "buyIn": 0,
+      "cashOut": 12.5,
+      "profit": 12.5,
+      "sourceName": "Jake",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "ben",
+      "buyIn": 150,
+      "cashOut": 121,
+      "profit": -29,
+      "sourceName": "Ben",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "stone",
+      "buyIn": 100,
+      "cashOut": 60,
+      "profit": -40,
+      "sourceName": "Stone",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "drew",
+      "buyIn": 100,
+      "cashOut": 58.25,
+      "profit": -41.75,
+      "sourceName": "Drew",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "raghav",
+      "buyIn": 100,
+      "cashOut": 57,
+      "profit": -43,
+      "sourceName": "Raghav",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "brett",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Brett",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "max",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Max",
+      "placement": 11
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "tim",
+      "buyIn": 100,
+      "cashOut": 0,
+      "profit": -100,
+      "sourceName": "Tim",
+      "placement": 12
+    },
+    {
+      "nightId": "spring-2026-50-2026-01-21",
+      "playerId": "zimmy",
+      "buyIn": 100,
+      "cashOut": 0,
+      "profit": -100,
+      "sourceName": "Zimmy",
+      "placement": 13
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "raghav",
+      "buyIn": 50,
+      "cashOut": 350.25,
+      "profit": 300.25,
+      "sourceName": "Raghav",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "max",
+      "buyIn": 50,
+      "cashOut": 192.5,
+      "profit": 142.5,
+      "sourceName": "Max",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "ben",
+      "buyIn": 150,
+      "cashOut": 145.5,
+      "profit": -4.5,
+      "sourceName": "Ben",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "drew",
+      "buyIn": 150,
+      "cashOut": 113.25,
+      "profit": -36.75,
+      "sourceName": "Drew",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "tim",
+      "buyIn": 100,
+      "cashOut": 51,
+      "profit": -49,
+      "sourceName": "Tim",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "cam",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Cam",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "stone",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Stone",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "aidan-pirc",
+      "buyIn": 100,
+      "cashOut": 0,
+      "profit": -100,
+      "sourceName": "Aidan Pirc",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-50-2026-02-13",
+      "playerId": "zimmy",
+      "buyIn": 200,
+      "cashOut": 47.5,
+      "profit": -152.5,
+      "sourceName": "Zimmy",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "max",
+      "buyIn": 50,
+      "cashOut": 106,
+      "profit": 56,
+      "sourceName": "Max",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "drew",
+      "buyIn": 100,
+      "cashOut": 130.75,
+      "profit": 30.75,
+      "sourceName": "Drew",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "tim",
+      "buyIn": 100,
+      "cashOut": 120,
+      "profit": 20,
+      "sourceName": "Tim",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "cam",
+      "buyIn": 100,
+      "cashOut": 116,
+      "profit": 16,
+      "sourceName": "Cam",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "jake",
+      "buyIn": 50,
+      "cashOut": 65.75,
+      "profit": 15.75,
+      "sourceName": "Jake",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "aiden",
+      "buyIn": 50,
+      "cashOut": 55.75,
+      "profit": 5.75,
+      "sourceName": "Aiden",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "raghav",
+      "buyIn": 50,
+      "cashOut": 55.75,
+      "profit": 5.75,
+      "sourceName": "Raghav",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "ben",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Ben",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "jack",
+      "buyIn": 50,
+      "cashOut": 0,
+      "profit": -50,
+      "sourceName": "Jack",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-50-2026-05-03",
+      "playerId": "stone",
+      "buyIn": 70,
+      "cashOut": 0,
+      "profit": -70,
+      "sourceName": "Stone",
+      "placement": 10
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 112,
+      "profit": 92,
+      "sourceName": "Tim",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "jake",
+      "buyIn": 10,
+      "cashOut": 24,
+      "profit": 14,
+      "sourceName": "Jake",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "aidan-pirc",
+      "buyIn": 10,
+      "cashOut": 8.5,
+      "profit": -1.5,
+      "sourceName": "Aidan Pirc",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 10.5,
+      "profit": -9.5,
+      "sourceName": "Max",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "ben",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Ben",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "chris",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Chris",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "jack",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Jack",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "matthew",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Matthew",
+      "placement": 8
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-16",
+      "playerId": "drew",
+      "buyIn": 35,
+      "cashOut": 0,
+      "profit": -35,
+      "sourceName": "Drew",
+      "placement": 9
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-31",
+      "playerId": "jack",
+      "buyIn": 10,
+      "cashOut": 61.1,
+      "profit": 51.1,
+      "sourceName": "Jack",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-31",
+      "playerId": "max",
+      "buyIn": 10,
+      "cashOut": 25.05,
+      "profit": 15.05,
+      "sourceName": "Max",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-31",
+      "playerId": "william",
+      "buyIn": 20,
+      "cashOut": 21.5,
+      "profit": 1.5,
+      "sourceName": "William",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-31",
+      "playerId": "jake",
+      "buyIn": 10,
+      "cashOut": 8.35,
+      "profit": -1.65,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-31",
+      "playerId": "drew",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Drew",
+      "placement": 5
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-31",
+      "playerId": "tim",
+      "buyIn": 60,
+      "cashOut": 33,
+      "profit": -27,
+      "sourceName": "Tim",
+      "placement": 6
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-01-31",
+      "playerId": "matthew",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Matthew",
+      "placement": 7
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-04-28",
+      "playerId": "ben",
+      "buyIn": 10,
+      "cashOut": 74.1,
+      "profit": 64.1,
+      "sourceName": "Ben",
+      "placement": 1
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-04-28",
+      "playerId": "aidan-pirc",
+      "buyIn": 30,
+      "cashOut": 65.9,
+      "profit": 35.9,
+      "sourceName": "Aidan Pirc",
+      "placement": 2
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-04-28",
+      "playerId": "grace",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Grace",
+      "placement": 3
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-04-28",
+      "playerId": "mason",
+      "buyIn": 30,
+      "cashOut": 0,
+      "profit": -30,
+      "sourceName": "Mason",
+      "placement": 4
+    },
+    {
+      "nightId": "spring-2026-one-off-2026-04-28",
+      "playerId": "calen",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Calen",
+      "placement": 5
+    },
+    {
+      "nightId": "summer-2026-10-2026-06-05",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 51.28,
+      "profit": 31.28,
+      "sourceName": "Tim",
+      "placement": 1
+    },
+    {
+      "nightId": "summer-2026-10-2026-06-05",
+      "playerId": "aiden",
+      "buyIn": 10,
+      "cashOut": 35.89,
+      "profit": 25.89,
+      "sourceName": "Aiden",
+      "placement": 2
+    },
+    {
+      "nightId": "summer-2026-10-2026-06-05",
+      "playerId": "ben",
+      "buyIn": 10,
+      "cashOut": 30.43,
+      "profit": 20.43,
+      "sourceName": "Ben",
+      "placement": 3
+    },
+    {
+      "nightId": "summer-2026-10-2026-06-05",
+      "playerId": "zimmy",
+      "buyIn": 10,
+      "cashOut": 22.15,
+      "profit": 12.15,
+      "sourceName": "Zimmy",
+      "placement": 4
+    },
+    {
+      "nightId": "summer-2026-10-2026-06-05",
+      "playerId": "zach",
+      "buyIn": 10,
+      "cashOut": 0,
+      "profit": -10,
+      "sourceName": "Zach",
+      "placement": 5
+    },
+    {
+      "nightId": "summer-2026-10-2026-06-05",
+      "playerId": "aidan-pirc",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Aidan Pirc",
+      "placement": 6
+    },
+    {
+      "nightId": "summer-2026-10-2026-06-05",
+      "playerId": "gage",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Gage",
+      "placement": 7
+    },
+    {
+      "nightId": "summer-2026-10-2026-06-05",
+      "playerId": "raghav",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Raghav",
+      "placement": 8
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 84.3,
+      "profit": 64.3,
+      "sourceName": "Drew",
+      "placement": 1
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 75.6,
+      "profit": 55.6,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "calen",
+      "buyIn": 80,
+      "cashOut": 80,
+      "profit": 0,
+      "sourceName": "Calen",
+      "placement": 3
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "jake",
+      "buyIn": 40,
+      "cashOut": 37.3,
+      "profit": -2.7,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "chris-s",
+      "buyIn": 40,
+      "cashOut": 32.1,
+      "profit": -7.9,
+      "sourceName": "Chris S",
+      "placement": 5
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "stone",
+      "buyIn": 20,
+      "cashOut": 8,
+      "profit": -12,
+      "sourceName": "Stone",
+      "placement": 6
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "mason",
+      "buyIn": 30,
+      "cashOut": 12.5,
+      "profit": -17.5,
+      "sourceName": "Mason",
+      "placement": 7
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Cam",
+      "placement": 8
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "gage",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Gage",
+      "placement": 9
+    },
+    {
+      "nightId": "summer-2026-20-2026-06-30",
+      "playerId": "zimmy",
+      "buyIn": 40,
+      "cashOut": 0,
+      "profit": -40,
+      "sourceName": "Zimmy",
+      "placement": 10
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-14",
+      "playerId": "zimmy",
+      "buyIn": 20,
+      "cashOut": 75.2,
+      "profit": 55.2,
+      "sourceName": "Zimmy",
+      "placement": 1
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-14",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 57.8,
+      "profit": 37.8,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-14",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 49,
+      "profit": 29,
+      "sourceName": "Cam",
+      "placement": 3
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-14",
+      "playerId": "aidan-pirc",
+      "buyIn": 60,
+      "cashOut": 66.7,
+      "profit": 6.7,
+      "sourceName": "Aidan Pirc",
+      "placement": 4
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-14",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Mason",
+      "placement": 5
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-14",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Tim",
+      "placement": 6
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-14",
+      "playerId": "calen",
+      "buyIn": 100,
+      "cashOut": 11.4,
+      "profit": -88.6,
+      "sourceName": "Calen",
+      "placement": 7
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "drew",
+      "buyIn": 50,
+      "cashOut": 102.9,
+      "profit": 52.9,
+      "sourceName": "Drew",
+      "placement": 1
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "tim",
+      "buyIn": 20,
+      "cashOut": 68.3,
+      "profit": 48.3,
+      "sourceName": "Tim",
+      "placement": 2
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "chris-s",
+      "buyIn": 20,
+      "cashOut": 61.1,
+      "profit": 41.1,
+      "sourceName": "Chris S",
+      "placement": 3
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 51.1,
+      "profit": 31.1,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 10,
+      "profit": -10,
+      "sourceName": "Mason",
+      "placement": 5
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "calen",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Calen",
+      "placement": 6
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "maggie",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Maggie",
+      "placement": 7
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Raghav",
+      "placement": 8
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "ben",
+      "buyIn": 60,
+      "cashOut": 16.6,
+      "profit": -43.4,
+      "sourceName": "Ben",
+      "placement": 9
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-18",
+      "playerId": "zimmy",
+      "buyIn": 60,
+      "cashOut": 0,
+      "profit": -60,
+      "sourceName": "Zimmy",
+      "placement": 10
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "jake",
+      "buyIn": 20,
+      "cashOut": 82,
+      "profit": 62,
+      "sourceName": "Jake",
+      "placement": 1
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "cam",
+      "buyIn": 20,
+      "cashOut": 63.2,
+      "profit": 43.2,
+      "sourceName": "Cam",
+      "placement": 2
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "ben",
+      "buyIn": 60,
+      "cashOut": 60.2,
+      "profit": 0.2,
+      "sourceName": "Ben",
+      "placement": 3
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "drew",
+      "buyIn": 40,
+      "cashOut": 40,
+      "profit": 0,
+      "sourceName": "Drew",
+      "placement": 4
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "lucas",
+      "buyIn": 30,
+      "cashOut": 28.6,
+      "profit": -1.4,
+      "sourceName": "Lucas",
+      "placement": 5
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "chris",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Chris",
+      "placement": 6
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Mason",
+      "placement": 7
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "owen",
+      "buyIn": 40,
+      "cashOut": 20,
+      "profit": -20,
+      "sourceName": "Owen",
+      "placement": 8
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Raghav",
+      "placement": 9
+    },
+    {
+      "nightId": "summer-2026-20-2026-07-28",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 15.6,
+      "profit": -24.4,
+      "sourceName": "Calen",
+      "placement": 10
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-11",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 53.6,
+      "profit": 33.6,
+      "sourceName": "Mason",
+      "placement": 1
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-11",
+      "playerId": "ben",
+      "buyIn": 20,
+      "cashOut": 20,
+      "profit": 0,
+      "sourceName": "Ben",
+      "placement": 2
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-11",
+      "playerId": "joey",
+      "buyIn": 20,
+      "cashOut": 15,
+      "profit": -5,
+      "sourceName": "Joey",
+      "placement": 3
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-11",
+      "playerId": "jake",
+      "buyIn": 40,
+      "cashOut": 31.4,
+      "profit": -8.6,
+      "sourceName": "Jake",
+      "placement": 4
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-11",
+      "playerId": "lucas",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Lucas",
+      "placement": 5
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "calen",
+      "buyIn": 40,
+      "cashOut": 126,
+      "profit": 86,
+      "sourceName": "Calen",
+      "placement": 1
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "zimmy",
+      "buyIn": 20,
+      "cashOut": 103,
+      "profit": 83,
+      "sourceName": "Zimmy",
+      "placement": 2
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "mason",
+      "buyIn": 20,
+      "cashOut": 33.5,
+      "profit": 13.5,
+      "sourceName": "Mason",
+      "placement": 3
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "aiden",
+      "buyIn": 20,
+      "cashOut": 20.7,
+      "profit": 0.7,
+      "sourceName": "Aiden",
+      "placement": 4
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "max",
+      "buyIn": 20,
+      "cashOut": 10.4,
+      "profit": -9.6,
+      "sourceName": "Max",
+      "placement": 5
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "drew",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Drew",
+      "placement": 6
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "raghav",
+      "buyIn": 20,
+      "cashOut": 0,
+      "profit": -20,
+      "sourceName": "Raghav",
+      "placement": 7
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "ben",
+      "buyIn": 40,
+      "cashOut": 12.7,
+      "profit": -27.3,
+      "sourceName": "Ben",
+      "placement": 8
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "tim",
+      "buyIn": 40,
+      "cashOut": 10.9,
+      "profit": -31.1,
+      "sourceName": "Tim",
+      "placement": 9
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "chris-s",
+      "buyIn": 60,
+      "cashOut": 22.8,
+      "profit": -37.2,
+      "sourceName": "Chris S",
+      "placement": 10
+    },
+    {
+      "nightId": "summer-2026-20-2026-08-16",
+      "playerId": "aidan-pirc",
+      "buyIn": 60,
+      "cashOut": 20,
+      "profit": -40,
+      "sourceName": "Aidan Pirc",
+      "placement": 11
+    }
+  ],
+  "issues": [
+    {
+      "workbook": "fall-2025.xlsx",
+      "sheet": "One-offs (not in totals)",
+      "row": 6,
+      "severity": "warning",
+      "message": "Skipped Drew: malformed buy-in/cash-out"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-08-27",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.25"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-09-10",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.05"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-09-22",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.15"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-10-23",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -3.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-11-13",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.50"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-10-2025-11-24",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.50"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-09-03",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.35"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-09-17",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 1.50"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-10-16",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-11-05",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -2.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-20-2025-11-20",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -5.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-one-off-2025-10-03",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 13.90"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-one-off-2025-10-10",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-one-off-2025-10-27",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 10.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2025-one-off-2025-12-07",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 19.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-20-2026-08-19",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -3.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-20-2026-08-26",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-20-2026-09-02",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.10"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-one-off-2026-08-20",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.25"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-one-off-2026-09-03",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 6.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-one-off-2026-09-30",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.20"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "fall-2026-one-off-2026-10-05",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 5.20"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-01-14",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.25"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-01-28",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 9.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-02-11",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.45"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-02-25",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.35"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-10-2026-04-01",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.30"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-01-07",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 1.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-02-04",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -2.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-02-18",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-03-26",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 5.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-20-2026-04-22",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-50-2026-05-03",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -20.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "spring-2026-one-off-2026-01-31",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -1.00"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-10-2026-06-05",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.25"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-20-2026-06-30",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.20"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-20-2026-07-14",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to 0.10"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-20-2026-07-28",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -0.40"
+    },
+    {
+      "workbook": "normalized",
+      "sheet": "summer-2026-20-2026-08-16",
+      "row": 0,
+      "severity": "warning",
+      "message": "Night profit reconciles to -2.00"
+    }
+  ]
+}

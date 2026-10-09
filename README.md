@@ -1,10 +1,10 @@
-﻿# Poker Stats
+# Poker Stats
 
 **A multi-season poker analytics dashboard built from messy real-world spreadsheet data.**
 
 Poker Stats turns our home game's historical Excel workbooks into a searchable analytics application with player profiles, game history, league-wide statistics, head-to-head comparisons, interactive charts, and data-driven player classifications.
 
-The application includes a Supabase-backed league management portal at `/manage` for game and result CRUD. Sign up at `/auth/signup` and link your player pages from `/account`. New accounts default to `player`; a project administrator can promote `public.users.role` to `admin` to manage games across leagues. Once configured, Supabase is the source of truth for league analytics. Without database configuration, the committed workbooks remain available as a read-only archive.
+The application includes a Supabase-backed league management portal at `/manage` for game and result CRUD. Sign up at `/auth/signup` and link your player pages from `/account`. New accounts default to `player`; a project administrator can promote `public.users.role` to `admin` to manage games across leagues. Supabase is required and is the source of truth for league analytics. The original spreadsheets have been retired from the deployed source; missing database configuration or outages display an error rather than stale history.
 
 See [Backend setup](docs/backend-setup.md) for the schema, authentication and roles, safe historical import, and database validation. All historical records migrate into **UNC Poker**; additional leagues have isolated games, players, and membership.
 
@@ -20,7 +20,7 @@ That worked fine for recording results, but it became increasingly difficult to 
 
 Instead of replacing the spreadsheets, I built an application around them.
 
-The result is a read-only analytics layer that treats the existing workbooks as an ingestion format and converts them into a consistent domain model the rest of the application can use.
+It began as a read-only analytics layer over the workbooks. It now records games and reads league analytics from Supabase, while retaining the original importer for external archives.
 
 ---
 
@@ -32,20 +32,20 @@ The result is a read-only analytics layer that treats the existing workbooks as 
 | UI | React, TypeScript |
 | Styling | Tailwind CSS |
 | Charts | Recharts |
-| Excel parsing | SheetJS / `xlsx` |
+| Offline archive import | SheetJS / `xlsx` (development tooling only) |
 | Validation | Zod |
 | Testing | Vitest |
-| Data source | Multi-season Excel workbooks |
+| Data source | Supabase Postgres |
 | Database and authentication | Supabase Postgres, RLS, Supabase Auth |
 
 ---
 
-## Data pipeline
+## Historical import pipeline
 
-The core of the project is the normalization pipeline.
+The historical spreadsheets were normalized once and imported by migration `202610090004`. Live pages read Supabase directly. The pipeline below describes the retained offline importer, which accepts an external archive directory with `npm run db:export -- --input-dir /path/to/archive`.
 
 ```text
-data/*.xlsx
+/path/to/archive/*.xlsx
      │
      ▼
 Workbook discovery
@@ -77,14 +77,14 @@ Next.js dashboards
 Season files follow a simple naming convention:
 
 ```text
-data/
+/path/to/archive/
 ├── fall-2025.xlsx
 ├── spring-2026.xlsx
 ├── summer-2026.xlsx
 └── fall-2026.xlsx
 ```
 
-The application discovers matching workbooks automatically, so adding another season does not require registering it in application code.
+The offline importer discovers matching archived workbooks automatically. Live seasons are derived from database games entered through Manage league.
 
 ```ts
 const SEASON_WORKBOOK = /^([a-z][a-z0-9-]*-\d{4})\.xlsx$/i;
@@ -256,11 +256,11 @@ The source workbooks are never rewritten by the application.
 
 ## Real-world data
 
-The `data/` directory intentionally contains the historical workbooks used by this instance of the project.
+The four source workbooks were removed after the verified database import. They remain recoverable from Git history; keep an organizer-controlled archive outside the application for historical review. No deployed page or build requires Excel files.
 
-They provide a useful real-world example of the inconsistencies the ingestion layer was built to handle: changing worksheet structures, inconsistent player names, incomplete rows, new game formats, and several seasons of accumulated data.
+Historical parity tests use `test/fixtures/historical-data.json`, a frozen normalization snapshot. Small synthetic workbook tests exercise the offline parser. The SQL migration, manifest and verification query remain committed under `supabase/`.
 
-If adapting this project for another poker group, replace the workbooks in `data/` with files following the same season naming convention and sheet structure.
+See [Historical data review](docs/data-quality-report.md) for the missing payout, preserved Net discrepancies and game reconciliation checklist.
 
 ---
 
@@ -303,8 +303,9 @@ npm run build
 ## Repository structure
 
 ```text
-data/
-└── *.xlsx                         # Source workbooks
+supabase/
+├── migrations/                    # Schema and frozen historical import
+└── imports/                       # Import manifest and verification SQL
 
 docs/
 ├── data-mapping.md
@@ -358,7 +359,7 @@ Then open:
 http://localhost:3000
 ```
 
-Because the workbooks are committed under `data/`, no external service is required to explore the read-only archive locally. To enable game entry and make the database authoritative, follow [Backend setup](docs/backend-setup.md). The earlier pipeline sections describe workbook ingestion used for that historical import.
+Before starting, copy `.env.example` to `.env.local` and configure your Supabase project URL and publishable key. Follow [Backend setup](docs/backend-setup.md) for migrations and authentication. Supabase is required for local league pages as well as production. Tests use isolated fixtures and an in-memory PostgreSQL instance; they need no live project or spreadsheet archive.
 
 ---
 
@@ -380,4 +381,4 @@ validated analytics
 useful interface
 ```
 
-That architecture lets the spreadsheets continue doing what they are good at—being easy to update—while the application handles the increasingly complicated analysis built on top of them.
+New games are recorded through Manage league. The original normalization tools remain available for reviewing archived source data.
