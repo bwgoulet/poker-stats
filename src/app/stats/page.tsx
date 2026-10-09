@@ -1,3 +1,4 @@
+import { toSearchParams, type SearchParams } from '@/lib/filters/scope-query';
 import Link from 'next/link';
 import { getPokerData } from '@/lib/data/poker-repository';
 import { getDataSeasonIds, parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
@@ -6,7 +7,7 @@ import { dollars, pct } from '@/lib/formatting/format';
 
 type BoardRow = { id: string; label: string; value: string; href: string };
 
-export default async function Stats({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
+export default async function Stats({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const sp = await searchParams;
   const data = await getPokerData();
   const seasonIds = getDataSeasonIds(data.nights);
@@ -18,14 +19,16 @@ export default async function Stats({ searchParams }: { searchParams: Promise<Re
   const eligiblePlayers = new Set(stats.map(stat => stat.player.id));
   const single = results.filter(result => eligiblePlayers.has(result.playerId)).sort((a, b) => b.profit - a.profit).slice(0, 10);
   const players = new Map(data.players.map(player => [player.id, player.displayName]));
-  const query = new URLSearchParams(sp as Record<string, string>).toString();
+  const scopedNightIds = new Set(nights.map(night => night.id));
+  const issues = data.issues.filter(issue => scopedNightIds.has(issue.sheet));
+  const query = toSearchParams(sp).toString();
   const playerRow = (stat: typeof stats[number]): BoardRow => ({ id: stat.player.id, label: stat.player.displayName, value: dollars(stat.totalProfit), href: `/players/${stat.player.id}?${query}` });
 
   return <><header><p className="text-carolina-dark font-semibold">{scopeLabel(filters, seasonIds)}</p><h1 className="text-4xl font-black">Stats</h1></header><section className="grid lg:grid-cols-3 gap-5">
     <Board title="Most profitable" rows={stats.slice(0, 10).map(playerRow)} />
     <Board title={`Highest ROI (${MIN_SAMPLE_SIZE}+ nights)`} rows={roi.map(stat => ({ ...playerRow(stat), value: pct(stat.roi) }))} />
     <Board title="Largest single-night wins" rows={single.map(result => ({ id: result.nightId, label: players.get(result.playerId) ?? result.sourceName, value: dollars(result.profit), href: `/games/${result.nightId}?${query}` }))} />
-  </section><div className="card p-5"><h2 className="font-bold text-xl mb-2">Data quality</h2><p className="text-gray-600">{data.issues.length} validation or reconciliation notes for this league.</p></div></>;
+  </section><div className="card p-5"><h2 className="font-bold text-xl mb-2">Data quality</h2><p className="text-gray-600">{issues.length} validation or reconciliation notes in the selected scope.</p></div></>;
 }
 
 function Board({ title, rows }: { title: string; rows: BoardRow[] }) {

@@ -1,3 +1,4 @@
+import { toSearchParams, type SearchParams } from '@/lib/filters/scope-query';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -11,7 +12,7 @@ export default async function Game({
   searchParams,
 }: {
   params: Promise<{ nightId: string }>;
-  searchParams: Promise<Record<string, string | undefined>>;
+  searchParams: Promise<SearchParams>;
 }) {
   const { nightId } = await params;
   const sp = await searchParams;
@@ -20,7 +21,7 @@ export default async function Game({
 
   if (!night) notFound();
 
-  const paramsString = new URLSearchParams(sp as Record<string, string>).toString();
+  const paramsString = toSearchParams(sp).toString();
   const results = data.results
     .filter((result) => result.nightId === nightId)
     .sort((a, b) => (a.placement ?? 99) - (b.placement ?? 99));
