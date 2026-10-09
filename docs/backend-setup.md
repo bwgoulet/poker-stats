@@ -383,3 +383,13 @@ sign-in/session refresh, profile creation, admin game CRUD without a membership,
 and account/player-page linking in Auth/PostgREST. Confirm a player/viewer is
 read-only and a second private league is invisible to unrelated accounts. These
 project-specific checks require a live Supabase connection.
+
+## One-off scope categories
+
+Apply migrations 202610090009 and 202610090010 before deploying the new game editor. They add $10 one-offs and $20 one-offs to the database and RPC, then reclassify regular $10/$20 games whose titles explicitly say “one-off” (including spaced and hyphenated variants), or whose retained import metadata marks them as one-offs. An explicit $10/$20 stake in the title takes precedence; otherwise the recorded regular stake supplies the one-off stake. Generic one-offs remain in “Other one-offs” unless the title explicitly records a $10 or $20 stake; rebuys are never used to guess the nominal stake. Correction preserves game IDs, results, recorded amounts, and source references, increments the version, and writes an audit record. Rerunning the correction produces no additional changes.
+
+Default and Current Season scopes select regular $10/$20 nights only. One-off checkboxes can be selected separately or combined with regular nights. Legacy nightType=one-off URLs and saved scopes continue to select all one-offs. Titles marked “one-off” are normalized at both application and database save boundaries to prevent them reentering regular-night totals.
+
+The historical stake-classification migration now uses unique version 202610090008; it previously duplicated 202610090007 used by completed-game validation. Apply migrations in filename order. The subsequent one-off correction retains the stake assignments and restores one-off categories for all 16 imported one-offs.
+
+Player BB totals and buy-in normalization retain the nominal stakes for explicit $10/$20 one-offs, so these statistics remain available when those one-offs are in scope.

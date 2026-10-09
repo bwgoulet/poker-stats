@@ -4,18 +4,12 @@ import { useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { parseFilters, MIN_NIGHTS_OPTIONS } from '@/lib/filters/filter-data';
 import { withScope } from '@/lib/filters/scope-query';
-import type { NightType } from '@/types/poker';
+import { NIGHT_TYPE_OPTIONS, DEFAULT_NIGHT_TYPES, type ScopeNightType } from '@/lib/filters/night-types';
 import { navigationStartEvent } from '@/components/layout/NavigationLoader';
 
-const nightTypes = [
-  ['10', '$10 nights'],
-  ['20', '$20 nights'],
-  ['50', '$50 nights'],
-  ['one-off', 'One-offs'],
-  ['online', 'Online'],
-] as const;
-const currentSeasonNightTypes: NightType[] = ['10', '20'];
-const defaultNightTypes: NightType[] = ['10', '20'];
+const nightTypes = NIGHT_TYPE_OPTIONS;
+const currentSeasonNightTypes: ScopeNightType[] = DEFAULT_NIGHT_TYPES;
+const defaultNightTypes = DEFAULT_NIGHT_TYPES;
 const minNightsOptions = MIN_NIGHTS_OPTIONS;
 
 function seasonLabel(season: string) {

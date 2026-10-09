@@ -58,28 +58,7 @@ export default async function Dashboard({
           Live league statistics from completed games.
         </p>
       </header>
-      {nights.length > 0 && (
-        <section className="card p-5" aria-labelledby="reconciliation-heading">
-          <h2 id="reconciliation-heading" className="text-sm font-semibold text-gray-600">
-            Reconciliation discrepancies · Selected scope
-          </h2>
-          <p className="mt-1 text-2xl font-black">{dollars(reconciliation.totalDiscrepancy)}</p>
-          <dl className="mt-3 grid gap-3 sm:grid-cols-2">
-            <div>
-              <dt className="text-sm text-gray-600">Extra bought in (buy-ins exceed cash-outs)</dt>
-              <dd className="font-bold tabular-nums">{dollars(reconciliation.extraBuyIn)}</dd>
-            </div>
-            <div>
-              <dt className="text-sm text-gray-600">Extra bought out (cash-outs exceed buy-ins)</dt>
-              <dd className="font-bold tabular-nums">{dollars(reconciliation.extraCashOut)}</dd>
-            </div>
-          </dl>
-          <p className="mt-3 text-sm text-gray-500">
-            Sum of each game's buy-in/cash-out mismatch across {reconciliation.affectedGames} completed
-            {reconciliation.affectedGames === 1 ? ' game' : ' games'} in the selected seasons and night types. Recorded discrepancies do not necessarily represent money lost.
-          </p>
-        </section>
-      )}
+      {nights.length > 0 && <ReconciliationCard reconciliation={reconciliation} query={params.toString()} />}
       {nights.length === 0 ? (
         <>
           <div className="card p-10 text-center">
@@ -87,7 +66,6 @@ export default async function Dashboard({
             {!data.league.id && <Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage">Open league management</Link>}
             {data.nights.length === 0 && canEdit(data.league.role) && <><p className="mt-2 text-gray-600">Complete a game to start building your league statistics.</p><Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage?new=1">Record a game</Link></>}
           </div>
-          {data.nights.length > 0 && <ReconciliationCard reconciliation={reconciliation} />}
         </>
       ) : (
         <>
@@ -148,8 +126,6 @@ export default async function Dashboard({
               ))}
             </div>
           </section>
-
-          <ReconciliationCard reconciliation={reconciliation} />
 
           <section>
             <h2 className="text-xl font-black mb-4">League balance</h2>

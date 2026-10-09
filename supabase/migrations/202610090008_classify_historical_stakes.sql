@@ -24,7 +24,7 @@ do $check$
 begin
   if exists (select 1 from _stakes s left join public.games g
     on g.id = s.id and g.league_id = '00000000-0000-4000-8000-000000000001'
-    where g.id is null or g.night_type not in (s.old_type, s.new_type)) then
+    where g.id is null or g.night_type not in (s.old_type, s.new_type, 'one-off-' || s.new_type)) then
     raise exception 'Historical stake classification conflicts with existing games. No changes applied.';
   end if;
   if exists (select 1 from _stakes s join public.games g
@@ -45,12 +45,12 @@ from public.games g join _stakes s on s.id = g.id
 where g.league_id = '00000000-0000-4000-8000-000000000001' and g.night_type = s.old_type;
 update public.games g set night_type = c.new_type,
   title = '$' || c.new_type || ' ' || case c.old_type when 'online' then 'online' else 'one-off' end || ' · ' || g.date,
-  notes = coalesce(g.notes, '') || E'\nHistorical stake classification 007: originally ' || c.old_type ||
+  notes = coalesce(g.notes, '') || E'\nHistorical stake classification 008: originally ' || c.old_type ||
     '; classified as $' || c.new_type || case c.new_type when '10' then ' because a recorded player bought in for exactly $10.' else ' because no recorded player bought in for $10; inferred $20 game.' end,
   version = g.version + 1, updated_at = now()
 from _stake_changes c where g.id = c.id and g.league_id = '00000000-0000-4000-8000-000000000001';
 insert into public.game_audit_log (league_id, game_id, action, actor_snapshot, before_data, after_data)
-select g.league_id, g.id, 'update', '{"migration":"202610090007","reason":"Owner-requested historical stake classification"}'::jsonb,
+select g.league_id, g.id, 'update', '{"migration":"202610090008","reason":"Owner-requested historical stake classification"}'::jsonb,
  c.before_data, to_jsonb(g)
 from _stake_changes c join public.games g on g.id = c.id
 where g.league_id = '00000000-0000-4000-8000-000000000001';

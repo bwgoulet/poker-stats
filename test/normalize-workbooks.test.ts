@@ -71,6 +71,27 @@ describe('archived workbook normalization and historical snapshot', () => {
     expect(blockIsOnline(rows, 3, 5, 'fall-2026')).toBe(false);
   });
 
+  it('keeps explicitly named $10/$20 one-off sheets separate from regular nights', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'poker-one-offs-'));
+    const workbook = XLSX.utils.book_new();
+    for (const name of ['Stats $10', 'Stats $10 One-offs', 'One-offs $20', 'One-offs']) {
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([
+        ['Player', '', 'Buy-in', 'End', 'Net'],
+        ['', 'October 3rd 2026'],
+        ['Ben', '', 60, 100, 40],
+      ]), name);
+    }
+    XLSX.writeFile(workbook, join(directory, 'fall-2026.xlsx'));
+    try {
+      const data = normalizeWorkbooks(directory);
+      expect(data.nights.map(night => night.nightType)).toEqual(['10', 'one-off-10', 'one-off-20', 'one-off']);
+      expect(new Set(data.nights.map(night => night.id)).size).toBe(4);
+      expect(data.results).toHaveLength(4);
+      expect(data.nights.filter(night => night.nightType.startsWith('one-off'))
+        .every(night => night.notes === 'Excluded from workbook totals')).toBe(true);
+    } finally { rmSync(directory, { recursive: true }); }
+  });
+
   it('imports games and results from a dedicated Online sheet', () => {
     const onlineNight = normalizedData.nights.find(
       (night) => night.id === 'fall-2026-online-2026-09-27',
