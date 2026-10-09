@@ -11,6 +11,15 @@ try {
   await db.exec(await readFile(new URL('tests/bootstrap.sql', root), 'utf8'));
   const migrations = (await readdir(fileURLToPath(new URL('migrations/', root))))
     .filter((name) => name.endsWith('.sql')).sort();
+  const versions = new Map();
+  for (const migration of migrations) {
+    const version = migration.match(/^(\d+)_/)?.[1];
+    if (!version) throw new Error(`Invalid migration filename: ${migration}`);
+    if (versions.has(version)) {
+      throw new Error(`Duplicate migration version ${version}: ${versions.get(version)} and ${migration}`);
+    }
+    versions.set(version, migration);
+  }
   let total = 0;
   async function runSuite(suite) {
     const results = await db.exec(await readFile(new URL(`tests/${suite}`, root), 'utf8'));
@@ -25,6 +34,9 @@ try {
     // These suites use empty-league fixtures and roll them back. Run them at
     // the schema boundary before the production historical records are seeded.
     if (migration === '202610090004_import_historical_workbooks.sql') {
+      // Exercise current game validation before seeding history. Migration 007
+      // only replaces the RPC and is safe to apply again in filename order.
+      await db.exec(await readFile(new URL('migrations/202610090007_allow_unbalanced_completed_games.sql', root), 'utf8'));
       await runSuite('assertions.sql');
       // Exercise the current link-review contract on empty-league fixtures.
       // Migration 006 only replaces the RPC and is safe to apply again below.
