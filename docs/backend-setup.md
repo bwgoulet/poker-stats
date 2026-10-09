@@ -1,3 +1,57 @@
+# Discord accounts and verified player links
+
+The account page now uses **Sign in with Discord** to create or sign in to an
+account through Supabase Auth. Email sign-in remains available. After signing in,
+choose a league and player page or **No link for now**. A no-link choice is saved
+on the account and can be changed later. Private league rosters remain restricted
+to members; sign-in and linking never grant management privileges.
+
+## Enable the live account flow
+
+1. Connect the existing Supabase project using the two public variables described
+   below, and apply migrations 001, 002, then
+   `supabase/migrations/202610090003_discord_link_verification.sql`.
+   Existing player links are preserved; all new claims become pending requests.
+2. In the Discord Developer Portal, create/select your application and add this
+   OAuth2 redirect: `https://<project-ref>.supabase.co/auth/v1/callback`.
+   Use the callback shown by Supabase if your Auth endpoint uses a custom domain.
+3. In Supabase Authentication → Sign In / Providers → Discord, enable Discord
+   and enter the Discord application's client ID and client secret. The Discord
+   secret belongs only in Supabase, never in this app's public environment values.
+   Allow new user signups in Supabase Authentication.
+4. Set Supabase's Site URL to the application's production origin and allow
+   `<origin>/auth/callback` (plus the local development callback when needed).
+   The Discord redirect goes to Supabase; Supabase then returns to the app.
+5. Sign in with Discord. Assign your account `admin` in `public.users` using the
+   privileged first-admin setup below, or assign `owner`/`admin` league membership.
+   OAuth metadata can never promote an account. Account reviews require these
+   actual database permissions.
+6. Verify on the live project with two distinct accounts: submit a claim from a
+   player account, approve it from a league owner/admin's **My account → Verify
+   player links**, then refresh the player account to see its profile. Also test
+   rejection, cancellation, no-link, sign-out/session refresh, and Discord denial.
+
+An administrator cannot approve their own claim. Another league owner/admin or
+an app administrator must review it. The review queue shows the Discord user ID from the Auth identity (or the account
+ID for email users), so administrators can confirm who is making the claim.
+Review records retain the decision, reviewer,
+and time. Conflicting approvals are rejected atomically; a pending claim reserves
+no player ownership. Claimants can cancel pending requests and choose again.
+Existing verified ownership constraints still allow one account per player and
+one player per account per league. The account page shows every accessible linked
+profile, with all-time profit, ROI, rank, buy-ins/cash-outs, win rate, streaks,
+championships, a profit chart, and full completed-game history. It uses the same
+statistics and historical profit overrides as the league dashboards.
+
+No live Supabase project or Discord application was configured by this code
+change. The setup above is necessary before real OAuth sign-in works. Without
+configuration the account page shows the Discord entry point with a clear service
+setup state; it cannot create a simulated account.
+
+The earlier setup notes below describe the existing database, email signup,
+privileged administration, and workbook cutover. Where they describe instant
+self-claims, migration 003 supersedes that behavior with administrator review.
+
 # Supabase league management
 
 The `/manage` portal is the entry point for recording games, updating results,
