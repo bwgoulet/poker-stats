@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import {
   getCurrentSeasonId,
@@ -6,12 +6,8 @@ import {
   parseFilters,
   scopeLabel,
 } from '@/lib/filters/filter-data';
-import { getSeasonIds } from '@/lib/data/load-workbooks';
 import type { PokerNight } from '@/types/poker';
 
-vi.mock('@/lib/data/load-workbooks', () => ({
-  getSeasonIds: vi.fn(() => ['workbook-2025']),
-}));
 
 const databaseSeasonIds = ['autumn-2030', 'winter-2031'];
 
@@ -19,12 +15,10 @@ function night(id: string, seasonId: string, date: string): PokerNight {
   return { id, seasonId, date, title: id, nightType: '20' };
 }
 
-beforeEach(() => vi.clearAllMocks());
 
 describe('filters for database seasons', () => {
   it('defaults to the supplied league seasons without discovering workbooks', () => {
     expect(parseFilters({}, databaseSeasonIds).season).toEqual(databaseSeasonIds);
-    expect(getSeasonIds).not.toHaveBeenCalled();
   });
 
   it('accepts explicit database seasons and rejects seasons outside the league', () => {
@@ -35,7 +29,6 @@ describe('filters for database seasons', () => {
 
     expect(filters.season).toEqual(['winter-2031']);
     expect(scopeLabel(filters, databaseSeasonIds)).toBe('Winter ’31 · $20 nights · 1+ nights');
-    expect(getSeasonIds).not.toHaveBeenCalled();
   });
 
   it('falls back to all supplied league seasons when a selection is invalid', () => {
@@ -50,13 +43,11 @@ describe('filters for database seasons', () => {
     }, databaseSeasonIds);
 
     expect(scopeLabel(filters, databaseSeasonIds)).toBe('All-time · All night types · 3+ nights');
-    expect(getSeasonIds).not.toHaveBeenCalled();
   });
 
   it('keeps an empty league empty instead of falling back to workbook seasons', () => {
     expect(parseFilters({}, []).season).toEqual([]);
     expect(parseFilters({ season: 'workbook-2025' }, []).season).toEqual([]);
-    expect(getSeasonIds).not.toHaveBeenCalled();
   });
 });
 
@@ -73,7 +64,6 @@ describe('seasons derived from league game data', () => {
     expect(getDataSeasonIds(nights)).toEqual(['spring-2026', 'winter-2027', 'fall-2025']);
     expect(getCurrentSeasonId(nights)).toBe('spring-2026');
     expect(nights.map(({ id }) => id)).toEqual(originalOrder);
-    expect(getSeasonIds).not.toHaveBeenCalled();
   });
 
   it('orders seasons with equally recent games deterministically', () => {
@@ -89,6 +79,5 @@ describe('seasons derived from league game data', () => {
   it('has no available or current season when there are no games', () => {
     expect(getDataSeasonIds([])).toEqual([]);
     expect(getCurrentSeasonId([])).toBeUndefined();
-    expect(getSeasonIds).not.toHaveBeenCalled();
   });
 });

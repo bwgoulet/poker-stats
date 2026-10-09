@@ -20,7 +20,6 @@
     "react-dom": "^19.2.7",
     "recharts": "^3.9.2",
     "tailwindcss": "^4.3.2",
-    "xlsx": "^0.18.5",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -30,6 +29,7 @@
     "@types/react-dom": "^19.2.3",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "xlsx": "^0.18.5"
   }
 }

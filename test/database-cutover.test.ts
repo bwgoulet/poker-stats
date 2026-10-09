@@ -2,18 +2,18 @@ import { beforeEach, expect, it, vi } from 'vitest';
 
 const fixtures = vi.hoisted(() => ({
   normalize: vi.fn(() => { throw new Error('Historical spreadsheets have been archived.'); }),
-  server: vi.fn(),
+  server: vi.fn(), configured: true,
 }));
 vi.mock('next/headers', () => ({ cookies: async () => ({ get: () => undefined }) }));
 vi.mock('@/lib/data/normalize-workbooks', () => ({ normalizeWorkbooks: fixtures.normalize }));
 vi.mock('@/lib/backend/supabase', () => ({
-  supabaseConfig: () => ({ url: 'https://example.supabase.co', key: 'public-test-key' }),
+  supabaseConfig: () => fixtures.configured ? { url: 'https://example.supabase.co', key: 'public-test-key' } : null,
   serverSupabase: fixtures.server,
 }));
-import { getActivePokerData } from '@/lib/backend/repository';
+import { getPortalData, getActivePokerData } from '@/lib/backend/repository';
 import { UNC_LEAGUE_ID } from '@/lib/backend/types';
 
-beforeEach(() => vi.clearAllMocks());
+beforeEach(() => { vi.clearAllMocks(); fixtures.configured = true; });
 
 it('reads database analytics when the historical spreadsheets are unavailable', async () => {
   const rows: Record<string, unknown[]> = {
@@ -48,4 +48,12 @@ it('surfaces a database outage without attempting to load archived spreadsheets'
   fixtures.server.mockRejectedValue(new Error('Database unavailable'));
   await expect(getActivePokerData()).rejects.toThrow('Database unavailable');
   expect(fixtures.normalize).not.toHaveBeenCalled();
+});
+
+it('requires database configuration instead of falling back to historical files', async () => {
+  fixtures.configured = false;
+  await expect(getActivePokerData()).rejects.toThrow('League data requires Supabase');
+  await expect(getPortalData()).rejects.toThrow('League data requires Supabase');
+  expect(fixtures.normalize).not.toHaveBeenCalled();
+  expect(fixtures.server).not.toHaveBeenCalled();
 });

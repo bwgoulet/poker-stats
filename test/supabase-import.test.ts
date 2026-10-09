@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildWorkbookImport, type NormalizedWorkbookData } from '@/lib/backend/import-workbooks';
-import { normalizeWorkbooks } from '@/lib/data/normalize-workbooks';
+import { historicalData } from './helpers/historical-data';
 import { UNC_LEAGUE_ID } from '@/lib/backend/types';
 
 function fixture(): NormalizedWorkbookData {
@@ -14,7 +14,7 @@ function fixture(): NormalizedWorkbookData {
 
 describe('offline Supabase workbook import', () => {
   it('preserves canonical historical IDs and source standings in integer cents', () => {
-    const normalized = normalizeWorkbooks();
+    const normalized = historicalData();
     const imported = buildWorkbookImport(normalized);
     expect(imported.manifest.league.id).toBe(UNC_LEAGUE_ID);
     expect(imported.players.map((player) => player.id).sort()).toEqual(normalized.players.map((player) => player.id).sort());

@@ -3,11 +3,11 @@ vi.mock('next/headers', () => ({ cookies: async () => ({ get: () => undefined })
 vi.mock('@/lib/backend/supabase', () => ({ supabaseConfig: () => null, serverSupabase: vi.fn() }));
 import { portalToPokerData } from '@/lib/backend/repository';
 import { buildWorkbookImport } from '@/lib/backend/import-workbooks';
-import { normalizeWorkbooks } from '@/lib/data/normalize-workbooks';
+import { historicalData } from './helpers/historical-data';
 import { UNC_LEAGUE_ID, type PortalData } from '@/lib/backend/types';
 import type { PlayerResult } from '@/types/poker';
 
-function historicalPortal(normalized = normalizeWorkbooks()): PortalData {
+function historicalPortal(normalized = historicalData()): PortalData {
   const imported = buildWorkbookImport(normalized);
   return {
     configured: true, user: null, selectedLeagueId: UNC_LEAGUE_ID,
@@ -20,7 +20,7 @@ const comparable = (rows: PlayerResult[]) => new Map(rows.map(({ nightId, player
 
 describe('database analytics adapter', () => {
   it('preserves all historical results and tie placements after migration', () => {
-    const normalized = normalizeWorkbooks();
+    const normalized = historicalData();
     const adapted = portalToPokerData(historicalPortal(normalized));
     expect(comparable(adapted.results)).toEqual(comparable(normalized.results));
     expect(adapted.players).toEqual(normalized.players);

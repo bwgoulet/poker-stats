@@ -68,7 +68,7 @@ export function LeagueSwitcher({ configured, leagues, selectedLeagueId, user }: 
   }
 
   if (!configured) {
-    return <p className="mt-6 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs leading-relaxed text-blue-100/75">Workbook archive · Open Manage league for database setup.</p>;
+    return <p className="mt-6 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs leading-relaxed text-blue-100/75">League service is not configured.</p>;
   }
 
   return <div className="mt-6 space-y-2">

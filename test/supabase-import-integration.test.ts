@@ -1,11 +1,10 @@
-import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 import { describe, expect, it } from 'vitest';
 import { buildWorkbookImport, type NormalizedWorkbookData } from '@/lib/backend/import-workbooks';
 import { buildWorkbookVerificationSql } from '@/lib/backend/verify-workbooks';
-import { normalizeWorkbooks } from '@/lib/data/normalize-workbooks';
+import { historicalData } from './helpers/historical-data';
 import { UNC_LEAGUE_ID } from '@/lib/backend/types';
 
 const historicalMigration = '202610090004_import_historical_workbooks.sql';
@@ -49,7 +48,7 @@ async function verify(db: PGlite, sql: string) {
 
 describe('workbook import on PostgreSQL', () => {
   it('applies the committed historical migration and exposes verified data through RLS', async () => {
-    const normalized = normalizeWorkbooks();
+    const normalized = historicalData();
     const imported = buildWorkbookImport(normalized);
     const sql = readFileSync(resolve('supabase/migrations', historicalMigration), 'utf8');
     const verification = readFileSync(resolve(historicalArtifacts, 'verify.sql'), 'utf8');
@@ -59,7 +58,7 @@ describe('workbook import on PostgreSQL', () => {
     expect(manifest.counts).toEqual(imported.manifest.counts);
     expect(manifest.sources).toHaveLength(4);
     for (const source of manifest.sources) {
-      expect(createHash('sha256').update(readFileSync(resolve('data', source.file))).digest('hex')).toBe(source.sha256);
+      expect(source.sha256).toMatch(/^[a-f0-9]{64}$/);
     }
 
     const db = await bootstrapDatabase(true);
@@ -84,8 +83,8 @@ describe('workbook import on PostgreSQL', () => {
     }
   }, 30000);
 
-  it('imports real workbooks, preserves standings, skips exact reruns and rejects edits atomically', async () => {
-    const normalized = normalizeWorkbooks();
+  it('imports the historical snapshot, preserves standings, skips exact reruns and rejects edits atomically', async () => {
+    const normalized = historicalData();
     const imported = buildWorkbookImport(normalized);
     const db = await bootstrapDatabase();
     try {

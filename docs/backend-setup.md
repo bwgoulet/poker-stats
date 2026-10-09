@@ -45,8 +45,8 @@ statistics and historical profit overrides as the league dashboards.
 
 No live Supabase project or Discord application was configured by this code
 change. The setup above is necessary before real OAuth sign-in works. Without
-configuration the account page shows the Discord entry point with a clear service
-setup state; it cannot create a simulated account.
+configuration league pages show a database setup error; no simulated account or
+spreadsheet fallback is available.
 
 The earlier setup notes below describe the existing database, email signup,
 privileged administration, and workbook cutover. Where they describe instant
@@ -57,9 +57,8 @@ self-claims, migration 003 supersedes that behavior with administrator review.
 The `/manage` portal is the entry point for recording games, updating results,
 adding players, and creating or configuring leagues. The existing dashboards read
 the selected league's completed database games once Supabase is configured.
-Without configuration the committed workbooks remain a clearly labeled read-only
-archive; writes are disabled. A configured database failure never substitutes old
-workbook data.
+Supabase configuration is required. Missing configuration or a database failure
+shows an error; no archived workbook data is served.
 
 ## Connect a project
 
@@ -193,10 +192,9 @@ this implementation.
 ### Apply the committed historical migration
 
 Connecting Supabase switches the dashboards to database reads. An empty database
-therefore shows **No completed games yet** even while the source workbooks remain
-in the repository. OAuth sign-in does not import those workbooks.
+therefore shows **No completed games yet** before the historical import has been applied. OAuth sign-in does not import those workbooks.
 
-The frozen import of all four committed season workbooks is ready to execute:
+The frozen import of all four original season workbooks is ready to execute:
 
 1. Confirm migrations `202610090001`, `202610090002`, and `202610090003` have
    already been applied to the same Supabase project used by the deployed app.
@@ -218,7 +216,7 @@ cash-outs, inferred placements, original dates, and historical Net overrides.
 It contains 49 players, 62 games, and 696 valid results across fall 2025, spring
 2026, summer 2026, and fall 2026. The one incomplete source result is Drew's
 October 3, 2025 one-off: a $50 buy-in with `?` for cash-out and Net
-(`fall-2025.xlsx`, `One-offs (not in totals)`, row 6). It remains in the workbook
+(`fall-2025.xlsx`, `One-offs (not in totals)`, row 6). It remains in the external source archive
 and is reported in the manifest; no payout or profit is invented. Correct this
 record separately once its actual cash-out is known. Other source reconciliation
 warnings and six Net overrides are preserved, not balanced artificially.
@@ -234,7 +232,7 @@ review a new export; do not regenerate an already-applied migration.
 Run from the repository root:
 
 ```bash
-npm run db:export
+npm run db:export -- --input-dir /path/to/archive
 ```
 
 This creates `work/supabase-import.sql`, `work/supabase-import-manifest.json`, and
@@ -272,7 +270,7 @@ records; regenerating it from changed workbooks changes the comparison baseline.
 
 After cutover, record new games in the portal. This is an initial migration, not a
 synchronization job. Follow [Spreadsheet retirement](spreadsheet-retirement.md)
-to archive the workbooks and later remove them from the deployed repository.
+for the source archive and database-only runtime.
 
 ## Data and access model
 

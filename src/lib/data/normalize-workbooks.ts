@@ -88,14 +88,14 @@ export function blockIsOnline(rows: unknown[][], start: number, column: number |
   return false;
 }
 
-export function normalizeWorkbooks() {
+export function normalizeWorkbooks(dataDir?: string) {
   const players = new Map<string, Player>();
   const nights: PokerNight[] = [];
   const results: PlayerResult[] = [];
   const issues: ValidationIssue[] = [];
   const seenNights = new Set<string>();
 
-  for (const wb of loadWorkbooks()) {
+  for (const wb of loadWorkbooks(dataDir)) {
     for (const sheetName of wb.workbook.SheetNames) {
       const nt = sheetType(sheetName);
       if (!nt) continue;
