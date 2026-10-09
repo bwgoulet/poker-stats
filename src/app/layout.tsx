@@ -17,6 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const shell = await Promise.all([getPokerData(), getPortalData()])
     .then(([data, portal]) => ({
       seasonIds: getDataSeasonIds(data.nights),
+      gameSeasonIds: getDataSeasonIds(portal.games),
       currentSeason: getCurrentSeasonId(data.nights),
       leagueName: data.league.name,
       portal: { configured: portal.configured, leagues: portal.leagues, selectedLeagueId: portal.selectedLeagueId, user: portal.user },
@@ -26,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       unstable_rethrow(error);
       // Keep sign-in reachable when league records cannot be loaded.
       return {
-        seasonIds: [], currentSeason: undefined, leagueName: 'Poker Tracker',
+        seasonIds: [], gameSeasonIds: [], currentSeason: undefined, leagueName: 'Poker Tracker',
         portal: { configured: true, leagues: [], selectedLeagueId: null, user: null },
         backendUnavailable: true,
       };

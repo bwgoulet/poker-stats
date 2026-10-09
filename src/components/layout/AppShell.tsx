@@ -6,9 +6,10 @@ import { NavigationLinks } from '@/components/layout/NavigationLinks';
 import { NavigationLoader } from '@/components/layout/NavigationLoader';
 import type { PortalData } from '@/lib/backend/types';
 
-export function AppShell({ children, seasonIds, currentSeason, leagueName, portal, backendUnavailable }: {
+export function AppShell({ children, seasonIds, gameSeasonIds, currentSeason, leagueName, portal, backendUnavailable }: {
   children: React.ReactNode;
   seasonIds: string[];
+  gameSeasonIds?: string[];
   currentSeason?: string;
   leagueName: string;
   portal: Pick<PortalData, 'configured' | 'leagues' | 'selectedLeagueId' | 'user'>;
@@ -36,7 +37,7 @@ export function AppShell({ children, seasonIds, currentSeason, leagueName, porta
         <div className="mx-auto max-w-7xl space-y-7 p-4 md:p-8 lg:p-10">
           {backendUnavailable && <BackendConnectionNotice />}
           <Suspense fallback={null}>
-            <AnalyticsFilters seasonIds={seasonIds} currentSeason={currentSeason} />
+            <AnalyticsFilters gameSeasonIds={gameSeasonIds} seasonIds={seasonIds} currentSeason={currentSeason} />
           </Suspense>
           {children}
         </div>

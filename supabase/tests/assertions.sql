@@ -73,8 +73,8 @@ select tests.login('');
 set local role anon;
 select tests.assert('anon sees only public leagues', (select count(*) = 1 from public.leagues));
 select tests.assert('anon sees only public players', (select count(*) = 2 from public.players));
-select tests.assert('anon cannot see public drafts or private games', (select count(*) = 1 from public.games));
-select tests.assert('anon cannot see draft results or private results', (select count(*) = 2 from public.game_results));
+select tests.assert('anon sees public completed games and drafts only', (select count(*) = 2 from public.games));
+select tests.assert('anon sees public completed and draft results only', (select count(*) = 3 from public.game_results));
 select tests.assert_raises('anon cannot invoke save RPC', $$select public.save_game('00000000-0000-4000-8000-000000000001', tests.game_payload())$$, '42501');
 select tests.assert_raises('anon cannot read membership', $$select * from public.league_members$$, '42501');
 select tests.assert_raises('anon cannot call snapshot bypass', $$select public.game_snapshot('00000000-0000-4000-8000-000000000001','draft-secret')$$, '42501');
@@ -86,7 +86,10 @@ select tests.assert_raises('authenticated null uid cannot create league', $$sele
 select tests.login('10000000-0000-4000-8000-000000000004');
 select tests.assert('outsider sees public plus own private league', (select count(*) = 2 from public.leagues));
 select tests.assert('outsider cannot see other private league', not exists(select 1 from public.leagues where slug='private-poker'));
-select tests.assert('outsider cannot see another league draft results', not exists(select 1 from public.game_results where game_id='draft-secret'));
+select tests.assert('outsider sees public drafts', exists(select 1 from public.games where id='draft-secret'));
+select tests.assert('outsider cannot see other private games', not exists(select 1 from public.games where id='private-game'));
+select tests.assert('outsider cannot see other private results', not exists(select 1 from public.game_results where game_id='private-game'));
+select tests.assert('outsider sees public draft results', exists(select 1 from public.game_results where game_id='draft-secret'));
 select tests.assert_raises('outsider cannot edit UNC', $$select public.save_game('00000000-0000-4000-8000-000000000001', tests.game_payload())$$, '42501');
 select tests.assert_raises('authenticated direct table insert revoked', $$insert into public.players(league_id,id,display_name) values ('00000000-0000-4000-8000-000000000003','bad','Bad')$$, '42501');
 select tests.assert_raises('authenticated cannot escalate role', $$update public.league_members set role='owner' where user_id=auth.uid()$$, '42501');
@@ -175,7 +178,7 @@ select public.update_league('00000000-0000-4000-8000-000000000001','UNC Poker','
 reset role;
 set local role anon;
 select tests.login('');
-select tests.assert('private visibility immediately hides completed games', (select count(*)=0 from public.games));
+select tests.assert('private visibility immediately hides completed games and drafts', (select count(*)=0 from public.games));
 select tests.assert('private visibility immediately hides all results', (select count(*)=0 from public.game_results));
 select tests.assert('private visibility immediately hides all players', (select count(*)=0 from public.players));
 reset role;
@@ -213,7 +216,12 @@ select tests.assert_raises('revoked scorekeeper role immediately blocks save', $
 reset role;
 delete from public.league_members where league_id='00000000-0000-4000-8000-000000000001' and user_id='10000000-0000-4000-8000-000000000002';
 set local role authenticated;
-select tests.assert('revoked membership immediately hides draft results', not exists(select 1 from public.game_results where game_id='draft-secret'));
+select tests.assert('revoked membership still allows public drafts', exists(select 1 from public.game_results where game_id='draft-secret'));
+reset role;
+update public.leagues set visibility='private' where id='00000000-0000-4000-8000-000000000001';
+set local role authenticated;
+select tests.assert('revoked membership hides private drafts', not exists(select 1 from public.games where id='draft-secret'));
+select tests.assert('revoked membership hides private draft results', not exists(select 1 from public.game_results where game_id='draft-secret'));
 reset role;
 
 select count(*)::integer as passed_assertions from tests.assertions;

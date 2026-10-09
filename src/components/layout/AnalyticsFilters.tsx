@@ -3,8 +3,9 @@
 import { usePathname } from 'next/navigation';
 import { GlobalFilterBar } from '@/components/filters/GlobalFilterBar';
 
-export function AnalyticsFilters({ seasonIds, currentSeason }: { seasonIds: string[]; currentSeason?: string }) {
+export function AnalyticsFilters({ seasonIds, gameSeasonIds, currentSeason }: { seasonIds: string[]; gameSeasonIds?: string[]; currentSeason?: string }) {
   const pathname = usePathname();
-  if (pathname.startsWith('/manage') || pathname.startsWith('/auth') || pathname.startsWith('/account') || seasonIds.length === 0) return null;
-  return <GlobalFilterBar seasonIds={seasonIds} currentSeason={currentSeason} />;
+  const seasons = pathname.startsWith('/games') ? gameSeasonIds ?? seasonIds : seasonIds;
+  if (pathname.startsWith('/manage') || pathname.startsWith('/auth') || pathname.startsWith('/account') || seasons.length === 0) return null;
+  return <GlobalFilterBar seasonIds={seasons} currentSeason={pathname.startsWith('/games') ? seasons[0] : currentSeason} />;
 }
