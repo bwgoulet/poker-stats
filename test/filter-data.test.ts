@@ -14,7 +14,9 @@ describe('global filters', () => {
       '20',
       '50',
       'online',
-      'one-off',
+      'one-off-10',
+      'one-off-20',
+      'one-off-other',
     ]);
   });
 

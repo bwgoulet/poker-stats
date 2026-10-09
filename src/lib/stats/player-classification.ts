@@ -1,3 +1,4 @@
+import { nominalNightBuyIn } from '@/lib/filters/night-types';
 import { PlayerResult, PokerNight } from '@/types/poker';
 
 export const MIN_CLASSIFICATION_NIGHTS = 5;
@@ -74,9 +75,7 @@ function percentileRanks(values: Map<string, number>) {
 }
 
 function nominalBuyIn(night: PokerNight) {
-  if (night.nightType === 'one-off' || night.nightType === 'online') return null;
-  const amount = Number(night.nightType);
-  return amount > 0 ? amount : null;
+  return nominalNightBuyIn(night.nightType);
 }
 
 function measurePlayer(player: ClassifiablePlayer, nights: Map<string, PokerNight>): Measurements {

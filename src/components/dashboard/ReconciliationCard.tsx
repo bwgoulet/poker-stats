@@ -2,13 +2,14 @@ import Link from 'next/link';
 import { dateFmt, dollars } from '@/lib/formatting/format';
 import type { leagueReconciliation } from '@/lib/stats/statistics';
 
-export function ReconciliationCard({ reconciliation }: {
+export function ReconciliationCard({ reconciliation, query = '' }: {
   reconciliation: ReturnType<typeof leagueReconciliation>;
+  query?: string;
 }) {
   return (
     <section className="card p-5" aria-labelledby="reconciliation-heading">
       <h2 id="reconciliation-heading" className="text-sm font-semibold text-gray-600">
-        Reconciliation discrepancies · All-time league
+        Reconciliation discrepancies · Selected scope
       </h2>
       <p className="mt-1 text-2xl font-black">{dollars(reconciliation.totalDiscrepancy)}</p>
       <dl className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -23,8 +24,7 @@ export function ReconciliationCard({ reconciliation }: {
       </dl>
       <p className="mt-3 text-sm text-gray-500">
         Sum of each game's buy-in/cash-out mismatch across {reconciliation.affectedGames} completed
-        {reconciliation.affectedGames === 1 ? ' game' : ' games'}. Covers all seasons and night types,
-        regardless of filters. Recorded discrepancies do not necessarily represent money lost.
+        {reconciliation.affectedGames === 1 ? ' game' : ' games'} in the selected seasons and night types. Recorded discrepancies do not necessarily represent money lost.
       </p>
       {reconciliation.games.length > 0 ? (
         <details className="mt-4 border-t pt-3">
@@ -34,7 +34,7 @@ export function ReconciliationCard({ reconciliation }: {
           <ul className="mt-3 max-h-96 overflow-y-auto">
             {reconciliation.games.map(({ night, difference }) => (
               <li key={night.id} className="border-t first:border-t-0">
-                <Link href={`/games/${night.id}`} className="flex flex-wrap items-center justify-between gap-2 rounded py-3 hover:bg-gray-50 focus-visible:outline-2">
+                <Link href={`/games/${night.id}${query ? `?${query}` : ''}`} className="flex flex-wrap items-center justify-between gap-2 rounded py-3 hover:bg-gray-50 focus-visible:outline-2">
                   <span>
                     <span className="font-semibold">{night.title}</span>
                     <span className="block text-sm text-gray-500">{dateFmt(night.date)}</span>

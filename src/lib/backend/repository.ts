@@ -1,3 +1,4 @@
+import { classifyNightType } from '@/lib/filters/night-types';
 import { cache } from 'react';
 import { cookies } from 'next/headers';
 import type { NightType, PlayerResult, ValidationIssue } from '@/types/poker';
@@ -75,7 +76,7 @@ export const getPortalData = cache(async (requestedLeagueId?: string): Promise<P
   ]);
   const players: ManagedPlayer[] = playerRows.map(row => ({ id: row.id, displayName: row.display_name, aliases: row.aliases }));
   const games: ManagedGame[] = gameRows.map(row => ({
-    id: row.id, leagueId: row.league_id, title: row.title, date: row.date, seasonId: row.season_id, nightType: row.night_type,
+    id: row.id, leagueId: row.league_id, title: row.title, date: row.date, seasonId: row.season_id, nightType: classifyNightType(row.night_type, row.title),
     format: row.format, status: row.status, notes: row.notes ?? '', version: row.version, sourceRef: row.source_ref,
     results: row.results.map(result => ({ playerId: result.player_id, buyInCents: result.buy_in_cents, cashOutCents: result.cash_out_cents, placement: result.placement, legacyProfitCents: result.legacy_profit_cents })),
   }));
@@ -108,7 +109,7 @@ export function portalToPokerData(portal: PortalData) {
   });
   return {
     players, results, issues, league, source: 'supabase' as const,
-    nights: games.map(game => ({ id: game.id, date: game.date, title: game.title, seasonId: game.seasonId, nightType: game.nightType, format: game.format, notes: game.notes })),
+    nights: games.map(game => ({ id: game.id, date: game.date, title: game.title, seasonId: game.seasonId, nightType: classifyNightType(game.nightType, game.title), format: game.format, notes: game.notes })),
   };
 }
 const profit = (result: ManagedResult) => result.legacyProfitCents ?? (result.cashOutCents ?? 0) - result.buyInCents;

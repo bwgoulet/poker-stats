@@ -1,13 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { nightTypeLabel } from '@/lib/filters/night-types';
+import type { NightType } from '@/types/poker';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 import { navigationStartEvent } from '@/components/layout/NavigationLoader';
 import { dollars, dateFmt } from '@/lib/formatting/format';
 
 type SortKey = 'date' | 'players' | 'pot' | 'winner';
-type Row = { id: string; date: string; title: string; seasonId: string; nightType: string; players: number; totalPot: number; winner: string };
+type Row = { id: string; date: string; title: string; seasonId: string; nightType: NightType; players: number; totalPot: number; winner: string };
 const PAGE_SIZE = 25;
 
 export default function GamesListing({ rows }: { rows: Row[] }) {
@@ -22,7 +24,7 @@ export default function GamesListing({ rows }: { rows: Row[] }) {
 
   const filtered = useMemo(() => rows.filter(row => {
     const needle = query.trim().toLocaleLowerCase();
-    return (!needle || `${row.title} ${row.seasonId} ${row.nightType} ${row.winner}`.toLocaleLowerCase().includes(needle))
+    return (!needle || `${row.title} ${row.seasonId} ${nightTypeLabel(row.nightType)} ${row.winner}`.toLocaleLowerCase().includes(needle))
       && (!from || row.date >= from) && (!to || row.date <= to);
   }).sort((a, b) => compare(a, b, sort) * (direction === 'asc' ? 1 : -1)), [rows, query, from, to, sort, direction]);
   const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
@@ -62,7 +64,7 @@ export default function GamesListing({ rows }: { rows: Row[] }) {
       <Sortable label="Players" value="players" current={sort} ariaSort={ariaSort('players')} onSort={changeSort} />
       <Sortable label="Pot" value="pot" current={sort} ariaSort={ariaSort('pot')} onSort={changeSort} />
       <Sortable label="Winner" value="winner" current={sort} ariaSort={ariaSort('winner')} onSort={changeSort} />
-    </tr></thead><tbody>{visible.map(row => <tr className="border-t" key={row.id}><td className="p-3 whitespace-nowrap">{dateFmt(row.date)}</td><td className="p-3"><Link className="font-semibold text-navy" href={`/games/${row.id}?${searchParams.toString()}`}>{row.title}</Link><small className="block text-gray-500">{row.seasonId} · {row.nightType}</small></td><td className="text-center">{row.players}</td><td className="text-center">{dollars(row.totalPot)}</td><td className="text-center">{row.winner}</td></tr>)}</tbody></table>
+    </tr></thead><tbody>{visible.map(row => <tr className="border-t" key={row.id}><td className="p-3 whitespace-nowrap">{dateFmt(row.date)}</td><td className="p-3"><Link className="font-semibold text-navy" href={`/games/${row.id}?${searchParams.toString()}`}>{row.title}</Link><small className="block text-gray-500">{row.seasonId} · {nightTypeLabel(row.nightType)}</small></td><td className="text-center">{row.players}</td><td className="text-center">{dollars(row.totalPot)}</td><td className="text-center">{row.winner}</td></tr>)}</tbody></table>
       {!visible.length && <p className="p-6 text-center text-gray-500">No games match these filters.</p>}
     </div>
     {pages > 1 && <nav className="flex items-center justify-between" aria-label="Games pagination"><button className="rounded border px-3 py-2 disabled:opacity-50" disabled={page === 1} onClick={() => changePage(page - 1)}>Previous</button><span>Page {page} of {pages} · {filtered.length} games</span><button className="rounded border px-3 py-2 disabled:opacity-50" disabled={page === pages} onClick={() => changePage(page + 1)}>Next</button></nav>}
