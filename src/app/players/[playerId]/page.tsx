@@ -4,7 +4,7 @@ import { getPokerData } from '@/lib/data/poker-repository';
 import { getDataSeasonIds, parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
 import { playerStats, sortResultsByDate } from '@/lib/stats/statistics';
 import { classifyPlayers } from '@/lib/stats/player-classification';
-import { buyInUnits, dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
+import { bigBlinds, buyInUnits, dollars, pct, dateFmt, streakLabel } from '@/lib/formatting/format';
 import { ProfitTimeline } from '@/components/charts/ProfitTimeline';
 import { PlayerPageLink } from '@/components/account/PlayerPageLink';
 import { getCurrentUser, getPlayerLinkState } from '@/lib/backend/repository';
@@ -40,6 +40,8 @@ export default async function Player({ params, searchParams }: {
     { label: 'Win rate', value: pct(stats.winRate) },
   ];
   const detailStats = [
+    { label: 'Total BB up/down', value: bigBlinds(stats.totalBB), help: `Sum of game profit divided by the big blind ($0.10 for $10 cash games, $0.20 for $20 cash games). ${stats.bbNights} qualifying games in the selected filters; $50, unclassified games and tournaments excluded.` },
+    { label: 'Average BB up/down', value: bigBlinds(stats.avgBB), help: 'Total BB divided by qualifying cash games played, including breakeven games. This is per game, not per 100 hands.' },
     { label: 'Total buy-in', value: dollars(stats.totalBuyIn) },
     { label: 'Average profit', value: dollars(stats.avgProfit) },
     { label: 'Median profit', value: dollars(stats.medianProfit) },
