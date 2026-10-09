@@ -17,6 +17,12 @@ describe('game entry validation', () => {
     tournament.results[0].placement = 1; tournament.results[1].placement = 2;
     expect(gameInputSchema.safeParse(tournament).success).toBe(true);
   });
+  it.each([0, 3499, 3501, 4500])('accepts mismatched completed cash and tournament totals with payout %i', cashOutCents => {
+    const value = game(); value.results[0].cashOutCents = cashOutCents;
+    expect(gameInputSchema.parse(value).results[0].cashOutCents).toBe(cashOutCents);
+    value.format = 'tournament'; value.results[0].placement = 1; value.results[1].placement = 2;
+    expect(gameInputSchema.safeParse(value).success).toBe(true);
+  });
   it('preserves a blank cash-out as unknown in drafts', () => {
     const draft = game(); draft.status = 'draft'; draft.results[0].cashOutCents = null;
     expect(gameInputSchema.parse(draft).results[0].cashOutCents).toBeNull();
@@ -24,7 +30,7 @@ describe('game entry validation', () => {
     expect(gameInputSchema.safeParse(draft).success).toBe(false);
   });
   it.each([
-    ['unbalanced totals', (value: GameInput) => { value.results[0].cashOutCents = 3501; }],
+    ['zero total buy-in', (value: GameInput) => { value.results.forEach(row => { row.buyInCents = 0; }); }],
     ['negative buy-in', (value: GameInput) => { value.results[0].buyInCents = -1; }],
     ['fractional cents', (value: GameInput) => { value.results[0].buyInCents = 1.5; }],
     ['duplicate players', (value: GameInput) => { value.results[1].playerId = 'alice'; }],

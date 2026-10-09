@@ -36,9 +36,7 @@ export const gameInputSchema = z.object({
     if (game.results.length < 2) add('Completed games need at least two players.');
     if (game.results.some(row => row.cashOutCents === null)) add('Enter every cash-out before completing the game.');
     const buyIns = game.results.reduce((sum, row) => sum + row.buyInCents, 0);
-    const cashOuts = game.results.reduce((sum, row) => sum + (row.cashOutCents ?? 0), 0);
     if (!buyIns) add('Completed games need a positive total buy-in.');
-    if (buyIns !== cashOuts) add('Buy-ins and cash-outs must balance before completing the game.');
     if (game.format === 'tournament') {
       if (game.results.some(row => row.placement === null)) add('Enter every tournament placement.');
       if (game.results.some(row => row.placement !== null && row.placement > game.results.length)) add('Tournament placements must run from first place to the number of players.');
