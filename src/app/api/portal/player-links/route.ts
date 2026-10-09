@@ -10,7 +10,7 @@ async function changeLink(request: NextRequest, operation: 'claim_player_page' |
     if (error?.code === '23505') throw new HttpError(409, 'A player page is already linked. Refresh your account to see the current link, or ask a league admin to resolve it.');
     if (error?.code === '42501') throw new HttpError(403, 'Confirm your email, and make sure this is an accessible league and your own player page.');
     rpcError(error);
-    return NextResponse.json({ linked: operation === 'claim_player_page' });
+    return NextResponse.json(operation === 'claim_player_page' ? { requested: true } : { linked: false });
   });
 }
 export const POST = (request: NextRequest) => changeLink(request, 'claim_player_page');

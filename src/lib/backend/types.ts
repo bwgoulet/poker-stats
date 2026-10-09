@@ -15,6 +15,7 @@ export interface PlayerLink {
   accessible: boolean;
 }
 export interface PlayerLinkState {
+  requested?: boolean;
   linked: boolean;
   linkedToYou: boolean;
   yourPlayerId: string | null;

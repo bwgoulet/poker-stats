@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { serverSupabase } from '@/lib/backend/supabase';
+import { serverSupabase, supabaseConfig } from '@/lib/backend/supabase';
 import { accountReturnTo } from '@/lib/backend/account';
 import { requestOrigin } from '@/lib/backend/http';
 export async function GET(request: NextRequest) {
@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const tokenHash = request.nextUrl.searchParams.get('token_hash');
   const type = request.nextUrl.searchParams.get('type');
   const next = accountReturnTo(request.nextUrl.searchParams.get('next'));
-  if (code || (tokenHash && (type === 'email' || type === 'signup'))) {
+  if (supabaseConfig() && (code || (tokenHash && (type === 'email' || type === 'signup')))) {
     const client = await serverSupabase();
     const { error } = code ? await client.auth.exchangeCodeForSession(code)
       : await client.auth.verifyOtp({ token_hash: tokenHash!, type: type as 'email' | 'signup' });
