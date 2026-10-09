@@ -6,12 +6,38 @@ choose a league and player page or **No link for now**. A no-link choice is save
 on the account and can be changed later. Private league rosters remain restricted
 to members; sign-in and linking never grant management privileges.
 
+## Resolve a 403 when an admin approves their own link
+
+Deploying the Vercel app does not apply Supabase SQL migrations. The old migration
+003 function denies self-review even for app admins, and older portal versions
+map that denial to the generic “Your league role does not allow this change.”
+A screenshot of this message alone does not prove which database rule denied it.
+
+Before deploying the updated API, apply the entire
+`supabase/migrations/202610090007_player_link_review_contract.sql` in the live
+Supabase project's SQL Editor as the project administrator. It requires the
+account/link schema from 001–003; it also repairs a project where 006 was missed.
+It installs `review_player_link_v2`, updates the legacy entry point to use the
+same rules, restores the authenticated RPC grants, and reloads PostgREST's schema
+cache. It preserves pending requests, links, roles, and review history.
+
+The updated API calls the versioned function so it cannot silently use the old
+self-review rule. If the function is missing, the portal reports a database update
+is needed (503) with the required migration number. A 403 from the new function
+means the signed-in account must have `public.users.role = 'admin'` or an
+`owner`/`admin` membership in the request's league. Discord metadata does not
+establish those permissions. Apply the migration to the same project configured
+by Vercel's `NEXT_PUBLIC_SUPABASE_URL`, then retry the existing pending request;
+no cancellation or resubmission is needed. App admins can approve their own
+requests without a league membership.
+
 ## Enable the live account flow
 
 1. Connect the existing Supabase project using the two public variables described
    below, and apply migrations 001, 002, then
    `supabase/migrations/202610090003_discord_link_verification.sql`, followed by
-   `supabase/migrations/202610090006_admin_self_player_links.sql`.
+   `supabase/migrations/202610090006_admin_self_player_links.sql` and
+   `supabase/migrations/202610090007_player_link_review_contract.sql`.
    Existing player links are preserved; all new claims become pending requests.
 2. In the Discord Developer Portal, create/select your application and add this
    OAuth2 redirect: `https://<project-ref>.supabase.co/auth/v1/callback`.
