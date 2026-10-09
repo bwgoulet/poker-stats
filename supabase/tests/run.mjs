@@ -37,6 +37,8 @@ try {
       // Exercise current game validation before seeding history. Migration 007
       // only replaces the RPC and is safe to apply again in filename order.
       await db.exec(await readFile(new URL('migrations/202610090007_allow_unbalanced_completed_games.sql', root), 'utf8'));
+      // Apply current read policies before exercising public drafts and isolation.
+      await db.exec(await readFile(new URL('migrations/202610090008_public_draft_games.sql', root), 'utf8'));
       await runSuite('assertions.sql');
       // Exercise the current link-review contract on empty-league fixtures.
       // Migration 006 only replaces the RPC and is safe to apply again below.

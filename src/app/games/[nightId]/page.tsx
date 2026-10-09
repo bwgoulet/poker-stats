@@ -7,6 +7,8 @@ import { ProfitDistribution } from '@/components/charts/ProfitDistribution';
 import { getPokerData } from '@/lib/data/poker-repository';
 import { dollars, longDateFmt } from '@/lib/formatting/format';
 import { canEdit } from '@/lib/backend/types';
+import { getPortalData } from '@/lib/backend/repository';
+import DraftGameDetails from '@/components/games/DraftGameDetails';
 
 export default async function Game({
   params,
@@ -17,6 +19,12 @@ export default async function Game({
 }) {
   const { nightId } = await params;
   const sp = await searchParams;
+  const portal = await getPortalData();
+  const draft = portal.games.find(game => game.id === nightId && game.status === 'draft');
+  if (draft) {
+    const league = portal.leagues.find(item => item.id === portal.selectedLeagueId);
+    return <DraftGameDetails game={draft} players={portal.players} editable={canEdit(league?.role ?? null)} />;
+  }
   const data = await getPokerData();
   const night = data.nights.find((item) => item.id === nightId);
 

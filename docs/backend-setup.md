@@ -331,8 +331,10 @@ for the source archive and database-only runtime.
 Composite foreign keys prevent a game from referring to another league's players.
 All tables have row-level security. The original UNC league is public to preserve
 the existing analytics experience; new leagues default to private. Anonymous
-users can read completed games and players in public leagues. League members and
-app admins can also see drafts. Viewers cannot write; scorekeepers can manage
+users can read players, completed games, drafts, and their results in public leagues
+after migration `202610090008_public_draft_games.sql`. The Games tab labels drafts
+and shows unknown payouts as pending; standings and analytics use completed games
+only. Private leagues retain their membership and app-admin access rules. Viewers cannot write; scorekeepers can manage
 games and add players; owners/admins can rename leagues and change visibility. Only owners can
 delete a league, and it must have no games. Its roster and membership then cascade
 away; game audit history remains.
