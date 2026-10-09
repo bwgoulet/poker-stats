@@ -227,6 +227,17 @@ create accounts, grant administrator privileges, or claim player profiles.
 Keep this applied migration frozen. For later spreadsheet changes, generate and
 review a new export; do not regenerate an already-applied migration.
 
+### Apply confirmed historical corrections
+
+The owner-confirmed payout and Net corrections are a separate migration:
+`supabase/migrations/202610090005_correct_historical_results.sql`. Apply it after
+004, then run `supabase/imports/202610090005/verify.sql` and require both counts
+to be 7 and `passed = true`. Drew's October 3 cash-out is $36.10 against a $50.00
+buy-in (Net -$13.90); six erroneous spreadsheet Net overrides are cleared.
+The original import verification intentionally reports these later corrections
+as changes. Keep migration 004 frozen and do not rerun it to restore old figures.
+See [Historical corrections and counting differences](data-quality-report.md).
+
 ### Generate a new export
 
 Run from the repository root:

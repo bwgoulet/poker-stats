@@ -102,9 +102,14 @@ export function toGameInput(fields: GameFields, status: GameInput['status'], gam
   };
 }
 
-export function needsReconciliation(game: ManagedGame): boolean {
+export function gameCashTotals(game: ManagedGame) {
   const totalIn = game.results.reduce((sum, row) => sum + row.buyInCents, 0);
   const totalOut = game.results.reduce((sum, row) => sum + (row.cashOutCents ?? 0), 0);
-  return game.results.some(row => row.legacyProfitCents != null && row.cashOutCents != null && row.legacyProfitCents !== row.cashOutCents - row.buyInCents)
-    || (game.status === 'completed' && (totalIn !== totalOut || game.results.some(row => row.cashOutCents === null)));
+  const pendingPayouts = game.results.filter(row => row.cashOutCents === null).length;
+  return { totalIn, totalOut, pendingPayouts, difference: pendingPayouts ? null : totalOut - totalIn };
+}
+
+export function needsReconciliation(game: ManagedGame): boolean {
+  const totals = gameCashTotals(game);
+  return game.status === 'completed' && (totals.pendingPayouts > 0 || totals.difference !== 0);
 }

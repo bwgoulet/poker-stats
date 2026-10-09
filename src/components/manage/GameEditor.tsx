@@ -98,7 +98,7 @@ export function GameEditor({ game, league, players, seasons, busy, onSave, onCan
       </div>
     </div>
     <form className="space-y-6 p-5 sm:p-6" onSubmit={event => event.preventDefault()}>
-      {historicalWarning && <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"><strong className="block">This imported game needs reconciliation.</strong><p className="mt-1">The original totals or recorded profits differ. Check each buy-in and cash-out before saving. Saving replaces the imported profit values with cash-out minus buy-in; completed games must balance.</p></div>}
+      {historicalWarning && <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"><strong className="block">Buy-in/cash-out mismatch.</strong><p className="mt-1">Recorded buy-ins and cash-outs differ. Historical live-game counting differences can remain as recorded. Saving a completed game still requires balanced totals.</p></div>}
       <fieldset disabled={busy} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <legend className="sr-only">Game details</legend>
         <label className="text-sm font-semibold sm:col-span-2">Game title <span className="text-slate-400">*</span><input required autoComplete="off" maxLength={120} className={fieldClass} value={fields.title} onChange={event => update('title', event.target.value)} placeholder="Friday at the house" /></label>
