@@ -1,9 +1,10 @@
+import type { SearchParams } from '@/lib/filters/scope-query';
 import { getPokerData } from '@/lib/data/poker-repository';
 import { getDataSeasonIds, parseFilters, filterNights, filterResults, scopeLabel } from '@/lib/filters/filter-data';
 import { nightStats } from '@/lib/stats/statistics';
 import GamesListing from './games-listing';
 
-export default async function Games({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
+export default async function Games({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const sp = await searchParams;
   const data = await getPokerData();
   const seasonIds = getDataSeasonIds(data.nights);

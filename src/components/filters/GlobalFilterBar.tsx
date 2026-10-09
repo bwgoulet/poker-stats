@@ -1,7 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { parseFilters, MIN_NIGHTS_OPTIONS } from '@/lib/filters/filter-data';
+import { withScope } from '@/lib/filters/scope-query';
+import type { NightType } from '@/types/poker';
 import { navigationStartEvent } from '@/components/layout/NavigationLoader';
 
 const nightTypes = [
@@ -11,10 +14,9 @@ const nightTypes = [
   ['one-off', 'One-offs'],
   ['online', 'Online'],
 ] as const;
-const currentSeasonNightTypes = ['10', '20'];
-const defaultNightTypes = ['10', '20'];
-const minNightsOptions = [1, 3, 5, 10] as const;
-const defaultMinNights = 1;
+const currentSeasonNightTypes: NightType[] = ['10', '20'];
+const defaultNightTypes: NightType[] = ['10', '20'];
+const minNightsOptions = MIN_NIGHTS_OPTIONS;
 
 function seasonLabel(season: string) {
   const [name, ...rest] = season.split('-');
@@ -29,31 +31,18 @@ function sameValues(left: readonly string[], right: readonly string[]) {
 export function GlobalFilterBar({ seasonIds, currentSeason }: { seasonIds: string[]; currentSeason?: string }) {
   const seasons = seasonIds.map((value) => [value, seasonLabel(value)] as const);
   const sp = useSearchParams();
-  const router = useRouter();
   const path = usePathname();
   const search = sp.toString();
   const seasonKey = seasonIds.join(',');
 
-  function selected(
-    key: string,
-    all: readonly (readonly [string, string])[],
-    defaults = all.map(([value]) => value),
-  ) {
-    const allowed = all.map(([value]) => value);
-    const values = sp.getAll(key).flatMap((value) => value.split(',')).filter((value) => allowed.includes(value));
-    return values.length ? [...new Set(values)] : defaults;
-  }
-
-  function selectedMinNights() {
-    const requested = Number(sp.get('minNights'));
-    return (minNightsOptions as readonly number[]).includes(requested)
-      ? requested
-      : defaultMinNights;
-  }
-
-  const appliedSeasons = selected('season', seasons);
-  const appliedNightTypes = selected('nightType', nightTypes, defaultNightTypes);
-  const appliedMinNights = selectedMinNights();
+  const applied = parseFilters({
+    season: sp.has('season') ? sp.getAll('season') : undefined,
+    nightType: sp.has('nightType') ? sp.getAll('nightType') : undefined,
+    minNights: sp.get('minNights') ?? undefined,
+  }, seasonIds);
+  const appliedSeasons = applied.season;
+  const appliedNightTypes = applied.nightType;
+  const appliedMinNights = applied.minNights;
   const [draftSeasons, setDraftSeasons] = useState(appliedSeasons);
   const [draftNightTypes, setDraftNightTypes] = useState(appliedNightTypes);
   const [draftMinNights, setDraftMinNights] = useState(appliedMinNights);
@@ -66,7 +55,7 @@ export function GlobalFilterBar({ seasonIds, currentSeason }: { seasonIds: strin
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, seasonKey]);
 
-  function toggleValue(value: string, values: string[], setValues: (values: string[]) => void) {
+  function toggleValue<T extends string>(value: T, values: T[], setValues: (values: T[]) => void) {
     setValues(values.includes(value) ? values.filter((item) => item !== value) : [...values, value]);
   }
 
@@ -106,24 +95,14 @@ export function GlobalFilterBar({ seasonIds, currentSeason }: { seasonIds: strin
 
   function updateScope() {
     if (!isDirty || draftSeasons.length === 0 || draftNightTypes.length === 0) return;
-    const params = new URLSearchParams(sp);
-    params.delete('season');
-    params.delete('nightType');
-    params.delete('minNights');
-
-    if (!sameValues(draftSeasons, seasonIds)) {
-      draftSeasons.forEach((value) => params.append('season', value));
-    }
-    if (!sameValues(draftNightTypes, defaultNightTypes)) {
-      draftNightTypes.forEach((value) => params.append('nightType', value));
-    }
-    if (draftMinNights !== defaultMinNights) {
-      params.set('minNights', String(draftMinNights));
-    }
-
-    const query = params.toString();
+    const params = withScope(new URLSearchParams(sp), {
+      season: draftSeasons,
+      nightType: draftNightTypes,
+      minNights: draftMinNights,
+    }, seasonIds);
     window.dispatchEvent(new Event(navigationStartEvent));
-    router.push(query ? `${path}?${query}` : path);
+    // Fetch a fresh server render, including the shared layout and league data.
+    window.location.assign(`${path}?${params}`);
   }
 
   return (

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { scopeQuery } from '@/lib/filters/scope-query';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { BarChart3, CircleDollarSign, Gamepad2, Settings2, UserRound, Users } from 'lucide-react';
 
@@ -16,7 +17,7 @@ const nav = [
 export function NavigationLinks() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const query = searchParams.toString();
+  const query = scopeQuery(new URLSearchParams(searchParams)).toString();
 
   return (
     <nav className="mt-8 grid gap-2">
