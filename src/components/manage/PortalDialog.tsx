@@ -12,6 +12,7 @@ export function PortalDialog({ title, children, onClose, busy = false }: {
     const element = ref.current;
     const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     element?.showModal();
+    element?.querySelector<HTMLElement>('[data-dialog-focus]')?.focus();
     return () => { element?.close(); previous?.focus(); };
   }, []);
   return <dialog ref={ref} aria-labelledby={titleId} onCancel={event => { event.preventDefault(); if (!busy) onClose(); }}
