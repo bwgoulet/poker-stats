@@ -190,6 +190,47 @@ this implementation.
 
 ## Move the historical workbooks
 
+### Apply the committed historical migration
+
+Connecting Supabase switches the dashboards to database reads. An empty database
+therefore shows **No completed games yet** even while the source workbooks remain
+in the repository. OAuth sign-in does not import those workbooks.
+
+The frozen import of all four committed season workbooks is ready to execute:
+
+1. Confirm migrations `202610090001`, `202610090002`, and `202610090003` have
+   already been applied to the same Supabase project used by the deployed app.
+2. Review `supabase/imports/202610090004/manifest.json` for workbook SHA-256
+   fingerprints, counts, source discrepancies, and import assumptions.
+3. In Supabase **SQL Editor**, run the entire
+   `supabase/migrations/202610090004_import_historical_workbooks.sql` as the project
+   administrator. Alternatively, after reviewing `npx supabase db push --dry-run`,
+   apply the pending migrations with `npx supabase db push`.
+4. Run the entire `supabase/imports/202610090004/verify.sql`. The `game`, `player`,
+   and `result` rows must each have `passed = true` and zero missing, changed, or
+   unexpected records. Run this before editing historical records in the portal.
+5. Refresh the deployed dashboard. No website redeployment is required for this
+   database-only import. UNC Poker's existing visibility and memberships remain
+   unchanged; its seeded public history is readable by newly signed-in accounts.
+
+The migration inserts completed games, canonical players and aliases, buy-ins,
+cash-outs, inferred placements, original dates, and historical Net overrides.
+It contains 49 players, 62 games, and 696 valid results across fall 2025, spring
+2026, summer 2026, and fall 2026. The one incomplete source result is Drew's
+October 3, 2025 one-off: a $50 buy-in with `?` for cash-out and Net
+(`fall-2025.xlsx`, `One-offs (not in totals)`, row 6). It remains in the workbook
+and is reported in the manifest; no payout or profit is invented. Correct this
+record separately once its actual cash-out is known. Other source reconciliation
+warnings and six Net overrides are preserved, not balanced artificially.
+Exact reruns are safe. Conflicting existing records or previously deleted games
+abort the whole transaction rather than overwriting portal edits. It does not
+create accounts, grant administrator privileges, or claim player profiles.
+
+Keep this applied migration frozen. For later spreadsheet changes, generate and
+review a new export; do not regenerate an already-applied migration.
+
+### Generate a new export
+
 Run from the repository root:
 
 ```bash
