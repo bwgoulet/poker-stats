@@ -18,6 +18,7 @@ import {
 } from '@/lib/stats/statistics';
 import { ProfitDistribution } from '@/components/charts/ProfitDistribution';
 import { dateFmt, dollars, pct } from '@/lib/formatting/format';
+import { ReconciliationCard } from '@/components/dashboard/ReconciliationCard';
 import { canEdit } from '@/lib/backend/types';
 
 export default async function Dashboard({
@@ -80,11 +81,14 @@ export default async function Dashboard({
         </section>
       )}
       {nights.length === 0 ? (
-        <div className="card p-10 text-center">
-          <h2 className="text-xl font-bold">{!data.league.id ? 'Choose a league to get started' : data.nights.length === 0 ? 'No completed games yet' : 'No poker nights match this filter'}</h2>
-          {!data.league.id && <Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage">Open league management</Link>}
-          {data.nights.length === 0 && canEdit(data.league.role) && <><p className="mt-2 text-gray-600">Complete a game to start building your league statistics.</p><Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage?new=1">Record a game</Link></>}
-        </div>
+        <>
+          <div className="card p-10 text-center">
+            <h2 className="text-xl font-bold">{!data.league.id ? 'Choose a league to get started' : data.nights.length === 0 ? 'No completed games yet' : 'No poker nights match this filter'}</h2>
+            {!data.league.id && <Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage">Open league management</Link>}
+            {data.nights.length === 0 && canEdit(data.league.role) && <><p className="mt-2 text-gray-600">Complete a game to start building your league statistics.</p><Link className="mt-4 inline-block rounded-lg bg-carolina-dark px-5 py-2.5 font-bold text-white" href="/manage?new=1">Record a game</Link></>}
+          </div>
+          {data.nights.length > 0 && <ReconciliationCard reconciliation={reconciliation} />}
+        </>
       ) : (
         <>
           <section className="grid md:grid-cols-4 gap-4">
@@ -144,6 +148,8 @@ export default async function Dashboard({
               ))}
             </div>
           </section>
+
+          <ReconciliationCard reconciliation={reconciliation} />
 
           <section>
             <h2 className="text-xl font-black mb-4">League balance</h2>
