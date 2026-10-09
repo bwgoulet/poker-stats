@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ProfitDistribution } from '@/components/charts/ProfitDistribution';
 import { getPokerData } from '@/lib/data/poker-repository';
 import { dollars, longDateFmt } from '@/lib/formatting/format';
+import { canEdit } from '@/lib/backend/types';
 
 export default async function Game({
   params,
@@ -14,7 +15,7 @@ export default async function Game({
 }) {
   const { nightId } = await params;
   const sp = await searchParams;
-  const data = getPokerData();
+  const data = await getPokerData();
   const night = data.nights.find((item) => item.id === nightId);
 
   if (!night) notFound();
@@ -28,11 +29,12 @@ export default async function Game({
 
   return (
     <>
-      <header>
-        <p className="text-carolina-dark font-semibold">
+      <header className="flex flex-wrap items-end justify-between gap-4">
+        <div><p className="text-carolina-dark text-sm font-semibold">
           {night.seasonId} · {night.nightType}
         </p>
-        <h1 className="text-4xl font-black">{longDateFmt(night.date)}</h1>
+        <h1 className="text-4xl font-black">{longDateFmt(night.date)}</h1></div>
+        {canEdit(data.league.role) && <Link href={`/manage?gameId=${encodeURIComponent(night.id)}`} className="rounded-lg bg-carolina-dark px-5 py-2.5 text-sm font-bold text-white">Edit game</Link>}
       </header>
       <section className="grid md:grid-cols-3 gap-4">
         <div className="card p-5">

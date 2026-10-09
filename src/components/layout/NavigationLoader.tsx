@@ -31,11 +31,13 @@ export function NavigationLoader() {
       }
     };
 
-    document.addEventListener('click', handleClick, true);
+    // Editor guards run during capture and stop blocked links. Observe allowed
+    // links in bubbling so canceling navigation never leaves an overlay active.
+    document.addEventListener('click', handleClick);
     window.addEventListener('popstate', startLoading);
     window.addEventListener(navigationStartEvent, startLoading);
     return () => {
-      document.removeEventListener('click', handleClick, true);
+      document.removeEventListener('click', handleClick);
       window.removeEventListener('popstate', startLoading);
       window.removeEventListener(navigationStartEvent, startLoading);
     };

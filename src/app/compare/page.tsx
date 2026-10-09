@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ComparisonProfitChart } from '@/components/charts/ComparisonProfitChart';
 import { getPokerData } from '@/lib/data/poker-repository';
-import { filterNights, filterResults, parseFilters, scopeLabel } from '@/lib/filters/filter-data';
+import { filterNights, filterResults, getDataSeasonIds, parseFilters, scopeLabel } from '@/lib/filters/filter-data';
 import { dateFmt, dollars, pct } from '@/lib/formatting/format';
 import { classifyPlayers, MIN_CLASSIFICATION_NIGHTS } from '@/lib/stats/player-classification';
 import { playerStats } from '@/lib/stats/statistics';
@@ -15,8 +15,9 @@ function requestedPlayers(params: SearchParams) {
 
 export default async function Compare({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const params = await searchParams;
-  const filters = parseFilters(params);
-  const data = getPokerData();
+  const data = await getPokerData();
+  const seasonIds = getDataSeasonIds(data.nights);
+  const filters = parseFilters(params, seasonIds);
   const requested = requestedPlayers(params);
   const uniqueIds = [...new Set(requested)];
   const duplicates = requested.length - uniqueIds.length;
@@ -42,7 +43,7 @@ export default async function Compare({ searchParams }: { searchParams: Promise<
     return Object.fromEntries([['date', date], ...selectedIds.map((id) => [id, totals.get(id)!])]);
   });
 
-  return <><header><p className="font-semibold text-carolina-dark">{scopeLabel(filters)}</p><h1 className="text-4xl font-black">Player comparison</h1><p className="mt-2 text-gray-600">Compare performance across the currently selected seasons and night types.</p></header>
+  return <><header><p className="font-semibold text-carolina-dark">{scopeLabel(filters, seasonIds)}</p><h1 className="text-4xl font-black">Player comparison</h1><p className="mt-2 text-gray-600">Compare performance across the currently selected seasons and night types.</p></header>
     {(duplicates > 0 || missing.length > 0) && <div className="card border-amber-300 bg-amber-50 p-4 text-amber-900" role="status">{duplicates > 0 && <p>{duplicates} duplicate selection{duplicates === 1 ? ' was' : 's were'} ignored.</p>}{missing.length > 0 && <p>Unknown player ID{missing.length === 1 ? '' : 's'}: {missing.join(', ')}.</p>}</div>}
     {selected.length < 2 ? <div className="card p-8 text-center"><h2 className="text-xl font-bold">Choose at least two valid players</h2><p className="mt-2 text-gray-500">Use the checkboxes on the Players page to build a comparison.</p><Link href="/players" className="mt-4 inline-block rounded-lg bg-carolina-dark px-4 py-2 font-semibold text-white">Select players</Link></div> : <>
       {nights.length === 0 && <div className="card p-5 text-center text-gray-600">No nights match the filtered scope. Try changing the season or night type filters.</div>}

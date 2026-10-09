@@ -4,7 +4,9 @@
 
 Poker Stats turns our home game's historical Excel workbooks into a searchable analytics application with player profiles, game history, league-wide statistics, head-to-head comparisons, interactive charts, and data-driven player classifications.
 
-The spreadsheets remain the source of truth. Rather than manually maintaining a second database, the application discovers season workbooks, parses their different sheet formats, normalizes player and game records, validates the results, and derives the statistics at runtime.
+The application now includes a Supabase-backed league management portal at `/manage` for game and result CRUD. Once configured, Supabase is the source of truth for league analytics. Without database configuration, the committed workbooks remain available as a read-only archive.
+
+See [Backend setup](docs/backend-setup.md) for the schema, authentication and roles, safe historical import, and database validation. All historical records migrate into **UNC Poker**; additional leagues have isolated games, players, and membership.
 
 ---
 
@@ -34,6 +36,7 @@ The result is a read-only analytics layer that treats the existing workbooks as 
 | Validation | Zod |
 | Testing | Vitest |
 | Data source | Multi-season Excel workbooks |
+| Database and authentication | Supabase Postgres, RLS, Supabase Auth |
 
 ---
 
@@ -355,7 +358,7 @@ Then open:
 http://localhost:3000
 ```
 
-Because the workbooks are committed under `data/`, no database or external service is required to explore the project locally.
+Because the workbooks are committed under `data/`, no external service is required to explore the read-only archive locally. To enable game entry and make the database authoritative, follow [Backend setup](docs/backend-setup.md). The earlier pipeline sections describe workbook ingestion used for that historical import.
 
 ---
 

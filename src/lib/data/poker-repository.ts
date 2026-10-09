@@ -1,3 +1,14 @@
-import { cache } from 'react'; import { normalizeWorkbooks } from './normalize-workbooks';
-export const getPokerData=cache(()=>normalizeWorkbooks());
-export function getRepository(){const d=getPokerData(); return {getPlayers:()=>d.players,getNights:()=>d.nights,getResults:()=>d.results,getIssues:()=>d.issues};}
+import { cache } from 'react';
+import { getActivePokerData } from '@/lib/backend/repository';
+
+export const getPokerData = cache(async () => getActivePokerData());
+
+export async function getRepository() {
+  const data = await getPokerData();
+  return {
+    getPlayers: () => data.players,
+    getNights: () => data.nights,
+    getResults: () => data.results,
+    getIssues: () => data.issues,
+  };
+}

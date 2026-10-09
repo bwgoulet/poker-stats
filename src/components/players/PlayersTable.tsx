@@ -20,7 +20,7 @@ const columns: PlayerColumn[] = [
   { key: 'roi', label: 'ROI', description: 'Total profit divided by total buy-in, shown as a percentage.' },
   { key: 'nightsPlayed', label: 'Nights', description: 'Number of game nights in which the player recorded a result.' },
   { key: 'wins', label: 'Wins', description: 'Number of nights the player finished with a profit greater than zero.' },
-  { key: 'champions', label: 'Champion', description: 'Number of nights the player was the overall top earner. Ties count for every top earner.' },
+  { key: 'champions', label: 'Champion', description: 'Cash: top profit, ties count. Tournaments: first place.' },
   { key: 'winRate', label: 'Win rate', description: 'Winning nights divided by total nights played, shown as a percentage.' },
 ];
 

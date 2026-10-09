@@ -11,7 +11,6 @@ const nightTypes = [
   ['one-off', 'One-offs'],
   ['online', 'Online'],
 ] as const;
-const currentSeason = 'fall-2026';
 const currentSeasonNightTypes = ['10', '20'];
 const defaultNightTypes = ['10', '20'];
 const minNightsOptions = [1, 3, 5, 10] as const;
@@ -27,20 +26,22 @@ function sameValues(left: readonly string[], right: readonly string[]) {
   return left.length === right.length && left.every((value) => right.includes(value));
 }
 
-export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
+export function GlobalFilterBar({ seasonIds, currentSeason }: { seasonIds: string[]; currentSeason?: string }) {
   const seasons = seasonIds.map((value) => [value, seasonLabel(value)] as const);
   const sp = useSearchParams();
   const router = useRouter();
   const path = usePathname();
   const search = sp.toString();
+  const seasonKey = seasonIds.join(',');
 
   function selected(
     key: string,
     all: readonly (readonly [string, string])[],
     defaults = all.map(([value]) => value),
   ) {
-    const values = sp.getAll(key).flatMap((value) => value.split(',')).filter(Boolean);
-    return values.length ? values : defaults;
+    const allowed = all.map(([value]) => value);
+    const values = sp.getAll(key).flatMap((value) => value.split(',')).filter((value) => allowed.includes(value));
+    return values.length ? [...new Set(values)] : defaults;
   }
 
   function selectedMinNights() {
@@ -63,13 +64,14 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
     setDraftMinNights(appliedMinNights);
     // The serialized query is the source of truth after navigation.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [search, seasonKey]);
 
   function toggleValue(value: string, values: string[], setValues: (values: string[]) => void) {
     setValues(values.includes(value) ? values.filter((item) => item !== value) : [...values, value]);
   }
 
   const currentSeasonSelected =
+    Boolean(currentSeason) &&
     draftSeasons.length === 1 &&
     draftSeasons[0] === currentSeason &&
     sameValues(draftNightTypes, currentSeasonNightTypes);
@@ -92,6 +94,7 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
   }
 
   function toggleCurrentSeason() {
+    if (!currentSeason) return;
     if (currentSeasonSelected) {
       setDraftSeasons(seasonIds);
       setDraftNightTypes(defaultNightTypes.slice());
@@ -102,7 +105,7 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
   }
 
   function updateScope() {
-    if (!isDirty) return;
+    if (!isDirty || draftSeasons.length === 0 || draftNightTypes.length === 0) return;
     const params = new URLSearchParams(sp);
     params.delete('season');
     params.delete('nightType');
@@ -132,7 +135,7 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
             All
             <Toggle checked={allSelected} />
           </button>
-          <button type="button" role="switch" aria-checked={currentSeasonSelected} onClick={toggleCurrentSeason} className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold">
+          <button type="button" role="switch" aria-checked={currentSeasonSelected} disabled={!currentSeason} onClick={toggleCurrentSeason} className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold disabled:opacity-50">
             Current Season
             <Toggle checked={currentSeasonSelected} />
           </button>
@@ -177,9 +180,10 @@ export function GlobalFilterBar({ seasonIds }: { seasonIds: string[] }) {
         </div>
       </div>
       <div className="flex items-center justify-end border-t bg-gray-50/70 px-4 py-3">
+        {(draftSeasons.length === 0 || draftNightTypes.length === 0) && <p className="mr-auto text-sm text-gray-600">Choose at least one season and night type.</p>}
         <button
           type="button"
-          disabled={!isDirty}
+          disabled={!isDirty || draftSeasons.length === 0 || draftNightTypes.length === 0}
           onClick={updateScope}
           className="rounded-lg bg-carolina-dark px-5 py-2.5 text-sm font-bold text-white shadow-sm disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500 disabled:shadow-none"
         >
