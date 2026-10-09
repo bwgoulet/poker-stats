@@ -51,8 +51,8 @@ Run from the repository root:
 npm run db:export
 ```
 
-This creates `work/supabase-import.sql` and
-`work/supabase-import-manifest.json`, without contacting a database. Review the
+This creates `work/supabase-import.sql`, `work/supabase-import-manifest.json`, and
+`work/supabase-verify.sql`, without contacting a database. Review the
 manifest and execute the **entire** SQL file in the project's SQL editor after
 applying the schema. The import runs in one transaction and retains canonical
 player/game IDs, preserving existing links. All source records belong to UNC
@@ -74,8 +74,19 @@ it again; saving a draft removes it from standings until it is reconciled.
 An identical rerun skips complete existing games. Changed source records,
 portal-edited records, mismatched provenance, missing result rows, and deleted
 game tombstones abort the transaction rather than overwriting or resurrecting
-records. After cutover, record new games in the portal and retain the spreadsheets
-as historical evidence. This is an initial migration, not a synchronization job.
+records. After import, execute the **entire** `work/supabase-verify.sql` as the
+project administrator. This independent, read-only transaction compares the
+frozen export with the database: canonical identities and aliases, game metadata
+and provenance, and every result's buy-in, cash-out, placement and legacy profit.
+It returns three rows (`game`, `player`, `result`); all `passed` values must be
+`true`. Missing, changed, or extra historical results are listed in `mismatches`.
+New players and new games do not invalidate verification. Use the verification
+file produced alongside the import, before making portal edits to historical
+records; regenerating it from changed workbooks changes the comparison baseline.
+
+After cutover, record new games in the portal. This is an initial migration, not a
+synchronization job. Follow [Spreadsheet retirement](spreadsheet-retirement.md)
+to archive the workbooks and later remove them from the deployed repository.
 
 ## Data and access model
 

@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 import { describe, expect, it } from 'vitest';
 import { buildWorkbookImport, type NormalizedWorkbookData } from '@/lib/backend/import-workbooks';
+import { buildWorkbookVerificationSql } from '@/lib/backend/verify-workbooks';
 import { normalizeWorkbooks } from '@/lib/data/normalize-workbooks';
 import { UNC_LEAGUE_ID } from '@/lib/backend/types';
 
@@ -23,6 +24,22 @@ async function recordCounts(db: PGlite) {
   `)).rows[0];
 }
 
+interface VerificationRow {
+  record_type: string;
+  expected_count: number;
+  matched_count: number;
+  missing_count: number;
+  changed_count: number;
+  unexpected_count: number;
+  passed: boolean;
+  mismatches: { key: string[]; reason: string }[];
+}
+
+async function verify(db: PGlite, sql: string) {
+  const results = await db.exec(sql);
+  return results.find(result => result.fields.some(field => field.name === 'passed'))!.rows as VerificationRow[];
+}
+
 describe('workbook import on PostgreSQL', () => {
   it('imports real workbooks, preserves standings, skips exact reruns and rejects edits atomically', async () => {
     const normalized = normalizeWorkbooks();
@@ -32,6 +49,14 @@ describe('workbook import on PostgreSQL', () => {
       await db.exec(imported.sql);
       const counts = await recordCounts(db);
       expect(counts).toEqual({ players: normalized.players.length, games: normalized.nights.length, results: normalized.results.length });
+      const verificationSql = buildWorkbookVerificationSql(imported);
+      const verified = await verify(db, verificationSql);
+      expect(verified.map(row => [row.record_type, row.expected_count, row.matched_count, row.passed])).toEqual([
+        ['game', normalized.nights.length, normalized.nights.length, true],
+        ['player', normalized.players.length, normalized.players.length, true],
+        ['result', normalized.results.length, normalized.results.length, true],
+      ]);
+      expect(await recordCounts(db)).toEqual(counts);
 
       const originalStandings = new Map<string, number>();
       for (const result of normalized.results) {
@@ -87,6 +112,67 @@ describe('workbook import on PostgreSQL', () => {
       await db.exec('rollback;');
       expect(await recordCounts(db)).toEqual(countsAfterDeletion);
       expect((await db.query('select id from public.games where league_id = $1 and id = $2', [UNC_LEAGUE_ID, game.id])).rows).toHaveLength(0);
+    } finally {
+      await db.close();
+    }
+  }, 30000);
+
+  it('reports missing, changed and extra historical rows without changing data or blocking new games', async () => {
+    const source: NormalizedWorkbookData = {
+      players: [
+        { id: 'alex', displayName: "Alex O'Brien", aliases: ['Z', 'A', '\u{1F600}', '\uE000', 'literal\\u0000'] },
+        { id: 'sam', displayName: 'Sam', aliases: [] },
+      ],
+      nights: [{ id: 'historical', title: "Night's results", date: '2026-09-01', seasonId: 'fall-2026', nightType: '20' }],
+      results: [
+        { nightId: 'historical', playerId: 'alex', buyIn: 20, cashOut: 30, profit: 10, placement: 1, sourceName: 'Alex' },
+        { nightId: 'historical', playerId: 'sam', buyIn: 20, cashOut: 10, profit: -10, placement: 2, sourceName: 'Sam' },
+      ],
+      issues: [],
+    };
+    const imported = buildWorkbookImport(source);
+    const sql = buildWorkbookVerificationSql(imported);
+    const db = await bootstrapDatabase();
+    try {
+      const missing = await verify(db, sql);
+      expect(missing.map(row => [row.record_type, row.missing_count, row.passed])).toEqual([
+        ['game', 1, false], ['player', 2, false], ['result', 2, false],
+      ]);
+      expect(await recordCounts(db)).toEqual({ players: 0, games: 0, results: 0 });
+      await db.exec(imported.sql);
+      // Unrelated new records and the same IDs in another league must not affect verification.
+      await db.exec(`
+        insert into public.players (league_id, id, display_name, aliases)
+          values ('${UNC_LEAGUE_ID}', 'new-player', 'New Player', '{}');
+        insert into public.games (league_id, id, title, date, season_id, night_type, format, status)
+          values ('${UNC_LEAGUE_ID}', 'new-game', 'New Game', '2026-10-01', 'fall-2026', '20', 'cash', 'draft');
+        insert into public.game_results (league_id, game_id, player_id, buy_in_cents, cash_out_cents)
+          values ('${UNC_LEAGUE_ID}', 'new-game', 'new-player', 2000, 2000);
+        insert into public.leagues (id, slug, name)
+          values ('00000000-0000-4000-8000-000000000002', 'other', 'Other');
+        insert into public.players (league_id, id, display_name, aliases)
+          values ('00000000-0000-4000-8000-000000000002', 'alex', 'Different Alex', '{}');
+      `);
+      expect((await verify(db, sql)).every(row => row.passed)).toBe(true);
+      await db.query('update public.players set aliases = $1 where league_id = $2 and id = $3', [['A', 'Z', '\uE000', '\u{1F600}', 'literal\\u0000'], UNC_LEAGUE_ID, 'alex']);
+      expect((await verify(db, sql)).every(row => row.passed)).toBe(true);
+      await db.query('update public.game_results set legacy_profit_cents = 900 where league_id = $1 and game_id = $2 and player_id = $3', [UNC_LEAGUE_ID, 'historical', 'alex']);
+      await db.query("update public.games set title = 'Edited history' where league_id = $1 and id = $2", [UNC_LEAGUE_ID, 'historical']);
+      await db.query('delete from public.game_results where league_id = $1 and game_id = $2 and player_id = $3', [UNC_LEAGUE_ID, 'historical', 'sam']);
+      await db.query('insert into public.game_results (league_id, game_id, player_id, buy_in_cents, cash_out_cents) values ($1, $2, $3, 2000, 1000)', [UNC_LEAGUE_ID, 'historical', 'new-player']);
+      const before = await db.query('select * from public.game_results order by league_id, game_id, player_id');
+      const checked = await verify(db, sql);
+      expect(checked.find(row => row.record_type === 'game')).toMatchObject({ changed_count: 1, passed: false });
+      expect(checked.find(row => row.record_type === 'player')).toMatchObject({ passed: true });
+      expect(checked.find(row => row.record_type === 'result')).toMatchObject({
+        expected_count: 2, matched_count: 0, changed_count: 1, missing_count: 1, unexpected_count: 1, passed: false,
+        mismatches: [
+          { key: ['historical', 'alex'], reason: 'changed' },
+          { key: ['historical', 'new-player'], reason: 'unexpected' },
+          { key: ['historical', 'sam'], reason: 'missing' },
+        ],
+      });
+      expect((await db.query('select * from public.game_results order by league_id, game_id, player_id')).rows).toEqual(before.rows);
     } finally {
       await db.close();
     }
