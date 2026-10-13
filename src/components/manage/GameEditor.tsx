@@ -21,7 +21,7 @@ export function GameEditor({ game, league, players, seasons, busy, onSave, onCan
   const month = Number(today.slice(5, 7));
   const defaultSeason = `${month <= 5 ? 'spring' : month <= 7 ? 'summer' : 'fall'}-${today.slice(0, 4)}`;
   const [fields, setFields] = useState<GameFields>(() => initialFields(game, defaultSeason, today));
-  const original = useRef(JSON.stringify(fields));
+  const [original, setOriginal] = useState(() => JSON.stringify(fields));
   const [attempted, setAttempted] = useState(false);
   const [discardOpen, setDiscardOpen] = useState(false);
   const [createPlayerOpen, setCreatePlayerOpen] = useState(false);
@@ -33,7 +33,7 @@ export function GameEditor({ game, league, players, seasons, busy, onSave, onCan
   const allowLeave = useRef(false);
   const validation = useMemo(() => validateFields(fields, players), [fields, players]);
   const canComplete = validation.draftErrors.length === 0 && validation.completionErrors.length === 0;
-  const isDirty = JSON.stringify(fields) !== original.current;
+  const isDirty = JSON.stringify(fields) !== original;
   const historicalWarning = game && needsReconciliation(game);
   const playerNames = new Map(players.map(player => [player.id, player.displayName]));
 
@@ -81,7 +81,8 @@ export function GameEditor({ game, league, players, seasons, busy, onSave, onCan
   async function save(status: GameInput['status']) {
     setAttempted(true);
     if (validation.draftErrors.length || (status === 'completed' && !canComplete) || busy) return;
-    await onSave(toGameInput(fields, status, game));
+    const savedFields = JSON.stringify(fields);
+    if (await onSave(toGameInput(fields, status, game))) setOriginal(savedFields);
   }
   async function createPlayer() {
     if (!playerName.trim()) { setPlayerError('Enter a player name.'); return; }

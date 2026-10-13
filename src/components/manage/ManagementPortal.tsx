@@ -123,10 +123,17 @@ export function ManagementPortal({ initialData }: { initialData: PortalData }) {
       const saved = await api<{ id: string; version: number }>('/games', { method: 'POST', body: { leagueId: league.id, game: input } });
       const record: ManagedGame = { ...input, id: saved.id, version: saved.version, leagueId: league.id, sourceRef: editor?.game?.sourceRef ?? null };
       setData(current => ({ ...current, games: [...current.games.filter(game => game.id !== saved.id), record] }));
+      if (input.status === 'draft') {
+        setEditor({ game: record });
+        const url = new URL(window.location.href);
+        url.searchParams.delete('new'); url.searchParams.set('gameId', saved.id);
+        window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+      }
       return refreshAfterMutation();
     });
     if (!result.ok) return false;
-    closeEditor(); setNotice({ tone: 'success', text: (input.status === 'draft' ? 'Draft saved. It is excluded from standings until completed.' : 'Game saved. The completed results are included in standings.') + refreshSuffix(result.value) });
+    if (input.status === 'completed') closeEditor();
+    setNotice({ tone: 'success', text: (input.status === 'draft' ? 'Draft saved. Keep editing and save again as the game progresses. It is excluded from standings until completed.' : 'Game saved. The completed results are included in standings.') + refreshSuffix(result.value) });
     return true;
   }
   async function createPlayer(displayName: string): Promise<string | null> {
@@ -205,7 +212,7 @@ export function ManagementPortal({ initialData }: { initialData: PortalData }) {
         <div className="flex flex-wrap items-center justify-between gap-3 border-t bg-slate-50/50 px-5 py-3"><p className="text-xs text-slate-500">{filtered.length ? `${(currentPage - 1) * pageSize + 1}–${Math.min(currentPage * pageSize, filtered.length)} of ${filtered.length} games` : '0 games'}{query || season !== 'all' || status !== 'all' ? ' match your filters' : ''}</p>{pages > 1 && <nav aria-label="Game records pagination" className="flex items-center gap-3 text-xs"><button type="button" disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)} className="rounded-lg border bg-white px-3 py-2 font-semibold disabled:opacity-40">Previous</button><span>{currentPage} / {pages}</span><button type="button" disabled={currentPage === pages} onClick={() => setPage(currentPage + 1)} className="rounded-lg border bg-white px-3 py-2 font-semibold disabled:opacity-40">Next</button></nav>}</div>
       </section>
     </>}
-    {editor && league && <GameEditor key={`${editor.game?.id ?? 'new'}:${editor.game?.version ?? 0}:${editorRevision}`} game={editor.game} league={league} players={players} seasons={seasons} busy={!!busy || !editable} onSave={saveGame} onCancel={closeEditor} onCreatePlayer={createPlayer} />}
+    {editor && league && <GameEditor key={editorRevision} game={editor.game} league={league} players={players} seasons={seasons} busy={!!busy || !editable} onSave={saveGame} onCancel={closeEditor} onCreatePlayer={createPlayer} />}
     {dialog?.kind === 'delete' && <PortalDialog title="Delete this game?" onClose={() => setDialog(null)} busy={!!busy}><p className="text-sm leading-6 text-slate-600"><strong className="text-navy">{dialog.game.title}</strong> from {dateLabel(dialog.game.date)} and all {dialog.game.results.length} player results will be permanently removed. Completed results will also leave the standings.</p>{notice?.tone === 'error' && <p role="alert" className="mt-3 text-sm text-red-700">{notice.text}</p>}<div className="mt-6 flex justify-end gap-3"><button autoFocus data-dialog-focus type="button" disabled={!!busy} onClick={() => setDialog(null)} className={secondaryClass}>Keep game</button><button type="button" disabled={!!busy} onClick={() => deleteGame(dialog.game)} className="inline-flex items-center gap-2 rounded-lg bg-red-700 px-4 py-2.5 text-sm font-semibold text-white disabled:opacity-50"><Trash2 size={16} />{busy ? 'Deleting…' : 'Delete game'}</button></div></PortalDialog>}
     {dialog?.kind === 'league' && <LeagueDialog league={dialog.league} deletable={dialog.league?.role === 'owner' && !data.games.length} busy={!!busy} error={notice?.tone === 'error' ? notice.text : null} onClose={() => setDialog(null)} onSave={values => saveLeague(values, dialog.league)} onDelete={() => dialog.league ? deleteLeague(dialog.league) : Promise.resolve(false)} />}
     {dialog?.kind === 'reload' && <PortalDialog title="Load the latest saved game?" busy={!!busy} onClose={() => setDialog(null)}><p className="text-sm leading-6 text-slate-600">Loading the latest version of <strong>{dialog.game.title}</strong> will discard the unsaved changes in this editor.</p>{notice?.tone === 'error' && <p className="mt-3 text-sm text-red-700">{notice.text}</p>}<div className="mt-5 flex justify-end gap-2"><button type="button" autoFocus data-dialog-focus disabled={!!busy} onClick={() => setDialog(null)} className={secondaryClass}>Keep editing</button><button type="button" disabled={!!busy} onClick={() => reloadGame(dialog.game)} className={primaryClass}>{busy ? 'Loading…' : 'Load latest game'}</button></div></PortalDialog>}
